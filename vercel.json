@@ -1,7 +1,14 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/backend/server.js" },
-    { "source": "/(.*)", "destination": "/$1" }
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "frontend/**", "use": "@vercel/static" },
+    { "src": "acervo/**", "use": "@vercel/static" },
+    { "src": "backend/server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "backend/server.js" },
+    { "src": "/acervo/(.*)", "dest": "/acervo/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
