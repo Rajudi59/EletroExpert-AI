@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/ask",
-      "destination": "/backend/server.js"
+      "destination": "/api/server.js"
     }
   ]
 }
