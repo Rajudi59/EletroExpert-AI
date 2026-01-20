@@ -1,0 +1,14 @@
+[
+  {
+    "cod": "P0101",
+    "resumoIA": "controla a rampa de desaceleração, definindo o tempo para o motor ir da velocidade atual até parar. É um ajuste crucial para paradas suaves, ajustado em segundos, essencial para evitar golpes mecânicos em bombas.",
+    "pagManual": "15-1",
+    "pagPDF": 80
+  },
+  {
+    "cod": "P0002",
+    "resumoIA": "indica a velocidade de saída do motor em Hertz (Hz). É um parâmetro de leitura que permite ao operador monitorar a frequência real aplicada ao motor em tempo real.",
+    "pagManual": "16-1",
+    "pagPDF": 98
+  }
+]
