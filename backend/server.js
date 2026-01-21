@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { buscarConhecimentoTecnico } = require("./services/acervoService");
 
 module.exports = async (req, res) => {
-  // Configurações de CORS para permitir que o seu frontend se conecte
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -9,34 +9,50 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  // Mudamos para o modelo 1.5-flash: mais rápido e preciso para manuais técnicos
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   try {
-    const { question } = req.body;
+    const { question, image, imageType } = req.body;
 
-    // Novo Prompt: Foco total em Manutenção Industrial e Resolução de Problemas
-    const prompt = `Você é o EletroExpert-AI, um Especialista em Manutenção Elétrica Industrial e Acervo Técnico.
-    Sua missão é ajudar técnicos e eletricistas a diagnosticar falhas, interpretar diagramas e configurar equipamentos (Inversores, CLPs, Motores).
-    
-    Diretrizes de Resposta:
-    1. FOCO EM MANUTENÇÃO: Priorize diagnósticos de defeitos, testes de continuidade, medições de grandezas e parametrização.
-    2. LINGUAGEM TÉCNICA: Use termos como 'contatora', 'bornes', 'barramento', 'fechamento de motor', 'harmônicas'.
-    3. SEGURANÇA BASE: Sempre mencione o uso de EPIs e o respeito à NR-10 como pré-requisito, mas foque na SOLUÇÃO DO PROBLEMA técnico.
-    4. ACERVO: Se o usuário perguntar de manuais (como o CFW500), aja como se conhecesse os parâmetros técnicos de fábrica.
-    
-    Pergunta do Técnico: ${question}`;
+    // 1. Busca automaticamente o conteúdo de todos os manuais no acervo
+    const conhecimentoExtraido = await buscarConhecimentoTecnico();
 
-    const result = await model.generateContent(prompt);
+    // 2. Monta o Prompt focado em Manutenção Industrial
+    const promptPrincipal = `Você é o EletroExpert-AI, Especialista em Manutenção Elétrica Industrial.
+    Use o CONHECIMENTO TÉCNICO abaixo extraído dos manuais do acervo para responder.
+    
+    DIRETRIZES:
+    - Se for erro de inversor, consulte as tabelas de falhas no texto abaixo.
+    - Se houver uma imagem, analise componentes, fiação ou códigos de display.
+    - Foque em solução rápida: 'O que testar?', 'Qual parâmetro mudar?'.
+    - Segurança: Sempre cite EPIs e NR-10, mas resolva o problema técnico.
+
+    CONHECIMENTO TÉCNICO DO ACERVO:
+    ${conhecimentoExtraido}
+
+    PERGUNTA DO TÉCNICO: ${question}`;
+
+    let payload = [promptPrincipal];
+
+    // Se o técnico enviou uma foto (base64)
+    if (image) {
+      payload.push({
+        inlineData: {
+          data: image,
+          mimeType: imageType || "image/jpeg"
+        }
+      });
+    }
+
+    const result = await model.generateContent(payload);
     const responseText = result.response.text();
     
     res.status(200).json({ 
-      answer: responseText,
-      arquivos: [] // Espaço reservado para links de manuais futuros
+      answer: responseText 
     });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ answer: "Erro técnico no motor da IA. Verifique se a chave GEMINI_API_KEY está configurada na Vercel." });
+    res.status(500).json({ answer: "Erro no servidor de manutenção. Verifique os logs." });
   }
 };
