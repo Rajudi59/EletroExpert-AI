@@ -1,44 +1,34 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+const fs = require('fs');
+const path = require('path');
+const pdf = require('pdf-parse');
 
-// 1. INSIRA SUA CHAVE API DENTRO DAS ASPAS ABAIXO
-const API_KEY = "SUA_CHAVE_AQUI";
-const genAI = new GoogleGenerativeAI(API_KEY);
+async function buscarConhecimentoTecnico() {
+  const baseDir = path.join(__dirname, '../../acervo');
+  let textoAcumulado = "";
 
-/**
- * Função principal que consulta o acervo local e permite busca externa técnica
- */
-export async function gerarResposta(pergunta, contextoLocal = "") {
-    
-    // Configuramos o modelo para ser um Especialista em Elétrica (NBR 5410 / NR10)
-    const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
-        systemInstruction: `Você é o especialista técnico do sistema ElectroExpert.
-        
-        SUA MISSÃO:
-        - Priorize as informações do 'Contexto Local' (seus manuais em PDF).
-        - Caso a informação não esteja nos manuais, use sua base de dados da internet, mas RESTRITO a temas de: elétrica, manutenção industrial, normas técnicas brasileiras e manuais de fabricantes.
-        - Se o usuário fugir do tema elétrica, diga que você é focado apenas em manutenção.
-        - Use sempre a terminologia correta: Fase (Preto), Neutro (Azul), Retorno (Amarelo) e Terra (Verde).
-        - SEGURANÇA: Sempre mencione a importância de usar EPIs e testar a ausência de tensão.`
-    });
+  // Pastas que queremos monitorar automaticamente
+  const pastas = ['Inversores', 'Motores', 'CLP_Logica', 'Diagramas', 'Normas_Regulamentadoras'];
 
-    // Estrutura o que será enviado para a IA analisar
-    const prompt = `
-    DADOS DO ACERVO LOCAL (PRIORIDADE):
-    ${contextoLocal ? contextoLocal : "Nenhuma informação específica encontrada nos manuais locais."}
-
-    DÚVIDA DO ELETRICISTA:
-    ${pergunta}
-
-    INSTRUÇÃO: Se a resposta não estiver nos dados do acervo, aja como um engenheiro eletricista e responda com base em normas técnicas externas.
-    `;
-
-    try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        return response.text();
-    } catch (error) {
-        console.error("Erro na comunicação com o Gemini:", error);
-        return "Erro ao processar a consulta técnica. Verifique a conexão ou a chave da API.";
+  for (const pasta of pastas) {
+    const caminhoPasta = path.join(baseDir, pasta);
+    if (fs.existsSync(caminhoPasta)) {
+      const arquivos = fs.readdirSync(caminhoPasta);
+      
+      for (const arquivo of arquivos) {
+        if (arquivo.toLowerCase().endsWith('.pdf')) {
+          const caminhoArquivo = path.join(caminhoPasta, arquivo);
+          const dataBuffer = fs.readFileSync(caminhoArquivo);
+          try {
+            const data = await pdf(dataBuffer);
+            textoAcumulado += `\n--- Conteúdo do Manual: ${arquivo} ---\n${data.text}\n`;
+          } catch (e) {
+            console.error(`Erro ao ler ${arquivo}:`, e);
+          }
+        }
+      }
     }
+  }
+  return textoAcumulado;
 }
+
+module.exports = { buscarConhecimentoTecnico };
