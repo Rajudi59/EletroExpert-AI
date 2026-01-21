@@ -14,7 +14,6 @@
 
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            /* Ajustado: Gradiente mais suave para a imagem de fundo aparecer com força */
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
                         url('acervo/fundo-industrial.png'); 
             background-size: cover;
@@ -33,7 +32,7 @@
             box-sizing: border-box; 
             display: flex; 
             align-items: center; 
-            background: rgba(255, 255, 255, 0.9); /* Header mais sólido */
+            background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
 
@@ -41,7 +40,7 @@
         .logo span { background: #ffcc00; color: #000; padding: 2px 8px; border-radius: 4px; margin-right: 10px; }
 
         .container { 
-            background: rgba(255, 255, 255, 0.95); /* Container mais opaco para leitura clara */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
             padding: 30px; 
             border-radius: 15px; 
@@ -91,7 +90,7 @@
 </div>
 
 <div class="container">
-    <textarea id="pergunta" placeholder="Segure o 🎤 para falar o nome do diagrama ou digite aqui..."></textarea>
+    <textarea id="pergunta" placeholder="Segure o 🎤 para falar ou digite sua dúvida técnica..."></textarea>
     
     <div class="btn-group">
         <button class="btn-base" onclick="processarEntrada()">ENVIAR</button>
@@ -124,29 +123,57 @@
 
     const textarea = document.getElementById('pergunta');
     const btnMic = document.getElementById('btn-mic');
+    const conteudoDiv = document.getElementById('conteudo');
+    const resultadoDiv = document.getElementById('resultado');
 
-    function processarEntrada() {
+    // --- FUNÇÃO PRINCIPAL: BUSCA LOCAL + BACKEND IA ---
+    async function processarEntrada() {
         const texto = textarea.value.toLowerCase().trim();
         if (!texto) return;
 
-        const achou = meuAcervo.find(item => 
+        // 1. TENTA BUSCA LOCAL (DIAGRAMAS RÁPIDOS)
+        const achouLocal = meuAcervo.find(item => 
             item.chaves.some(chave => texto.includes(chave))
         );
 
-        if (achou) {
-            mostrarNoSite(achou);
-        } else {
-            document.getElementById('resultado').style.display = 'block';
-            document.getElementById('conteudo').innerHTML = "<div class='alerta'>Diagrama não localizado no acervo. Verifique o termo ou realize a busca via IA.</div>";
+        if (achouLocal) {
+            mostrarNoSite(achouLocal);
+            return;
+        }
+
+        // 2. SE NÃO ACHOU LOCAL, CHAMA O BACKEND (IA + MANUAIS PDF)
+        resultadoDiv.style.display = 'block';
+        conteudoDiv.innerHTML = "<div class='alerta' style='border-left-color: #00BFFF; background: #f0f7ff;'><strong>🔍 Vasculhando manuais de Sensores, Inversores e Controladores no acervo...</strong></div>";
+
+        try {
+            const response = await fetch("/server", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question: texto })
+            });
+
+            const data = await response.json();
+
+            if (data.answer) {
+                conteudoDiv.innerHTML = `
+                    <div class="alerta" style="border-left-color: #005792; background: #f0f7ff;">
+                        <strong>💡 Instrução Técnica do Acervo:</strong><br><br>
+                        ${data.answer.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+                document.getElementById('fonte').innerText = "ORIGEM: INTELIGÊNCIA ARTIFICIAL + MANUAIS PDF";
+            }
+        } catch (error) {
+            conteudoDiv.innerHTML = "<div class='alerta'>⚠️ Servidor não respondeu. Verifique se o backend está rodando na Vercel.</div>";
         }
     }
 
     function mostrarNoSite(item) {
-        document.getElementById('resultado').style.display = 'block';
-        document.getElementById('conteudo').innerHTML = `
+        resultadoDiv.style.display = 'block';
+        conteudoDiv.innerHTML = `
             <div class="alerta">
                 <strong>⚠️ PROTOCOLO DE SEGURANÇA OBRIGATÓRIO:</strong><br>
-                Uso de EPIs, EPCs e aplicação do LOTO (Bloqueio e Etiquetagem) antes de qualquer intervenção técnica.
+                Uso de EPIs, EPCs e aplicação do LOTO antes de qualquer intervenção.
             </div>
             <h3 style="color:#005792; margin-top:0; font-size: 22px;">${item.titulo}</h3>
             <p style="line-height: 1.6; color: #444;">${item.obs}</p>
@@ -156,20 +183,47 @@
         textarea.value = "";
     }
 
-    // Reconhecimento de Voz
+    // --- LÓGICA DA CÂMERA (FOTO DO COMPONENTE) ---
+    document.getElementById('file-input').addEventListener('change', async function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        resultadoDiv.style.display = 'block';
+        conteudoDiv.innerHTML = "<strong>📸 Analisando imagem conforme manuais do acervo...</strong>";
+
+        const reader = new FileReader();
+        reader.onload = async function(event) {
+            const base64 = event.target.result.split(',')[1];
+            try {
+                const response = await fetch("/server", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        question: "Analise esta foto técnica conforme o acervo de manuais.",
+                        image: base64
+                    })
+                });
+                const data = await response.json();
+                conteudoDiv.innerHTML = `<strong>Análise Visual:</strong><br>${data.answer.replace(/\n/g, '<br>')}`;
+                document.getElementById('fonte').innerText = "ORIGEM: VISÃO COMPUTACIONAL + ACERVO";
+            } catch (err) {
+                conteudoDiv.innerHTML = "<div class='alerta'>Erro ao processar imagem.</div>";
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // --- RECONHECIMENTO DE VOZ ---
     const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (Speech) {
         const rec = new Speech();
         rec.lang = 'pt-BR';
-        
         const start = (e) => { e.preventDefault(); rec.start(); btnMic.classList.add('recording'); };
         const stop = (e) => { e.preventDefault(); rec.stop(); btnMic.classList.remove('recording'); };
-
         btnMic.addEventListener('mousedown', start);
         btnMic.addEventListener('mouseup', stop);
         btnMic.addEventListener('touchstart', start);
         btnMic.addEventListener('touchend', stop);
-
         rec.onresult = (e) => {
             textarea.value = e.results[0][0].transcript;
             setTimeout(processarEntrada, 600);
