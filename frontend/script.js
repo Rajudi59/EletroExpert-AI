@@ -27,7 +27,7 @@ async function enviarPergunta() {
     respostaDiv.innerHTML = "<strong>⚙️ Analisando imagem e manuais...</strong>";
 
     try {
-        const response = await fetch("/server", { 
+        const response = await fetch("/api/pergunta", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 

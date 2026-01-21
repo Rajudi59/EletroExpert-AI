@@ -1,7 +1,16 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["backend/acervo/**"]
+      }
+    }
+  ],
   "rewrites": [
-    { "source": "/server", "destination": "/backend/server.js" },
-    { "source": "/(.*)", "destination": "/$1" }
+    { "source": "/api/pergunta", "destination": "/backend/server.js" },
+    { "source": "/(.*)", "destination": "/frontend/$1" }
   ]
 }
