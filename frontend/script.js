@@ -1,17 +1,19 @@
 async function enviarPergunta() {
-    const pergunta = document.getElementById("pergunta").value;
+    const perguntaInput = document.getElementById("pergunta");
+    const pergunta = perguntaInput.value;
     const respostaDiv = document.getElementById("resposta");
 
     if (!pergunta.trim()) {
-        alert("Digite uma pergunta antes de enviar!");
+        alert("Por favor, descreva o problema ou a dúvida técnica.");
         return;
     }
 
-    respostaDiv.innerText = "Consultando IA e Acervo Técnico...";
+    // Feedback visual rápido para o técnico
+    respostaDiv.innerHTML = "<strong>⚙️ Analisando Manuais e Diagramas...</strong>";
 
     try {
-        // CORREÇÃO: Agora o sistema busca no endereço correto da internet
-        const response = await fetch("/api/ask", {
+        // AJUSTE DE ROTA: Agora aponta para o seu servidor no backend
+        const response = await fetch("/server", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ question: pergunta })
@@ -19,24 +21,19 @@ async function enviarPergunta() {
 
         const data = await response.json();
 
-        if (data.arquivos && data.arquivos.length > 0) {
-            const html = data.arquivos.map(a => `
-                <div style="margin-bottom:15px; border-left: 3px solid #007bff; padding-left: 10px;">
-                    <strong>Documento: ${a.nome}</strong>
-                    <ul>
-                        ${a.trechos.map(t => `<li>${t}</li>`).join("")}
-                    </ul>
-                    <a href="/acervo/${a.nome}" target="_blank" style="color: blue; text-decoration: underline;">Abrir manual completo</a>
-                </div>
-            `).join("");
+        // Limpa o campo de pergunta para facilitar a próxima busca
+        perguntaInput.value = "";
 
-            respostaDiv.innerHTML = `<strong>Resposta:</strong><br>${data.answer}<hr>${html}`;
+        // Exibe a resposta da IA (que já leu seus PDFs no backend)
+        if (data.answer) {
+            // Usamos innerHTML e replace para manter as quebras de linha da IA
+            respostaDiv.innerHTML = `<strong>💡 Instrução Técnica:</strong><br>${data.answer.replace(/\n/g, '<br>')}`;
         } else {
-            respostaDiv.innerText = data.answer;
+            respostaDiv.innerText = "A IA não conseguiu processar a resposta. Tente novamente.";
         }
 
     } catch (error) {
-        respostaDiv.innerText = "Erro ao conectar com o servidor. Verifique sua conexão.";
-        console.error(error);
+        respostaDiv.innerHTML = "<span style='color:red;'>⚠️ Erro de conexão com o servidor de manutenção. Verifique o sinal de internet.</span>";
+        console.error("Erro no fetch:", error);
     }
 }
