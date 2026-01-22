@@ -1,43 +1,35 @@
 const fs = require('fs');
 const path = require('path');
-const pdf = require('pdf-parse');
+// Removemos o pdf-parse daqui por enquanto para testar a conexão limpa
+// const pdf = require('pdf-parse'); 
 
 async function buscarConhecimentoTecnico() {
-  // AJUSTE DE CAMINHO: __dirname garante que ele ache a pasta independente de onde rode
-  const baseDir = path.join(__dirname, '..', 'acervo');
-  
-  let textoAcumulado = "";
-  const pastas = ['Inversores', 'Motores', 'CLP_Logica', 'Diagramas', 'Normas_Regulamentadoras', 'Sensores'];
-
-  console.log("Iniciando leitura do acervo em:", baseDir);
-
-  for (const pasta of pastas) {
-    const caminhoPasta = path.join(baseDir, pasta);
+  try {
+    const acervoPath = path.join(__dirname, '..', 'acervo');
     
-    if (fs.existsSync(caminhoPasta)) {
-      const arquivos = fs.readdirSync(caminhoPasta);
-      
-      for (const arquivo of arquivos) {
-        if (arquivo.toLowerCase().endsWith('.pdf')) {
-          const caminhoArquivo = path.join(caminhoPasta, arquivo);
-          
-          try {
-            const dataBuffer = fs.readFileSync(caminhoArquivo);
-            const data = await pdf(dataBuffer);
-            
-            // Limitamos um pouco o texto para não estourar a memória da Vercel
-            const textoLimpo = data.text.substring(0, 5000); 
-            textoAcumulado += `\n[FONTE: ${arquivo}]\n${textoLimpo}\n`;
-            
-          } catch (e) {
-            console.error(`Falha no arquivo ${arquivo}:`, e.message);
-          }
+    // Na Vercel, ler muitos PDFs trava o servidor. 
+    // Vamos apenas listar os manuais disponíveis para a IA saber o que você tem.
+    let listaManuais = "O técnico possui os seguintes manuais no acervo: ";
+    
+    if (fs.existsSync(acervoPath)) {
+      const pastas = fs.readdirSync(acervoPath);
+      pastas.forEach(pasta => {
+        const caminhoPasta = path.join(acervoPath, pasta);
+        if (fs.lstatSync(caminhoPasta).isDirectory()) {
+          const arquivos = fs.readdirSync(caminhoPasta);
+          listaManuais += `\n- Na pasta ${pasta}: ${arquivos.join(', ')}`;
         }
-      }
+      });
     }
-  }
 
-  return textoAcumulado || "Aviso: Base de dados offline. Use o conhecimento geral de NR-10 e Manutenção.";
+    // Retornamos apenas a lista e uma instrução. 
+    // Isso é leve e não trava o servidor.
+    return listaManuais + "\nInstrução: Responda como especialista se baseando nesses manuais e na NR-10.";
+
+  } catch (error) {
+    console.error("Erro leve no acervo:", error);
+    return "Base de manuais offline. Siga protocolos de segurança padrão.";
+  }
 }
 
 module.exports = { buscarConhecimentoTecnico };
