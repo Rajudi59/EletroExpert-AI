@@ -3,14 +3,13 @@ const path = require('path');
 const pdf = require('pdf-parse');
 
 async function buscarConhecimentoTecnico() {
-  // process.cwd() garante que a Vercel ache a pasta 'acervo' dentro de 'backend'
-  const baseDir = path.join(process.cwd(), 'acervo');
+  // AJUSTE DE CAMINHO: __dirname garante que ele ache a pasta independente de onde rode
+  const baseDir = path.join(__dirname, '..', 'acervo');
   
   let textoAcumulado = "";
-  // Lista das pastas que você tem no seu computador
   const pastas = ['Inversores', 'Motores', 'CLP_Logica', 'Diagramas', 'Normas_Regulamentadoras', 'Sensores'];
 
-  console.log("Buscando manuais em:", baseDir);
+  console.log("Iniciando leitura do acervo em:", baseDir);
 
   for (const pasta of pastas) {
     const caminhoPasta = path.join(baseDir, pasta);
@@ -26,18 +25,19 @@ async function buscarConhecimentoTecnico() {
             const dataBuffer = fs.readFileSync(caminhoArquivo);
             const data = await pdf(dataBuffer);
             
-            // Identifica a fonte para a IA citar o manual correto
-            textoAcumulado += `\n[FONTE TÉCNICA: ${arquivo}]\n${data.text}\n`;
+            // Limitamos um pouco o texto para não estourar a memória da Vercel
+            const textoLimpo = data.text.substring(0, 5000); 
+            textoAcumulado += `\n[FONTE: ${arquivo}]\n${textoLimpo}\n`;
+            
           } catch (e) {
-            console.error(`Erro ao ler o arquivo ${arquivo}:`, e.message);
+            console.error(`Falha no arquivo ${arquivo}:`, e.message);
           }
         }
       }
     }
   }
 
-  // Retorno de segurança caso os manuais falhem
-  return textoAcumulado || "Atenção: Manuais técnicos não carregados. Siga rigorosamente a NR-10 e manuais físicos.";
+  return textoAcumulado || "Aviso: Base de dados offline. Use o conhecimento geral de NR-10 e Manutenção.";
 }
 
 module.exports = { buscarConhecimentoTecnico };
