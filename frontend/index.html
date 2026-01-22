@@ -14,8 +14,9 @@
 
         body { 
             font-family: 'Segoe UI', sans-serif; 
+            /* Ajustado para sair da pasta frontend e achar a imagem no backend */
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                        url('acervo/Diagramas/fundo-industrial.png'); 
+                        url('../backend/acervo/Diagramas/fundo-industrial.png'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -106,17 +107,19 @@
 </div>
 
 <script>
+    let imagemBase64 = null;
+
     const meuAcervo = [
         {
             chaves: ["estrela", "triângulo", "partida"],
             titulo: "Partida Estrela-Triângulo",
-            imagem: "acervo/estrela-triangulo.png",
+            imagem: "../backend/acervo/Diagramas/estrela-triangulo.png",
             obs: "Nota Técnica: Verifique o intertravamento elétrico e o ajuste do relé térmico (RT) para proteção do motor conforme NR-10."
         },
         {
             chaves: ["lâmpada", "simples", "interruptor"],
             titulo: "Lâmpada Simples e Interruptor",
-            imagem: "acervo/interruptor-simples.png",
+            imagem: "../backend/acervo/Diagramas/interruptor-simples.png",
             obs: "Segurança NBR 5410: O condutor de fase deve sempre ser interrompido pelo interruptor, garantindo que o bocal fique desenergizado ao desligar."
         }
     ];
@@ -126,33 +129,52 @@
     const conteudoDiv = document.getElementById('conteudo');
     const resultadoDiv = document.getElementById('resultado');
 
-    // --- FUNÇÃO PRINCIPAL: BUSCA LOCAL + BACKEND IA ---
+    // Escuta a câmera/arquivo
+    document.getElementById('file-input').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imagemBase64 = event.target.result.split(',')[1];
+                processarEntrada(); // Dispara análise automática ao tirar foto
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
     async function processarEntrada() {
         const texto = textarea.value.toLowerCase().trim();
-        if (!texto) return;
+        
+        // Se não tem texto nem imagem, ignora
+        if (!texto && !imagemBase64) return;
 
-        // 1. TENTA BUSCA LOCAL (DIAGRAMAS RÁPIDOS)
-        const achouLocal = meuAcervo.find(item => 
-            item.chaves.some(chave => texto.includes(chave))
-        );
-
-        if (achouLocal) {
-            mostrarNoSite(achouLocal);
-            return;
+        // 1. BUSCA LOCAL (DIAGRAMAS) - Apenas se tiver texto e não tiver imagem
+        if (texto && !imagemBase64) {
+            const achouLocal = meuAcervo.find(item => 
+                item.chaves.some(chave => texto.includes(chave))
+            );
+            if (achouLocal) {
+                mostrarNoSite(achouLocal);
+                return;
+            }
         }
 
-        // 2. SE NÃO ACHOU LOCAL, CHAMA O BACKEND (IA + MANUAIS PDF)
+        // 2. BUSCA NO BACKEND (IA + PDFS)
         resultadoDiv.style.display = 'block';
-        conteudoDiv.innerHTML = "<div class='alerta' style='border-left-color: #00BFFF; background: #f0f7ff;'><strong>🔍 Vasculhando manuais de Sensores, Inversores e Controladores no acervo...</strong></div>";
+        conteudoDiv.innerHTML = "<div class='alerta' style='border-left-color: #00BFFF; background: #f0f7ff;'><strong>🔍 Analisando manuais e imagens no acervo técnico...</strong></div>";
 
         try {
-            const response = await fetch("/server", {
+            const response = await fetch("/api/pergunta", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ question: texto })
+                body: JSON.stringify({ 
+                    question: texto || "Analise esta imagem técnica conforme o acervo.",
+                    image: imagemBase64 
+                })
             });
 
             const data = await response.json();
+            imagemBase64 = null; // Limpa para próxima
 
             if (data.answer) {
                 conteudoDiv.innerHTML = `
@@ -161,7 +183,7 @@
                         ${data.answer.replace(/\n/g, '<br>')}
                     </div>
                 `;
-                document.getElementById('fonte').innerText = "ORIGEM: INTELIGÊNCIA ARTIFICIAL + MANUAIS PDF";
+                document.getElementById('fonte').innerText = "ORIGEM: INTELIGÊNCIA ARTIFICIAL + ACERVO TÉCNICO";
             }
         } catch (error) {
             conteudoDiv.innerHTML = "<div class='alerta'>⚠️ Servidor não respondeu. Verifique se o backend está rodando na Vercel.</div>";
@@ -183,37 +205,7 @@
         textarea.value = "";
     }
 
-    // --- LÓGICA DA CÂMERA (FOTO DO COMPONENTE) ---
-    document.getElementById('file-input').addEventListener('change', async function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        resultadoDiv.style.display = 'block';
-        conteudoDiv.innerHTML = "<strong>📸 Analisando imagem conforme manuais do acervo...</strong>";
-
-        const reader = new FileReader();
-        reader.onload = async function(event) {
-            const base64 = event.target.result.split(',')[1];
-            try {
-                const response = await fetch("/server", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ 
-                        question: "Analise esta foto técnica conforme o acervo de manuais.",
-                        image: base64
-                    })
-                });
-                const data = await response.json();
-                conteudoDiv.innerHTML = `<strong>Análise Visual:</strong><br>${data.answer.replace(/\n/g, '<br>')}`;
-                document.getElementById('fonte').innerText = "ORIGEM: VISÃO COMPUTACIONAL + ACERVO";
-            } catch (err) {
-                conteudoDiv.innerHTML = "<div class='alerta'>Erro ao processar imagem.</div>";
-            }
-        };
-        reader.readAsDataURL(file);
-    });
-
-    // --- RECONHECIMENTO DE VOZ ---
+    // VOZ
     const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (Speech) {
         const rec = new Speech();
