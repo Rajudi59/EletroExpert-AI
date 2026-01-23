@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; font-src * data:; img-src * data: blob:; connect-src *;">
+    
     <title>ElectroExpert AI - Acervo Técnico</title>
     <style>
         :root {
@@ -14,9 +16,8 @@
 
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            /* Ajustado para sair da pasta frontend e achar a imagem no backend */
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                        url('../backend/acervo/Diagramas/fundo-industrial.png'); 
+                        url('acervo/Diagramas/fundo-industrial.png'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -113,13 +114,13 @@
         {
             chaves: ["estrela", "triângulo", "partida"],
             titulo: "Partida Estrela-Triângulo",
-            imagem: "../backend/acervo/Diagramas/estrela-triangulo.png",
+            imagem: "acervo/Diagramas/estrela-triangulo.png",
             obs: "Nota Técnica: Verifique o intertravamento elétrico e o ajuste do relé térmico (RT) para proteção do motor conforme NR-10."
         },
         {
             chaves: ["lâmpada", "simples", "interruptor"],
             titulo: "Lâmpada Simples e Interruptor",
-            imagem: "../backend/acervo/Diagramas/interruptor-simples.png",
+            imagem: "acervo/Diagramas/interruptor-simples.png",
             obs: "Segurança NBR 5410: O condutor de fase deve sempre ser interrompido pelo interruptor, garantindo que o bocal fique desenergizado ao desligar."
         }
     ];
@@ -129,14 +130,13 @@
     const conteudoDiv = document.getElementById('conteudo');
     const resultadoDiv = document.getElementById('resultado');
 
-    // Escuta a câmera/arquivo
     document.getElementById('file-input').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(event) {
                 imagemBase64 = event.target.result.split(',')[1];
-                processarEntrada(); // Dispara análise automática ao tirar foto
+                processarEntrada();
             };
             reader.readAsDataURL(file);
         }
@@ -144,11 +144,8 @@
 
     async function processarEntrada() {
         const texto = textarea.value.toLowerCase().trim();
-        
-        // Se não tem texto nem imagem, ignora
         if (!texto && !imagemBase64) return;
 
-        // 1. BUSCA LOCAL (DIAGRAMAS) - Apenas se tiver texto e não tiver imagem
         if (texto && !imagemBase64) {
             const achouLocal = meuAcervo.find(item => 
                 item.chaves.some(chave => texto.includes(chave))
@@ -159,12 +156,12 @@
             }
         }
 
-        // 2. BUSCA NO BACKEND (IA + PDFS)
         resultadoDiv.style.display = 'block';
         conteudoDiv.innerHTML = "<div class='alerta' style='border-left-color: #00BFFF; background: #f0f7ff;'><strong>🔍 Analisando manuais e imagens no acervo técnico...</strong></div>";
 
         try {
-            const response = await fetch("https://eletroexpert-ai-production.up.railway.app/api/ask", {
+            // CORREÇÃO: Usando rota relativa para evitar erros na Railway
+            const response = await fetch("/api/ask", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
@@ -174,7 +171,7 @@
             });
 
             const data = await response.json();
-            imagemBase64 = null; // Limpa para próxima
+            imagemBase64 = null;
 
             if (data.answer) {
                 conteudoDiv.innerHTML = `
@@ -186,7 +183,7 @@
                 document.getElementById('fonte').innerText = "ORIGEM: INTELIGÊNCIA ARTIFICIAL + ACERVO TÉCNICO";
             }
         } catch (error) {
-            conteudoDiv.innerHTML = "<div class='alerta'>⚠️ Servidor não respondeu. Verifique se o backend está rodando na Vercel.</div>";
+            conteudoDiv.innerHTML = "<div class='alerta'>⚠️ O sistema está processando a requisição. Por favor, aguarde ou tente novamente em alguns segundos.</div>";
         }
     }
 
@@ -205,7 +202,6 @@
         textarea.value = "";
     }
 
-    // VOZ
     const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (Speech) {
         const rec = new Speech();
