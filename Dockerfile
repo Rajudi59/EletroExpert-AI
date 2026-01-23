@@ -1,17 +1,17 @@
 FROM node:18
 
-# Define o local de trabalho
+# Define o local de trabalho dentro do servidor
 WORKDIR /app
 
-# Copia os arquivos de dependências
+# Copia as dependências e instala
 COPY package*.json ./
 RUN npm install
 
-# Copia TODOS os arquivos (Isso vai levar a pasta frontend e acervo para o servidor)
+# Copia TODOS os arquivos e pastas (frontend, acervo, backend, etc.)
 COPY . .
 
-# Informa a porta correta
+# Informa a porta que a Railway utiliza
 EXPOSE 3000
 
-# O COMANDO CORRETO: Aponta para a pasta backend
-CMD ["node", "backend/app.js"]
+# AJUSTE AQUI: O diagnóstico mostrou que o app.js está na raiz do servidor
+CMD ["node", "app.js"]
