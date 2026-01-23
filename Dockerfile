@@ -13,5 +13,5 @@ COPY . .
 # Informa a porta que a Railway utiliza
 EXPOSE 3000
 
-# AJUSTE AQUI: O diagnóstico mostrou que o app.js está na raiz do servidor
-CMD ["node", "app.js"]
+# AJUSTE DEFINITIVO: O app.js está dentro da pasta backend
+CMD ["node", "backend/app.js"]
