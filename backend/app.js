@@ -25,27 +25,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-const caminhosParaTestar = [
-    path.join(process.cwd(), "frontend"),
-    path.join(__dirname, "frontend"),
-    path.join(__dirname, "..", "frontend"),
-    process.cwd()
-];
-
-let caminhoFinal = "";
-// AQUI ESTAVA O ERRO: Trocado 'de' por 'of'
-for (const pasta of caminhosParaTestar) {
-    if (fs.existsSync(path.join(pasta, "index.html"))) {
-        caminhoFinal = pasta;
-        break;
-    }
-}
-
-if (caminhoFinal) {
-    app.use(express.static(caminhoFinal));
-    app.get("/", (req, res) => res.sendFile(path.join(caminhoFinal, "index.html")));
-}
-
+// --- FUNÇÕES AUXILIARES (PDF E BUSCA) ---
 async function lerPdfRobusto(caminho) {
     try {
         const dataBuffer = new Uint8Array(fs.readFileSync(caminho));
@@ -72,6 +52,8 @@ function buscarArquivos(diretorio, lista = []) {
     return lista;
 }
 
+// --- 1. CIRCUITO DE API (CÉREBRO DA IA) ---
+// Deve vir antes da rota coringa para não ser bloqueado
 app.post("/api/ask", async (req, res) => {
     const { question, image } = req.body;
     try {
@@ -89,9 +71,41 @@ app.post("/api/ask", async (req, res) => {
         const text = result.response.text();
         res.json({ answer: text, alerta: "Consulte sempre as Normas NR10." });
     } catch (error) {
-        res.status(500).json({ answer: "Erro técnico." });
+        console.error("Erro na API:", error);
+        res.status(500).json({ answer: "Erro técnico ao processar consulta." });
     }
 });
+
+// --- 2. LOCALIZAÇÃO DO FRONTEND (INTERFACE) ---
+const caminhosParaTestar = [
+    path.join(process.cwd(), "frontend"),
+    path.join(__dirname, "frontend"),
+    path.join(__dirname, "..", "frontend"),
+    process.cwd()
+];
+
+let caminhoFinal = "";
+for (const pasta of caminhosParaTestar) {
+    if (fs.existsSync(path.join(pasta, "index.html"))) {
+        caminhoFinal = pasta;
+        break;
+    }
+}
+
+// --- 3. CIRCUITO DE ENTREGA DO SITE ---
+if (caminhoFinal) {
+    app.use(express.static(caminhoFinal));
+    
+    // ROTA CORINGA: Atende qualquer pedido que não seja a API
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(caminhoFinal, "index.html"));
+    });
+    console.log(`✅ Interface técnica carregada de: ${caminhoFinal}`);
+} else {
+    app.get("/", (req, res) => {
+        res.status(404).send("Erro: Arquivo index.html não localizado no servidor.");
+    });
+}
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Online na Porta ${PORT}!`));
