@@ -18,7 +18,7 @@ const model = genAI.getGenerativeModel({
     systemInstruction: `Você é o especialista técnico sênior do ElectroExpert.
     
     DIRETRIZES OBRIGATÓRIAS:
-    1. SEGURANÇA: Use [ALERTA] para normas NR10/NBR5410 e riscos jurídicos. Seja enfático sobre EPIs e desenergização.
+    1. SEGURANÇA: Use [ALERTA] para normas NR10/NBR5410 e riscos jurídicos. Seja enfático sobre EPIs e desenergização. Priorize a segurança do operador acima de tudo.
     2. CONTEÚDO: Use [TECNICO] para a explicação técnica detalhada.
     3. VISÃO: Se receber uma foto, identifique Marca e Modelo na etiqueta.
     4. PESQUISA: Priorize o ACERVO LOCAL. Se não encontrar o modelo exato lá, use sua base externa (internet) e avise.
@@ -26,21 +26,34 @@ const model = genAI.getGenerativeModel({
 });
 
 const app = express();
-
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// --- LOGICA DE PASTAS PARA EVITAR ERRO 404 ---
-const localFrontend = path.join(__dirname, "..", "frontend");
-const cloudFrontend = path.join(__dirname, "frontend");
-const caminhoFinal = fs.existsSync(localFrontend) ? localFrontend : cloudFrontend;
+// --- LÓGICA DE BUSCA DE DIRETÓRIO ROBUSTA (Correção do Erro ENOENT) ---
+const caminhosParaTestar = [
+    path.join(process.cwd(), "frontend"),
+    path.join(__dirname, "frontend"),
+    path.join(__dirname, "..", "frontend"),
+    process.cwd()
+];
 
-app.use(express.static(caminhoFinal));
+let caminhoFinal = "";
+for (const pasta de caminhosParaTestar) {
+    if (fs.existsSync(path.join(pasta, "index.html"))) {
+        caminhoFinal = pasta;
+        console.log(`✅ Pasta frontend localizada em: ${pasta}`);
+        break;
+    }
+}
 
-// Rota principal para carregar o site
-app.get("/", (req, res) => {
-    res.sendFile(path.join(caminhoFinal, "index.html"));
-});
+if (caminhoFinal) {
+    app.use(express.static(caminhoFinal));
+    app.get("/", (req, res) => {
+        res.sendFile(path.join(caminhoFinal, "index.html"));
+    });
+} else {
+    console.error("❌ ERRO CRÍTICO: index.html não foi encontrado em nenhum diretório!");
+}
 
 // --- MOTOR DE LEITURA DE MANUAIS ---
 async function lerPdfRobusto(caminho) {
@@ -70,11 +83,11 @@ function buscarArquivos(diretorio, lista = []) {
     return lista;
 }
 
-// --- ROTA DE COMUNICAÇÃO ---
+// --- ROTA DE COMUNICAÇÃO (API) ---
 app.post("/api/ask", async (req, res) => {
     const { question, image } = req.body;
     try {
-        const caminhoAcervo = path.join(__dirname, "acervo");
+        const caminhoAcervo = path.join(process.cwd(), "acervo");
         const todosPDFs = buscarArquivos(caminhoAcervo);
         let contextoGeral = "";
         
@@ -105,7 +118,8 @@ app.post("/api/ask", async (req, res) => {
             fonte: procedimento.includes("ORIGEM: PESQUISA EXTERNA") ? "Base Global" : "Acervo Interno"
         });
     } catch (error) {
-        res.status(500).json({ answer: "Erro técnico no processamento." });
+        console.error("Erro interno:", error);
+        res.status(500).json({ answer: "Erro técnico no processamento da consulta." });
     }
 });
 
