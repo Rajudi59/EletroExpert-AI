@@ -9,8 +9,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CONFIGURAÇÃO DA API
-const API_KEY = "SUA_CHAVE_AQUI"; 
+// CONFIGURAÇÃO DE SEGURANÇA: A chave vem da Railway (Environment Variables)
+const API_KEY = process.env.GEMINI_API_KEY; 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const model = genAI.getGenerativeModel({ 
@@ -19,17 +19,22 @@ const model = genAI.getGenerativeModel({
     
     DIRETRIZES OBRIGATÓRIAS:
     1. SEGURANÇA: Use [ALERTA] para normas NR10/NBR5410 e riscos jurídicos. Seja enfático sobre EPIs e desenergização.
-    2. CONTEÚDO: Use [TECNICO] para a explicação.
+    2. CONTEÚDO: Use [TECNICO] para a explicação técnica detalhada.
     3. VISÃO: Se receber uma foto, identifique Marca e Modelo na etiqueta.
     4. PESQUISA: Priorize o ACERVO LOCAL. Se não encontrar o modelo exato lá, use sua base externa (internet) e avise.
     5. RESPOSTA: Se a informação for do acervo, escreva "ORIGEM: ACERVO LOCAL". Se for externa, "ORIGEM: PESQUISA EXTERNA".`
 });
 
 const app = express();
-// Limite de 50mb para suportar fotos de alta resolução
-app.use(cors(), express.json({ limit: '50mb' }));
+
+// Middleware: Suporte a fotos grandes e CORS para o seu domínio
+app.use(cors());
+app.use(express.json({ limit: '50mb' }));
+
+// Servir arquivos estáticos do frontend
 app.use(express.static(path.join(__dirname, "..", "frontend")));
 
+// Função para extrair texto dos manuais em PDF
 async function lerPdfRobusto(caminho) {
     try {
         const dataBuffer = new Uint8Array(fs.readFileSync(caminho));
@@ -46,6 +51,7 @@ async function lerPdfRobusto(caminho) {
     } catch (error) { return ""; }
 }
 
+// Busca recursiva nos 200 manuais
 function buscarArquivos(diretorio, lista = []) {
     if (!fs.existsSync(diretorio)) return lista;
     const itens = fs.readdirSync(diretorio);
@@ -57,6 +63,7 @@ function buscarArquivos(diretorio, lista = []) {
     return lista;
 }
 
+// ROTA DE COMUNICAÇÃO (Ajustada para /api/ask)
 app.post("/api/ask", async (req, res) => {
     const { question, image } = req.body;
     try {
@@ -64,6 +71,7 @@ app.post("/api/ask", async (req, res) => {
         const todosPDFs = buscarArquivos(caminhoAcervo);
         let contextoGeral = "";
         
+        // Lê os manuais para dar contexto à IA
         for (const caminho of todosPDFs) {
             const texto = await lerPdfRobusto(caminho);
             contextoGeral += `\n--- MANUAL: ${path.basename(caminho)} ---\n${texto}\n`;
@@ -91,26 +99,18 @@ app.post("/api/ask", async (req, res) => {
         const eExterno = procedimento.includes("ORIGEM: PESQUISA EXTERNA");
 
         res.json({
-            resposta: `
-                <div style="font-family: sans-serif;">
-                    <div style="background: #fff5f5; border: 2px solid #d9534f; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <h3 style="color:#d9534f; margin:0 0 10px 0;">⚠️ SEGURANÇA E RESPONSABILIDADE JURÍDICA</h3>
-                        <div style="color: #b91c1c; font-weight: 500;">${alerta.replace(/\n/g, '<br>')}</div>
-                    </div>
-
-                    <div style="background: #f0f7ff; border-left: 5px solid #004a99; padding: 20px; border-radius: 8px;">
-                        <div style="display: inline-block; padding: 4px 10px; background: ${eExterno ? '#fff3cd' : '#d4edda'}; color: ${eExterno ? '#856404' : '#155724'}; border-radius: 4px; font-size: 11px; font-weight: bold; margin-bottom: 15px; border: 1px solid currentColor;">
-                            ${eExterno ? "🌐 FONTE EXTERNA" : "📁 FONTE: ACERVO LOCAL"}
-                        </div>
-                        <h3 style="color:#004a99; margin:0 0 15px 0;">🔧 PROCEDIMENTO TÉCNICO</h3>
-                        <div style="color: #1e3a8a; line-height: 1.6;">${procedimento.replace(/ORIGEM: (ACERVO LOCAL|PESQUISA EXTERNA)/g, "").replace(/\n/g, '<br>')}</div>
-                    </div>
-                </div>`,
+            answer: procedimento, // Simplificado para o index.html ler direto
+            alerta: alerta,
             fonte: eExterno ? "Base Global + Visão" : "Acervo Interno"
         });
     } catch (error) {
-        res.status(500).json({ resposta: "Erro ao processar consulta." });
+        console.error("Erro no servidor:", error);
+        res.status(500).json({ answer: "Erro ao processar consulta técnica." });
     }
 });
 
-app.listen(3000, () => console.log("🚀 ElectroExpert Online na Porta 3000!"));
+// CONFIGURAÇÃO DA PORTA PARA RAILWAY
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 ElectroExpert Online na Porta ${PORT}!`);
+});
