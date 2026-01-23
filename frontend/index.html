@@ -164,7 +164,7 @@
         conteudoDiv.innerHTML = "<div class='alerta' style='border-left-color: #00BFFF; background: #f0f7ff;'><strong>🔍 Analisando manuais e imagens no acervo técnico...</strong></div>";
 
         try {
-            const response = await fetch("/api/pergunta", {
+            const response = await fetch("https://eletroexpert-ai-production.up.railway.app/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
