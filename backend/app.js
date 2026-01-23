@@ -9,30 +9,70 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Configuração da API
 const API_KEY = process.env.GEMINI_API_KEY; 
 const genAI = new GoogleGenerativeAI(API_KEY);
-
 const model = genAI.getGenerativeModel({ 
     model: "gemini-2.0-flash",
-    systemInstruction: `Você é o especialista técnico sênior do ElectroExpert.
-    1. SEGURANÇA: Use [ALERTA] para normas NR10/NBR5410. Priorize a segurança do operador.
-    2. CONTEÚDO: Use [TECNICO] para detalhes.
-    3. VISÃO: Identifique Marca/Modelo em fotos.
-    4. ORIGEM: Cite se é ACERVO LOCAL ou PESQUISA EXTERNA.`
+    systemInstruction: `Você é o especialista técnico sênior do ElectroExpert. 
+    Priorize NR10 e NBR5410. Identifique marcas/modelos em fotos.`
 });
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// --- FUNÇÕES AUXILIARES (PDF E BUSCA) ---
+// --- 1. ROTAS DE API (Cérebro) ---
+app.post("/api/ask", async (req, res) => {
+    const { question, image } = req.body;
+    try {
+        const caminhoAcervo = path.join(process.cwd(), "acervo");
+        const todosPDFs = buscarArquivos(caminhoAcervo);
+        let contexto = "";
+        for (const caminho of todosPDFs) {
+            contexto += `\n--- MANUAL: ${path.basename(caminho)} ---\n${await lerPdfRobusto(caminho)}\n`;
+        }
+        const contentParts = [{ text: `ACERVO:\n${contexto.substring(0, 700000)}\nPERGUNTA: ${question}` }];
+        if (image) contentParts.push({ inlineData: { mimeType: "image/jpeg", data: image } });
+
+        const result = await model.generateContent(contentParts);
+        res.json({ answer: result.response.text(), alerta: "Consulte a NR10." });
+    } catch (error) {
+        res.status(500).json({ answer: "Erro técnico na IA." });
+    }
+});
+
+// --- 2. LOCALIZAÇÃO DO FRONTEND (O SALTO DE PASTA) ---
+// Como o app.js está em /backend, precisamos subir um nível (..) para achar a /frontend
+const raizDoProjeto = process.cwd(); 
+const pastaFrontend = path.join(raizDoProjeto, "frontend");
+const caminhoIndex = path.join(pastaFrontend, "index.html");
+
+// --- 3. ENTREGA DA INTERFACE ---
+if (fs.existsSync(caminhoIndex)) {
+    // Serve os arquivos (CSS, JS, Imagens)
+    app.use(express.static(pastaFrontend));
+    
+    // Rota coringa para carregar o HTML
+    app.get("*", (req, res) => {
+        res.sendFile(caminhoIndex);
+    });
+    console.log(`✅ Sucesso: Interface carregada de ${pastaFrontend}`);
+} else {
+    // Diagnóstico caso ainda falhe
+    app.get("/", (req, res) => {
+        res.status(404).send(`Erro: index.html não achado em ${pastaFrontend}. Verifique se a pasta 'frontend' subiu para o GitHub.`);
+    });
+}
+
+// Funções Auxiliares
 async function lerPdfRobusto(caminho) {
     try {
         const dataBuffer = new Uint8Array(fs.readFileSync(caminho));
         const loadingTask = pdfjs.getDocument({ data: dataBuffer, disableFontFace: true });
         const pdf = await loadingTask.promise;
         let texto = "";
-        for (let i = 1; i <= Math.min(pdf.numPages, 100); i++) {
+        for (let i = 1; i <= Math.min(pdf.numPages, 50); i++) {
             const page = await pdf.getPage(i);
             const content = await page.getTextContent();
             texto += content.items.map(item => item.str).join(" ") + "\n";
@@ -52,60 +92,5 @@ function buscarArquivos(diretorio, lista = []) {
     return lista;
 }
 
-// --- 1. CIRCUITO DE API (CÉREBRO DA IA) ---
-app.post("/api/ask", async (req, res) => {
-    const { question, image } = req.body;
-    try {
-        // Busca acervo na raiz (um nível acima de backend)
-        const caminhoAcervo = path.join(process.cwd(), "acervo");
-        const todosPDFs = buscarArquivos(caminhoAcervo);
-        let contexto = "";
-        for (const caminho of todosPDFs) {
-            contexto += `\n--- MANUAL: ${path.basename(caminho)} ---\n${await lerPdfRobusto(caminho)}\n`;
-        }
-
-        const contentParts = [{ text: `ACERVO:\n${contexto.substring(0, 700000)}\nPERGUNTA: ${question}` }];
-        if (image) contentParts.push({ inlineData: { mimeType: "image/jpeg", data: image } });
-
-        const result = await model.generateContent(contentParts);
-        const text = result.response.text();
-        res.json({ answer: text, alerta: "Consulte sempre as Normas NR10." });
-    } catch (error) {
-        console.error("Erro na API:", error);
-        res.status(500).json({ answer: "Erro técnico ao processar consulta." });
-    }
-});
-
-// --- 2. LOCALIZAÇÃO DO FRONTEND (INTERFACE) ---
-// Ajustado para encontrar a pasta na raiz estando dentro de /backend
-const caminhosParaTestar = [
-    path.join(process.cwd(), "frontend"),          // Raiz do projeto
-    path.join(__dirname, "..", "frontend"),        // Um nível acima de onde este arquivo está
-    path.join(__dirname, "frontend")               // Caso as pastas estejam juntas
-];
-
-let caminhoFinal = "";
-for (const pasta of caminhosParaTestar) {
-    if (fs.existsSync(path.join(pasta, "index.html"))) {
-        caminhoFinal = pasta;
-        break;
-    }
-}
-
-// --- 3. CIRCUITO DE ENTREGA DO SITE ---
-if (caminhoFinal) {
-    app.use(express.static(caminhoFinal));
-    
-    // ROTA CORINGA: Serve o index.html para qualquer URL não mapeada (como a raiz "/")
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(caminhoFinal, "index.html"));
-    });
-    console.log(`✅ Sucesso: Interface carregada de: ${caminhoFinal}`);
-} else {
-    app.get("/", (req, res) => {
-        res.status(404).send("Erro Crítico: Pasta 'frontend' com arquivo 'index.html' não localizada na estrutura do servidor.");
-    });
-}
-
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 ElectroExpert Online na Porta ${PORT}!`));
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Sistema Online na Porta ${PORT}`));
