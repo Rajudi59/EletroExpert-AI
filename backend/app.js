@@ -9,7 +9,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CONFIGURAÇÃO DE SEGURANÇA: A chave vem da Railway (Environment Variables)
+// CONFIGURAÇÃO DE SEGURANÇA: A chave vem da Railway
 const API_KEY = process.env.GEMINI_API_KEY; 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
@@ -27,14 +27,22 @@ const model = genAI.getGenerativeModel({
 
 const app = express();
 
-// Middleware: Suporte a fotos grandes e CORS para o seu domínio
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// Servir arquivos estáticos do frontend
-app.use(express.static(path.join(__dirname, "..", "frontend")));
+// --- LOGICA DE PASTAS PARA EVITAR ERRO 404 ---
+const localFrontend = path.join(__dirname, "..", "frontend");
+const cloudFrontend = path.join(__dirname, "frontend");
+const caminhoFinal = fs.existsSync(localFrontend) ? localFrontend : cloudFrontend;
 
-// Função para extrair texto dos manuais em PDF
+app.use(express.static(caminhoFinal));
+
+// Rota principal para carregar o site
+app.get("/", (req, res) => {
+    res.sendFile(path.join(caminhoFinal, "index.html"));
+});
+
+// --- MOTOR DE LEITURA DE MANUAIS ---
 async function lerPdfRobusto(caminho) {
     try {
         const dataBuffer = new Uint8Array(fs.readFileSync(caminho));
@@ -51,7 +59,6 @@ async function lerPdfRobusto(caminho) {
     } catch (error) { return ""; }
 }
 
-// Busca recursiva nos 200 manuais
 function buscarArquivos(diretorio, lista = []) {
     if (!fs.existsSync(diretorio)) return lista;
     const itens = fs.readdirSync(diretorio);
@@ -63,7 +70,7 @@ function buscarArquivos(diretorio, lista = []) {
     return lista;
 }
 
-// ROTA DE COMUNICAÇÃO (Ajustada para /api/ask)
+// --- ROTA DE COMUNICAÇÃO ---
 app.post("/api/ask", async (req, res) => {
     const { question, image } = req.body;
     try {
@@ -71,18 +78,14 @@ app.post("/api/ask", async (req, res) => {
         const todosPDFs = buscarArquivos(caminhoAcervo);
         let contextoGeral = "";
         
-        // Lê os manuais para dar contexto à IA
         for (const caminho of todosPDFs) {
             const texto = await lerPdfRobusto(caminho);
             contextoGeral += `\n--- MANUAL: ${path.basename(caminho)} ---\n${texto}\n`;
         }
 
-        const promptPart = { text: `ACERVO DISPONÍVEL:\n${contextoGeral.substring(0, 700000)}\n\nPERGUNTA: ${question}` };
+        const promptPart = { text: `ACERVO DISPONÍVEL:\n${contextoGeral.substring(0, 700000)}\nPERGUNTA: ${question}` };
         const contentParts = [promptPart];
-
-        if (image) {
-            contentParts.push({ inlineData: { mimeType: "image/jpeg", data: image } });
-        }
+        if (image) contentParts.push({ inlineData: { mimeType: "image/jpeg", data: image } });
 
         const result = await model.generateContent(contentParts);
         const text = result.response.text();
@@ -96,20 +99,16 @@ app.post("/api/ask", async (req, res) => {
             procedimento = partes[1].trim();
         }
 
-        const eExterno = procedimento.includes("ORIGEM: PESQUISA EXTERNA");
-
         res.json({
-            answer: procedimento, // Simplificado para o index.html ler direto
+            answer: procedimento,
             alerta: alerta,
-            fonte: eExterno ? "Base Global + Visão" : "Acervo Interno"
+            fonte: procedimento.includes("ORIGEM: PESQUISA EXTERNA") ? "Base Global" : "Acervo Interno"
         });
     } catch (error) {
-        console.error("Erro no servidor:", error);
-        res.status(500).json({ answer: "Erro ao processar consulta técnica." });
+        res.status(500).json({ answer: "Erro técnico no processamento." });
     }
 });
 
-// CONFIGURAÇÃO DA PORTA PARA RAILWAY
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 ElectroExpert Online na Porta ${PORT}!`);
