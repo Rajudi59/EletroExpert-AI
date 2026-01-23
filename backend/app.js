@@ -53,10 +53,10 @@ function buscarArquivos(diretorio, lista = []) {
 }
 
 // --- 1. CIRCUITO DE API (CÉREBRO DA IA) ---
-// Deve vir antes da rota coringa para não ser bloqueado
 app.post("/api/ask", async (req, res) => {
     const { question, image } = req.body;
     try {
+        // Busca acervo na raiz (um nível acima de backend)
         const caminhoAcervo = path.join(process.cwd(), "acervo");
         const todosPDFs = buscarArquivos(caminhoAcervo);
         let contexto = "";
@@ -77,11 +77,11 @@ app.post("/api/ask", async (req, res) => {
 });
 
 // --- 2. LOCALIZAÇÃO DO FRONTEND (INTERFACE) ---
+// Ajustado para encontrar a pasta na raiz estando dentro de /backend
 const caminhosParaTestar = [
-    path.join(process.cwd(), "frontend"),
-    path.join(__dirname, "frontend"),
-    path.join(__dirname, "..", "frontend"),
-    process.cwd()
+    path.join(process.cwd(), "frontend"),          // Raiz do projeto
+    path.join(__dirname, "..", "frontend"),        // Um nível acima de onde este arquivo está
+    path.join(__dirname, "frontend")               // Caso as pastas estejam juntas
 ];
 
 let caminhoFinal = "";
@@ -96,16 +96,16 @@ for (const pasta of caminhosParaTestar) {
 if (caminhoFinal) {
     app.use(express.static(caminhoFinal));
     
-    // ROTA CORINGA: Atende qualquer pedido que não seja a API
+    // ROTA CORINGA: Serve o index.html para qualquer URL não mapeada (como a raiz "/")
     app.get("*", (req, res) => {
         res.sendFile(path.join(caminhoFinal, "index.html"));
     });
-    console.log(`✅ Interface técnica carregada de: ${caminhoFinal}`);
+    console.log(`✅ Sucesso: Interface carregada de: ${caminhoFinal}`);
 } else {
     app.get("/", (req, res) => {
-        res.status(404).send("Erro: Arquivo index.html não localizado no servidor.");
+        res.status(404).send("Erro Crítico: Pasta 'frontend' com arquivo 'index.html' não localizada na estrutura do servidor.");
     });
 }
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Online na Porta ${PORT}!`));
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 ElectroExpert Online na Porta ${PORT}!`));
