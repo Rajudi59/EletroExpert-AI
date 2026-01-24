@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path'); // ESSENCIAL: Para encontrar as pastas
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { buscarConhecimentoTecnico } = require("./services/acervoService");
 
@@ -10,8 +11,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' })); // Suporte para fotos de alta resolução
 
-// Rota de Diagnóstico para ver se o servidor está vivo
-app.get('/', (req, res) => res.send("EletroExpert Server Online ⚡"));
+// --- NOVA PARTE: LIGANDO A TELA AZUL (FRONTEND) ---
+// Isso faz o servidor entregar os arquivos CSS e JS da pasta frontend
+app.use(express.static(path.join(process.cwd(), 'frontend')));
+
+// Isso abre o arquivo index.html assim que você clica no link da Railway
+app.get('/', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'frontend', 'index.html'));
+});
+// --------------------------------------------------
 
 // Rota Principal (Onde o seu site envia as perguntas)
 app.post('/api/chat', async (req, res) => {
@@ -25,7 +33,7 @@ app.post('/api/chat', async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Busca o conhecimento nos manuais (com o tempo você terá centenas aqui)
+    // Busca o conhecimento nos manuais (Prioridade para Segurança do Técnico)
     let conhecimentoExtraido = "";
     try {
       conhecimentoExtraido = await buscarConhecimentoTecnico();
@@ -59,8 +67,8 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// A Railway exige que o servidor use a porta que ela fornecer via variável de ambiente
-const PORT = process.env.PORT || 3000;
+// A Railway exige que o servidor use a porta que ela fornecer
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor EletroExpert ligado na porta ${PORT} ⚡`);
+  console.log(`🚀 Servidor EletroExpert ligado na porta ${PORT} ⚡`);
 });
