@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const pdf = require('pdf-parse');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
@@ -9,45 +8,37 @@ const app = express();
 const port = process.env.PORT || 8080;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Configuração de limites e arquivos estáticos
 app.use(express.json({ limit: '20mb' }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-/**
- * FUNÇÃO DE BUSCA FILTRADA:
- * Em vez de ler o manual todo, ela filtra apenas linhas com 'P', 'F' ou 'Erro'.
- * Isso evita que o servidor da Railway trave por tempo (Timeout).
- */
-async function buscarParametroNoManual(pergunta) {
+// FUNÇÃO QUE LÊ APENAS ARQUIVOS .TXT (Rápida e Segura)
+function carregarManuaisTexto() {
     try {
-        const acervoPath = path.join(process.cwd(), 'frontend', 'acervo', 'inversores');
-        if (!fs.existsSync(acervoPath)) return "Aviso: Pasta de inversores não localizada.";
+        const acervoPath = path.join(process.cwd(), 'frontend', 'acervo');
+        let textoFinal = "";
 
-        const arquivos = fs.readdirSync(acervoPath);
-        let resumoParaIA = "";
+        if (!fs.existsSync(acervoPath)) return "Acervo não encontrado.";
 
-        for (const arquivo of arquivos) {
-            if (arquivo.toLowerCase().endsWith('.pdf')) {
-                const dataBuffer = fs.readFileSync(path.join(acervoPath, arquivo));
-                const data = await pdf(dataBuffer);
-                
-                // Transforma o PDF em linhas e filtra apenas o que parece ser parâmetro ou erro
-                const linhas = data.text.split('\n');
-                const filtro = linhas.filter(l => 
-                    l.includes('P0') || 
-                    l.includes('Parâmetro') || 
-                    l.includes('Erro') || 
-                    l.includes('F0')
-                );
+        // Função que vasculha todas as pastas (Inversores, etc)
+        const lerPastas = (diretorio) => {
+            const itens = fs.readdirSync(diretorio);
+            itens.forEach(item => {
+                const caminho = path.join(diretorio, item);
+                if (fs.statSync(caminho).isDirectory()) {
+                    lerPastas(caminho);
+                } else if (item.toLowerCase().endsWith('.txt')) {
+                    const conteudo = fs.readFileSync(caminho, 'utf8');
+                    // Adicionamos o nome do arquivo para a IA saber a origem
+                    textoFinal += `\n--- MANUAL: ${item} ---\n${conteudo.substring(0, 20000)}\n`;
+                }
+            });
+        };
 
-                // Pega as primeiras 150 linhas relevantes para não estourar a memória
-                resumoParaIA += `\n[FONTE: ${arquivo}]\n` + filtro.slice(0, 150).join('\n');
-            }
-        }
-        return resumoParaIA || "Nenhum dado técnico específico extraído.";
-    } catch (e) {
-        console.error("Erro na extração:", e);
-        return "Erro ao processar os arquivos PDF.";
+        lerPastas(acervoPath);
+        return textoFinal || "Nenhum arquivo .txt localizado.";
+    } catch (error) {
+        console.error("Erro na leitura:", error);
+        return "Erro ao processar manuais técnicos.";
     }
 }
 
@@ -55,24 +46,21 @@ app.post('/chat', async (req, res) => {
     try {
         const { question, image } = req.body;
         
-        // Aciona a busca inteligente nos manuais
-        const contextoTecnico = await buscarParametroNoManual(question);
-
+        // Carrega o conteúdo dos manuais em milissegundos
+        const conhecimento = carregarManuaisTexto();
+        
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const promptSistema = `Você é o ElectroExpert-AI.
-        Use os dados extraídos dos manuais abaixo para responder ao técnico.
-        Se o parâmetro (ex: P0101) estiver nos dados, explique exatamente o que o manual diz.
-        
-        DADOS DO ACERVO:
-        ${contextoTecnico}
+        const promptSistema = `Você é o ElectroExpert-AI, especialista em manutenção elétrica.
+        Aqui estão os dados técnicos extraídos dos manuais disponíveis nas pastas:
+        ${conhecimento}
 
-        REGRAS:
-        1. Cite o nome do manual.
-        2. Priorize a segurança (NR-10/NR-12).
-        3. Se não encontrar o parâmetro nos dados acima, use seu conhecimento geral WEG mas avise o usuário.
+        REGRAS IMPORTANTES:
+        1. Responda com base nos manuais acima. Se encontrar a solução, cite o nome do arquivo.
+        2. Priorize SEMPRE a segurança do técnico e as normas (NR-10).
+        3. Se a pergunta for sobre um parâmetro (ex: P0101), procure nos dados acima.
         
-        PERGUNTA: ${question}`;
+        PERGUNTA DO TÉCNICO: ${question}`;
 
         const result = await model.generateContent([
             promptSistema,
@@ -81,9 +69,9 @@ app.post('/chat', async (req, res) => {
 
         res.json({ answer: result.response.text() });
     } catch (error) {
-        console.error("Erro no Chat:", error);
-        res.status(500).json({ answer: "⚠️ O servidor demorou muito para ler o manual. Tente ser mais específico na pergunta." });
+        console.error("Erro Chat:", error);
+        res.status(500).json({ answer: "⚠️ Erro interno. Verifique a conexão com a API do Google." });
     }
 });
 
-app.listen(port, () => console.log(`⚡ ElectroExpert Online na porta ${port}`));
+app.listen(port, () => console.log(`⚡ ElectroExpert operando com manuais TXT na porta ${port}`));
