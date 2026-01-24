@@ -1,14 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-// Removemos o pdf-parse daqui por enquanto para testar a conexão limpa
-// const pdf = require('pdf-parse'); 
 
 async function buscarConhecimentoTecnico() {
   try {
-    const acervoPath = path.join(__dirname, '..', 'acervo');
+    // Usamos process.cwd() para garantir que começamos da RAIZ do projeto
+    const acervoPath = path.join(process.cwd(), 'acervo');
     
-    // Na Vercel, ler muitos PDFs trava o servidor. 
-    // Vamos apenas listar os manuais disponíveis para a IA saber o que você tem.
     let listaManuais = "O técnico possui os seguintes manuais no acervo: ";
     
     if (fs.existsSync(acervoPath)) {
@@ -20,10 +17,10 @@ async function buscarConhecimentoTecnico() {
           listaManuais += `\n- Na pasta ${pasta}: ${arquivos.join(', ')}`;
         }
       });
+    } else {
+      console.log("⚠️ Pasta acervo não encontrada no caminho:", acervoPath);
     }
 
-    // Retornamos apenas a lista e uma instrução. 
-    // Isso é leve e não trava o servidor.
     return listaManuais + "\nInstrução: Responda como especialista se baseando nesses manuais e na NR-10.";
 
   } catch (error) {
