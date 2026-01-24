@@ -1,81 +1,81 @@
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
 const path = require('path');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { buscarConhecimentoTecnico } = require("./services/acervoService");
+const fs = require('fs');
+const pdf = require('pdf-parse'); // O novo "leitor" de manuais potente
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 8080;
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// --- ROTA DE ESTABILIDADE (HEALTHCHECK) ---
-// Responde imediatamente para a Railway não derrubar o servidor
-app.get('/health', (req, res) => {
-    res.status(200).send('OK');
-});
+app.use(express.json({ limit: '50mb' }));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Configurações de Segurança e Conexão
-app.use(cors());
-app.use(bodyParser.json({ limit: '50mb' }));
-
-// LIGANDO A TELA AZUL (FRONTEND)
-app.use(express.static(path.join(process.cwd(), 'frontend')));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(process.cwd(), 'frontend', 'index.html'));
-});
-
-// Rota Principal de Chat
-app.post('/api/chat', async (req, res) => {
+/**
+ * FUNÇÃO DE BUSCA: Agora lê .txt E extrai texto de .pdf automaticamente
+ */
+async function buscarConhecimentoTecnico() {
     try {
-        const { question, image, imageType } = req.body;
+        const acervoPath = path.join(__dirname, '../frontend/acervo');
+        let conhecimentoExtraido = "DADOS EXTRAÍDOS DO ACERVO TÉCNICO:\n";
 
-        if (!process.env.GEMINI_API_KEY) {
-            return res.status(500).json({ answer: "Erro: Chave API não configurada na Railway." });
+        if (fs.existsSync(acervoPath)) {
+            // Função recursiva para ler todas as subpastas (inversores, clp, etc)
+            const lerArquivos = async (diretorio) => {
+                const itens = fs.readdirSync(diretorio);
+                for (const item of itens) {
+                    const caminhoCompleto = path.join(diretorio, item);
+                    const stats = fs.lstatSync(caminhoCompleto);
+
+                    if (stats.isDirectory()) {
+                        await lerArquivos(caminhoCompleto);
+                    } else {
+                        // Se for PDF, extrai o texto usando a memória do Hobby Plan
+                        if (item.toLowerCase().endsWith('.pdf')) {
+                            const dataBuffer = fs.readFileSync(caminhoCompleto);
+                            const data = await pdf(dataBuffer);
+                            conhecimentoExtraido += `\n--- MANUAL (PDF): ${item} ---\n${data.text.substring(0, 7000)}\n`; 
+                            // Aumentamos para 7000 caracteres pois agora temos 8GB de RAM!
+                        } 
+                        // Se for TXT, lê normal
+                        else if (item.toLowerCase().endsWith('.txt')) {
+                            const conteudo = fs.readFileSync(caminhoCompleto, 'utf8');
+                            conhecimentoExtraido += `\n--- MANUAL (TXT): ${item} ---\n${conteudo}\n`;
+                        }
+                    }
+                }
+            };
+            await lerArquivos(acervoPath);
         }
+        return conhecimentoExtraido;
+    } catch (error) {
+        console.error("Erro ao ler acervo:", error);
+        return "Erro ao processar manuais. Siga as normas de segurança (NR-10).";
+    }
+}
 
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+app.post('/chat', async (req, res) => {
+    try {
+        const { question, image } = req.body;
+        const acervo = await buscarConhecimentoTecnico();
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        let conhecimentoExtraido = "";
-        try {
-            conhecimentoExtraido = await buscarConhecimentoTecnico();
-        } catch (e) {
-            console.error("Erro no acervo:", e.message);
-            conhecimentoExtraido = "Aviso: Base de manuais offline. Use normas NR-10.";
-        }
+        const promptSistema = `Você é o ElectroExpert-AI, um assistente técnico especializado. 
+        Siga rigorosamente as normas de segurança (NR-10, NR-12).
+        Use este acervo técnico para responder com precisão: ${acervo}. 
+        Pergunta do técnico: ${question}`;
 
-        const promptPrincipal = `Você é o EletroExpert-AI, Especialista em Manutenção Elétrica.
-        Responda com base no conteúdo abaixo:
+        const result = await model.generateContent([
+            promptSistema, 
+            ...(image ? [{ inlineData: { data: image, mimeType: "image/jpeg" }}] : [])
+        ]);
         
-        ${conhecimentoExtraido}
-
-        PERGUNTA: ${question}
-        
-        IMPORTANTE: Priorize a segurança do operador, técnico ou eletricista, seguindo normas técnicas (NR-10, NBR-5410) para precauções legais.`;
-
-        let payload = [promptPrincipal];
-        if (image) {
-            payload.push({
-                inlineData: { data: image, mimeType: imageType || "image/jpeg" }
-            });
-        }
-
-        const result = await model.generateContent(payload);
-        res.status(200).json({ answer: result.response.text() });
-
+        res.json({ answer: result.response.text() });
     } catch (error) {
-        console.error("ERRO CRÍTICO NO SERVIDOR:", error);
-        res.status(500).json({ answer: "Erro no processamento. Tente novamente." });
+        console.error("Erro no chat:", error);
+        res.status(500).json({ answer: "⚠️ Erro no servidor. Verifique a conexão e tente novamente." });
     }
 });
 
-// Configuração de Porta para Deploy
-const PORT = process.env.PORT || 8080;
-const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Servidor EletroExpert ligado na porta ${PORT} ⚡`);
-});
-
-// Mantém a conexão estável para evitar Stopping Container
-server.keepAliveTimeout = 120000;
-server.headersTimeout = 125000;
-// Reiniciando sistema para deploy
+app.listen(port, () => console.log(`⚡ ElectroExpert Online (Hobby Plan Ativo)`));
