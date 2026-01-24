@@ -1,0 +1,1186 @@
+﻿ELETRICISTA: 
+INSTALAÇÕES ELÉTRICAS 
+  
+  
+  
+  
+
+Serviço Nacional de Aprendizagem Rural 
+Administração Regional do Estado do Paraná 
+Coleção SENAR-PR/250
+FRANCISCO DE PAULA MEDEIROS 
+ELETRICISTA: 
+INSTALAÇÕES ELÉTRICAS 
+CURITIBA 
+SENAR-PR 
+2010
+Depósito legal na CENAGRI, conforme Portaria Interministerial n. 164, datada de 22 de julho de 1994, e junto a Fundação  Biblioteca Nacional. 
+Autor: Francisco de Paula Medeiros 
+Coordenação técnica: Néder Maciel Corso CREA-PR-62260/D 
+Coordenação metodológica: Patrícia Lupion Torres 
+Ilustrações: Senar-Pr. 
+Normalização: Rita de Cassia Teixeira Gusso – CRB 9./647 
+Revisão técnica e final: CEDITEC/SENAR-PR. 
+Diagramação: Virtual Publicidade 
+Catalogação no Centro de Editoração, Documentação  
+e Informação Técnica do Senar-Pr. 
+Medeiros, Francisco de Paula. 
+M488 
+Eletricista: instalações elétricas / Francisco de Paula Medeiros. – Curitiba:  SENAR - Pr., 2010. 
+ISBN: 978-85-7565-060-8 
+1. Energia elétrica. 2. Instalações elétricas. I. Título. 
+CDD630 
+CDU696.6+537 
+Nenhuma parte desta publicação poderá ser reproduzida, por qualquer meio, sem a autorização do autor. IMPRESSO NO BRASIL – DISTRIBUIÇÃO GRATUITA
+APRESENTAÇÃO 
+O SENAR Nacional – Serviço Nacional de Aprendizagem Rural – é uma instituição  prevista na Constituição Federal e criada pela Lei nº 8.315, de 23/12/1991. Tem como objetivo  a formação profissional e a promoção social do homem do campo para que ele melhore o  resultado do seu trabalho e, com isso, aumente sua renda e a sua condição social. 
+No Paraná, O SENAR é administrado pela Federação da Agricultura do Estado do  Paraná – FAEP – e vem respondendo por amplo e diversificado programa de treinamento. 
+Todos os cursos ministrados por intermédio do SENAR são coordenados pelos Sindicatos  Rurais e contam com a colaboração de outras instituições governamentais e particulares,  Prefeituras Municipais, cooperativas e empresas privadas. 
+O material didático de cada curso levado pelo SENAR é preparado de forma criteriosa  e exclusiva para seu público-alvo, a exemplo deste manual. O intuito não é outro senão o de  assegurar que os benefícios dos treinamentos se consolidem e se estendam. Afinal, quanto  maior o número de trabalhadores e produtores rurais qualificados, melhor será o resultado  para a economia e para a sociedade em geral.
+SUMÁRIO 
+INTRODUÇÃO ................................................................................................................................................................7 
+1 FERRAMENTAS E INSTRUMENTOS BÁSICOS DO ELETRICISTA .....................................................................8 1.1 CUIDADOS COM AS FERRAMENTAS........................................................................................................14 1.2 INSTRUMENTOS ELETROELETRÔNICOS PARA MEDIÇÕES E TESTES...............................................15 
+2 MEDIÇÕES E TESTES..........................................................................................................................................18 2.1 MEDIÇÕES E TESTES COM MULTÍMETROS ANALÓGICOS...................................................................18 2.2 MEDIÇÕES E TESTES COM MULTÍMETROS DIGITAIS............................................................................22 2.3 MEDIÇÕES COM AMPERÍMETRO DO TIPO ALICATE..............................................................................28 2.4 TESTE MULTITENSÃO................................................................................................................................29 2.5 TESTE NEON...............................................................................................................................................30 2.6 TESTE COM LÂMPADA DE PROVA ...........................................................................................................30 
+3 ATIVIDADES PRÁTICAS DE INSTALAÇÕES ELÉTRICAS.................................................................................34 3.1 MARCAR PONTOS DAS INSTALAÇÕES ...................................................................................................34 3.2 PASSANDO CONDUTORES PELOS ELETRODUTOS (CONDUÍTES)......................................................34 3.3 DESENCAPANDO PONTAS DE CONDUTORES........................................................................................35 3.4 FAZENDO EMENDAS DE FIOS RÍGIDOS E CABOS FLEXÍVEIS..............................................................36 3.5 FAZENDO DERIVAÇÕES EM CONDUTORES RÍGIDOS...........................................................................38 3.6 FAZENDO O ISOLAMENTO COM FITAS ISOLANTES ANTICHAMA.........................................................38 3.7 FIXANDO OS CONDUTORES NOS EQUIPAMENTOS ELÉTRICOS.........................................................39 3.8 FAZENDO EMENDAS COM CONECTORES PRESSCON E “DADO”........................................................40 3.9 FIXANDO OS CONDUTORES EM ROLDANAS..........................................................................................41 3.10 EXTENSÕES E TOMADAS .........................................................................................................................42 3.11 TROCANDO A RESISTÊNCIA DE UM CHUVEIRO ELÉTRICO COMUM...................................................46 
+4 INSTALAÇÕES ELÉTRICAS BÁSICAS................................................................................................................49 4.1 INSTALANDO UMA LÂMPADA INCANDESCENTE COM INTERRUPTOR DE UMA TECLA SIMPLES ....49 4.2 INSTALANDO DUAS LÂMPADAS INCANDESCENTES COM INTERRUPTOR DE UMA TECLA SIMPLES...51 4.3 INSTALANDO TRÊS LÂMPADAS INCANDESCENTES COM INTERRUPTOR DE UMA TECLA SIMPLES...54 4.4 INSTALANDO DUAS LÂMPADAS INCANDESCENTES COM INTERRUPTOR DE DUAS TECLAS SIMPLES..56 4.5 INSTALANDO TRÊS LÂMPADAS INCANDESCENTES COM INTERRUPTOR DE TRÊS TECLAS SIMPLES...58 4.6 INSTALANDO EM SÉRIE DUAS LÂMPADAS INCANDESCENTES 127V NA REDE DE 220V, COM  
+INTERRUPTOR DE UMA TECLA SIMPLES.................................................................................................... 61 4.7 INSTALANDO UMA LÂMPADA INCANDESCENTE COM DOIS INTERRUPTORES DE UMA TECLA  (PARALELOS)..............................................................................................................................................63 4.8 INSTALANDO DUAS LÂMPADAS INCANDESCENTES COM DOIS INTERRUPTORES DE UMA TECLA  (PARALELOS)..............................................................................................................................................65 4.9 INSTALANDO UMA LÂMPADA INCANDESCENTE COM DOIS INTERRUPTORES DE UMA TECLA  (PARALELOS) E UM INTERRUPTOR DE UMA TECLA (INTERMEDIÁRIO) ..................................................67 4.10 INSTALANDO UMA LÂMPADA INCANDESCENTE COM DOIS INTERRUPTORES DE UMA TECLA  (PARALELOS) E DOIS INTERRUPTORES DE UMA TECLA (INTERMEDIÁRIOS)...............................................71 4.11 INSTALANDO UMA LÂMPADA INCANDESCENTE PARA ILUMINAÇÃO EM DOIS NÍVEIS UTILIZANDO  UM DIODO SEMICONDUTOR, COM INTERRUPTOR DE DUAS TECLAS SIMPLES ................................. 72
+4.12 INSTALANDO UMA LÂMPADA INCANDESCENTE PARA ILUMINAÇÃO EM DOIS NÍVEIS UTILIZANDO  DIODO SEMICONDUTOR, COM UM INTERRUPTOR DE DUAS TECLAS (SIMPLES E PARALELO)  E OUTRO DE UMA TECLA SIMPLES....................................................................................................................75 
+4.13 INSTALANDO UMA CIGARRA COM INTERRUPTOR DE UMA TECLA SIMPLES RETRÁTIL (PRESSÃO).....77 4.14 INSTALANDO UMA CAMPAINHA “DIM DOM” COM INTERRUPTOR DE UMA TECLA SIMPLES  RETRÁTIL (PRESSÃO) ...............................................................................................................................80 4.15 INSTALANDO UMA TOMADA BIPOLAR 127V............................................................................................82 4.16 INSTALANDO DUAS TOMADAS BIPOLARES 127V ..................................................................................83 4.17 INSTALANDO UMA TOMADA BIPOLAR 127V COM ATERRAMENTO ......................................................85 4.18 INSTALANDO DUAS TOMADAS BIPOLARES 127V E 220V......................................................................87 4.19 INSTALANDO UMA TOMADA 127V COM ATERRAMENTO (NBR 14.136)................................................88 4.20 INSTALANDO DUAS TOMADAS 127V COM ATERRAMENTO (NBR 14.136) ...........................................90 4.21 INSTALANDO UMA TOMADA DUPLA 127V E 220V COM ATERRAMENTO (NBR 14.136) ......................93 4.22 INSTALANDO UMA LÂMPADA INCANDESCENTE 127V E UMA TOMADA BIPOLAR 127V.....................95 4.23 INSTALANDO DUAS LÂMPADAS INCANDESCENTES 127V E UMA TOMADA BIPOLAR 127V..............98 4.24 INSTALANDO UMA LÂMPADA FLUORESCENTE 20W COM REATOR CONVENCIONAL 127V X 20W....100 4.25 INSTALANDO DUAS LÂMPADAS FLUORESCENTES 20W COM DOIS REATORES CONVENCIONAIS  127V X 20W ...............................................................................................................................................104 4.26 INSTALANDO UMA LÂMPADA FLUORESCENTE 20W COM REATOR CONVENCIONAL 220V X 20W .....106 4.27 INSTALANDO DUAS LÂMPADAS FLUORESCENTES 20W COM DOIS REATORES CONVENCIONAIS  220V X 20W ...............................................................................................................................................110 4.28 INSTALANDO UMA LÂMPADA FLUORESCENTE 20W COM REATOR ELETRÔNICO PARTIDA  RÁPIDA 127V X 20W .................................................................................................................................112 4.29 INSTALANDO DUAS LÂMPADAS FLUORESCENTES 20W COM DOIS REATORES ELETRÔNICOS  PARTIDA RÁPIDA 127V X 20W.................................................................................................................115 4.30 INSTALANDO DUAS LÂMPADAS FLUORESCENTES 20W COM REATOR ELETRÔNICO PARTIDA  RÁPIDA 127V X 20W .................................................................................................................................118 4.31 INSTALANDO UMA LÂMPADA FLUORESCENTE 20W COM REATOR CONVENCIONAL 127V X 20W  COM DOIS INTERRUPTORES DE UMA TECLA (PARALELOS)..............................................................120 4.32 INSTALANDO UMA LÂMPADA FLUORESCENTE 20W COM REATOR ELETRÔNICO PARTIDA  RÁPIDA 127V X 20W COM DOIS INTERRUPTORES DE UMA TECLA (PARALELOS)...........................124 4.33 INSTALANDO DUAS LÂMPADAS FLUORESCENTES 20W COM REATOR ELETRÔNICO PARTIDA  RÁPIDA 127V X 20W COM DOIS INTERRUPTORES DE UMA TECLA (PARALELOS)...........................128 4.34 INSTALANDO UM MOTOR ELÉTRICO MONOFÁSICO NA REDE DE 127V (TENSÃO MENOR OU EM  PARALELO)................................................................................................................................................130 4.35 INSTALANDO UM MOTOR ELÉTRICO MONOFÁSICO NA REDE DE 220V (TENSÃO MAIOR OU EM  SÉRIE)........................................................................................................................................................131 4.36 INSTALANDO UM MOTOR ELÉTRICO TRIFÁSICO EM 220V (TENSÃO MENOR OU EM TRIÂNGULO).....133 4.37 INSTALANDO UM MOTOR ELÉTRICO TRIFÁSICO EM 380V (TENSÃO MAIOR OU EM ESTRELA)....134 4.38 INSTALANDO UM MOTOR ELÉTRICO TRIFÁSICO EM 220V (TRIÂNGULO) COM CHAVE MAGNÉTICA  (CONTACTOR E RELÊ TÉRMICO) ...........................................................................................................135 4.39 INSTALAÇÃO DE CHAVES-BOIA SUPERIOR E INFERIOR COM ELETROBOMBA MONOFÁSICA......139 
+REFERÊNCIAS...........................................................................................................................................................140
+INTRODUÇÃO 
+As instalações elétricas devem ter uma boa apresentação, confiabilidade e garantir  o bom funcionamento dos aparelhos elétricos. Equipamentos elétricos que funcionam  corretamente realizam o trabalho com eficiência e sem desperdício de energia elétrica. 
+Redes elétricas mal feitas, que apresentam fugas de energia na instalação, nos  disjuntores, pinos e tomadas, além de proporcionar riscos para as pessoas e às residências,  causam danos aos aparelhos elétricos e consumo desnecessário de eletricidade.  
+Aparelhos elétricos ligados em redes feitas sem obedecer às normas técnicas  podem apresentar defeitos prematuros e às vezes irreparáveis. Têm como destino final o  lixo, contaminando o meio ambiente. É necessário estar ciente que quando um aparelho  elétrico se tornar inútil, será substituído por um novo e a matéria-prima para fabricá-lo  será extraída da natureza. 
+O objetivo desse manual não é formar técnicos em eletricidade, mas orientar  principalmente os produtores e trabalhadores rurais sobre as instalações elétricas de  baixa tensão, utilizadas nas propriedades agropecuárias. 
+A forma simplificada de apresentar os esquemas elétricos nesse manual tem a  finalidade de tornar fácil o seu entendimento, para que possa fazer suas próprias instalações  e garantir o bom funcionamento dos equipamentos elétricos. 
+Os produtores e trabalhadores rurais poderão fazer instalações internas de baixa  tensão, com confiança e economia, boa apresentação, obedecendo as normas técnicas  vigentes e as regras de segurança no uso da eletricidade.
+SENAR-PR 
+7 
+1 FERRAMENTAS E INSTRUMENTOS BÁSICOS DO  ELETRICISTA 
+Para realizar um trabalho com eficiência, boa apresentação, segurança e  confiabilidade nas instalações, o eletricista básico deve utilizar ferramentas adequadas e  com boas condições de uso. As principais ferramentas que o eletricista utiliza na prática  estão descritas a seguir.  
+Alicates 
+Os mais comuns são os “alicates universais”, que servem para segurar peças  irregulares com firmeza, cortar e dobrar fios em geral. O eletricista pode usar também o  alicate de corte, de bico chato, redondo, meia-cana, que são usados para fazer olhais  nas pontas dos fios (anéis), alicate descascador e de pressão. 
+Os alicates precisam estar limpos e lubrificados para evitar o emperramento pela  ferrugem. Nunca devem ser usados como martelos e nem para apertar parafusos ou  porcas. Isto pode danificar seriamente os alicates. 
+Figura 1 – Tipos de alicates. 
+  
+  
+7
+1 2 3 4 
+5 6 
+1, 2 e 3. Alicates universais. 4. Alicate de bico redondo. 5. Alicate de bico meia-cana.  6. Alicate de bico torto. 7. Alicate de bico retrátil (com mola). 
+  
+8   9 
+8. Alicate de corte. 9. Alicate bico de papagaio ou tipo bomba. 
+SENAR-PR 
+8 
+Alicates de pressão 
+São utilizados para prender peças, parafusos ou porcas. Possuem uma porca  recartilhada para o ajuste da boca e da pressão. Existem vários tipos de alicates de  pressão. Os mais comuns têm a forma apresentada na figura 2. 
+Figura 2 – Alicate de pressão. 
+  
+
+Descascadores de fios 
+Existem vários tipos de alicates para descascar fios elétricos. São muito úteis,  principalmente para quem trabalha de maneira intensiva com instalações elétricas. Os  fios e os cabos podem também ser descascados com a utilização de uma pequena faca  ou canivete. 
+Figura 3 – Descascadores de fios. 
+  
+2 
+1 
+3 
+1. Alicate descascador calibrado. 2. Alicate descascador  
+ajustável. 3. Faca. 
+Chaves de fenda 
+São chaves utilizadas em parafusos com cabeça de fenda. Deve-se usar a chave  com tamanho igual à fenda para não danificar a chave e nem a cabeça do parafuso.  Manter a chave sempre na posição reta em relação ao parafuso.
+SENAR-PR 
+9 
+Figura 4 – Chaves de fenda. 
+  
+  
+
+Chaves “Philips” 
+Possuem suas pontas em forma de cruz. Apresentam a vantagem de pressionar a  cabeça do parafuso com bastante firmeza sem o risco de escaparem da cabeça. Facilitam  a colocação e remoção de parafusos em lugares profundos. 
+Figura 5 – Chaves “Philips”. 
+  
+  
+
+Chaves torque 
+São chaves que possuem suas pontas estriadas. Apresentam maior resistência  ao esforço. As cabeças dos parafusos são estriadas internamente em profundidade,  proporcionando uma melhor fixação da chave. 
+Figura 6 – Chaves torque.
+  
+
+SENAR-PR 
+10 
+Marretas e martelos 
+Os tipos mais usados pelos eletricistas são as marretas de ferro, martelos de bola,  de pena e de unha. Ao utilizar marretas e martelos, segurar firmemente na ponta do cabo.  Verificar, periodicamente, as cunhas que prendem os cabos para que não se soltem e  causem acidentes. 
+Figura 7 – Marretas e martelos. 
+1 2 3 
+1. Marreta de ferro. 2. Martelo de pena. 3. Martelo de unha. 
+Ferramentas para traços e medições 
+São ferramentas usadas para fazer medições em geral e para marcar os locais a  serem instalados os pontos de luz e as redes.  
+Figura 8 – Ferramentas para traços e medições. 
+5 6 
+3 
+1 2 
+4 
+1 e 2. Metros de carpinteiro. 3. Lápis de carpinteiro. 4. Trena  
+de 30m. 5. Trena de bolso com nível. 6. Trena de bolso. 
+Chaves de cano ajustáveis 
+São utilizadas para prender e rosquear tubos e conduítes rígidos. Possuem garras  (estrias) para segurar os tubos e uma porca para ajustar a abertura da boca.
+SENAR-PR 
+11 
+Figura 9 – Chaves de cano. 
+
+Chaves de boca ajustáveis (inglesas) 
+São utilizadas para fixar porcas e parafusos de cabeças quadradas ou sextavadas.  O ajuste da abertura da boca é feito por um cilindro de rosca e estriado externamente. 
+Figura 10 – Chaves de boca ajustáveis (inglesas). 
+
+Chaves do tipo Allen 
+O formato mais comum é em “L”, com o corpo e pontas sextavados. São utilizadas  em parafusos com cabeças sextavadas (6 lados) internamente em profundidade. 
+Figura 11 – Chaves Allen.
+
+SENAR-PR 
+12 
+Chaves fixas 
+As chaves fixas são utilizadas em porcas e parafusos sextavados ou quadrados.  São classificadas em 3 tipos: “chaves fixas de boca”, “chaves fixas estriadas” e “chaves  fixas combinadas”. 
+Figura 12 – Chaves fixas (de boca, combinada e estriada). 
+
+Furadeiras elétricas 
+As furadeiras podem ser de bancada ou manuais, e alimentadas pela rede de  energia elétrica (110 / 220V) ou portáteis à bateria recarregável (12V). São utilizadas para  furar madeiras, metais, plásticos, alvenaria e cerâmicas. Para cada tipo de material a ser  perfurado existe uma broca e uma rotação específica. 
+Figura 13 – Furadeira manual alimentada pela rede de energia elétrica. 
+
+Brocas para furadeiras elétricas  
+As brocas são acessórios que requerem muito cuidado na sua utilização por  serem extremamente frágeis. Existem vários tipos de brocas, destinadas para diferentes  materiais.  
+As brocas de “aço-carbono” são específicas para perfurar superfícies consideradas  moles, como madeiras, plásticos, fibras, etc. As brocas de “aço rápido” são próprias para 
+SENAR-PR 
+13 
+perfurar metais de superfície dura. Para perfurar cerâmicas, alvenaria em geral e concretos,  são empregadas as brocas com pontas de “aço vídea”.  
+Além das brocas existem outros acessórios de perfuração, como “alargadores” e  “corta copo” utilizados em madeira. 
+Figura 14 – Brocas para furadeiras elétricas. 
+1 2 3 
+1. Brocas de aço rápido. 2. Brocas de aço-carbono. 3. Brocas de vídea. 
+1.1 CUIDADOS COM AS FERRAMENTAS 
+Para que uma ferramenta desempenhe o objetivo para o qual ela foi fabricada,  antes de tudo, deve estar em perfeitas condições de uso. Ferramentas de corte em geral  precisam estar sempre bem afiadas, ajustadas (sem folgas nos seus eixos) e armazenadas  nos seus respectivos estojos. As ferramentas expostas ao ar, poeira, umidade e outras  condições do tempo desfavoráveis, enferrujam, emperram e perdem completamente o  seu poder de corte, tornando-as perigosas. 
+Outros cuidados são importantes de serem seguidos. 
+🕘 As ferramentas de metal devem ser lubrificadas com óleo fino de máquina e,  depois, guardadas em locais apropriados para conservá-las em bom estado. 🕘 Nunca deixe uma ferramenta elétrica com o cabo de força ligado na tomada  se não estiver em uso. Retire-a e guarde-a na sua caixa, armazenando em  locais isentos de poeira, umidade, sol e calor intensos. Tenha muita atenção  e cuidado ao usar ferramentas elétricas.  
+🕘 Evite usar as ferramentas sujas de óleo, graxa ou terra. Limpe-as antes de  usá-las.  
+🕘 Mantenha as mãos firmes nas ferramentas durante o trabalho. Os cabos precisam  estar bem fixos, em bom estado e, ao usar, segure-os com firmeza. 🕘 Não utilize ferramentas velhas, empenadas ou desgastadas. Além do baixo  rendimento podem causar acidentes.  
+🕘 Não coloque nos bolsos ferramentas cortantes ou pontiagudas. 🕘 Durante o trabalho mantenha o corpo e as mãos fora de alcance e da direção  do movimento da ferramenta.
+SENAR-PR 
+14 
+🕘 Ao trabalhar com ferramentas rotativas, não use roupas de mangas largas  ou excesso de tecido. 
+🕘 Nunca impulsione uma ferramenta em direção a um objeto cortante ou  pontiagudo. 
+ATENÇÃO 
+Use sempre a ferramenta adequada para o trabalho a ser realizado. 
+1.2 INSTRUMENTOS ELETROELETRÔNICOS PARA MEDIÇÕES E  TESTES 
+Todas as pessoas que desenvolvem algum tipo de atividade ligada à eletricidade,  principalmente o eletricista, precisam de alguns instrumentos eletroeletrônicos para  medições e testes em aparelhos e redes elétricas. 
+Os instrumentos para medições e testes podem ser analógicos ou digitais. Os  aparelhos analógicos de medições possuem um ponteiro que se move sobre uma escala  graduada, indicando os valores da medição realizada. Já os instrumentos digitais não  possuem ponteiro, e sim um visor de cristal líquido, onde são mostrados os valores em  números reais. 
+Os principais instrumentos de medição e testes são: 
+🕘 voltímetro 
+🕘 amperímetro 
+🕘 wattímetro 
+🕘 ohmímetro 
+🕘 multímetro 
+🕘 teste neon 
+🕘 lâmpada de prova 
+Voltímetro: instrumento utilizado para medir Tensões (em Volts – V) das redes  elétricas, pilhas, baterias e aparelhos eletroeletrônicos em geral. 
+Figura 15 – Voltímetros analógicos e teste multitensões.
+
+SENAR-PR 
+15 
+Amperímetro: aparelho utilizado para medir as Correntes (em Amperes – A) que  circulam pelos aparelhos eletroeletrônicos. 
+Figura 16 – Amperímetros analógicos de diversas capacidades e miliamperímetro. 
+
+Wattímetro: instrumento utilizado para medir a Potência Real (em Watts – W ou  KW) dos aparelhos elétricos. 
+Figura 17 – Wattímetro analógico e digital para medições  
+de potências elétricas. 
+
+Ohmímetro: aparelho destinado para medição de Resistências (em Ohms – Ω) dos  materiais usados em eletroeletrônica. É muito útil como teste de continuidade. 
+Figura 18 – Ohmímetro digital para medições  
+de resistências elétricas. 
+
+Multímetro: é o instrumento de medição manual que engloba os principais medidores:  voltímetro, amperímetro, ohmímetro e outros.
+SENAR-PR 
+16 
+Figura 19 – Multímetros digitais e analógicos para medições  
+de unidades elétricas diversas. 
+
+Teste neon: é encontrado em vários tipos. O mais comum é em forma de chave  de fenda. É utilizado para verificação de presença de tensão e identificar o condutor fase  das redes. Possui uma lâmpada com gás neon. 
+Figura 20 – Testes neon. 
+
+Lâmpada de prova: é um teste simples usado para verificar tensões de redes e  continuidade de circuitos.  
+Figura 21 – Lâmpada de prova.
+
+SENAR-PR 
+17 
+2 MEDIÇÕES E TESTES 
+2.1 MEDIÇÕES E TESTES COM MULTÍMETROS ANALÓGICOS 
+Antes de fazer qualquer medição ou teste, verifique se o multímetro contém pilha  ou bateria em boas condições. 
+Medindo tensões de redes de corrente alternada (ACV) 
+1. Conectar o pino da ponta de prova vermelha no jack (borne) positivo (+) e o  pino da ponta de prova preta no jack (borne) negativo (–). 
+Figura 22 – Conectando as pontas de prova nos bornes. 
+
+2. Posicionar o seletor de funções num dos pontos vermelhos de ACV, numa  voltagem sempre acima do valor suspeito. 
+Figura 23 – Posicionando o seletor de funções no ponto de 250ACV.
+
+SENAR-PR 
+18 
+3. Encostar as pontas de prova (vermelha e preta) nos dois pontos a serem  medidos. 
+Figura 24 – Medindo tensões de redes de corrente alternada. 
+
+4. Fazer a leitura na escala que tenha o valor máximo igual ao selecionado. Se selecionar 10, faça a leitura na escala vermelha que vai até 10. 
+Se selecionar 50, faça a leitura na escala preta que vai até 50. 
+Se selecionar 250, faça a leitura na escala preta que vai até 250. 
+Se selecionar 1000, faça a leitura na escala que vai até 10 e multiplique o valor  encontrado pelo ponteiro por 100. Exemplo: 2 x 100 = 200V. 
+Medindo tensões de pilhas e baterias (DCV) 
+1. Conectar o pino da ponta de prova vermelha no jack (borne) positivo (+) e o  pino da ponta de prova preta no jack (borne) negativo (–). 
+Figura 25 – Conectando as pontas de prova nos bornes.
+
+SENAR-PR 
+19 
+2. Posicionar o seletor de funções num dos pontos de DCV, numa voltagem sempre  acima do valor suspeito. 
+Figura 26 – Posicionando o seletor de funções no ponto 10DCV. 
+
+3. Encostar a ponta de prova vermelha no pólo positivo (+) e a preta no pólo  negativo (–). 
+Figura 27 – Medindo tensões de pilhas (1,6V) e baterias (9V). 
+
+4. Fazer a leitura na escala que tenha o valor máximo igual ao selecionado. Se selecionar 10, faça a leitura na escala que vai até 10. 
+Se selecionar 50, faça a leitura na escala que vai até 50. 
+Se selecionar 250, faça a leitura na escala que vai até 250.  
+Medindo a continuidade ou resistência de materiais e equipamentos (Ohm) 
+1. Conectar o pino da ponta de prova vermelha no jack (borne) positivo (+) e o  pino da ponta de prova preta no jack (borne) negativo (–).
+SENAR-PR 
+20 
+Figura 28 – Conectando as pontas de prova nos bornes. 
+
+2. Posicionar o seletor de funções na posição x1 de Ω. 
+Figura 29 – Posicionando o seletor de funções em x1. 
+
+3. Encostar as pontas de prova uma na outra e ajustar o ponteiro no zero, pelo  botão de ajuste. Observação: cada vez que mudar o seletor de funções, é preciso  fazer o ajuste de zero. 
+Figura 30 – Ajustando o valor de “zero” no ohmímetro.
+
+SENAR-PR 
+21 
+4. Encostar as pontas de prova vermelha e preta nos dois pontos extremos do  aparelho ou dispositivo. Faça a leitura na escala preta superior que tem o zero  no lado direito.  
+ATENÇÃO 
+Não pode haver presença de tensão ou corrente no equipamento a ser medido. 
+Figura 31 – Medindo continuidade, resistência de fio, lâmpada incandescente e fluorescente. 
+2.2 MEDIÇÕES E TESTES COM MULTÍMETROS DIGITAIS 
+ATENÇÃO 
+Leia atentamente o manual de instruções antes de usar o multímetro digital. A má  interpretação das orientações e o uso incorreto podem causar danos irreparáveis  ao seu instrumento. 
+Regra geral 
+O multímetro digital de bolso é utilizado para medir tensões contínuas (DC), tensões  alternadas (AC), correntes contínuas (DC), resistências e diodos. Alguns modelos podem  ainda testar transistores, medir temperaturas, testar continuidade com sinal sonoro e  testar baterias. Possuem proteção contra sobrecarga e indicador de voltagem de baterias.  São indicados para uso de campo, laboratório, trabalho móvel, passatempo e aplicações  caseiras. 
+SENAR-PR 
+22 
+Descrição básica do painel frontal 
+🕘 Seletor de funções: é usado para selecionar a função a ser utilizada. Para  prolongar a vida útil da bateria, mantenha o aparelho desligado com o seletor  na posição OFF.  
+🕘 Visor (display): normalmente são de LCD de alta resolução.  🕘 Jack “COM” (Comum): para conectar o pino da ponta de prova preta  (negativo).  
+🕘 Jack “V, Ω, mA”: para conectar o pino da ponta de prova vermelha (positivo)  para medir voltagens, resistências e correntes contínuas (exceto 10A). 🕘 Jack “10 ADC”: para conectar o pino da ponta de prova vermelha (positivo)  para medir correntes até 10A em correntes contínuas. 
+Teste de continuidade audível 
+Alguns multímetros possuem um sinal sonoro no ohmímetro para testes de  continuidade. 
+ATENÇÃO 
+Não faça medições de tensões elétricas acima de 500V sobre o solo para evitar  choques perigosos e/ou danos no instrumento. Antes de usar o instrumento, verifique  nos conectores e pontas de prova se não estão descascadas, não possuem trincas  ou rachaduras causadas pelo sol. 
+Medindo tensões contínuas (DCV) 
+1. Conectar a ponta de prova vermelha no jack “V Ω mA” e a preta no jack  “COM”. 
+Figura 32 – Conectando as pontas de provas nos bornes.
+
+SENAR-PR 
+23 
+2. Girar o seletor de funções para a posição DCV desejada. Se a voltagem a medir  for desconhecida, coloque o seletor de funções na indicação mais alta (1000). 
+Figura 33 – Posicionando o seletor de funções em 20DCV. 
+
+3. Conectar as pontas de prova no dispositivo ou circuito a ser medido, observando  a polaridade. O valor da tensão existente no dispositivo ou circuito aparecerá  no visor do instrumento. 
+Figura 34 – Medindo tensões de pilhas (1,61V) e baterias (8,95V) com multímetro digital. 
+
+Medindo tensões alternadas (ACV) 
+1. Conectar a ponta de prova vermelha no jack “V Ω mA” e a preta no jack “COM”. 
+SENAR-PR 
+24 
+Figura 35 – Conectando as pontas de provas nos bornes. 
+
+2. Girar o seletor de funções para a posição ACV desejada.  
+Figura 36 – Posicionando o seletor de funções em 750ACV. 
+
+3. Conectar as pontas de prova no dispositivo ou circuito a ser medido. O valor da  tensão existente no dispositivo ou circuito aparecerá no visor do instrumento. 
+Figura 37 – Medindo tensões em redes de corrente alternada (220V).
+
+SENAR-PR 
+25 
+Medindo correntes contínuas (DCA) 
+1. Conectar a ponta de prova vermelha no jack “V Ω mA” e a preta no jack “COM”.  Para medir correntes contínuas de 200mA a 10A conecte a ponta de prova  vermelha no jack “10 DCA”. 
+Figura 38 – Conectando as pontas de prova nos bornes. 
+
+2. Girar o seletor de funções para a posição DCA desejada. 
+Figura 39 – Posicionando o seletor de funções em 10A. 
+
+3. Interromper o circuito e conectar as pontas de prova em série com a carga na  qual será medida a corrente. O valor da corrente existente no circuito aparecerá  no visor do instrumento.
+SENAR-PR 
+26 
+Figura 40 – Medindo corrente contínua de uma  
+lâmpada de 4,5V (0,210A). 
+
+Medindo a continuidade ou resistência de materiais (OHM - Ω) 1. Conectar a ponta de prova vermelha no jack “V Ω mA” e a preta no jack “COM”.  
+Figura 41 – Conectando as pontas de provas nos bornes. 
+
+2. Girar o seletor de funções para a posição Ω desejada.  
+Figura 42 – Posicionando o seletor de funções em 200Ω.
+
+SENAR-PR 
+27 
+3. Conectar as pontas de prova na resistência ou dispositivo a ser medido. O valor  da resistência aparecerá no display do instrumento. 
+Figura 43 – Medindo continuidade, resistência e lâmpadas. 
+1. Resistência de fio. 2. Lâmpada incandescente. 3. Lâmpada fluorescente. 
+2.3 MEDIÇÕES COM AMPERÍMETRO DO TIPO ALICATE 
+Para medir correntes alternadas de um circuito, o mais prático e eficiente é utilizar  um amperímetro do tipo alicate. O método consiste em laçar um dos condutores com as  garras do amperímetro, que detecta a corrente pelo campo magnético. O amperímetro  alicate é um teste muito útil para se descobrir falhas em motores elétricos. Sabendo-se  a corrente nominal em amperes (está na plaqueta do motor) basta fazer a medição de  corrente durante o funcionamento. Se o valor encontrado for muito acima do indicado na  plaqueta, conclui-se que o motor está avariado. 
+1. Girar o seletor de funções para a posição de corrente alternada ACA desejada. 
+Figura 44 – Posicionando o seletor de funções do  
+amperímetro alicate em 20ACA.
+
+SENAR-PR 
+28 
+2. Laçar um dos condutores do circuito e fazer a leitura de corrente alternada no  visor. 
+Figura 45 – Medindo a corrente alternada de um circuito  
+com amperímetro alicate (0,80A). 
+
+2.4 TESTE MULTITENSÃO 
+Detectando valores de tensões alternadas pelo teste multitensão 
+O teste multitensão é um aparelho simples utilizado apenas para detectar  tensões nos circuitos elétricos de corrente alternada, em valores pré-estabelecidos no  instrumento. É útil para verificar a tensão de uma rede elétrica de corrente alternada,  110 ou 220V. 
+Inserir as duas pontas de prova nos terminais das tomadas de força e observar as  lâmpadas do teste. Se acender só uma, a tensão é de 110V e se acenderem as duas é  de 220V. 
+Figura 46 – Teste multitensão. 
+a) 220V (duas lâmpadas acesas). b) 110V (apenas uma lâmpada acesa).
+SENAR-PR 
+29 
+2.5 TESTE NEON 
+Detectando presença de tensões pelo teste neon 
+O teste neon, como o próprio nome indica, utiliza uma pequena lâmpada com gás  neon que acende na presença de uma tensão elétrica. É útil para detectar presença de  tensão elétrica num circuito, de maneira muito rápida e eficiente. Muito utilizado para  identificar o condutor fase de uma rede elétrica de 127V. 
+Os testes neon são fabricados em diversas formas e tamanhos. Os mais comuns  são do tipo chave de fenda. Colocar a ponta do teste neon no local a verificar a presença  de tensão (tomadas, fios, etc.) e encostar a mão no outro extremo para fechar o circuito.  Se a lâmpada neon acender significa que existe tensão naquele ponto. 
+Figura 47 – Teste neon. 
+a) Lâmpada neon acesa (Fase). b) Lâmpada neon apagada (Neutro). 
+2.6 TESTE COM LÂMPADA DE PROVA 
+A lâmpada de prova ou “teste de continuidade” é um instrumento simples de fabricação  caseira e útil para testes rápidos de defeitos comuns em redes e aparelhos elétricos em geral. Pode ser usado para verificar a presença de tensões em aparelhos elétricos e como  teste de continuidade (verificar se há interrupção) em dispositivos elétricos como: fusíveis,  chaves, interruptores, lâmpadas incandescentes e fluorescentes, bobinas, contactores,  reatores, resistências de chuveiros e ferros elétricos, torneiras elétricas, extensões, redes  elétricas, tomadas, motores elétricos, capacitores de partida, etc. 
+Figura 48 – Esquema de uma lâmpada de prova. 
+Pontas 
+Lâmpada 220V 40W 
+de prova 
+Tomada 
+curto-circuitada
+SENAR-PR 
+30 
+Verificando a continuidade em materiais: fusíveis, chaves, interruptores,  contactores, disjuntores, bobinas, resistências, etc. 
+1. Conectar o pino de força do teste numa tomada elétrica energizada (de 110 ou  220V). 
+Figura 49 – Conectando o pino da lâmpada de prova  
+numa tomada energizada. 
+
+2. Encostar as pontas de prova nos pontos a serem verificados. Se a lâmpada  acender existe continuidade. Se não acender existe uma interrupção. 
+Figura 50 – Lâmpada de prova acesa indica que existe  
+continuidade (lâmpada boa). 
+
+Figura 51 – Lâmpada de prova apagada indica que não existe  
+continuidade (lâmpada queimada).
+
+SENAR-PR 
+31 
+Verificando a presença de energia elétrica em tomadas 
+1. Conectar o pino da lâmpada de prova na tomada elétrica. 
+Figura 52 – Conectando o pino da lâmpada de prova  
+a uma tomada energizada. 
+
+2. Encostar as pontas de prova, uma na outra, e observar a lâmpada. Se não  acender significa que não há energia elétrica na tomada. 
+Figura 53 – Teste com lâmpada de prova. 
+a) Lâmpada acesa → há energia na tomada. b) Lâmpada apagada → não há energia na tomada.  
+Verificando a presença de energia elétrica em outros locais: tomadas trifásicas,  redes, fios desencapados, bocais, aparelhos elétricos, etc. 
+1. Conectar o pino da lâmpada de prova na sua própria tomada (em curto-circuito).  
+Figura 54 – Conectando o pino da lâmpada de prova  
+na sua própria tomada.
+
+SENAR-PR 
+32 
+2. Encostar as pontas de prova nos locais a serem testados e observar a lâmpada.  Se não acender significa que não há energia elétrica no local. 
+Figura 55 – Teste com lâmpada de prova. 
+a) Lâmpada acesa → há energia na tomada. b) Lâmpada apagada → não há energia na tomada.  
+Verificando a tensão (voltagem) de uma tomada (110 ou 220V) 1. Conectar o pino da lâmpada de prova na tomada da rede a ser verificada. 
+Figura 56 – Conectando o pino da lâmpada de prova  
+a uma tomada energizada. 
+
+2. Encostar as pontas de prova, uma na outra e observar a lâmpada. Se a luminosidade  estiver normal a tensão é 220V. Se estiver fraca, a tensão é 110V. 
+Figura 57 – Teste com lâmpada de prova. 
+a) Luminosidade normal → tensão 220V. b) Luminosidade fraca → 110V.
+SENAR-PR 
+33 
+3 ATIVIDADES PRÁTICAS DE INSTALAÇÕES ELÉTRICAS 
+3.1 MARCAR PONTOS DAS INSTALAÇÕES 
+Até mesmo um eletricista mais experiente precisa ter em mãos o projeto da  instalação elétrica que será executado, com as medidas e os pontos de ligações. Por  mais simples que seja a instalação é preciso ter um desenho do esquema para orientar  no desempenho do trabalho. Isso evita erros que podem ocasionar perdas significativas  de tempo ou sérios problemas, desde o não funcionamento até mesmo incêndios nas  instalações. 
+Os locais dos pontos a serem instalados devem ser marcados previamente para  evitar embaraços e garantir um bom desempenho e segurança no trabalho. 
+3.2 PASSANDO CONDUTORES PELOS ELETRODUTOS (CONDUÍTES) 
+Para fazer a passagem dos fios condutores é preciso retirar os restos de reboques  e outras sujeiras das caixas de passagens e eletrodutos (conduítes). A limpeza pode ser feita passando um fio de arame com uma estopa na ponta. Se o  eletroduto tiver mais de uma curva é aconselhável soprar talco, para facilitar a passagem  dos condutores. 
+Introduzir um arame na tubulação deixando uma das pontas fora da caixa onde  serão puxados os fios e a outra ponta na outra caixa. Amarrar os condutores com firmeza  no arame para evitar que escapem. 
+Figura 58 – Amarrando dois conduítes em arame guia para passagem em eletrodutos. 
+1. Passar pontas dos fios no anel. 2. Torcer pontas com alicate. 3. Pontas fixadas no arame. 
+Quando tiver mais de dois condutores é aconselhável usar um pedaço de fio de  cobre. Fazer uma argola para cada condutor o que diminui o volume da amarração.
+SENAR-PR 
+34 
+Figura 59 – Amarrando grupo de condutores em arame guia para passagem em eletrodutos. 1. Fixar fio no primeiro anel. 2. Fixar outro fio no 2º anel. 3. Fixar outro fio no 3° anel. 
+
+4. Fixar o último fio no último anel. 5. Conjunto de 4 fios presos no arame guia. 
+A identificação dos fios condutores deve ser feita pelas cores e espessuras. É  importante deixar uma ponta de aproximadamente 15cm de cada condutor para fora da  caixa de passagem. 
+3.3 DESENCAPANDO PONTAS DE CONDUTORES 
+As pontas dos condutores elétricos podem ser desencapadas de várias maneiras  utilizando alicates desencapadores próprios ou até mesmo uma pequena faca ou  canivete. 
+Desencapando condutores com faca: o trabalho poderá ser feito girando o  condutor sobre um pedaço de madeira, conforme os passos da figura 60. 
+Figura 60 – Desencapando a ponta de um condutor com uma faca pequena. 
+1. Girar o fio na tábua com a faca. 2. Retirar a capa da ponta do fio. 3. Ponta do fio desencapada.
+SENAR-PR 
+35 
+Desencapando condutores com alicates desencapadores de fios: os alicates  próprios para desencapar pontas de condutores agilizam o trabalho, tornando a operação  menos cansativa e mais rápida, conforme os passos da figura 61. 
+Figura 61 – Desencapando a ponta de condutores com alicates descascadores de fios. 
+1. Prender fio na fenda do alicate. 2. Retirar capa da ponta do fio. 3. Fio com ponta desencapada. 
+
+4. Ajustar alicate na ponta do fio. 5. Puxar alicate para retirar a capa. 
+3.4 FAZENDO EMENDAS DE FIOS RÍGIDOS E CABOS FLEXÍVEIS 
+É preciso esclarecer que as emendas de fios e cabos devem ser bem feitas.  Mesmo assim, ainda provocam uma perda de energia e certo aquecimento no local da  emenda.  
+Ao desencapar fios e cabos, tomar o cuidado para não danificar o cobre do condutor,  isto pode provocar a ruptura durante o trabalho. 
+Desencapar pelo menos 6cm de cada ponta do condutor a ser emendado. As  emendas devem ser feitas no sentido longitudinal usando-se dois alicates. 
+Emendando fios rígidos 
+As pontas devem ser enroladas em forma de espiral, dando pelo menos 5 voltas  bem juntas no condutor, conforme os passos da figura 62.
+SENAR-PR 
+36 
+Figura 62 – Emendando fios rígidos. 
+1. Cruzar pontas dos fios desencapados. 2. Torcer fios com as mãos. 3. Prender fios com 2 alicates. 
+4. Torcer as pontas com 2 alicates. 5. Torcer as pontas até terminar. 6. Emenda concluída. 
+Emendando cabos flexíveis duplos paralelos ou trançados 
+As emendas de cabos flexíveis duplos paralelos ou trançados devem ser desencontradas  dando uma distância mínima de 5cm uma da outra. 
+Devem ser feitas no sentido longitudinal com dois alicates. Torcer os fios de cada  ponta para tornar a emenda mais firme. Dar aproximadamente 10 voltas bem juntas, em  forma de espiral, conforme os passos a seguir. 
+Figura 63 – Emendando cabo flexível duplo paralelo. 
+1. Cortar pontas desencontradas. 2. Desencapar pontas dos cabos. 3. Cruzar as pontas dos cabos. 
+
+4. Torcer pontas com as mãos. 5.Ajustar as emendas puxando os  cabos. 
+6. Emendas concluídas.
+SENAR-PR 
+37 
+3.5 FAZENDO DERIVAÇÕES EM CONDUTORES RÍGIDOS 
+As ligações de condutores de redes internas secundárias nas redes internas primárias  (rede geral) são chamadas de derivações. As derivações são as saídas da rede interna  primária (rede geral) para os pontos de consumo (lâmpadas, tomadas, etc.). 
+Desencapar no máximo 5cm os fios da rede interna primária no ponto onde será feita  a derivação, utilizando uma pequena faca ou canivete. Fixar o fio de saída (secundário)  dando de 5 a 10 voltas juntas em forma de espiral, utilizando um alicate universal, conforme  os passos da figura 64. 
+Figura 64 – Fazendo derivações em condutores rígidos. 
+1. Desencapar fio principal. 2. Cruzar fio secundário. 
+3. Torcer com alicate. 4. Derivação concluída.  
+3.6 FAZENDO O ISOLAMENTO COM FITAS ISOLANTES ANTICHAMA 
+Todas as emendas e derivações precisam ser isoladas com fitas antichama. As  fitas isolantes podem ser do tipo comum ou autofusão (emborrachada). As emendas  e derivações internas ou protegidas de chuva podem ser isoladas com fitas isolantes  comuns, que podem ser encontradas em diversas cores. 
+Em locais externos sujeitos a chuva ou em ambientes com concentração  de umidade e calor não muito intenso, recomenda-se o uso das fitas autofusão  (emborrachadas).
+SENAR-PR 
+38 
+Figura 65 – Fita isolante antichama (esquerda) e autofusão (direita).  
+ATENÇÃO 
+Não é necessário fazer um isolamento com grande quantidade de camadas de  fita. Sobrepor apenas meia fita sobre a volta anterior é suficiente para garantir um  bom isolamento de emendas e derivações. 
+Figura 66 – Fazendo isolamentos com fitas isolantes antichama. 
+
+1.Colar a fita isolante sobre a  capa do fio. 
+2.Enrolar, sobrepondo meia fita  e cortar.  
+3.Colar a fita sobre a capa do cabo. 
+4.Enrolar, sobrepondo meia fita e cortar. 5.Colar a fita sobre a capa do fio. 6.Enrolar, sobrepondo meia fita e cortar.  
+3.7 FIXANDO OS CONDUTORES NOS EQUIPAMENTOS ELÉTRICOS 
+As pontas dos condutores devem ser fixadas nos equipamentos por meio de parafusos  em “olhais” (anéis) desencapadas. Os olhais devem ser feitos para a direita, utilizando um  alicate de bico redondo ou meia-cana (sentido horário, aperto do parafuso). 
+Feche bem o olhal e evite remontar a ponta sobre o condutor para não danificá-lo  ao apertar o parafuso. Desencape os fios apenas o suficiente para fazer os olhais e não  deixe capas de plástico debaixo da cabeça dos parafusos.
+SENAR-PR 
+39 
+Figura 67 – Fazendo anel na ponta do condutor para fixar com parafuso no equipamento elétrico. 1. Prender a ponta do fio. 2. Fazer o anel com alicate. 3. Anel com a ponta para a direita.  
+
+4. O anel deve ser escondido. 5. Posição correta do anel. 
+3.8 FAZENDO EMENDAS COM CONECTORES PRESSCON E “DADO” 
+Em locais que não exigem esforço mecânico (puxões), principalmente emendas  internas de aparelhos eletrodomésticos, pode-se usar os conectores presscon. São  conectores que unem as pontas de dois ou mais condutores por pressão ou rosca. 
+Figura 68 – Fazendo emendas com conectores presscon de pressão e de rosca. 
+
+1.Introduzir as pontas dos fios  e apertar com alicate. 
+2.Emenda concluída. 3.Inserir as pontas dos fios e apertar  com alicate. 
+4.Emenda pronta. 5.Colocar as pontas dos cabos e girar. 6.Emenda concluída.
+SENAR-PR 
+40 
+Nas emendas de condutores que estão em locais protegidos, onde não há riscos de  contatos acidentais, podem-se usar os conectores do tipo “dado” ou “barras de emendas”. 
+Figura 69 – Fazendo emendas de condutores com conectores do tipo “dado”. 
+1. Inserir fio. 2. Apertar com chave. 3. Colocar outro fio e apertar. 
+
+4. Inserir fio e apertar. 5. Emendas prontas. 
+ATENÇÃO 
+Antes de fazer emendas, derivações e olhais é recomendável limpar com uma lixa  ou faca a superfície do condutor. Isto garante um bom contato. 
+Figura 70 – Limpando superfície do condutor. 
+1.Limpando o fio com uma pequena faca. 2.Lixando a ponta do fio. 
+3.9 FIXANDO OS CONDUTORES EM ROLDANAS 
+A rede interna primária (rede geral) deve ser feita fixando-se em primeiro lugar,  as roldanas nas extremidades da rede, mantendo-se a distância de 10 a 15cm de uma  roldana a outra (distância entre fios da rede).
+SENAR-PR 
+41 
+As redes internas primárias devem ser feitas na horizontal e as secundárias sobre  o forro dentro de conduítes. Isto permite a movimentação segura sobre o forro, sem  obstáculos ou tropeços em condutores.  
+Prender as pontas dos condutores nas primeiras roldanas com uma volta e enrolar  com pelo menos cinco voltas no próprio condutor. 
+Figura 71 – Fixando os condutores da rede geral nas roldanas das extremidades da rede. 1. Prender a ponta do fio e passar por baixo. 2. Enrolar a ponta do fio com alicate. 
+Esticar os condutores até as roldanas da outra extremidade da rede e fazer a  fixação. Pregar as roldanas intermediárias no vigamento da construção usando o próprio  fio como linha de referência. Fixar as redes nas roldanas intermediárias com pedaços de  20cm de fio 1,5mm2 (Figura 72). 
+Figura 72 – Fixando condutores em roldanas (roletes). 
+1. Laçar o fio principal. 2.Dar uma volta na roldana. 
+3.Enrolar nos dois lados. 4.Fixação efetuada. 
+3.10 EXTENSÕES E TOMADAS 
+Extensão elétrica é um cabo flexível bipolar (duplo), paralelo, trançado ou em forma  de cabo coaxial (duplo, com revestimento em polietileno) usado para conectar aparelhos  móveis à rede elétrica.
+SENAR-PR 
+42 
+Figura 73 – Extensão elétrica com cabo paralelo. 
+
+Uma extensão comum (de uso geral) utiliza um plugue macho bipolar (com dois  pinos) numa das pontas e outro plugue fêmea na outra. As extensões com aterramento  (fio terra) utilizam plugues macho e fêmea tripolares (com 3 pinos). 
+Figura 74 – Plugues (pinos bipolares) macho e fêmea para extensão sem aterramento. 
+
+Em 2002, foi lançada uma nova norma para plugues e tomadas de uso geral com  um novo formato, que foi minuciosamente elaborado com o objetivo de evitar choques  elétricos acidentais e aumentar a segurança dos usuários. 
+A norma NBR 14.136, de 2002, determina que, a partir de 2010, os plugues e  tomadas para ligar aparelhos elétricos sejam fabricados com três pinos redondos (2P +  T), obrigando a instalação de um fio terra no circuito. 
+Apesar das mudanças no formato, o novo sistema mantém a compatibilidade com  os plugues atuais brasileiros de dois pinos redondos (2P). Além disso, devem conter um  sulco de proteção para evitar contatos acidentais. 
+Figura 75 – Tomada com aterramento conforme a norma NBR 14.136. 
+
+A montagem de uma extensão é muito simples. A operação deve ser realizada  obedecendo-se às recomendações dos fabricantes de plugues.
+SENAR-PR 
+43 
+Figura 76 – Montagem passo a passo de uma extensão sem aterramento. 
+1.Material para extensão. 2.Retirar parafuso do plugue macho. 3.Abrir plugue. 
+4.Desencapar pontas dos cabos. 5.Soltar parafuso de fixação. 6. Fixar os cabos nos pinos. 
+7. Apertar os parafusos. 8. Alojar os cabos no plugue. 9. Cabos alojados no plugue.
+10. Fechar plugue macho. 11. Soltar parafuso do plugue fêmea. 12. Abrir plugue fêmea. 
+13. Soltar parafuso de fixação. 14. Fixar cabos nos pinos. 15. Apertar parafusos. 
+16. Alojar os cabos no plugue. 17. Fechar o plugue fêmea. 18. Amostra de plugue fêmea e macho. 
+
+19. Extensão concluída. 
+SENAR-PR 
+44 
+Montando uma tomada sem aterramento 
+Os condutores devem ser ajeitados dentro das caixas de passagem, com cuidado  para não danificar as suas capas ou a isolação de fitas. 
+Figura 77 – Alojando os fios e a tomada dentro de uma caixa de passagem. 
+1. Colocar os fios com cuidado. 2. Distribuir os fios dentro da caixa. 3. Colocar a tomada e fixar. 
+Montando uma tomada com aterramento – Norma NBR 14.136 
+Figura 78 – Montando uma tomada de embutir com aterramento (Norma NBR 14.136). 
+
+1.Tomada e pino com terra. 
+2.Fixar fio neutro na tomada. 
+3.Fixar fio terra na tomada. 
+
+4.Fixar fio fase. 
+7.Fixar o espelho na caixa.  
+5. Alojar os fios e a tomada. 
+6.Fixar a tomada na caixa.
+SENAR-PR 
+45 
+Montando um cabo num plugue com aterramento – Norma NBR 14.136 
+Figura 79 – Montando uma extensão com aterramento (Norma NBR 14.136). 
+1.Retirar o parafuso do plugue. 2.Abrir o plugue. 3.Fixar um dos cabos no plugue. 
+4.Fixar o segundo cabo. 5.Alojar cabos no plugue. 6.Fixar fio terra no plugue. 
+
+7.Alojar fio terra no canal. 8.Colocar o parafuso no plugue. 
+10. Tomada e plugue.  
+9.Tomada e plugue com terra.  
+3.11 TROCANDO A RESISTÊNCIA DE UM CHUVEIRO ELÉTRICO COMUM 
+Ao adquirir uma nova resistência é preciso saber que os tipos variam de acordo  com a marca, tipo, tensão e potência dos chuveiros. A substituição das resistências de  chuveiros elétricos obedece praticamente aos mesmos procedimentos para quase todas  as marcas e tipos. A seguir será mostrado, passo a passo, o procedimento correto de  substituição de uma resistência queimada de um chuveiro comum.
+SENAR-PR 
+46 
+Figura 80 – Trocando a resistência queimada de um chuveiro elétrico comum. 
+1.Abrindo o chuveiro. 2.Retirando a tela inferior. 3.Tela retirada. 4.Alongando o fio terra. 
+5.Retirando tampa protetora. 6.Resistência queimada. 7.Resistência nova. 
+8.Colocando a resistência nova. 9. Colocando a resistência nova. 10. Colocando a resistência nova. 
+11. Resistência colocada. 12. Colocando a tampa protetora. 13. Endireitando fio terra.  
+
+14. Colocando tela inferior. 15. Ajustando alavanca na posição desligada.  
+SENAR-PR 
+47 
+Cuidados importantes 
+🕘 Antes de realizar qualquer serviço de manutenção em chuveiros elétricos é  preciso desligar a chave geral da rede. 
+🕘 As características (tipo, tensão e potência) da nova resistência deverão ser  as mesmas daquelas que estavam no chuveiro. 
+🕘 Depois de montar e instalar o chuveiro no seu lugar, coloque a alavanca de  temperatura em “desligado” antes de abrir o registro, para evitar a queima da  resistência. 
+🕘 A redução do volume de água, fechando o registro para aquecer melhor, não  aumenta o consumo de energia, mas reduz a durabilidade da resistência.
+SENAR-PR 
+48 
+4 INSTALAÇÕES ELÉTRICAS BÁSICAS 
+Circuito elétrico é o caminho por onde circula uma tensão e, consequentemente,  uma corrente elétrica. Um circuito elétrico é composto por uma fonte geradora de energia,  fios condutores, um aparelho consumidor e interruptor. 
+🕘 Uma fonte geradora de energia: gera eletricidade, produzindo uma corrente  elétrica. 
+🕘 Fios condutores: conduzem a corrente pelo circuito elétrico. 
+🕘 Aparelho consumidor: utiliza a energia elétrica para produzir determinado  trabalho. 
+🕘 Interruptor: é utilizado para abrir e fechar o circuito conforme a  necessidade. 
+Para que um aparelho funcione é necessário que os dois condutores da rede  elétrica estejam ligados nos seus terminais, permitindo a passagem da corrente pelo seu  circuito.  
+Para o controle de funcionamento (liga/desliga) do aparelho elétrico, é introduzido  nos condutores uma chave ou interruptor, em local de fácil acesso, para abrir ou fechar  o circuito. 
+Figura 81 – Exemplo de um circuito elétrico. 
+Rede elétrica 
+Condutores 
+Aparelho 
+Interruptor 
+4.1 INSTALANDO UMA LÂMPADA INCANDESCENTE COM  INTERRUPTOR DE UMA TECLA SIMPLES 
+Material: 1 bocal com parafusos e porcas, 1 lâmpada incandescente 127V, 1  interruptor de 1 tecla simples, 3 fios 1,5mm2 (1 azul, 1 preto e 1 vermelho). 
+SENAR-PR 
+49 
+Figura 82 – Esquema da instalação de uma lâmpada com interruptor de tecla simples. Neutro 
+127V 
+Fase 
+Retorno Bocal 
+Lâmpada 
+127V 
+Interruptor 1 tecla simples 
+Figura 83 – Instalando uma lâmpada com interruptor de tecla simples. 
+1.Introduzir fios no conduíte. 2.Caixa com fios. 3. Desencapar a ponta do fio vermelho  (10cm). 
+4.Fixar fio vermelho (alicate). 5.Fio fixado na rede. 6.Introduzir fio preto no conduíte.
+7.Introduzir fios preto e azul no furo. 8. Desencapar a ponta do fio azul (10 cm). 9.Fixar fio azul (alicate). 
+10. Fio fixado na rede. 11. Fios instalados. 12. Desencapar as pontas dos fios  preto e vermelho (1cm). 
+SENAR-PR 
+50 
+
+13. Fixar fios (verm. e preto) no  interruptor. 
+14. Alojar interruptor na caixa. 15. Fixar interruptor na caixa. 
+
+16. Fixar espelho. 17. Desencapar as pontas dos fios  preto e azul (1cm).  
+18. Fixar fios no bocal. 
+
+19. Fixar bocal com dois parafusos  e porcas.  
+20. Colocar lâmpada  127V no bocal. 
+21. Ligar interruptor. 22. Teste de funcionamento. 
+4.2 INSTALANDO DUAS LÂMPADAS INCANDESCENTES COM  INTERRUPTOR DE UMA TECLA SIMPLES 
+Material: 2 bocais com parafusos e porcas, 2 lâmpadas incandescentes 127V, 1  interruptor de 1 tecla simples, 5 fios 1,5mm2 (2 azuis, 1 preto, 1 vermelho e 1 amarelo).  
+Figura 84 – Esquema da instalação de duas lâmpadas com interruptor de tecla simples.  Neutro 
+127V
+Fase 
+Retorno Bocal Bocal 
+127VLâmpada 
+127V 
+Interruptor 1 tecla simples 
+Lâmpada 
+SENAR-PR 
+51 
+Figura 85 – Instalando duas lâmpadas com interruptor de tecla simples. 
+
+1.Introduzir fios no conduíte. 
+2.Caixa com fios. 
+3.Desencapar a ponta do fio vermelho  (10cm). 
+
+4.Fixar fio vermelho (alicate).  
+5.Fio vermelho fixado na rede. 
+6.Introduzir fio preto no conduíte. 
+
+7.Introduzir fios no furo. 
+8.Fixar fio azul com alicate. 
+9.Fio azul fixado na rede.  
+
+10. Fios instalados. 
+11. Desencapar as pontas dos fios (1cm). 
+12. Fixar fios no interruptor.
+
+13. Alojar interruptor na caixa. 
+14. Fixar interruptor. 
+15. Fixar espelho. 
+SENAR-PR 
+52 
+
+16. Desencapar as pontas dos fios  (1cm). 
+17. Fixar fios no bocal.  
+18. Fixar bocal com dois parafusos e porcas.  
+
+19. Colocar primeira lâmpada 127V  no bocal.  
+20. Introduzir fio amarelo no conduíte.  
+21. Desencapar a ponta do fio (5cm). 
+
+22. Desencapar o fio preto (3cm).  
+23. Fixar fio amarelo com alicate.  
+24. Fio amarelo fixado no preto. 
+
+25. Introduzir fios no furo.  
+26. Fixar fio azul com alicate.  
+27. Fio azul fixado na rede.  
+
+28. Fios instalados.  
+29. Fios amarelo e azul no furo.  
+30. Desencapar as pontas dos fios (1cm).  
+SENAR-PR 
+53 
+
+31. Fixar fios no bocal.  
+32. Fixar bocal com 2 parafusos e  porcas.  
+33. Colocar segunda lâmpada.  
+
+34. Ligar interruptor.  
+35. Testar funcionamento.  
+4.3 INSTALANDO TRÊS LÂMPADAS INCANDESCENTES COM  INTERRUPTOR DE UMA TECLA SIMPLES 
+Material: 3 bocais com parafusos e porcas, 3 lâmpadas incandescentes 127V, 1  interruptor de 1 tecla simples, 7 fios 1,5mm2 (3 azuis, 1 preto, 1 vermelho, 1 amarelo e 1  branco).  
+Figura 86 – Esquema da instalação de três lâmpadas com interruptor de tecla simples. 
+Neutro 
+127V 
+Retorno 
+Interruptor 1 tecla simples 
+IMPORTANTE
+Fase 
+Bocal Bocal Bocal 
+Lâmpada 
+127VLâmpada 
+127VLâmpada 
+127V 
+A instalação da primeira e da segunda lâmpada deve ser feita como apresentado  nos passos 1 a 33 da figura 85. 
+SENAR-PR 
+54 
+Figura 87 – Instalando a terceira lâmpada (três lâmpadas com interruptor de tecla simples).  1.Introduzir fio branco no conduíte. 2.Descascar a ponta do fio (5cm). 3.Desencapar fio amarelo (3cm). 
+4.Fixar fio branco (alicate). 5.Fio branco fixado no amarelo. 6.Fio branco no furo. 
+7.Fios branco e azul no furo. 8.Fixar fio azul com alicate. 9.Fio azul fixado na rede. 
+10. Desencapar as pontas dos fios (1cm). 11. Fixar fios no bocal. 12. Fixar bocal com 2 parafusos e porcas. 
+13. Colocar terceira lâmpada. 14. Ligar interruptor. 15. Teste de funcionamento.
+SENAR-PR 
+55 
+4.4 INSTALANDO DUAS LÂMPADAS INCANDESCENTES COM  INTERRUPTOR DE DUAS TECLAS SIMPLES 
+Material: 2 bocais com parafusos e porcas, 2 lâmpadas incandescentes 127V, 1  interruptor de 2 teclas simples, 5 fios 1,5 mm2 (2 azuis, 1 preto, 1 vermelho e 1 amarelo).  
+Figura 88 – Esquema da instalação de duas lâmpadas com interruptor de duas teclas simples. Neutro 
+127V 
+Bocal Bocal 
+Fase 
+Retornos 
+Interruptor 2 teclas simples 
+Lâmpada 
+127VLâmpada 127V 
+Figura 89 – Instalando duas lâmpadas com interruptor de duas teclas simples.  
+
+1.Introduzir fios vermelho, preto e  amarelo no conduíte. 
+2. Introduzir fios preto e amarelo no  conduíte.  
+3. Desencapar a ponta do fio vermelho  (10cm). 
+
+4.Fixar fio vermelho com alicate.
+5.Fio vermelho fixado na rede. 6.Introduzir fio amarelo no conduíte. 
+7.Introduzir fios azul e preto no furo. 8. Introduzir fios amarelo e azul no furo. 9.Desencapar as pontas dos fios vermelho  (4cm), preto e amarelo (1cm).  
+SENAR-PR 
+56 
+
+10. Fixar fio vermelho nos  dois parafusos do meio.  
+11. Fixar fio preto no parafuso  de cima.  
+12. Fixar o fio amarelo no  parafuso de baixo.  
+13. Ajeitar os fios e alojar o  interruptor.  
+
+14. Fixar interruptor na caixa. 15. Fixar o espelho. 16. Desencapar fios preto e  azul. 
+17. Fixar fios preto e azul no  bocal.  
+
+18. Fixar bocal com 2 parafusos  e porcas. 
+19. Colocar primeira lâmpada 127V  no bocal. 
+20. Desencapar as pontas dos fios  azul e amarelo. 
+
+21. Fixar os fios azul e amarelo no  bocal. 
+22. Fixar bocal com 2 parafusos e  porcas.  
+23. Colocar segunda lâmpada 127V  no bocal.  
+24. Ligar interruptores. 25. Teste de funcionamento.
+SENAR-PR 
+57 
+4.5 INSTALANDO TRÊS LÂMPADAS INCANDESCENTES COM  INTERRUPTOR DE TRÊS TECLAS SIMPLES 
+Material: 3 bocais com parafusos e porcas, 3 lâmpadas incandescentes 127V, 1 interruptor  de 3 teclas simples, 7 fios 1,5mm2 (3 azuis, 1 preto, 1 vermelho, 1 amarelo e 1 branco).  
+Figura 90 – Esquema da instalação de três lâmpadas com interruptor de três teclas simples. 
+Neutro 
+127V 
+Retorno 
+Interruptor 3 teclas simples 
+Fase 
+Bocal Bocal Bocal 
+Lâmpada 
+127VLâmpada 
+127VLâmpada 
+127V 
+Figura 91 – Instalando três lâmpadas com interruptor de três teclas simples.  
+1.Introduzir 4 fios no conduíte. 2.Caixa com 4 fios. 3.Fios nos conduítes. 
+4.Desencapar a ponta do fio vermelho 5.Fixar fio vermelho com alicate. 6.Fio vermelho fixado na rede. (10cm).
+
+7.Introduzir fios preto, amarelo e  branco no conduíte.  
+8. Saída dos fios do conduíte. 9.Introduzir fios preto e azul no furo.  
+SENAR-PR 
+58 
+10. Fixar fio azul com alicate. 11. Fio azul fixado na rede. 12. Introduzir fios branco e amarelo  no conduíte. 
+
+13. Fios instalados.  
+14. Introduzir fios amarelo e azul no furo. 15. Fixar fio azul com alicate.  
+
+16. Fio azul fixado na rede. 
+17. Introduzir fio branco no conduíte. 18. Introduzir fios branco e azul no furo.  
+
+19. Desencapar pontas dos  fios vermelho (6cm), preto,  amarelo e branco (1cm).  
+20. Fixar fio vermelho nos 3  parafusos do interruptor. 
+21. Fixar fio preto no primeiro  parafuso do interruptor. 
+22. Fixar fio amarelo no parafuso  do meio do interruptor. 
+
+23. Fixar fio branco no parafuso  de baixo do interruptor. 
+24. Alojar o interruptor na  caixa.
+25. Fixar interruptor na caixa. 26. Interruptor fixado na caixa. 
+SENAR-PR 
+59 
+
+27. Fixar espelho. 28. Desencapar as pontas  dos fios (1cm). 
+29. Fixar fios azul e preto  no bocal. 
+30. Fixar bocal. 
+31. Colocar primeira lâmpada. 32. Desencapar as pontas dos fios (1cm). 33. Fixar fios amarelo e azul no bocal.  
+34. Fixar bocal. 35. Colocar segunda lâmpada. 36. Desencapar as pontas dos fios. 
+37. Fixar fios branco e azul no bocal. 38. Fixar bocal. 39. Colocar terceira lâmpada 127V  no bocal. 
+
+40. Ligar interruptores. 
+41. Teste de funcionamento.
+SENAR-PR 
+60 
+4.6 INSTALANDO EM SÉRIE DUAS LÂMPADAS INCANDESCENTES 127V  NA REDE DE 220V, COM INTERRUPTOR DE UMA TECLA SIMPLES 
+Material: 2 bocais com parafusos e porcas, 2 lâmpadas incandescentes 127V, 1  interruptor de 1 tecla simples, 4 fios 1,5mm2 (1 preto, 2 vermelhos, 1 amarelo).  
+Figura 92 – Esquema da instalação em série de duas lâmpadas com interruptor  
+de uma tecla simples.  
+Fase 
+220V 
+Fase 
+Retorno Bocal Bocal 127VLâmpada 
+127V 
+Interruptor 1 tecla simples 
+Lâmpada 
+Figura 93 – Instalando em série duas lâmpadas incandescentes 127V na rede de 220V, com interruptor de uma tecla simples. 
+1. Introduzir fios vermelho e preto  no furo. 
+2.Desencapar fio vermelho (10cm). 3.Fixar fio vermelho com alicate. 
+4.Fio vermelho fixado na rede. 5.Introduzir fio preto no conduíte. 6.Introduzir fio preto no furo. 
+
+7.Introduzir fio amarelo no furo. 8.Desencapar a ponta do fio vermelho  (10cm).  
+9.Fixar fio vermelho com alicate.
+SENAR-PR 
+61 
+
+10. Fio vermelho fixado na rede. 11. Caixa com fios preto  e vermelho. 
+12. Desencapar fios preto  e vermelho (1cm). 
+13. Fixar fios vermelho e  preto no interruptor.  
+
+14. Alojar interruptor na  caixa. 
+15. Fixar interruptor. 16. Fixar espelho. 17. Desencapar as pontas dos fios  preto e amarelo (1cm).  
+
+18. Fixar fios preto e amarelo no  primeiro bocal. 
+19. Fixar primeiro bocal com 2  parafusos e porcas.  
+20. Colocar primeira lâmpada 127V  x 40W.
+
+21. Desencapar as pontas dos fios  amarelo e vermelho. 
+22. Fixar fios amarelo e vermelho  no segundo bocal. 
+23. Fixar segundo bocal com 2 parafusos  e porcas. 
+24. Colocar segunda lâmpada 26. Teste de funcionamento. 
+25. Ligar interruptor. 
+127V x 40W. 
+SENAR-PR 
+62 
+4.7 INSTALANDO UMA LÂMPADA INCANDESCENTE COM DOIS  INTERRUPTORES DE UMA TECLA (PARALELOS) 
+Material: 1 bocal com parafusos e porcas, 1 lâmpada incandescentes 127V, 2  interruptores 1 tecla (paralelo), 5 fios 1,5mm2 (1 preto comprido, 1 amarelo comprido, 1  branco, 1 azul e 1 vermelho).  
+Figura 94 – Esquema da instalação de uma lâmpada com dois interruptores de  
+uma tecla (paralelos). 
+Neutro 
+127V 
+Fase 
+Retorno 
+Bocal 
+Lâmpada 
+127V 
+paraleloInterruptor 1 tecla  
+Interruptor 1 tecla  
+paralelo 
+Figura 95 – Instalando uma lâmpada com dois interruptores de uma tecla (paralelos). 
+
+1.Introduzir fios branco, preto e amarelo  no conduíte. 
+2.Introduzir fio branco no conduíte. 3.Introduzir fio branco no furo. 
+
+4.Introduzir fios amarelo e preto no  conduíte longo. 
+5. Fios introduzidos nos conduítes. 6.Introduzir fios amarelo, preto e branco  no conduíte.
+SENAR-PR 
+63 
+7.Fios introduzidos no 10. Desencapar fio vermelho (10cm).  
+conduíte. 
+8.Caixa esquerda com  fios. 
+9.Caixa direita com  fios.  
+
+11. Fixar fio vermelho com alicate. 12. Fio vermelho fixado na rede. 
+13. Introduzir fio azul junto com o  branco no furo. 
+
+14. Desencapar a ponta do fio azul 15. Fixar fio azul com alicate.  (10cm).  
+16. Fio azul fixado na rede. 
+
+17. Desencapar as pontas  dos fios (1cm). 
+18. Fixar fio branco no parafuso  do meio do interruptor.  
+19. Fixar fio preto no parafuso  de cima do interruptor. 
+20. Fixar fio amarelo no parafuso  de baixo do interruptor. 
+
+21. Alojar o interruptor na  caixa.  
+22. Fixar o interruptor na  caixa.  
+23. Fixar espelho. 24. Desencapar as pontas  dos fios (1cm). 
+SENAR-PR 
+64 
+
+25. Fixar fio vermelho no  parafuso do meio do  interruptor.  
+26. Fixar fio preto no parafuso  de cima do interruptor. 
+27. Fixar fio amarelo no parafuso  de baixo do interruptor.  
+28. Alojar interruptor na caixa. 
+29. Fixar o interruptor na caixa. 30. Fixar espelho. 31. Desencapar a ponta dos fios (1cm).  
+
+32. Fixar fios no bocal. 33. Fixar bocal com 2 parafusos e  porcas.  
+35. Ligar interruptor. 36. Teste de funcionamento.  
+34. Colocar lâmpada 127V no bocal.  
+4.8 INSTALANDO DUAS LÂMPADAS INCANDESCENTES COM DOIS  INTERRUPTORES DE UMA TECLA (PARALELOS). 
+Material: 2 bocais com parafusos e porcas, 2 lâmpadas incandescentes 127V, 2  interruptores 1 tecla (paralelos), 7 fios 1,5mm2 (1 preto comprido, 1 amarelo comprido, 2  brancos, 2 azuis e 1 vermelho). 
+SENAR-PR 
+65 
+Figura 96 – Esquema da instalação de duas lâmpadas com dois interruptores  de uma tecla (paralelos). 
+Neutro 
+127V 
+Fase 
+Retorno 
+Bocal Bocal 
+Lâmpada 
+127VLâmpada 
+127V 
+paraleloInterruptor 1 tecla  
+IMPORTANTE 
+Interruptor 1 tecla  
+paralelo 
+A instalação da primeira lâmpada deve ser feita como apresentado nos passos 1  a 34 da figura 95.  
+Figura 97 – Instalando a segunda lâmpada – dois interruptores de uma tecla (paralelos). 35. Introduzir fio branco no conduíte. 36. Introduzir fio branco no furo. 37. Desencapar a ponta do fio branco  (5cm).  
+
+38. Desencapar fio branco (3cm). 
+39. Fixar fio branco (alicate). 40. Fio branco fixado.  
+
+41. Introduzir fio azul no furo. 42. Desencapar a ponta do fio azul  (10cm). 
+43. Fixar fio azul (alicate).  
+SENAR-PR 
+66 
+
+44. Fio azul fixado na rede.  
+45. Desencapar pontas dos fios (1cm). 46. Fixar fios branco e azul no bocal. 
+
+47. Fixar bocal com dois  parafusos e porcas.  
+48. Colocar a segunda lâmpada  127V no local.  
+49. Ligar interruptor. 50. Teste de funcionamento.  
+4.9 INSTALANDO UMA LÂMPADA INCANDESCENTE COM DOIS  INTERRUPTORES DE UMA TECLA (PARALELOS) E UM  INTERRUPTOR DE UMA TECLA (INTERMEDIÁRIO)  
+Material: 1 bocal com parafusos e porcas, 1 lâmpada incandescente 127V, 2  interruptores de 1 tecla (paralelos), 1 interruptor 1 tecla (intermediário), 7 fios 1,5mm2 (2  pretos, 2 amarelos, 1 branco, 1 azul e 1 vermelho).  
+Figura 98 – Esquema da instalação de uma lâmpada com dois interruptores de uma tecla  (paralelos) e um interruptor de uma tecla (intermediário). 
+Neutro 
+127V
+tecla paraleloInterruptor  
+Fase 
+Bocal 
+Lâmpada 
+127V 
+Interruptor 1  
+1 tecla intermediárioInterruptor 1 tecla  paralelo 
+SENAR-PR 
+67 
+Figura 99 – Instalando uma lâmpada com dois interruptores de uma tecla (paralelos) e um interruptor de uma tecla  (intermediário). 
+
+1. Introduzir fios branco, preto e amarelo  no conduíte. 
+2.Introduzir fios branco, preto e amarelo  no conduíte. 
+3.Fios introduzidos nos conduítes. 
+
+4.Introduzir fio branco no furo.  
+5.Introduzir fios amarelo e preto no  conduíte. 
+6.Fios amarelo e preto nos conduítes  e o branco no furo. 
+
+7.Introduzir 2 fios amarelos e 2 pretos  no conduíte. 
+8.Introduzir fios amarelo e preto no  conduíte. 
+9.Introduzir fios amarelo e preto no  conduíte.  
+
+10. Fios nos conduítes. 
+11. Introduzir fios amarelo e preto no  conduíte. 
+12. Fios nos conduítes. 
+
+13. Introduzir fios amarelo, preto e  vermelho no conduíte. 
+14. Fios no conduíte. 
+15. Desencapar a ponta do fio vermelho  (10cm). 
+SENAR-PR 
+68 
+
+16. Fixar fio vermelho com alicate. 
+17. Fio vermelho fixado na rede. 
+18. Introduzir fio azul no furo.  
+
+19. Desencapar a ponta do fio azul (10cm). 
+20. Fixar fio azul com alicate. 
+21. Fio azul fixado na rede. 
+22. Caixa com fios. 25. Fixar fio preto no parafuso  
+23. Desencapar as pontas  dos fios (1cm). 
+24. Fixar fio branco no parafuso  do meio do interruptor. 
+de cima do interruptor. 
+
+26. Fixar o fio amarelo no  parafuso de baixo do  interruptor. 
+27. Alojar o interruptor na  caixa. 
+28. Fixar o interruptor na  caixa. 
+29. Fixar o espelho. 
+
+30. Caixa com fios. 
+31. Desencapar as pontas  dos fios (1cm). 
+32. Fixar fio vermelho no  parafuso do meio do  interruptor. 
+33. Fixar fio preto no parafuso  de cima do interruptor. 
+SENAR-PR 
+69 
+
+34. Fixar fio amarelo no  parafuso de baixo do  interruptor. 
+35. Alojar o interruptor na  caixa. 
+36. Fixar interruptor na caixa. 37. Fixar espelho. 
+
+38. Desencapar as pontas dos fios  (1cm).  
+39. Fixar fios no bocal.
+40. Fixar bocal com 2 parafusos e  porcas. 
+
+41. Colocar lâmpada 127V. 42. Caixa com fios. 43. Desencapar as pontas  dos fios (1cm). 
+44. Fixar fio preto no parafuso  de cima do interruptor. 
+
+45. Fixar fio amarelo no  parafuso de baixo do  interruptor. 
+46. Fixar fio preto no parafuso  de cima do interruptor. 
+47. Fixar fio amarelo no  parafuso de baixo do  interruptor. 
+48. Alojar o interruptor na  caixa. 
+SENAR-PR 
+70 
+
+49. Fixar o interruptor na  caixa. 
+50. Fixar espelho. 51. Ligar interruptor. 52. Teste de funcionamento. 
+4.10 INSTALANDO UMA LÂMPADA INCANDESCENTE COM DOIS  INTERRUPTORES DE UMA TECLA (PARALELOS) E DOIS  INTERRUPTORES DE UMA TECLA (INTERMEDIÁRIOS) 
+Material: 1 bocal com parafusos e porcas, 1 lâmpada incandescente 127V, 2  interruptores 1 tecla (paralelos), 2 interruptores 1 tecla (intermediários), 9 fios 1,5mm2 (3  pretos, 3 amarelos, 1 branco, 1 azul e 1 vermelho).  
+Figura 100 – Esquema da instalação de uma lâmpada com dois interruptores de uma  
+tecla (paralelos) e dois interruptores de uma tecla (intermediários). 
+Neutro 
+127V 
+tecla paraleloInterruptor  
+Fase 
+Bocal 
+Lâmpada 
+127V 
+Interruptor 1  
+1 tecla intermediárioInterruptor  Interruptor  
+IMPORTANTE
+1 tecla  
+intermediário 
+1 tecla  paralelo 
+O início da instalação é similar aos passos 1 a 50 da figura 99. 
+SENAR-PR 
+71 
+Figura 101 – Instalando uma lâmpada com dois interruptores de uma tecla (paralelos) e dois interruptores de uma  tecla (intermediários). 
+
+51. Segunda caixa com 4  fios. 
+52. Desencapar as pontas  dos fios (1cm). 
+53. Fixar fio preto no parafuso  de cima do interruptor. 
+54. Fixar fio amarelo no parafuso  de baixo do interruptor. 
+
+55. Fixar fio preto no parafuso  de cima do interruptor.  
+56. Fixar fio amarelo no  parafuso de baixo do  interruptor. 
+57. Alojar o interruptor na  segunda caixa. 
+58. Fixar interruptor na  segunda caixa. 
+
+59. Fixar espelho na segunda  caixa. 
+60. Ligar interruptor. 
+61. Teste de funcionamento. 
+4.11 INSTALANDO UMA LÂMPADA INCANDESCENTE PARA ILUMINAÇÃO  EM DOIS NÍVEIS UTILIZANDO UM DIODO SEMICONDUTOR, COM  INTERRUPTOR DE DUAS TECLAS SIMPLES 
+Material: 1 bocal com parafusos e porcas, 1 lâmpada incandescente 127V, 1  interruptor 2 teclas simples, 1 diodo semicondutor 1N 4007, 3 fios 1,5mm2 (1 azul, 1 preto  e 1 vermelho). 
+SENAR-PR 
+72 
+Figura 102 – Esquema da instalação de uma lâmpada para iluminação em dois níveis. Neutro 
+127V 
+Diodo 
+Fase 
+Retorno 
+Bocal 
+Interruptor  
+Semicondutor 1n 4007 
+Lâmpada 127V 
+2 teclas simples 
+Figura 103 – Esquema da instalação de uma lâmpada para iluminação em dois níveis utilizando um diodo  semicondutor, com interruptor de duas teclas simples. 
+
+1.Introduzir fios no conduíte. 
+2.Caixa com fios. 
+3.Desencapar a ponta do fio vermelho  (10cm). 
+
+4.Fixar fio vermelho com alicate. 
+5.Fio vermelho fixado na rede. 
+6.Introduzir fio preto no conduíte. 
+
+7.Introduzir fios preto e azul no furo. 
+8.Fixar fio azul com alicate.  
+9.Fio azul fixado na rede.
+SENAR-PR 
+73 
+
+10. Fios preto, vermelho e azul  instalados. 
+11. Desencapar as pontas dos fios  vermelho (4cm) e preto (1cm). 
+12. Fixar fio vermelho nos dois parafusos  do meio do interruptor. 
+
+13. Fixar um dos terminais  do diodo no parafuso de  cima do interruptor. 
+14. Fixar o outro terminal do  diodo juntamente com o  fio preto no parafuso de  baixo do interruptor. 
+15. Fixar o interruptor na  caixa.  
+16. Fixar espelho. 
+17. Desencapar as pontas dos fios (1cm). 18. Fixar fios preto e azul no no bocal. 19. Fixar bocal com 2 parafusos e porcas. 
+20. Colocar lâmpada 127V no bocal. 21. Ligar interruptores. 22. Teste de funcionamento.
+SENAR-PR 
+74 
+4.12 INSTALANDO UMA LÂMPADA INCANDESCENTE PARA  ILUMINAÇÃO EM DOIS NÍVEIS UTILIZANDO DIODO  
+SEMICONDUTOR, COM UM INTERRUPTOR DE DUAS TECLAS  (SIMPLES E PARALELO) E OUTRO DE UMA TECLA (PARALELO). 
+Material: 1 bocal com parafusos e porcas, 1 lâmpada incandescente 127V, 1 interruptor  2 teclas: 1 simples e 1 paralelo, 1 interruptor 1 tecla (paralelo), 1 diodo semicondutor 1N  4007, 5 fios 1,5mm2 (1 azul, 1 preto, 1 amarelo, 1 branco e 1 vermelho).  
+Figura 104 – Esquema da instalação de uma lâmpada para iluminação em dois níveis. 
+Neutro 
+127V 
+Fase 
+Retorno 
+Bocal 
+Diodo 
+Semicondutor 
+1n 4007 
+Interruptor 2 teclas  1 paralelo  
+1 simples 
+Lâmpada 127V 
+Interruptor 
+1 tecla (paralelo) 
+Figura 105 – Instalando uma lâmpada para iluminação em dois níveis, utilizando diodo semicondutor, com um interruptor  de duas teclas (simples e paralelo) e outro de uma tecla simples. 
+
+1.Introduzir fios branco, preto e amarelo  no conduíte. 
+2.Introduzir fio branco no conduíte. 3.Introduzir fio branco no furo. 
+
+4.Introduzir fios amarelo e preto no  conduíte longo. 
+5.Fios introduzidos nos conduítes. 6.Introduzir fios amarelo, preto e  vermelho no conduíte.
+SENAR-PR 
+75 
+
+7.Fios introduzidos no  conduíte. 
+8.Caixa esquerda com fios. 9.Caixa direita com fios. 10. Desencapar o fio  vermelho (10cm). 
+11. Fixar fio vermelho com alicate. 12. Fio vermelho fixado na rede. 13. Introduzir fio azul junto com o branco  no furo.  
+
+14. Desencapar a ponta do fio azul  (10cm).  
+15. Fixar fio azul com alicate.  
+16. Fio azul fixado na rede. 
+
+17. Desencapar as pontas  dos fios (1cm).  
+18. Fixar fio preto no  
+parafuso inferior  
+esquerdo do interruptor.  
+19. Fixar fio amarelo no  parafuso inferior direito  do interruptor. 
+20. Fixar o diodo nos 2  parafusos do meio do  interruptor. 
+
+21. Fixar o fio branco junta mente com o diodo no  parafuso de cima do  interruptor. 
+22. Fixar o interruptor na  caixa. 
+23. Fixar espelho na caixa. 24. Desencapar as pontas  dos fios (1cm). 
+SENAR-PR 
+76 
+
+25. Fixar fio vermelho no  parafuso do meio do  interruptor. 
+26. Fixar fio preto no parafuso  de cima do interruptor. 
+27. Fixar fio amarelo no  parafuso de baixo do  interruptor. 
+28. Alojar interruptor na  caixa. 
+29. Fixar o interruptor na caixa. 30. Fixar espelho. 31. Desencapar a ponta dos fios branco  e azul (1cm). 
+
+32. Fixar fios no bocal. 33. Fixar bocal com 2 parafusos e  porcas. 
+35. Ligar interruptor. 36. Teste de funcionamento. 
+34. Colocar lâmpada 127V no bocal.  
+4.13 INSTALANDO UMA CIGARRA COM INTERRUPTOR DE UMA  TECLA SIMPLES RETRÁTIL (PRESSÃO) 
+Material: 1 cigarra 127V, 1 interruptor de 1 tecla simples retrátil (pressão), 3 fios  1,5mm2 (1 azul, 1 preto e 1 vermelho). 
+SENAR-PR 
+77 
+Figura 106 – Esquema da instalação de cigarra com interruptor de uma tecla simples retrátil. Neutro 
+127V 
+Fase 
+Retorno 
+Bocal 
+Interruptor 1 tecla  simples retrátil  (pressão) 
+Cigarra 127V 
+Figura 107 – Instalando cigarra com interruptor de uma tecla simples retrátil (pressão). 
+
+1.Introduzir fios preto e vermelho  no conduíte. 
+2.Fios na caixa. 3.Desencapar fio vermelho (10cm). 
+4.Fixar fio vermelho com alicate. 5.Fio vermelho fixado na rede. 6.Introduzir fio preto no conduíte. 
+
+7.Introduzir fios preto e azul no  conduíte. 
+8. Fixar fio azul com alicate. 9.Fio azul fixado na rede. 
+SENAR-PR 
+78 
+
+10. Fios preto e azul instalados. 11. Desencapar as pontas dos fios  (1,5cm). 
+12. Fixar fio preto no parafuso de cima  do interruptor.  
+
+13. Fixar fio vermelho no  interruptor. 
+14. Alojar o interruptor na  caixa. 
+15. Fixar interruptor na caixa. 16. Fixar espelho.  
+
+17. Desencapar as pontas dos fios  (2,5cm). 
+18. Fazer olhal (anel) nas pontas dos  fios. 
+19. Olhais (anéis) prontos.  
+20. Fixar fio azul na cigarra. 21. Fixar fio preto na cigarra. 22. Alojar a cigarra na caixa.  
+
+23. Fixar a cigarra na caixa. 24. Cigarra fixada na caixa. 25. Teste de funcionamento.
+SENAR-PR 
+79

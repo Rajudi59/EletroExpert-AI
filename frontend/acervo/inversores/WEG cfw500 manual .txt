@@ -1,0 +1,6816 @@
+﻿Motores I Automação I Energia I Transmissão & Distribuição I Tintas 
+Inversor de Frequência 
+CFW500 V1.8X 
+Manual de Programação 
+  
+  
+
+  
+
+Manual de Programação Série: CFW500 
+Idioma: Português 
+N º do Documento: 10001469555 / 02 Versão de Software: 1.8X 
+Data da Publicação: 12/2014
+Índice 
+REFERÊNCIA RÁPIDA DOS PARÂMETROS, ALARMES E FALHAS .....0-1 
+1 INSTRUÇÕES DE SEGURANÇA............................................................1-1 1.1 AVISOS DE SEGURANÇA NO MANUAL........................................................................................1-1 1.2 AVISOS DE SEGURANÇA NO PRODUTO.....................................................................................1-1 1.3 RECOMENDAÇÕES PRELIMINARES ...........................................................................................1-2 
+2 INFORMAÇÕES GERAIS........................................................................2-1 2.1 SOBRE O MANUAL.........................................................................................................................2-1 2.2 TERMINOLOGIA E DEFINIÇÕES...................................................................................................2-1 
+2.2.1 Termos e Definições Utilizados ..........................................................................................2-1 2.2.2 Representação Numérica .................................................................................................. 2-3 2.2.3 Símbolos para Descrição das Propriedades dos Parâmetros ...................................... 2-3 
+3 SOBRE O CFW500..................................................................................3-1 
+4 HMI E PROGRAMAÇÃO BÁSICA...........................................................4-1 4.1 USO DA HMI PARA OPERAÇÃO DO INVERSOR ........................................................................ 4-1 4.2 INDICAÇÕES NO DISPLAY DA HMI............................................................................................. 4-1 4.3 MODOS DE OPERAÇÃO DA HMI ................................................................................................. 4-2 
+5 INSTRUÇÕES BÁSICAS PARA PROGRAMAÇÃO E AJUSTES ...........5-1 5.1 ESTRUTURA DE PARÂMETROS .................................................................................................. 5-1 5.2 PARÂMETROS SELECIONADOS PELO MENU DA HMI ............................................................ 5-1 5.3 HMI.................................................................................................................................................. 5-2 5.4 PARÂMETROS DE BACKUP......................................................................................................... 5-5 5.5 AJUSTE DAS INDICAÇÕES DO DISPLAY NO MODO MONITORAÇÃO ................................... 5-6 5.6 SITUAÇÕES PARA O ESTADO CONFIG ...................................................................................... 5-6 5.7 UNIDADES DE ENGENHARIA PARA SOFTPLC.......................................................................... 5-7 
+6 IDENTIFICAÇÃO DO MODELO DO INVERSOR E ACESSÓRIOS........6-1 6.1 DADOS DO INVERSOR ................................................................................................................. 6-1 
+7 COMANDO LÓGICO E REFERÊNCIA DE VELOCIDADE..................... 7-1 7.1 SELEÇÃO PARA COMANDO LÓGICO E REFERÊNCIA DE VELOCIDADE ................................7-1 7.2 REFERÊNCIA DE VELOCIDADE ...................................................................................................7-7 
+7.2.1 Limites para a Referência de Velocidade ....................................................................... 7-8 7.2.2 Backup da Referência de Velocidade............................................................................... 7-8 7.2.3 Parâmetros para Referência de Velocidade ....................................................................7-9 7.2.4 Referência via Potenciômetro Eletrônico ..................................................................... 7-11 7.2.5 Entrada Analógica AIx e Entrada em Frequência FI ....................................................7-12 7.2.6 Referência de Velocidade 13 bits ...................................................................................7-12 
+7.3 PALAVRA DE CONTROLE E ESTADO DO INVERSOR...............................................................7-12 7.3.1 Controle via Entradas HMI ..............................................................................................7-15 7.3.2 Controle via Entradas Digitais .......................................................................................7-16 
+8 TIPOS DE CONTROLE DO MOTOR DISPONÍVEIS ..............................8-1 
+9 CONTROLE ESCALAR V/f......................................................................9-1 9.1 PARAMETRIZAÇÃO DO CONTROLE ESCALAR V/f ................................................................... 9-3 9.2 COLOCAÇÃO EM FUNCIONAMENTO NO MODO V/f ............................................................... 9-7
+Índice 
+10 CONTROLE VETORIAL VVW ............................................... 10-1 10.1 PARÂMETRIZAÇÃO DO CONTROLE VETORIAL VVW ..............................................10-3 10.2 COLOCAÇÃO EM FUNCIONAMENTO NO MODO VVW.............................................10-8 
+11 FUNÇÕES COMUNS A TODOS OS MODOS DE CONTROLE ......... 11-1 11.1 RAMPAS .......................................................................................................................................11-1 11.2 LIMITAÇÃO DA TENSÃO DO BARRAMENTO CC E DA CORRENTE DE SAÍDA....................11-3 
+11.2.1 Limitação da Tensão no Barramento CC por “Hold de Rampa” P0150 = 0 ou 2.......11-4 11.2.2 Limitação da Tensão no Barramento CC por “Acelera de Rampa” P0150 = 1 ou 3 .11-4 11.2.3 Limitação da Corrente de Saída por “Hold de Rampa” P0150 = 2 ou 3.....................11-7 11.2.4 Limitação de Corrente Tipo “Desacelera de Rampa” P0150 = 0 ou 1........................11-7 
+11.3 ESTADO DORMIR (SLEEP) ........................................................................................................11-8 11.4 FLYING START / RIDE-THROUGH.............................................................................................11-9 11.4.1 Função Flying Start...........................................................................................................11-9 11.4.2 Função Ride-Through.....................................................................................................11-10 11.5 FRENAGEM CC .........................................................................................................................11-10 11.6 FREQUÊNCIA EVITADA............................................................................................................ 11-12 
+12 ENTRADAS E SAÍDAS DIGITAIS E ANALÓGICAS............................ 12-1 12.1 ENTRADAS ANALÓGICAS .........................................................................................................12-1 12.2 SAÍDAS ANALÓGICAS............................................................................................................... 12-6 12.3 ENTRADA EM FREQUÊNCIA.................................................................................................... 12-9 12.4 SAÍDA EM FREQUÊNCIA .........................................................................................................12-11 12.5 ENTRADAS DIGITAIS ...............................................................................................................12-13 12.6 SAÍDAS DIGITAIS..................................................................................................................... 12-22 
+13 REGULADOR PID ...............................................................................13-1 13.1 DESCRIÇÃO E DEFINIÇÕES .....................................................................................................13-1 13.2 COLOCAÇÃO EM FUNCIONAMENTO .................................................................................... 13-3 13.3 ESTADO DORMIR COM O PID (SLEEP) .................................................................................. 13-6 13.4 TELA DO MODO DE MONITORAÇÃO ..................................................................................... 13-6 13.5 PARÂMETROS PID .....................................................................................................................13-7 13.6 PID ACADÊMICO ......................................................................................................................13-11 
+14 FRENAGEM REOSTÁTICA..................................................................14-1 
+15 FALHAS E ALARMES..........................................................................15-1 15.1 PROTEÇÃO DE SOBRECARGA NO MOTOR (F0072 e A0046)................................................15-1 15.2 PROTEÇÃO DE SOBRECARGA DOS IGBTS (F0048 e A0047)............................................... 15-3 15.3 PROTEÇÃO DE SOBRETEMPERATURA DO MOTOR (F0078)............................................... 15-4 15.4 PROTEÇÃO DE SOBRETEMPERATURA DOS IGBTs (F0051 e A0050)................................. 15-5 15.5 PROTEÇÃO DE SOBRECORRENTE (F0070 e F0074) ............................................................. 15-6 15.6 SUPERVISÃO DA TENSÃO DO LINK (F0021 e F0022)............................................................ 15-6 15.7 FALHA DE COMUNICAÇÃO COM MÓDULO PLUG-IN (F0031) ............................................. 15-6 15.8 FALHA DE AUTOAJUSTE DO MODO DE CONTROLE VVW (F0033).................................... 15-6 15.9 ALARME DE FALTA NA COMUNICAÇÃO COM HMI REMOTA (A0750) ................................ 15-6 15.10 FALHA DE FALTA NA COMUNICAÇÃO COM HMI REMOTA (F0751)................................... 15-6 15.11 FALHA DE AUTODIAGNOSE (F0084)...................................................................................... 15-6 15.12 FALHA NA CPU (F0080)............................................................................................................15-7 15.13 VERSÃO DE SOFTWARE PRINCIPAL INCOMPATÍVEL (F0151) ............................................15-7 15.14 FALHA NA REALIMENTAÇÃO DE PULSOS (F0182)...............................................................15-7 15.15 HISTÓRICO DE FALHAS...........................................................................................................15-7 15.16 AUTO-RESET DE FALHAS......................................................................................................15-10 
+16 PARÂMETROS DE LEITURA..............................................................16-1
+Índice 
+17 COMUNICAÇÃO.................................................................................. 17-1 17.1 INTERFACE SERIAL USB, RS-232 E RS-485............................................................................17-1 17.2 INTERFACE CAN – CANOPEN / DEVICENET...........................................................................17-3 17.3 INTERFACE PROFIBUS DP ........................................................................................................17-4 17.4 INTERFACE ETHERNET .............................................................................................................17-5 17.5 ESTADOS E COMANDOS DA COMUNICAÇÃO........................................................................17-7 
+18 SOFTPLC.............................................................................................18-1
+Índice
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+REFERÊNCIA RÁPIDA DOS PARÂMETROS, ALARMES E FALHAS0 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0000 
+	Acesso aos Parâmetros 
+	0 a 9999 
+	0 
+	
+
+	
+
+	
+
+	5-2
+	P0001 
+	Referência Velocidade 
+	0 a 65535 
+	
+
+	
+
+	ro 
+	READ 
+	16-1
+	P0002 
+	Velocidade de Saída  
+(Motor)
+	0 a 65535 
+	
+
+	
+
+	ro 
+	READ 
+	16-1
+	P0003 
+	Corrente do Motor 
+	0,0 a 200,0 A 
+	
+
+	
+
+	ro 
+	READ 
+	16-1
+	P0004 
+	Tensão Barram. CC (Ud) 
+	0 a 2000 V 
+	
+
+	
+
+	ro 
+	READ 
+	16-1
+	P0005 
+	Frequência de Saída  
+(Motor)
+	0,0 a 500,0 Hz 
+	
+
+	
+
+	ro 
+	READ 
+	16-2
+	P0006 
+	Estado do Inversor 
+	0 = Ready (Pronto) 
+1 = Run (Execução) 
+2 = Subtensão 
+3 = Falha 
+4 = Autoajuste 
+5 = Configuração 
+6 = Frenagem CC 
+7 = Estado Dormir
+	
+
+	
+
+	ro 
+	READ 
+	16-2
+	P0007 
+	Tensão de Saída 
+	0 a 2000 V 
+	
+
+	
+
+	ro 
+	READ 
+	16-3
+	P0009 
+	Torque no Motor 
+	-1000,0 a 1000,0 % 
+	
+
+	
+
+	ro, VVW 
+	READ 
+	16-3
+	P0010 
+	Potência de Saída 
+	0,0 a 6553,5 kW 
+	
+
+	
+
+	ro 
+	READ 
+	16-3
+	P0011 
+	Fator de Potência 
+	-1,00 a 1,00 
+	
+
+	
+
+	ro 
+	READ 
+	16-3
+	P0012 
+	Estado DI8 a DI1 
+	Bit 0 = DI1 
+Bit 1 = DI2 
+Bit 2 = DI3 
+Bit 3 = DI4 
+Bit 4 = DI5 
+Bit 5 = DI6 
+Bit 6 = DI7 
+Bit 7 = DI8
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-14
+	P0013 
+	Estado DO5 a DO1 
+	Bit 0 = DO1 
+Bit 1 = DO2 
+Bit 2 = DO3 
+Bit 3 = DO4 
+Bit 4 = DO5
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-22
+	P0014 
+	Valor de AO1 
+	0,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-6
+	P0015 
+	Valor de AO2 
+	0,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-6
+	P0016 
+	Valor de FO em % 
+	0,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-12
+	P0017 
+	Valor de FO em Hz 
+	0 a 20000 Hz 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-12
+	P0018 
+	Valor de AI1 
+	-100,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-1
+	P0019 
+	Valor de AI2 
+	-100,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-1
+	P0020 
+	Valor de AI3 
+	-100,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-1
+	P0021 
+	Valor de FI em % 
+	-100,0 a 100,0 % 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-9
+	P0022 
+	Valor de FI em Hz 
+	0 a 20000 Hz 
+	
+
+	
+
+	ro 
+	READ, I/O 
+	12-10
+	P0023 
+	Versão de SW Princ. 
+	0,00 a 655,35 
+	
+
+	
+
+	ro 
+	READ 
+	6-1
+	P0024 
+	Versão de SW Sec. 
+	0,00 a 655,35 
+	
+
+	
+
+	ro 
+	READ 
+	6-1
+	P0027 
+	Config. Mod. Plug-in 
+	0 = Sem Plug-in 
+1 = CFW500-IOS 
+2 = CFW500-IOD 
+3 = CFW500-IOAD 
+4 = CFW500-IOR 
+5 = CFW500-CUSB 
+6 = CFW500-CCAN 
+7 = CFW500-CRS232 
+8 = CFW500-CPDP  
+9 = CFW500-CRS485  11 = CFW500-CETH-IP CFW500-CEMB-TCP  
+CFW500-CEPN-IO 
+	
+
+	
+
+	ro 
+	READ 
+	6-1
+	
+
+
+
+CFW500 | 0-1  
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0029 
+	Config. HW Potência 
+	0 = Não Identificado 
+1 = 200-240 V / 1,6 A 
+2 = 200-240 V / 2,6 A 
+3 = 200-240 V / 4,3 A 
+4 = 200-240 V / 7,0 A  
+5 = 200-240 V / 9,6 A 
+6 = 380-480 V / 1,0 A 
+7 = 380-480 V / 1,6 A 
+8 = 380-480 V / 2,6 A 
+9 = 380-480 V / 4,3 A 
+10 = 380-480 V / 6,1 A 11 = 200-240 V / 7,3 A 12 = 200-240 V / 10,0 A 13 = 200-240 V / 16,0 A 14 = 380-480 V / 2,6 A 15 = 380-480 V / 4,3 A 16 = 380-480 V / 6,5 A 17 = 380-480 V / 10,0 A 18 = 200-240 V / 24,0 A 19 = 380-480 V / 14,0 A 20 = 380-480 V / 16,0 A 21 = 500-600 V / 1,7 A 22 = 500-600 V / 3,0 A 23 = 500-600 V / 4,3 A 24 = 500-600 V / 7,0 A  25 = 500-600 V / 10,0 A 26 = 500-600 V / 12,0 A 27 = 200-240 V / 28,0 A  28 = 200-240 V / 33,0 A 29 = 380-480 V / 24,0 A 30 = 380-480 V / 30,0 A 31 = 500-600 V / 17,0 A 32 = 500-600 V / 22,0 A 33 = 200-240 V / 45,0 A 34 = 200-240 V / 54,0 A 35 = 380-480 V / 38,0 A 36 = 380-480 V / 45,0 A 37 = 500-600 V / 27,0 A 38 = 500-600 V / 32,0 A 39 a 63 = Reservado
+	Conforme modelo  do inversor
+	
+
+	ro 
+	READ 
+	6-2
+	P0030 
+	Temp. Módulo Potência 
+	-20 a 150 ºC 
+	
+
+	
+
+	ro 
+	READ 
+	16-5
+	P0037 
+	Sobrecarga Motor Ixt 
+	0 a 100 % 
+	
+
+	
+
+	ro 
+	READ 
+	15-2
+	P0040 
+	Variável Processo PID 
+	0,0 a 3000,0 
+	
+
+	
+
+	ro 
+	READ 
+	13-7
+	P0041 
+	Valor do Setpoint PID 
+	0,0 a 3000,0 
+	
+
+	
+
+	ro 
+	READ 
+	13-7
+	P0047 
+	Estado CONFIG 
+	0 a 999 
+	
+
+	
+
+	ro 
+	READ 
+	16-5
+	P0048 
+	Alarme Atual 
+	0 a 999 
+	
+
+	
+
+	ro 
+	READ 
+	15-7
+	P0049 
+	Falha Atual 
+	0 a 999 
+	
+
+	
+
+	ro 
+	READ 
+	15-7
+	P0050 
+	Última Falha 
+	0 a 999 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0051 
+	Corrente Últ. Falha 
+	0,0 a 200,0 A 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0052 
+	Barram. CC Últ. Falha 
+	0 a 2000 V 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0053 
+	Frequência Últ. Falha 
+	0,0 a 500,0 Hz 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0054 
+	Temp. Últ. Falha 
+	-20 a 150 ºC 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0055 
+	Estado Lóg. Últ. Falha 
+	0000h a FFFFh 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0060 
+	Segunda Falha 
+	0 a 999 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0061 
+	Corrente 2ª Falha 
+	0,0 a 200,0 A 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0062 
+	Barram. CC 2ª Falha 
+	0 a 2000 V 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0063 
+	Frequência 2ª Falha 
+	0,0 a 500,0 Hz 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0064 
+	Temp. 2ª Falha 
+	-20 a 150 ºC 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0065 
+	Estado Lóg. 2ª Falha 
+	0000h a FFFFh 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0070 
+	Terceira Falha 
+	0 a 999 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0071 
+	Corrente 3ª Falha 
+	0,0 a 200,0 A 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	
+
+
+
+0 
+0-2 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0072 
+	Barram. CC 3ª Falha 
+	0 a 2000 V 
+	
+
+	
+
+	ro 
+	READ 
+	15-8
+	P0073 
+	Frequência 3ª Falha 
+	0,0 a 500,0 Hz 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0074 
+	Temp. 3ª Falha 
+	-20 a 150 ºC 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0075 
+	Estado Lóg. 3ª Falha 
+	0000h a FFFFh 
+	
+
+	
+
+	ro 
+	READ 
+	15-9
+	P0100 
+	Tempo Aceleração 
+	0,1 a 999,0 s 
+	10,0 s 
+	
+
+	
+
+	BASIC 
+	11-1
+	P0101 
+	Tempo Desaceleração 
+	0,1 a 999,0 s 
+	10,0 s 
+	
+
+	
+
+	BASIC 
+	11-1
+	P0102 
+	Tempo Acel. 2ª Rampa 
+	0,1 a 999,0 s 
+	10,0 s 
+	
+
+	
+
+	
+
+	11-2
+	P0103 
+	Tempo Desac. 2ª Rampa 
+	0,1 a 999,0 s 
+	10,0 s 
+	
+
+	
+
+	
+
+	11-2
+	P0104 
+	Rampa S 
+	0 = Inativa 
+1 = Ativa
+	0 
+	
+
+	cfg 
+	
+
+	11-2
+	P0105 
+	Seleção 1ª/2ª Rampa 
+	0 = 1ª Rampa 
+1 = 2ª Rampa 
+2 = DIx 
+3 = Serial/USB 
+4 = Reservado 
+5 = CO/DN/DP 
+6 = SoftPLC
+	2 
+	
+
+	
+
+	I/O 
+	11-3
+	P0106 
+	Tempo da 3ª Rampa 
+	0,1 a 999,0 s 
+	5,0 s 
+	
+
+	
+
+	
+
+	11-3
+	P0120 
+	Backup da Ref. Veloc. 
+	0 = Inativo 
+1 = Ativo 
+2 = Backup por P0121
+	1 
+	
+
+	
+
+	
+
+	7-8
+	P0121 
+	Referência via HMI 
+	0,0 a 500,0 Hz 
+	3,0 Hz 
+	
+
+	
+
+	
+
+	7-9
+	P0122 
+	Referência JOG 
+	-500,0 a 500,0 Hz 
+	5,0 Hz 
+	
+
+	
+
+	
+
+	7-9
+	P0124 
+	Ref. 1 Multispeed 
+	-500,0 a 500,0 Hz 
+	3,0 Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0125 
+	Ref. 2 Multispeed 
+	-500,0 a 500,0 Hz 
+	10,0 (5,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0126 
+	Ref. 3 Multispeed 
+	-500,0 a 500,0 Hz 
+	20,0 (10,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0127 
+	Ref. 4 Multispeed 
+	-500,0 a 500,0 Hz 
+	30,0 (20,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0128 
+	Ref. 5 Multispeed 
+	-500,0 a 500,0 Hz 
+	40,0 (30,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0129 
+	Ref. 6 Multispeed 
+	-500,0 a 500,0 Hz 
+	50,0 (40,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0130 
+	Ref. 7 Multispeed 
+	-500,0 a 500,0 Hz 
+	60,0 (50,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0131 
+	Ref. 8 Multispeed 
+	-500,0 a 500,0 Hz 
+	66,0 (55,0) Hz 
+	
+
+	
+
+	
+
+	7-10
+	P0133 
+	Velocidade Mínima 
+	0,0 a 500,0 Hz 
+	3,0 Hz 
+	
+
+	
+
+	BASIC 
+	7-8
+	P0134 
+	Velocidade Máxima 
+	0,0 a 500,0 Hz 
+	66,0 (55,0) Hz 
+	
+
+	
+
+	BASIC 
+	7-8
+	P0135 
+	Corrente Máxima Saída 
+	0,0 a 200,0 A 
+	1,5xInom 
+	
+
+	
+
+	BASIC,  
+MOTOR
+	11-7
+	P0136 
+	Boost de Torque Manual 
+	0,0 a 30,0 % 
+	Conforme modelo  do inversor
+	
+
+	V/f 
+	BASIC,  
+MOTOR
+	9-4
+	P0137 
+	Boost de Torque Autom. 
+	0,0 a 30,0 % 
+	0,0 % 
+	
+
+	V/f 
+	MOTOR 
+	9-5
+	P0138 
+	Compensação Escorreg. 
+	-10,0 a 10,0 % 
+	0,0 % 
+	
+
+	V/f 
+	MOTOR 
+	9-6
+	P0139 
+	Filtro Corrente Saída 
+	0 a 9999 ms 
+	50 ms 
+	
+
+	
+
+	
+
+	8-1
+	P0140 
+	Filtro Comp. Escorreg. 
+	0 a 9999 ms 
+	500 ms 
+	
+
+	VVW 
+	
+
+	8-2
+	P0142 
+	Tensão Saída Máxima 
+	0,0 a 100,0 % 
+	100,0 % 
+	
+
+	cfg, V/f 
+	
+
+	9-4
+	P0143 
+	Tensão Saída Intermed. 
+	0,0 a 100,0 % 
+	66,7 % 
+	
+
+	cfg, V/f 
+	
+
+	9-4
+	P0144 
+	Tensão Saída Mínima 
+	0,0 a 100,0 % 
+	33,3 % 
+	
+
+	cfg, V/f 
+	
+
+	9-4
+	P0145 
+	Freq. Início Enf. Campo 
+	0,0 a 500,0 Hz 
+	60,0 (50,0) Hz 
+	
+
+	cfg, V/f 
+	
+
+	9-5
+	P0146 
+	Freq. Saída Intermed. 
+	0,0 a 500,0 Hz 
+	40,0 (33,3) Hz 
+	
+
+	cfg, V/f 
+	
+
+	9-5
+	P0147 
+	Freq. Saída Baixa 
+	0,0 a 500,0 Hz 
+	20,0 (16,7) Hz 
+	
+
+	cfg, V/f 
+	
+
+	9-5
+	P0150 
+	Tipo Regul. Barram. CC V/f 
+	0 = Hold_Ud e Desac_LC 1 = Acel_Ud e Desac_LC 2 = Hold_Ud e Hold_LC 3 = Acel_Ud e Hold_LC
+	0 
+	
+
+	cfg 
+	MOTOR 
+	11-4
+	P0151 
+	Nível Regul. Barram. CC 
+	339 a 1200 V 
+	400 V (P0296 = 0) 800 V (P0296 = 1) 1000 V (P0296 = 2)
+	
+
+	
+
+	MOTOR 
+	11-5
+	
+
+
+
+0 
+CFW500 | 0-3 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0152 
+	Ganho Prop. Regul.  
+Barram. CC
+	0,00 a 9,99 
+	1,50 
+	
+
+	
+
+	MOTOR 
+	11-5
+	P0153 
+	Nível Frenagem Reost. 
+	339 a 1200 V 
+	375 V (P0296 = 0) 750 V (P0296 = 1) 950 V (P0296 = 2)
+	
+
+	
+
+	MOTOR 
+	14-1
+	P0156 
+	Corr. Sobrecarga Vel.  Nom.
+	0,0 a 200,0 A 
+	1,1xInom 
+	
+
+	
+
+	MOTOR 
+	15-1
+	P0157 
+	Corr. Sobrecarga 50 % 
+	0,0 a 200,0 A 
+	1,0xInom 
+	
+
+	
+
+	MOTOR 
+	15-1
+	P0158 
+	Corr. Sobrecarga 5 % 
+	0,0 a 200,0 A 
+	0,8xInom 
+	
+
+	
+
+	MOTOR 
+	15-1
+	P0178 
+	Fluxo Nominal 
+	0,0 a 150,0 % 
+	100,0 % 
+	
+
+	
+
+	MOTOR 
+	10-5
+	P0200 
+	Senha 
+	0 = Inativa 
+1 = Ativa 
+1 a 9999 = Nova senha
+	0 
+	
+
+	
+
+	HMI 
+	5-2
+	P0202 
+	Tipo de Controle 
+	0 = V/f 
+1 = Sem Função 
+2 = Sem Função 
+3 = Sem Função 
+4 = Sem Função 
+5 = VVW
+	0 
+	
+
+	cfg 
+	STARTUP 
+	8-1
+	P0203 
+	Sel. Função Especial 
+	0 = Nenhuma 
+1 = PID via AI1 
+2 = PID via AI3 
+3 = PID via FI
+	0 
+	
+
+	cfg 
+	
+
+	13-7
+	P0204 
+	Carrega/Salva Parâm. 
+	0 a 4 = Sem Função 
+5 = Carrega WEG 60 Hz 6 = Carrega WEG 50 Hz 7 = Carr. Usuário 1 
+8 = Carr. Usuário 2 
+9 = Salva Usuário 1 
+10 = Salva Usuário 2  
+11 = Carrega Padrão  
+SoftPLC 
+12 a 15 = Reservado
+	0 
+	
+
+	cfg 
+	
+
+	5-5
+	P0205 
+	Parâmetro Display Princ. 
+	0 a 1500 
+	2 
+	
+
+	
+
+	HMI 
+	5-3
+	P0206 
+	Parâmetro Display  
+Secundário
+	0 a 1500 
+	1 
+	
+
+	
+
+	HMI 
+	5-3
+	P0207 
+	Parâmetro para Barra 
+	0 a 1500 
+	3 
+	
+
+	
+
+	HMI 
+	5-3
+	P0208 
+	Referência Nominal 
+	1 a 65535 
+	600 (500) 
+	
+
+	
+
+	HMI 
+	5-3
+	P0209 
+	Unidade Eng. Ref. 
+	0 = Sem Unidade 
+1 = V 
+2 = A 
+3 = rpm 
+4 = s 
+5 = ms 
+6 = N 
+7 = m 
+8 = Nm 
+9 = mA 
+10 = % 
+11 = ºC 
+12 = CV 
+13 = Hz 
+14 = HP 
+15 = h 
+16 = W 
+17 = kW 
+18 = kWh 
+19 = H
+	13 
+	
+
+	
+
+	HMI 
+	5-4
+	P0210 
+	Forma Indicação Ref. 
+	0 = wxyz 
+1 = wxy.z 
+2 = wx.yz 
+3 = w.xyz
+	1 
+	
+
+	
+
+	HMI 
+	5-4
+	P0213 
+	Fator Escala da Barra 
+	1 a 65535 
+	Conforme modelo  do inversor
+	
+
+	
+
+	HMI 
+	5-4
+	
+
+
+
+0 
+0-4 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0216 
+	Iluminação HMI 
+	0 = Desliga 
+1 = Liga
+	1 
+	
+
+	cfg 
+	HMI 
+	5-5
+	P0217 
+	Frequência para Dormir 
+	0,0 a 500,0 Hz 
+	0,0 Hz 
+	
+
+	
+
+	
+
+	11-8
+	P0218 
+	Tempo para Dormir 
+	0 a 999 s 
+	0 s 
+	
+
+	
+
+	
+
+	11-9
+	P0220 
+	Seleção LOC/REM 
+	0 = Sempre Local  
+1 = Sempre Remoto 
+2 = Tecla HMI (LOC) 
+3 = Tecla HMI (REM) 
+4 = Entrada Digital (DIx) 5 = Serial/USB (LOC) 
+6 = Serial/USB (REM) 
+7 = Sem Função 
+8 = Sem Função 
+9 = CO/DN/PB/Eth (LOC) 10 = CO/DN/PB/Eth (REM) 11 = SoftPLC
+	2 
+	
+
+	cfg 
+	I/O 
+	7-5
+	P0221 
+	Sel. Referência LOC 
+	0 = Teclas HMI 
+1 = AI1 
+2 = AI2 
+3 = AI3 
+4 = FI 
+5 = AI1 + AI2 > 0 
+6 = AI1 + AI2 
+7 = E.P. 
+8 = Multispeed 
+9 = Serial/USB 
+10 = Sem Função 
+11 = CO/DN/PB/Eth 
+12 = SoftPLC 
+13 = Sem Função 
+14 = AI1 > 0 
+15 = AI2 > 0 
+16 = AI3 > 0 
+17 = FI > 0
+	0 
+	
+
+	cfg 
+	I/O 
+	7-5
+	P0222 
+	Sel. Referência REM 
+	Ver opções em P0221 
+	1 
+	
+
+	cfg 
+	I/O 
+	7-5
+	P0223 
+	Seleção Giro LOC 
+	0 = Horário 
+1 = Anti-horário 
+2 = Tecla HMI (H) 
+3 = Teclas HMI (AH) 
+4 = DIx 
+5 = Serial/USB (H) 
+6 = Serial/USB (AH) 
+7 = Sem Função 
+8 = Sem Função 
+9 = CO/DN/PB/Eth (H) 10 = CO/DN/PB/Eth (AH) 11 = Sem Função 
+12 = SoftPLC
+	2 
+	
+
+	cfg 
+	I/O 
+	7-6
+	P0224 
+	Seleção Gira/Para LOC 
+	0 = Tecla HMI 
+1 = DIx 
+2 = Serial/USB 
+3 = Sem Função 
+4 = CO/DN/PB/Eth 
+5 = SoftPLC
+	0 
+	
+
+	cfg 
+	I/O 
+	7-7
+	P0225 
+	Seleção JOG LOC 
+	0 = Inativo 
+1 = Teclas HMI 
+2 = DIx 
+3 = Serial/USB 
+4 = Sem Função 
+5 = CO/DN/PB/Eth 
+6 = SoftPLC
+	1 
+	
+
+	cfg 
+	I/O 
+	7-7
+	P0226 
+	Seleção Giro REM 
+	Ver opções em P0223 
+	4 
+	
+
+	cfg 
+	I/O 
+	7-6
+	P0227 
+	Seleção Gira/Para REM 
+	Ver opções em P0224 
+	1 
+	
+
+	cfg 
+	I/O 
+	7-7
+	P0228 
+	Seleção JOG REM 
+	Ver opções em P0225 
+	2 
+	
+
+	cfg 
+	I/O 
+	7-7
+	P0229 
+	Seleção Modo Parada 
+	0 = Por Rampa 
+1 = Por Inércia 
+2 = Parada Rápida
+	0 
+	
+
+	cfg 
+	I/O 
+	7-15
+	
+
+
+
+0 
+CFW500 | 0-5 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0230 
+	Zona Morta (AIs) 
+	0 = Inativa 
+1 = Ativa
+	0 
+	
+
+	cfg 
+	I/O 
+	12-1
+	P0231 
+	Função do Sinal AI1 
+	0 = Ref. Veloc. 
+1 = Sem Função 
+2 = Sem Função 
+3 = Sem Função 
+4 = PTC 
+5 = Sem Função 
+6 = Sem Função 
+7 = Uso SoftPLC  
+8 = Função 1 Aplicação 9 = Função 2 Aplicação 10 = Função 3 Aplicação 11 = Função 4 Aplicação 12 = Função 5 Aplicação 13 = Função 6 Aplicação 14 = Função 7 Aplicação 15 = Função 8 Aplicação
+	0 
+	
+
+	cfg 
+	I/O 
+	12-3
+	P0232 
+	Ganho da Entrada AI1 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-4
+	P0233 
+	Sinal da Entrada AI1 
+	0 = 0 a 10 V / 20 mA 
+1 = 4 a 20 mA 
+2 = 10 V / 20 mA a 0 
+3 = 20 a 4 mA
+	0 
+	
+
+	
+
+	I/O 
+	12-5
+	P0234 
+	Offset da Entrada AI1 
+	-100,0 a 100,0 % 
+	0,0 % 
+	
+
+	
+
+	I/O 
+	12-4
+	P0235 
+	Filtro da Entrada AI1 
+	0,00 a 16,00 s 
+	0,00 s 
+	
+
+	
+
+	I/O 
+	12-4
+	P0236 
+	Função do Sinal AI2 
+	Ver opções em P0231 
+	0 
+	
+
+	cfg 
+	I/O 
+	12-3
+	P0237 
+	Ganho da Entrada AI2 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-4
+	P0238 
+	Sinal da Entrada AI2 
+	Ver opções em P0233 
+	0 
+	
+
+	
+
+	I/O 
+	12-5
+	P0239 
+	Offset da Entrada AI2 
+	-100,0 a 100,0 % 
+	0,0 % 
+	
+
+	
+
+	I/O 
+	12-4
+	P0240 
+	Filtro da Entrada AI2 
+	0,00 a 16,00 s 
+	0,00 s 
+	
+
+	
+
+	I/O 
+	12-4
+	P0241 
+	Função do Sinal AI3 
+	Ver opções em P0231 
+	0 
+	
+
+	cfg 
+	I/O 
+	12-3
+	P0242 
+	Ganho da Entrada AI3 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-4
+	P0243 
+	Sinal da Entrada AI3 
+	0 = 0 a 10 V / 20 mA 
+1 = 4 a 20 mA 
+2 = 10 V / 20 mA a 0 
+3 = 20 a 4 mA 
+4 = -10 a +10 V
+	0 
+	
+
+	
+
+	I/O 
+	12-5
+	P0244 
+	Offset da Entrada AI3 
+	-100,0 a 100,0 % 
+	0,0 % 
+	
+
+	
+
+	I/O 
+	12-4
+	P0245 
+	Filtro da Entrada AI3 
+	0,00 a 16,00 s 
+	0,00 s 
+	
+
+	
+
+	I/O 
+	12-4
+	P0246 
+	Entrada em Freq. FI 
+	0 = Inativa 
+1 = Ativa
+	0 
+	
+
+	
+
+	I/O 
+	12-10
+	P0247 
+	Ganho da Entrada FI 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-10
+	P0248 
+	Entrada FI Mínima 
+	10 a 20000 Hz 
+	10 Hz 
+	
+
+	
+
+	I/O 
+	12-10
+	P0249 
+	Offset da Entrada FI 
+	-100,0 a 100,0 % 
+	0,0 % 
+	
+
+	
+
+	I/O 
+	12-10
+	P0250 
+	Entrada FI Máxima 
+	10 a 20000 Hz 
+	10000 Hz 
+	
+
+	
+
+	I/O 
+	12-10
+	
+
+
+
+0 
+0-6 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0251 
+	Função da Saída AO1 
+	0 = Ref. Veloc. 
+1 = Sem Função 
+2 = Veloc. Real 
+3 = Sem Função 
+4 = Sem Função 
+5 = Corrente Saída 
+6 = Var. Processo 
+7 = Corrente Ativa 
+8 = Sem Função 
+9 = Setpoint PID 
+10 = Sem Função 
+11 = Torque Motor 
+12 = SoftPLC 
+13 = Sem Função 
+14 = Sem Função 
+15 = Sem Função 
+16 = Ixt Motor 
+17 = Sem Função 
+18 = Conteúdo P0696 
+19 = Conteúdo P0697 
+20 = Conteúdo P0698 21 = Função 1 Aplicação 22 = Função 2 Aplicação 23 = Função 3 Aplicação 24 = Função 4 Aplicação 25 = Função 5 Aplicação 26 = Função 6 Aplicação 27 = Função 7 Aplicação 28 = Função 8 Aplicação
+	2 
+	
+
+	
+
+	I/O 
+	12-7
+	P0252 
+	Ganho da Saída AO1 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-8
+	P0253 
+	Sinal da Saída AO1 
+	0 = 0 a 10 V 
+1 = 0 a 20 mA 
+2 = 4 a 20 mA 
+3 = 10 a 0 V 
+4 = 20 a 0 mA 
+5 = 20 a 4 mA
+	0 
+	
+
+	
+
+	I/O 
+	12-8
+	P0254 
+	Função da Saída AO2 
+	Ver opções em P0251 
+	5 
+	
+
+	
+
+	I/O 
+	12-7
+	P0255 
+	Ganho da Saída AO2 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-8
+	P0256 
+	Sinal da Saída AO2 
+	Ver opções em P0253 
+	0 
+	
+
+	
+
+	I/O 
+	12-8
+	P0257 
+	Função da Saída FO 
+	0 = Ref. Veloc. 
+1 = Sem Função 
+2 = Veloc. Real 
+3 = Sem Função 
+4 = Sem Função 
+5 = Corrente Saída 
+6 = Var. Processo 
+7 = Corrente Ativa 
+8 = Sem Função 
+9 = Setpoint PID 
+10 = Sem Função 
+11 = Torque Motor 
+12 = SoftPLC 
+13 = Sem Função 
+14 = Sem Função 
+15 = Desabilita F.O. 
+16 = Ixt Motor 
+17 = Sem Função 
+18 = Conteúdo P0696 
+19 = Conteúdo P0697 
+20 = Conteúdo P0698 21 = Função 1 Aplicação 22 = Função 2 Aplicação 23 = Função 3 Aplicação 24 = Função 4 Aplicação 25 = Função 5 Aplicação 26 = Função 6 Aplicação 27 = Função 7 Aplicação 28 = Função 8 Aplicação
+	15 
+	
+
+	
+
+	I/O 
+	12-12
+	
+
+
+
+0 
+CFW500 | 0-7 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0258 
+	Ganho Saída FO 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	I/O 
+	12-13
+	P0259 
+	Saída FO Mínima 
+	10 a 20000 Hz 
+	10 Hz 
+	
+
+	
+
+	I/O 
+	12-13
+	P0260 
+	Saída FO Máxima 
+	10 a 20000 Hz 
+	10000 Hz 
+	
+
+	
+
+	I/O 
+	12-13
+	P0263 
+	Função da Entrada DI1 
+	0 = Sem Função 
+1 = Gira/Para 
+2 = Habilita Geral 
+3 = Parada Rápida 
+4 = Avanço 
+5 = Retorno 
+6 = Start 
+7 = Stop 
+8 = Sentido de Giro Horário 9 = LOC/REM 
+10 = JOG 
+11 = Acelera E.P. 
+12 = Desacelera E.P. 
+13 = Multispeed 
+14 = 2ª Rampa 
+15 = Sem Função 
+16 = Sem Função 
+17 = Sem Função 
+18 = Sem Alarme Ext. 
+19 = Sem Falha Ext. 
+20 = Reset de Falha 
+21 = SoftPLC 
+22 = Man./Auto PID 
+23 = Sem Função 
+24 = Desab. Flying Start 25 = Sem Função 
+26 = Bloqueia Prog. 
+27 = Carrega Usuário 1 28 = Carrega Usuário 2 29 = PTC 
+30 = Sem Função 
+31 = Sem Função 
+32 = Multispeed 2ª Rampa 33 = Ac. E.P. 2ª Rampa 34 = De. E.P. 2ª Rampa 35 = Avanço 2ª Rampa 36 = Retorno 2ª Rampa 37 = Liga / Ac. E.P. 
+38 = De. E.P. / Desl. 
+39 = Função 1 Aplicação 40 = Função 2 Aplicação 41 = Função 3 Aplicação 42 = Função 4 Aplicação 43 = Função 5 Aplicação 44 = Função 6 Aplicação 45 = Função 7 Aplicação 46 = Função 8 Aplicação
+	1 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0264 
+	Função da Entrada DI2 
+	Ver opções em P0263 
+	8 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0265 
+	Função da Entrada DI3 
+	Ver opções em P0263 
+	20 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0266 
+	Função da Entrada DI4 
+	Ver opções em P0263 
+	10 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0267 
+	Função da Entrada DI5 
+	Ver opções em P0263 
+	0 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0268 
+	Função da Entrada DI6 
+	Ver opções em P0263 
+	0 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0269 
+	Função da Entrada DI7 
+	Ver opções em P0263 
+	0 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0270 
+	Função da Entrada DI8 
+	Ver opções em P0263 
+	0 
+	
+
+	cfg 
+	I/O 
+	12-15
+	P0271 
+	Sinal das DIs 
+	0 = Todas DIx são NPN  1 = (DI1) PNP 
+2 = (DI1..DI2) PNP 
+3 = (DI1..DI3) PNP 
+4 = (DI1..DI4) PNP 
+5 = (DI1..DI5) PNP 
+6 = (DI1..DI6) PNP 
+7 = (DI1..DI7) PNP 
+8 = Todas DIx são PNP
+	0 
+	
+
+	cfg 
+	I/O 
+	12-14
+	
+
+
+
+0 
+0-8 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0275 
+	Função da Saída DO1 
+	0 = Sem Função 
+1 = F* > Fx 
+2 = F > Fx 
+3 = F < Fx 
+4 = F = F* 
+5 = Sem Função 
+6 = Is > Ix 
+7 = Is < Ix 
+8 = Torque > Tx 
+9 = Torque < Tx 
+10 = Remoto 
+11 = Run 
+12 = Ready 
+13 = Sem Falha 
+14 = Sem F0070 
+15 = Sem Função 
+16 = Sem F0021/22 
+17 = Sem Função 
+18 = Sem F0072 
+19 = 4-20 mA OK 
+20 = Conteúdo P0695 21 = Sent. Horário 
+22 = V. Proc. > VPx 
+23 = V. Proc. < VPx 
+24 = Ride-Through 
+25 = Pré-Carga OK 
+26 = Com Falha 
+27 = Sem Função 
+28 = SoftPLC 
+29 = Sem Função 
+30 = Sem Função 
+31 = Sem Função 
+32 = Sem Função 
+33 = Sem Função 
+34 = Sem Função 
+35 = Sem Alarme 
+36 = Sem Falha/Alarme 37 = Função 1 Aplicação 38 = Função 2 Aplicação 39 = Função 3 Aplicação 40 = Função 4 Aplicação 41 = Função 5 Aplicação 42 = Função 6 Aplicação 43 = Função 7 Aplicação 44 = Função 8 Aplicação
+	13 
+	
+
+	
+
+	I/O 
+	12-23
+	P0276 
+	Função da Saída DO2 
+	Ver opções em P0275 
+	2 
+	
+
+	
+
+	I/O 
+	12-23
+	P0277 
+	Função da Saída DO3 
+	Ver opções em P0275 
+	0 
+	
+
+	
+
+	I/O 
+	12-23
+	P0278 
+	Função da Saída DO4 
+	Ver opções em P0275 
+	0 
+	
+
+	
+
+	I/O 
+	12-23
+	P0279 
+	Função da Saída DO5 
+	Ver opções em P0275 
+	0 
+	
+
+	
+
+	I/O 
+	12-23
+	P0287 
+	Histerese Fx 
+	0,0 a 500,0 Hz 
+	0,5 Hz 
+	
+
+	
+
+	I/O 
+	12-24
+	P0288 
+	Velocidade Fx 
+	0,0 a 500,0 Hz 
+	3,0 Hz 
+	
+
+	
+
+	I/O 
+	12-24
+	P0290 
+	Corrente Ix 
+	0,0 a 200,0 A 
+	1,0xInom 
+	
+
+	
+
+	I/O 
+	12-24
+	P0293 
+	Torque Tx 
+	0 a 200 % 
+	100 % 
+	
+
+	
+
+	I/O 
+	12-24
+	P0295 
+	Corr. Nom. Inv. 
+	0,0 a 200,0 A 
+	Conforme modelo  do inversor
+	
+
+	ro 
+	READ 
+	6-3
+	P0296 
+	Tensão Nominal Rede 
+	0 = 200 - 240 V 
+1 = 380 - 480 V 
+2 = 500 - 600 V
+	Conforme modelo  do inversor
+	
+
+	ro, cfg 
+	READ 
+	6-3
+	P0297 
+	Freq. de Chaveamento 
+	2500 a 15000 Hz 
+	5000 Hz 
+	
+
+	
+
+	
+
+	6-3
+	P0299 
+	Tempo Frenag. Partida 
+	0,0 a 15,0 s 
+	0,0 s 
+	
+
+	
+
+	
+
+	11-10
+	P0300 
+	Tempo Frenagem Parada 
+	0,0 a 15,0 s 
+	0,0 s 
+	
+
+	
+
+	
+
+	11-11
+	P0301 
+	Frequência de Início 
+	0,0 a 500,0 Hz 
+	3,0 Hz 
+	
+
+	
+
+	
+
+	11-12
+	P0302 
+	Tensão Frenagem CC 
+	0,0 a 100,0 % 
+	20,0 % 
+	
+
+	
+
+	
+
+	11-12
+	P0303 
+	Frequência Evitada 1 
+	0,0 a 500,0 Hz 
+	20,0 Hz 
+	
+
+	
+
+	
+
+	11-12
+	
+
+
+
+0 
+CFW500 | 0-9 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0304 
+	Frequência Evitada 2 
+	0,0 a 500,0 Hz 
+	30,0 Hz 
+	
+
+	
+
+	
+
+	11-12
+	P0306 
+	Faixa Evitada 
+	0,0 a 25,0 Hz 
+	0,0 Hz 
+	
+
+	
+
+	
+
+	11-12
+	P0308 
+	Endereço Serial 
+	1 a 247 
+	1 
+	
+
+	
+
+	NET 
+	17-2
+	P0310 
+	Taxa Comunic. Serial 
+	0 = 9600 bits/s 
+1 = 19200 bits/s 
+2 = 38400 bits/s
+	1 
+	
+
+	
+
+	NET 
+	17-2
+	P0311 
+	Config. Bytes Serial 
+	0 = 8 bits, sem, 1 
+1 = 8 bits, par, 1 
+2 = 8 bits, ímp, 1 
+3 = 8 bits, sem, 2 
+4 = 8 bits, par, 2 
+5 = 8 bits, ímp, 2
+	1 
+	
+
+	
+
+	NET 
+	17-2
+	P0312 
+	Protocolo Serial (1) (2) 
+	0 = HMIR (1) 
+1 = Reservado 
+2 = Modbus RTU (1) 
+3 = Reservado 
+4 = Reservado 
+5 = Mestre RTU (1) 
+6 = HMIR (1) + Modbus RTU (2) 7 = Modbus RTU (2)  
+8 a 11 = Reservado 
+12 = HMI (1)/Mestre RTU (2)  13 = Mestre RTU (2) 
+	2 
+	
+
+	cfg 
+	NET 
+	17-3
+	P0313 
+	Ação p/ Erro Comunic. 
+	0 = Inativo 
+1 = Para por Rampa 
+2 = Desab. Geral 
+3 = Vai para LOC 
+4 = LOC Mantém Hab. 5 = Causa Falha
+	1 
+	
+
+	
+
+	NET 
+	17-3
+	P0314 
+	Watchdog Serial 
+	0,0 a 999,0 s 
+	0,0 s 
+	
+
+	
+
+	NET 
+	17-3
+	P0316 
+	Estado Interf. Serial 
+	0 = Inativo 
+1 = Ativo 
+2 = Erro Watchdog
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-3
+	P0320 
+	Flying Start/Ride-Through 
+	0 = Inativas 
+1 = Flying Start (FS) 
+2 = FS / RT 
+3 = Ride-Through (RT)
+	0 
+	
+
+	cfg 
+	
+
+	11-9
+	P0331 
+	Rampa de Tensão FS e RT 
+	0,2 a 60,0 s 
+	2,0 s 
+	
+
+	
+
+	
+
+	11-9
+	P0340 
+	Tempo Auto-Reset 
+	0 a 255 s 
+	0 s 
+	
+
+	
+
+	
+
+	15-10
+	P0343 
+	Máscara Falha/Alarme 
+	Bit 0 = F0074  
+Bit 1 = F0048  
+Bit 2 = F0078  
+Bit 3 = F0079  
+Bit 4 = F0076  
+Bit 5 = F0179  
+Bit 6 a 15 = Reservado 
+	0007h 
+	
+
+	cfg 
+	
+
+	15-4
+	P0349 
+	Nível para Alarme Ixt 
+	70 a 100 % 
+	85 % 
+	
+
+	cfg 
+	
+
+	15-2
+	P0397 
+	Configuração do Controle 
+	Bit 0 = Comp. Escorreg.  Regen. 
+Bit 1 = Comp. Tempo Morto Bit 2 = Estabilização de Is Bit 3 = Red. P0297 no A0050
+	000Bh 
+	
+
+	cfg 
+	
+
+	8-2
+	P0399 
+	Rendimento Nom. Motor 
+	50,0 a 99,9 % 
+	75,0 % 
+	
+
+	cfg, VVW 
+	MOTOR,  
+STARTUP
+	10-5
+	P0400 
+	Tensão Nom. Motor 
+	200 a 600 V 
+	Conforme  
+Tabela 10.2 na  
+página 10-6
+	
+
+	cfg, VVW 
+	MOTOR,  
+STARTUP
+	10-5
+	P0401 
+	Corrente Nom. Motor 
+	0,0 a 200,0 A 
+	1,0xInom 
+	
+
+	cfg 
+	MOTOR,  
+STARTUP
+	10-7
+	P0402 
+	Velocidade Nom. Motor 
+	0 a 30000 rpm 
+	1710 (1425) rpm 
+	
+
+	cfg 
+	MOTOR,  
+STARTUP
+	10-7
+	P0403 
+	Frequência Nom. Motor 
+	0 a 500 Hz 
+	60 (50) Hz 
+	
+
+	cfg 
+	MOTOR,  
+STARTUP
+	10-7
+	
+
+
+
+0 
+0-10 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0404 
+	Potência Nom. Motor 
+	0 = 0,16 HP (0,12 kW) 
+1 = 0,25 HP (0,19 kW) 
+2 = 0,33 HP (0,25 kW) 
+3 = 0,50 HP (0,37 kW) 
+4 = 0,75 HP (0,55 kW) 
+5 = 1,00 HP (0,75 kW) 
+6 = 1,50 HP (1,10 kW) 
+7 = 2,00 HP (1,50 kW) 
+8 = 3,00 HP (2,20 kW) 
+9 = 4,00 HP (3,00 kW) 
+10 = 5,00 HP (3,70 kW) 11 = 5,50 HP (4,00 kW) 12 = 6,00 HP (4,50 kW) 13 = 7,50 HP (5,50 kW) 14 = 10,00 HP (7,50 kW) 
+15 = 12,50 HP (9,00 kW) 16 = 15,00 HP (11,00 kW) 17 = 20,00 HP (15,00 kW) 18 = 25,00 HP (18,50 kW) 19 = 30,00 HP (22,00 kW)
+	Conforme modelo  do inversor
+	
+
+	cfg, VVW 
+	MOTOR,  
+STARTUP
+	10-7
+	P0407 
+	Fator Pot. Nom. Motor 
+	0,50 a 0,99 
+	0,80 
+	
+
+	cfg, VVW 
+	MOTOR,  
+STARTUP
+	10-7
+	P0408 
+	Autoajuste 
+	0 = Não 
+1 = Sim
+	0 
+	
+
+	cfg, VVW 
+	STARTUP 
+	10-8
+	P0409 
+	Resistência Estator 
+	0,01 a 99,99 Ω 
+	Conforme modelo  do inversor
+	
+
+	cfg, VVW 
+	MOTOR,  
+STARTUP
+	10-8
+	P0510 
+	Unidade de Engenharia 1  SoftPLC
+	0 = Nenhuma 
+1 = V 
+2 = A 
+3 = rpm 
+4 = s 
+5 = ms 
+6 = N 
+7 = m 
+8 = Nm 
+9 = mA 
+10 = % 
+11 = °C 
+12 = CV 
+13 = Hz 
+14 = HP 
+15 = h 
+16 = W 
+17 = kW 
+18 = kWh 
+19 = H
+	0 
+	
+
+	
+
+	HMI, SPLC 
+	5-8
+	P0511 
+	Ponto Decimal para  
+Unidade de Engenharia 1  SoftPLC
+	0 = wxyz 
+1 = wxy.z 
+2 = wx.yz 
+3 = w.xyz
+	1 
+	
+
+	
+
+	HMI, SPLC 
+	5-8
+	P0512 
+	Unidade de Engenharia 2  SoftPLC
+	Ver opções em P0510 
+	3 
+	
+
+	
+
+	HMI, SPLC 
+	5-9
+	P0513 
+	Ponto Decimal para  
+Unidade de Engenharia 2  SoftPLC
+	Ver opções em P0511 
+	0 
+	
+
+	
+
+	HMI, SPLC 
+	5-9
+	P0520 
+	Ganho Proporc. PID 
+	0,000 a 9,999 
+	1,000 
+	
+
+	
+
+	
+
+	13-8
+	P0521 
+	Ganho Integral PID 
+	0,000 a 9,999 
+	0,430 
+	
+
+	
+
+	
+
+	13-8
+	P0522 
+	Ganho Diferencial PID 
+	0,000 a 9,999 
+	0,000 
+	
+
+	
+
+	
+
+	13-8
+	P0525 
+	Setpoint PID pela HMI 
+	0,0 a 100,0 % 
+	0,0 % 
+	
+
+	
+
+	
+
+	13-9
+	P0526 
+	Filtro Setpoint PID 
+	0 a 9999 ms 
+	50 ms 
+	
+
+	
+
+	
+
+	13-9
+	P0527 
+	Tipo de Ação PID 
+	0 = Direto 
+1 = Reverso
+	0 
+	
+
+	
+
+	
+
+	13-9
+	P0528 
+	Escala Indicação VP 
+	10 a 30000 
+	1000 
+	
+
+	
+
+	HMI 
+	13-10
+	
+
+
+
+0 
+CFW500 | 0-11 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0529 
+	Forma Indicação VP 
+	0 = wxyz 
+1 = wxy.z 
+2 = wx.yz 
+3 = w.xyz
+	1 
+	
+
+	
+
+	HMI 
+	13-10
+	P0533 
+	Valor VPx 
+	0,0 a 100,0 % 
+	90,0 % 
+	
+
+	
+
+	I/O 
+	13-10
+	P0535 
+	Faixa p/ Acordar 
+	0,0 a 100,0 % 
+	0,0 % 
+	
+
+	
+
+	I/O 
+	13-10
+	P0536 
+	Ajuste Autom. P0525 
+	0 = Inativo 
+1 = Ativo
+	0 
+	
+
+	cfg 
+	
+
+	13-11
+	P0680 
+	Estado Lógico 
+	0000h a FFFFh  
+Bit 0 = Reservado 
+Bit1 = Comando Gira 
+Bit 2 e 3 = Reservado 
+Bit 4 = Parada Rápida 
+Bit 5 = 2ª Rampa 
+Bit 6 = Modo Config. 
+Bit 7 = Alarme 
+Bit 8 = Girando 
+Bit 9 = Habilitado 
+Bit 10 = Horário 
+Bit 11 = JOG 
+Bit 12 = Remoto 
+Bit 13 = Subtensão 
+Bit 14 = Automático (PID) Bit 15 = Falha
+	
+
+	
+
+	ro 
+	READ, NET 
+	7-13
+	P0681 
+	Velocidade 13 bits 
+	-32768 a 32767 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-7
+	P0682 
+	Controle Serial/USB 
+	0000h a FFFFh  
+Bit 0 = Habilita Rampa Bit 1 = Habilita Geral 
+Bit 2 = Girar Horário 
+Bit 3 = Habilita JOG 
+Bit 4 = Remoto 
+Bit 5 = 2ª Rampa 
+Bit 6 = Parada Rápida 
+Bit 7 = Reset de Falha 
+Bit 8 a 15 = Reservado
+	
+
+	
+
+	ro 
+	NET 
+	7-14
+	P0683 
+	Ref. Vel. Serial/USB 
+	-32768 a 32767 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-3
+	P0684 
+	Controle CO/DN/PB/Eth 
+	Ver opções em P0682 
+	
+
+	
+
+	ro 
+	READ, NET 
+	7-14
+	P0685 
+	Ref. Vel. CO/DN/PB/Eth 
+	-32768 a 32767 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-3
+	P0690 
+	Estado Lógico 2 
+	Bit 0 a 3 = Reservado 
+Bit 4 = Redução Fs 
+Bit 5 = Estado Dormir 
+Bit 6 = Rampa Desacel. Bit 7 = Rampa Acel. 
+Bit 8 = Rampa Congelada Bit 9 = Setpoint Ok 
+Bit 10 = Regulação Link CC Bit 11 = Config. em 50 Hz Bit 12 = Ride Through 
+Bit 13 = Flying Start 
+Bit 14 = Frenagem CC 
+Bit 15 = Pulsos PWM
+	
+
+	
+
+	ro 
+	READ, NET 
+	7-13
+	P0695 
+	Valor para DOx 
+	Bit 0 = DO1 
+Bit 1 = DO2 
+Bit 2 = DO3 
+Bit 3 = DO4 
+Bit 4 = DO5
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-7
+	P0696 
+	Valor 1 para AOx 
+	-32768 a 32767 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-7
+	P0697 
+	Valor 2 para AOx 
+	-32768 a 32767 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-7
+	P0698 
+	Valor 3 para AOx 
+	-32768 a 32767 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-7
+	P0700 
+	Protocolo CAN 
+	1 = CANopen 
+2 = DeviceNet
+	2 
+	
+
+	
+
+	NET 
+	17-3
+	P0701 
+	Endereço CAN 
+	0 a 127 
+	63 
+	
+
+	
+
+	NET 
+	17-3
+	
+
+
+
+0 
+0-12 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0702 
+	Taxa Comunicação CAN 
+	0 = 1 Mbps/Auto 
+1 = Reservado/Auto 
+2 = 500 Kbps 
+3 = 250 Kbps 
+4 = 125 Kbps 
+5 = 100 Kbps/Auto 
+6 = 50 Kbps/Auto 
+7 = 20 Kbps/Auto 
+8 = 10 Kbps/Auto
+	0 
+	
+
+	
+
+	NET 
+	17-3
+	P0703 
+	Reset de Bus Off 
+	0 = Manual 
+1 = Automático
+	0 
+	
+
+	
+
+	NET 
+	17-3
+	P0705 
+	Estado Controlador CAN 
+	0 = Inativo 
+1 = Auto-baud 
+2 = CAN Ativo 
+3 = Warning 
+4 = Error Passive 
+5 = Bus Off 
+6 = Não Alimentado
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-3
+	P0706 
+	Telegramas CAN RX 
+	0 a 65535 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0707 
+	Telegramas CAN TX 
+	0 a 65535 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0708 
+	Contador de Bus Off 
+	0 a 65535 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0709 
+	Mensagens CAN Perdidas 
+	0 a 65535 
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0710 
+	Instâncias I/O DeviceNet 
+	0 = ODVA Basic 2W 
+1 = ODVA Extend 2W 
+2 = Especif. Fab.2W 
+3 = Especif. Fab.3W 
+4 = Especif. Fab.4W 
+5 = Especif. Fab.5W 
+6 = Especif. Fab.6W
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0711 
+	Leitura #3 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0712 
+	Leitura #4 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0713 
+	Leitura #5 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0714 
+	Leitura #6 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0715 
+	Escrita #3 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0716 
+	Escrita #4 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0717 
+	Escrita #5 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0718 
+	Escrita #6 DeviceNet 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0719 
+	Estado Rede DeviceNet 
+	0 = Offline 
+1 = OnLine, Não Con. 
+2 = OnLine Conect. 
+3 = Conexão Expirou 
+4 = Falha Conexão 
+5 = Auto-Baud
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0720 
+	Estado Mestre DNet 
+	0 = Run 
+1 = Idle
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0721 
+	Estado Com. CANopen 
+	0 = Inativo 
+1 = Reservado 
+2 = Comunic. Hab. 
+3 = Ctrl. Erros Hab. 
+4 = Erro Guarding 
+5 = Erro Heartbeat
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0722 
+	Estado Nó CANopen 
+	0 = Inativo 
+1 = Inicialização 
+2 = Parado 
+3 = Operacional 
+4 = PréOperacional
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-4
+	P0740 
+	Estado Com. Profibus 
+	0 = Inativo 
+1 = Erro Acesso 
+2 = Offline 
+3 = Erro Config. 
+4 = Erro Parâm. 
+5 = Modo clear 
+6 = Online
+	
+
+	
+
+	ro 
+	NET 
+	17-4
+	
+
+
+
+0 
+CFW500 | 0-13 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0741 
+	Perfil Dados Profibus 
+	0 = PROFIdrive 
+1 = Fabricante
+	1 
+	
+
+	
+
+	NET 
+	17-4
+	P0742 
+	Leitura #3 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0743 
+	Leitura #4 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0744 
+	Leitura #5 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0745 
+	Leitura #6 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-4
+	P0746 
+	Leitura #7 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0747 
+	Leitura #8 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0750 
+	Escrita #3 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0751 
+	Escrita #4 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0752 
+	Escrita #5 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0753 
+	Escrita #6 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0754 
+	Escrita #7 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0755 
+	Escrita #8 Profibus 
+	0 a 1199 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0800 
+	Eth: Identificação do  
+Módulo
+	0 = Não Identificado  
+1 = Modbus TCP  
+2 = EtherNet/IP  
+3 = PROFINET IO
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-5
+	P0801 
+	Eth: Estado da  
+Comunicação
+	0 = Setup  
+1 = Init 
+2 = Wait Comm 
+3 = Idle  
+4 = Data Active 
+5 = Error  
+6 = Reservado 
+7 = Exception 
+8 = Erro de Acesso
+	
+
+	
+
+	ro 
+	READ, NET 
+	17-5
+	P0803 
+	Eth: Taxa de Comunicação 
+	0 = Auto  
+1 = 10 Mbit, Half Duplex  2 = 10 Mbit, Full Duplex  3 = 100 Mbit, Half Duplex  4 = 100 Mbit, Full Duplex 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0806 
+	Eth: Timeout Modbus TCP 
+	0,0 a 65,5 
+	0,0 
+	
+
+	
+
+	NET 
+	17-5
+	P0810 
+	Eth: Config Endereço IP 
+	0 = Parâmetros  
+1 = DHCP 
+	1 
+	
+
+	
+
+	NET 
+	17-5
+	P0811 
+	Eth: Endereço IP 1 
+	0 a 255 
+	192 
+	
+
+	
+
+	NET 
+	17-5
+	P0812 
+	Eth: Endereço IP 2 
+	0 a 255 
+	168 
+	
+
+	
+
+	NET 
+	17-5
+	P0813 
+	Eth: Endereço IP 3 
+	0 a 255 
+	0 
+	
+
+	
+
+	NET 
+	17-5
+	P0814 
+	Eth: Endereço IP 4 
+	0 a 255 
+	14 
+	
+
+	
+
+	NET 
+	17-5
+	P0815 
+	Eth: CIDR Sub-rede 
+	1 a 31 
+	24 
+	
+
+	
+
+	NET 
+	17-5
+	P0816 
+	Eth: Gateway 1 
+	0 a 255 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0817 
+	Eth: Gateway 2 
+	0 a 255 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0818 
+	Eth: Gateway 3 
+	0 a 255 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0819 
+	Eth: Gateway 4 
+	0 a 255 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0820 
+	Eth: Leitura #3 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0821 
+	Eth: Leitura #4 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0822 
+	Eth: Leitura #5 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0823 
+	Eth: Leitura #6 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0824 
+	Eth: Leitura #7 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0825 
+	Eth: Leitura #8 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0826 
+	Eth: Leitura #9 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0827 
+	Eth: Leitura #10 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0828 
+	Eth: Leitura #11 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0829 
+	Eth: Leitura #12 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	
+
+
+
+0 
+0-14 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P0830 
+	Eth: Leitura #13 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0831 
+	Eth: Leitura #14 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0835 
+	Eth: Escrita #3 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0836 
+	Eth: Escrita #4 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0837 
+	Eth: Escrita #5 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0838 
+	Eth: Escrita #6 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0839 
+	Eth: Escrita #7 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0840 
+	Eth: Escrita #8 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0841 
+	Eth: Escrita #9 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0842 
+	Eth: Escrita #10 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0843 
+	Eth: Escrita #11 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0844 
+	Eth: Escrita #12 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-6
+	P0845 
+	Eth: Escrita #13 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-7
+	P0846 
+	Eth: Escrita #14 
+	0 a 9999 
+	0 
+	
+
+	
+
+	NET 
+	17-7
+	P0849 
+	Eth: Atualiza Configuração 
+	0 = Operação Normal  1 = Atualiza Configuração
+	0 
+	
+
+	
+
+	NET 
+	17-7
+	P0918 
+	Endereço Profibus 
+	1 a 126 
+	1 
+	
+
+	
+
+	NET 
+	17-5
+	P0922 
+	Sel. Teleg. Profibus 
+	2 = Telegrama Padrão 1 3 = Telegrama 103 
+4 = Telegrama 104 
+5 = Telegrama 105 
+6 = Telegrama 106 
+7 = Telegrama 107 
+8 = Telegrama 108
+	2 
+	
+
+	
+
+	NET 
+	17-5
+	P0963 
+	Taxa Comunic. Profibus 
+	0 = 9,6 kbit/s 
+1 = 19,2 kbit/s 
+2 = 93,75 kbit/s 
+3 = 187,5 kbit/s 
+4 = 500 kbit/s 
+5 = Não Detectada 
+6 = 1500 kbit/s 
+7 = 3000 kbit/s 
+8 = 6000 kbit/s 
+9 = 12000 kbit/s 
+10 = Reservado 
+11 = 45,45 kbit/s
+	
+
+	
+
+	ro 
+	NET 
+	17-5
+	P0967 
+	Palavra de Controle 1 
+	Bit 0 = ON 
+Bit 1 = No Coast Stop 
+Bit 2 = No Quick Stop 
+Bit 3 = Enable Operation Bit 4 = Enable Ramp  
+Generator 
+Bit 5 = Reservado 
+Bit 6 = Enable Setpoint Bit 7 = Fault Acknowledge Bit 8 = JOG 1 ON 
+Bit 9 = Reservado 
+Bit 10 = Control By PLC Bit 11 a 15 = Reservado
+	
+
+	
+
+	ro 
+	NET 
+	17-5
+	P0968 
+	Palavra de Status 1 
+	Bit 0 = Ready To Switch On Bit 1 = Ready To Operate Bit 2 = Operation Enabled Bit 3 = Fault Present 
+Bit 4 = Coast Stop Not Active Bit 5 = Quick Stop Not Active Bit 6 = Switching On Inhibited Bit 7 = Warning Present 
+Bit 8 = Reservado 
+Bit 9 = Control Requested Bit 10 a 15 = Reservado
+	
+
+	
+
+	ro 
+	NET 
+	17-5
+	
+
+
+
+0 
+CFW500 | 0-15 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P1000 
+	Estado SoftPLC 
+	0 = Sem Aplicativo  
+1 = Instal. Aplic.  
+2 = Aplic. Incomp.  
+3 = Aplic. Parado  
+4 = Aplic. Rodando 
+	0 
+	
+
+	ro 
+	READ,  
+SPLC
+	18-1
+	P1001 
+	Comando para SoftPLC 
+	0 = Para Aplic. 
+1 = Executa Aplic. 
+2 = Exclui Aplic.
+	0 
+	
+
+	
+
+	SPLC 
+	18-1
+	P1002 
+	Tempo Ciclo de Scan 
+	0 a 65535 ms 
+	
+
+	
+
+	ro 
+	READ,  
+SPLC
+	18-1
+	P1010 
+	Parâmetro SoftPLC 1 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1011 
+	Parâmetro SoftPLC 2 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1012 
+	Parâmetro SoftPLC 3 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1013 
+	Parâmetro SoftPLC 4 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1014 
+	Parâmetro SoftPLC 5 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1015 
+	Parâmetro SoftPLC 6 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1016 
+	Parâmetro SoftPLC 7 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1017 
+	Parâmetro SoftPLC 8 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1018 
+	Parâmetro SoftPLC 9 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1019 
+	Parâmetro SoftPLC 10 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1020 
+	Parâmetro SoftPLC 11 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1021 
+	Parâmetro SoftPLC 12 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1022 
+	Parâmetro SoftPLC 13 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1023 
+	Parâmetro SoftPLC 14 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1024 
+	Parâmetro SoftPLC 15 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1025 
+	Parâmetro SoftPLC 16 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1026 
+	Parâmetro SoftPLC 17 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1027 
+	Parâmetro SoftPLC 18 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1028 
+	Parâmetro SoftPLC 19 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1029 
+	Parâmetro SoftPLC 20 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1030 
+	Parâmetro SoftPLC 21 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1031 
+	Parâmetro SoftPLC 22 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1032 
+	Parâmetro SoftPLC 23 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1033 
+	Parâmetro SoftPLC 24 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1034 
+	Parâmetro SoftPLC 25 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1035 
+	Parâmetro SoftPLC 26 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1036 
+	Parâmetro SoftPLC 27 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1037 
+	Parâmetro SoftPLC 28 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1038 
+	Parâmetro SoftPLC 29 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1039 
+	Parâmetro SoftPLC 30 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1040 
+	Parâmetro SoftPLC 31 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1041 
+	Parâmetro SoftPLC 32 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1042 
+	Parâmetro SoftPLC 33 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1043 
+	Parâmetro SoftPLC 34 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1044 
+	Parâmetro SoftPLC 35 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1045 
+	Parâmetro SoftPLC 36 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1046 
+	Parâmetro SoftPLC 37 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1047 
+	Parâmetro SoftPLC 38 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1048 
+	Parâmetro SoftPLC 39 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1049 
+	Parâmetro SoftPLC 40 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1050 
+	Parâmetro SoftPLC 41 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1051 
+	Parâmetro SoftPLC 42 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1052 
+	Parâmetro SoftPLC 43 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1053 
+	Parâmetro SoftPLC 44 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1054 
+	Parâmetro SoftPLC 45 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	
+
+
+
+0 
+0-16 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Parâm. 
+	Descrição 
+	Faixa de  
+Valores
+	Ajuste de  
+Fábrica
+	Ajuste do  Usuário 
+	Propr. 
+	Grupos 
+	Pág.
+	P1055 
+	Parâmetro SoftPLC 46 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1056 
+	Parâmetro SoftPLC 47 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1057 
+	Parâmetro SoftPLC 48 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1058 
+	Parâmetro SoftPLC 49 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	P1059 
+	Parâmetro SoftPLC 50 
+	-32768 a 32767 
+	0 
+	
+
+	
+
+	SPLC 
+	18-2
+	
+
+
+
+0 
+Notas: 
+ro = Parâmetro somente leitura. 
+V/f = Parâmetro disponível em modo V/f. 
+cfg = Parâmetro de configuração, somente pode ser alterado com o motor parado. VVW = Parâmetro disponível em modo VVW.
+CFW500 | 0-17  
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Falha / Alarme 
+	Descrição 
+	Causas Prováveis
+	A0046 
+Carga Alta no Motor
+	Alarme de sobrecarga no motor. 
+	④ Ajuste de P0156, P0157 e P0158 com valor baixo para o motor  utilizado. 
+④ Carga no eixo do motor alta.
+	A0047 
+Carga Alta nos IGBTs
+	Alarme de sobrecarga no módulo de  potência com IGBTs.
+	④ Corrente alta na saída do inversor.
+	A0050 
+Temperatura Elevada no  Módulo de Potência
+	Alarme de temperatura elevada medida  no sensor de temperatura (NTC) do  módulo de potência. 
+	④ Temperatura ambiente ao redor do inversor alta (>50 °C) e  corrente de saída elevada. 
+④ Ventilador bloqueado ou defeituoso. 
+④ Dissipador muito sujo, impedindo o fluxo de ar.
+	A0090 
+Alarme Externo
+	Alarme externo via DIx (opção "Sem  Alarme Externo" em P026x).
+	④ Fiação nas entradas DI1 a DI8 aberta ou com mau contato.
+	A0128 
+Timeout na Recepção  de Telegramas
+	Alarme que indica falha na comunicação  serial. Indica que o equipamento parou  de receber telegramas seriais válidos por  um período maior do que o programado  no P0314.
+	④ Verificar instalação da rede, cabo rompido ou falha/mal contato  nas conexões com a rede, aterramento. 
+④ Garantir que o mestre envie telegramas para o equipamento  sempre em um tempo menor que o programado no P0314. ④ Desabilitar esta função no P0314.
+	A0133  
+Sem Alimentação na  Interface CAN
+	Indica que a interface CAN não possui  alimentação entre os pinos 1 e 5 do  conector.
+	④ Medir se existe tensão dentro da faixa permitida entre os pinos  1 e 5 do conector da interface CAN. 
+④ Verificar se os cabos de alimentação não estão trocados ou  invertidos. 
+④ Verificar problemas de contato no cabo ou no conector da  interface CAN.
+	A0134 
+Bus Off
+	Detectado erro de bus off na interface  CAN.
+	④ Verificar curto-circuito nos cabos de transmissão do circuito CAN. ④ Verificar se os cabos não estão trocados ou invertidos. ④ Verificar se todos os dispositivos da rede utilizam a mesma taxa  de comunicação. 
+④ Verificar se resistores de terminação com valores corretos foram  colocados somente nos extremos do barramento principal. ④ Verificar se a instalação da rede CAN foi feita de maneira  adequada.
+	A0135 
+Node Guarding/  
+Heartbeat
+	Controle de erros da comunicação  CANopen detectou erro de comunicação  utilizando o mecanismo de guarding.
+	④ Verificar os tempos programados no mestre e no escravo para  troca de mensagens. Para evitar problemas devido a atrasos na  transmissão e diferenças na contagem dos tempos, recomenda se que os valores programados para detecção de erros pelo  escravo sejam múltiplos dos tempos programados para a troca  de mensagens no mestre. 
+④ Verificar se o mestre está enviando os telegramas de guarding  no tempo programado. 
+④ Verificar problemas na comunicação que possam ocasionar  perda de telegramas ou atrasos na transmissão.
+	A0136 
+Mestre em Idle
+	Alarme que indica que o mestre da rede  DeviceNet está em modo Idle.
+	④ Ajuste a chave que comanda o modo de operação do mestre  para execução (Run) ou então o bit correspondente na palavra  de configuração do software do mestre. Em caso de dúvidas,  consulte a documentação do mestre em uso.
+	A0137 
+Timeout na Conexão  DeviceNet
+	Alarme que indica que uma ou mais  conexões I/O DeviceNet expiraram.
+	④ Verificar o estado do mestre da rede. 
+④ Verificar instalação da rede, cabo rompido ou falha/mal contato  nas conexões com a rede.
+	A0138 
+Interface Profibus DP  em Modo Clear
+	Indica que o inversor recebeu o comando  do mestre da rede Profibus DP para  entrar em modo clear.
+	④ Verifique o estado do mestre da rede, certificando que este se  encontra em modo de execução (RUN).
+	A0139 
+Interface Profibus DP  Offline
+	Indica interrupção na comunicação  entre o mestre da rede Profibus DP e  o inversor. A interface de comunicação  Profibus DP foi para o estado offline.
+	④ Verificar se o mestre da rede está configurado corretamente e  operando normalmente. 
+④ Verificar curto-circuito ou mau contato nos cabos de  comunicação. 
+④ Verificar se os cabos não estão trocados ou invertidos. ④ Verificar se resistores de terminação com valores corretos foram  colocados somente nos extremos do barramento principal. ④ Verificar a instalação da rede de maneira geral – passagem dos  cabos, aterramento.
+	A0140 
+Erro de Acesso ao  
+Módulo Profibus DP
+	Indica erro no acesso aos dados do  módulo de comunicação Profibus DP.
+	④ Verificar se o módulo Profibus DP está corretamente encaixado. ④ Erros de hardware decorrentes, por exemplo, do manuseio  ou instalação incorreta do acessório podem causar este  erro. Se possível realizar testes substituindo o acessório de  comunicação.
+	A0163 
+Falha Sinal AIx 4..20 mA
+	Sinal da entrada analógica AIx em 4 a 20 mA  ou 20 a 4 mA está abaixo de 2 mA.
+	④ Sinal de corrente na entrada analógica AIx interrompido ou nulo. ④ Erro na parametrização da entrada analógica Aix.
+	
+
+
+
+0 
+0-18 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Falha / Alarme 
+	Descrição 
+	Causas Prováveis
+	A0700 
+Falha na Comunicação  com HMI Remota
+	Sem comunicação com HMI remota,  porém não há comando ou referência de  velocidade para esta fonte. 
+	④ Verifique se a interface de comunicação com HMI está  configurada corretamente no parâmetro P0312. 
+④ Cabo da HMI desconectado.
+	A0702 
+Inversor Desabilitado
+	Ocorre quando um bloco de movimento  da SoftPLC (Bloco REF) é ativo e o  comando de Habilita Geral do drive não  está ativo.
+	④ Verificar se o comando de Habilita Geral do drive está ativo.
+	A0704 
+Dois Movim. Habilitados
+	Ocorre quando 2 ou mais blocos de movimento da SoftPLC (Bloco REF)  estão habilitados ao mesmo tempo.
+	④ Verificar lógica do programa do usuário.
+	A0706 
+Refer. não Progr. SPLC
+	Ocorre quando um bloco de movimento  da SoftPLC é habilitado e a referência de  velocidade não está programada para a  SoftPLC.
+	④ Verificar a programação das referências no modo Local e/ou  Remoto (P0221 e P0222).
+	A0710 
+Progr. SPLC maior que  8 KB
+	Ocorre quando tenta-se fazer o download  de Prog. SoftPLC muito extenso (maior  que 8 KB) para o inversor.
+	④ Extensão do Prog. SoftPLC excedeu 8 KBytes.
+	F0021 
+Subtensão no  
+Barramento CC
+	Falha de subtensão no circuito  
+intermediário.
+	④ Tensão de alimentação errada, confira se os dados na etiqueta  do inversor estão de acordo com a rede de alimentação e o  parâmetro P0296. 
+④ Tensão de alimentação muito baixa, ocasionando tensão no  barramento CC menor que o valor mínimo (em P0004): Ud < 200 Vcc em 200-240 Vac (P0296 = 0). 
+Ud < 360 Vcc em 380-480 Vac (P0296 = 1). 
+Ud < 500 Vcc em 500-600 Vac (P0296 = 2). 
+④ Falta de fase na entrada. 
+④ Falha no circuito de pré-carga. 
+	F0022 
+Sobretensão no  
+Barramento CC
+	Falha de sobretensão no circuito  intermediário.
+	④ Tensão de alimentação errada, confira se os dados na etiqueta  do inversor estão de acordo com a rede de alimentação e o  parâmetro P0296. 
+④ Tensão de alimentação muito alta, resultando em uma tensão no  barramento CC maior que o valor máximo (em P0004): Ud > 410 Vcc em 200-240 Vac (P0296 = 0). 
+Ud > 810 Vcc em 380-480 Vac (P0296 = 1). 
+Ud > 1000 Vcc em 500-600 Vac (P0296 = 2). 
+④ Inercia de carga muito alta ou rampa de desaceleração muito  rápida. 
+④ Ajuste de P0151 ou P0153 muito alto. 
+	F0031 
+Falha de Comunicação  com Módulo Plug-in
+	Controle principal não consegue  estabelecer o link de comunicação com  o módulo Plug-in.
+	④ Módulo Plug-in danificado. 
+④ Módulo Plug-in mal conectado. 
+④ Problema de identificação do módulo Plug-in, consulte P0027.
+	F0033 
+Falha no Autoajuste do  VVW
+	Falha no ajuste da resistência do estator  P0409.
+	④ Valor da resistência estatórica em P0409 não está de acordo  com a potência do inversor. 
+④ Erro nas conexões do motor, desligue a alimentação e verifique  a caixa de ligações do motor e as conexões com os bornes  do motor. 
+④ Potência do motor muito pequena ou muito grande em relação  ao inversor.
+	F0048 
+Sobrecarga nos IGBTs
+	Falha de sobrecarga no módulo de  potência com IGBTs (3 s em 1.5xInom).
+	④ Corrente alta na saída do inversor (>2xInom).
+	F0051 
+Sobretemperatura nos  IGBTs
+	Falha de sobretemperatura medida no  sensor de temperatura (NTC) do módulo  de potência. 
+	④ Temperatura ambiente ao redor do inversor alta (>50 °C) e  corrente de saída elevada. 
+④ Ventilador bloqueado ou defeituoso. 
+④ Dissipador muito sujo, impedindo o fluxo de ar.
+	F0070 
+Sobrecorrente/Curto circuito
+	Sobrecorrente ou curto-circuito na saída,  barramento CC ou resistor de frenagem.
+	④ Curto-circuito entre duas fases do motor. 
+④ Curto-circuito dos cabos de ligação do resistor de frenagem  reostática. 
+④ Módulo de IGBTs em curto ou danificado. 
+④ Partida com rampa de aceleração muito curta. 
+④ Partida com motor girando sem a função Flying Start. 
+	F0072 
+Sobrecarga no Motor
+	Falha de Sobrecarga no motor (60 s em  1,5xInom).
+	④ Ajuste de P0156, P0157 e P0158 muito baixo em relação à  corrente de operação do motor. 
+④ Carga no eixo do motor muito alta.
+	F0074 
+Falta à Terra
+	Falha de sobrecorrente para o terra. Obs.: 
+Pode ser desabilitada ajustando  
+P0343 = 0.
+	④ Curto para o terra em uma ou mais fases de saída. ④ Capacitância dos cabos do motor elevada ocasionando picos  de corrente na saída.
+	
+
+
+
+0 
+CFW500 | 0-19 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Falha / Alarme 
+	Descrição 
+	Causas Prováveis
+	F0076 
+Erro de Conexão no  Motor
+	Esta falha indica que o motor está com  falta de fase, desconectado ou com  correntes de fase desequilibradas.
+	④ Erro de ligação ou conexões do motor. 
+④ Perda de conexão do motor com o drive ou fio partido.
+	F0078 
+Sobretemper. Motor
+	Falha de sobretemperatura medida  no sensor de temperatura (Triplo PTC)  do motor via entrada analógica AIx ou  entrada digital DIx. 
+	④ Carga no eixo do motor muito alta. 
+④ Ciclo de carga muito elevado (grande número de partidas e  paradas por minuto). 
+④ Temperatura ambiente alta ao redor do motor. 
+④ Mau contato ou curto-circuito (3k9 < RPTC < 0k1). ④ Termistor do motor não instalado. 
+④ Eixo do motor travado.
+	F0080 
+Falha na CPU (Watchdog)
+	Falha relativa ao algoritmo de supervisão  da CPU principal do inversor.
+	④ Ruído elétrico. 
+④ Falha no firmware do inversor.
+	F0084 
+Falha de Autodiagnose
+	Falha relativa ao algoritmo de  
+identificação automática do hardware do  inversor e módulo Plug-in.
+	④ Mau contato nas conexões entre o controle principal e o módulo  de potência. 
+④ Hardware não compatível com a versão de firmware. ④ Defeito nos circuitos internos do inversor.
+	F0091 
+Falha Externa
+	Falha externa via DIx (opção "Sem Falha  Externa" em P026x).
+	④ Fiação nas entradas DI1 a DI8 aberta ou com mau contato.
+	F0151 
+Versão de Sw Princ.  Incomp.
+	Versão do Firmware principal difere da  versão do firmware no Módulo Plug-in.
+	④ Memória virgem no módulo Plug-in (1ª energização). ④ Falha no backup de dados durante a desenergização (power-down). 
+	F0182 
+Falha Reali. de Pulsos
+	Falha no circuito de realimentação de  pulsos da tensão de saída. 
+Obs.: pode ser desligada em P0397.
+	④ Falha na identificação de hardware, compare P0295 e P0296  com a etiqueta de identificação do inversor. 
+④ Falha no circuito interno de realimentação de pulso do inversor. 
+	F0228 
+Timeout na Recepção  de Telegramas
+	Indica falha na comunicação serial.  Indica que o equipamento parou de  receber telegramas seriais válidos por  um período maior do que o programado  no P0314.
+	④ Verificar instalação da rede, cabo rompido ou falha/mal contato  nas conexões com a rede, aterramento. 
+④ Garantir que o mestre envie telegramas para o equipamento  sempre em um tempo menor que o programado no P0314. ④ Desabilitar esta função no P0314.
+	F0233  
+Sem Alimentação na  Interface CAN
+	Indica que a interface CAN não possui  alimentação entre os pinos 1 e 5 do  conector.
+	④ Medir se existe tensão dentro da faixa permitida entre os pinos  1 e 5 do conector da interface CAN. 
+④ Verificar se os cabos de alimentação não estão trocados ou  invertidos. 
+④ Verificar problemas de contato no cabo ou no conector da  interface CAN.
+	F0234 
+Bus Off
+	Detectado erro de bus off na interface  CAN.
+	④ Verificar curto-circuito nos cabos de transmissão do circuito  CAN. 
+④ Verificar se os cabos não estão trocados ou invertidos. ④ Verificar se todos os dispositivos da rede utilizam a mesma taxa  de comunicação. 
+④ Verificar se os resistores de terminação estão com valores  corretos, e foram colocados somente nos extremos do  barramento principal. 
+④ Verificar se a instalação da rede CAN foi feita de maneira  adequada.
+	F0235 
+Node Guarding/  
+Heartbeat
+	Controle de erros da comunicação  CANopen detectou erro de comunicação  utilizando o mecanismo de guarding.
+	④ Verificar os tempos programados no mestre e no escravo para  troca de mensagens. Para evitar problemas devido a atrasos na  transmissão e diferenças na contagem dos tempos, recomenda se que os valores programados para detecção de erros pelo  escravo sejam múltiplos dos tempos programados para a troca  de mensagens no mestre. 
+④ Verificar se o mestre está enviando os telegramas de guarding  no tempo programado. 
+④ Verificar problemas na comunicação que possam ocasionar  perda de telegramas ou atrasos na transmissão.
+	F0236 
+Mestre em Idle
+	Esta falha indica que o mestre da rede  DeviceNet está em modo Idle.
+	④ Ajuste a chave que comanda o modo de operação do mestre  para execução (run) ou então o bit correspondente na palavra  de configuração do software do mestre. Em caso de dúvidas,  consulte a documentação do mestre em uso.
+	F0237 
+Timeout na Conexão  DeviceNet
+	Esta falha indica que uma ou mais  conexões I/O DeviceNet expiraram.
+	④ Verificar o estado do mestre da rede. 
+④ Verificar instalação da rede, cabo rompido ou falha/mal contato  nas conexões com a rede.
+	F0238 
+Interface Profibus DP  em Modo Clear
+	Indica que o inversor recebeu o comando  do mestre da rede Profibus DP para  entrar em modo clear.
+	④ Verifique o estado do mestre da rede, certificando que este se  encontra em modo de execução (RUN).
+	
+
+
+
+0 
+0-20 | CFW500
+Referência Rápida dos Parâmetros, Alarmes e Falhas 
+Falha / Alarme 
+	Descrição 
+	Causas Prováveis
+	F0239 
+Interface Profibus DP  Offline
+	Indica interrupção na comunicação  entre o mestre da rede Profibus DP e  o inversor. A interface de comunicação  Profibus DP foi para o estado offline.
+	④ Verificar se o mestre da rede está configurado corretamente e  operando normalmente. 
+④ Verificar curto-circuito ou mau contato nos cabos de  comunicação. 
+④ Verificar se os cabos não estão trocados ou invertidos. ④ Verificar se resistores de terminação com valores corretos foram  colocados somente nos extremos do barramento principal. ④ Verificar a instalação da rede de maneira geral – passagem dos  cabos, aterramento.
+	F0240 
+Falha de Acesso ao  Módulo Profibus DP
+	Indica falha no acesso aos dados do  módulo de comunicação Profibus DP.
+	④ Verificar se o módulo Profibus DP está corretamente encaixado. ④ Erros de hardware decorrentes, por exemplo, do manuseio  ou instalação incorreta do acessório podem causar esta  falha. Se possível realizar testes substituindo o acessório de  comunicação.
+	F0700 
+Falha na Comunicação  com HMI Remota
+	Sem comunicação com HMI remota,  porém há comando ou referência de  velocidade para esta fonte. 
+	④ Verifique se a interface de comunicação com HMI está  configurada corretamente no parâmetro P0312. 
+④ Cabo da HMI desconectado.
+	
+
+
+
+0 
+CFW500 | 0-21 
+Referência Rápida dos Parâmetros, Alarmes e Falhas 0 
+0-22 | CFW500
+Instruções de Segurança 
+1 INSTRUÇÕES DE SEGURANÇA 
+1 
+Este manual contém as informações necessárias para a programação correta do inversor de frequência CFW500. 1 
+Ele foi desenvolvido para ser utilizado por pessoas com treinamento ou qualificação técnica adequados para  operar este tipo de equipamento. Estas pessoas devem seguir as instruções de segurança definidas por normas  locais. Não seguir as instruções de segurança pode resultar em risco de vida e/ou danos no equipamento. 
+1.1 AVISOS DE SEGURANÇA NO MANUAL 
+PERIGO! 
+Os procedimentos recomendados neste aviso têm como objetivo proteger o usuário contra morte,  ferimentos graves e danos materiais consideráveis.
+	
+
+
+
+ATENÇÃO! 
+Os procedimentos recomendados neste aviso têm como objetivo evitar danos materiais.
+	
+
+
+
+NOTA! 
+O texto objetiva fornecer informações importantes para o correto entendimento e bom funcionamento  do produto.
+	
+
+
+
+1.2 AVISOS DE SEGURANÇA NO PRODUTO 
+Os seguintes símbolos estão afixados ao produto, servindo como aviso de segurança: 
+Tensões elevadas presentes. 
+Componentes sensíveis a descarga eletrostática.    
+Não tocá-los. 
+Conexão obrigatória ao terra de proteção (PE). 
+  
+Conexão da blindagem ao terra. 
+  
+Superfície quente.
+CFW500 | 1-1  
+Instruções de Segurança 
+1.3 RECOMENDAÇÕES PRELIMINARES 
+PERIGO! 
+Somente pessoas com qualificação adequada e familiaridade com o inversor CFW500 e equipamentos  associados devem planejar ou implementar a instalação, partida, operação e manutenção deste  equipamento. 
+Estas pessoas devem seguir todas as instruções de segurança contidas neste manual e/ou definidas  por normas locais. 
+Não seguir essas instruções pode resultar em risco de vida e/ou danos no equipamento.
+	
+
+
+
+1 
+NOTA! 
+Para os propósitos deste manual, pessoas qualificadas são aquelas treinadas de forma a estarem  aptas para: 
+1. Instalar, aterrar, energizar e operar o CFW500 de acordo com este manual e os procedimentos  legais de segurança vigentes. 
+2. Utilizar os equipamentos de proteção de acordo com as normas estabelecidas. 
+3. Prestar serviços de primeiro socorros.
+	
+
+
+
+PERIGO! 
+Sempre desconecte a alimentação geral antes de tocar em qualquer componente elétrico associado  ao inversor.  
+Muitos componentes podem permanecer carregados com altas tensões e/ou em movimento  (ventiladores), mesmo depois que a entrada de alimentação CA for desconectada ou desligada.  Aguarde pelo menos 10 minutos para garantir a total descarga dos capacitores. Sempre conecte a  carcaça do equipamento ao terra de proteção (PE) no ponto adequado para isto.
+	
+
+
+
+ATENÇÃO! 
+Os cartões eletrônicos possuem componentes sensíveis a descargas eletrostáticas. Não toque  diretamente sobre componentes ou conectores. Caso necessário, toque antes na carcaça metálica  aterrada ou utilize pulseira de aterramento adequada.
+	
+
+
+
+Não execute nenhum ensaio de tensão aplicada no inversor! 
+Caso seja necessário consulte a WEG.
+NOTA! 
+Inversores de frequência podem interferir em outros equipamentos eletrônicos. Siga os cuidados  recomendados no Capítulo 3 Instalação e Conexão, do manual do usuário, para minimizar estes efeitos. Leia completamente o manual do usuário antes de instalar ou operar este inversor.
+	
+
+
+
+1-2 | CFW500 
+Informações Gerais 
+2 INFORMAÇÕES GERAIS 
+2.1 SOBRE O MANUAL 
+Este manual apresenta informações necessárias para a configuração de todas as funções e parâmetros do  2 
+inversor de frequência CFW500. Este manual deve ser utilizado em conjunto com o manual do usuário CFW500.  2 
+O texto objetiva fornecer informações adicionais com o propósito de facilitar a utilização e programação do  CFW500, em determinadas aplicações. 
+2.2 TERMINOLOGIA E DEFINIÇÕES 
+2.2.1 Termos e Definições Utilizados 
+Inom: corrente nominal do Inversor por P0295.  
+Regime de Sobrecarga: no CFW500 não há distinção no regime de operação entre “Leve - Normal Duty” (ND)  e “Pesada - Heavy Duty” (HD). Assim, o regime de sobrecarga adotado para o CFW500 se equivale ao padrão  HD, ou seja, a corrente de sobrecarga máxima suportada é 1.5 x Inom durante 1 minuto de operação continua. 
+Retificador: circuito de entrada dos inversores que transforma a tensão CA de entrada em CC. Formado por  diodos de potência. 
+IGBT: do inglês “Insulated Gate Bipolar Transistor”; componente básico da ponte inversora de saída. Funciona  como chave eletrônica nos modos saturado (chave fechada) e cortado (chave aberta). 
+Barramento CC (Link CC): circuito intermediário do inversor; tensão em corrente contínua obtida pela retificação  da tensão alternada de alimentação ou através de fonte externa; alimenta a ponte inversora de saída com IGBTs. 
+Circuito de Pré-Carga: carrega os capacitores do barramento CC com corrente limitada, evitando picos de  correntes maiores na energização do inversor. 
+IGBT de Frenagem: funciona como chave para ligamento do resistor de frenagem. É comandado pelo nível do  barramento CC. 
+PTC: resistor cujo valor da resistência em ohms aumenta proporcionalmente com a temperatura; utilizado como  sensor de temperatura em motores. 
+NTC: resistor cujo valor da resistência em ohms diminui proporcionalmente com o aumento da temperatura;  utilizado como sensor de temperatura em módulos de potência. 
+HMI: “Interface Homem-Máquina”; dispositivo que permite o controle do motor, visualização e alteração dos  parâmetros do inversor. Apresenta teclas para comando do motor, teclas de navegação e display LCD gráfico. 
+PE: terra de proteção; do inglês “Protective Earth”. 
+PWM: do inglês “Pulse Width Modulation”; modulação por largura de pulso; tensão pulsada que alimenta o motor. 
+Frequência de Chaveamento: frequência de comutação dos IGBTs da ponte inversora, dada normalmente  em kHz.  
+Habilita Geral: quando ativada, acelera o motor por rampa de aceleração e Gira/Para = Gira. Quando desativada,  os pulsos PWM serão bloqueados imediatamente. Pode ser comandada por entrada digital programada para  esta função ou via serial. 
+Gira/Para: função do inversor quando ativada (gira), acelera o motor por rampa de aceleração até a velocidade  de referência e, quando desativada (para) desacelera o motor por rampa de desaceleração até parar. Pode ser  comandada por entrada digital programada para esta função ou via serial. 
+CFW500 | 2-1  
+Informações Gerais 
+Dissipador: peça de metal projetada para dissipar o calor gerado por semicondutores de potência. Amp, A: ampères. 
+°C: graus celsius.  
+CA: corrente alternada. 
+2 
+CC: corrente contínua. 
+CV: cavalo-vapor = 736 Watts (unidade de medida de potência, normalmente usada para indicar potência  mecânica de motores elétricos). 
+hp: horse power = 746 Watts (unidade de medida de potência, normalmente usada para indicar potência mecânica  de motores elétricos). 
+Fmin: frequência ou velocidade mínima (P0133). 
+Fmáx: frequência ou velocidade máxima (P0134). 
+DIx: entrada digital "x". 
+AIx: entrada analógica "x". 
+AOx: saída analógica "x". 
+DOx: saída digital "x". 
+Io: corrente de saída. 
+Iu: corrente na fase u (RMS). 
+Iv: corrente na fase v (RMS). 
+Iw: corrente na fase w (RMS). 
+Ia: corrente ativa de saída (RMS). 
+Hz: hertz. 
+kHz: quilohertz = 1000 hertz. 
+mA: miliamper = 0,001 ampères. 
+min: minuto. 
+ms: milisegundo = 0,001 segundos.  
+Nm: newton metro; unidade de medida de torque.  
+rms: do inglês “root mean square”, valor eficaz. 
+rpm: rotações por minuto; unidade de medida de rotação. 
+s: segundo. 
+V: volts. 
+Ω: ohms. 
+CO/DN/PB/Eth: Interface CANopen, DeviceNet, ProfibusDP ou Ethernet.
+2-2 | CFW500 
+Informações Gerais 
+2.2.2 Representação Numérica 
+Os números decimais são representados através de dígitos sem sufixo. Números hexadecimais são representados  com a letra ’h’ depois do número. 
+2 
+2.2.3 Símbolos para Descrição das Propriedades dos Parâmetros 
+2 
+ro Parâmetro somente de leitura, do inglês "read only". 
+cfg Parâmetro somente alterado com o motor parado. 
+V/f Parâmetro visível na HMI somente no modo V/f: P0202 = 0. 
+VVW Parâmetro visível na HMI somente no modo VVW: P0202 = 5.
+CFW500 | 2-3  
+Informações Gerais 
+2
+2-4 | CFW500 
+Sobre o CFW500 
+3 SOBRE O CFW500 
+O inversor de frequência CFW500 é um produto de alta performance que permite o controle de velocidade e  torque de motores de indução trifásicos. Este produto proporciona ao usuário as opções de controle vetorial  (VVW) ou escalar (V/f), ambos programáveis de acordo com a aplicação.  
+No modo vetorial a operação é otimizada para o motor em uso, obtendo-se um melhor desempenho em termos  de torque de regulação de velocidade. A função “Autoajuste”, disponível para o controle vetorial, permite ajuste  automático dos reguladores e parâmetros de controle, a partir da identificação (também automática) dos  parâmetros do motor.  
+3 
+O modo escalar (V/f) é recomendado para aplicações mais simples como o acionamento da maioria das bombas  3 
+e ventiladores. Nestes casos é possível reduzir as perdas no motor e no inversor ajustando a curva V/f através  dos parâmetros por aproximação de curva quadrática da relação V/f, o que resulta em economia de energia. O  modo V/f também é utilizado quando mais de um motor é acionado por um inversor simultaneamente (aplicações  multimotores). 
+O inversor de frequência CFW500 também possui funções de CLP (Controlador Lógico Programável) através do  recurso SoftPLC (integrado). Para mais detalhes referentes a programação dessas funções no CFW500, consulte  o manual de comunicação SoftPLC do CFW500. 
+Os principais componentes do CFW500 podem ser visualizados no blocodiagrama da Figura 3.1 na página  3-2 e no desenho da Figura 3.2 na página 3-3. O projeto mecânico foi idealizado para facilitar a conexão e  manutenção, bem como garantir a segurança do produto. 
+Desenvolvido para atender as principais exigências tecnológicas do mercado, o CFW500 tem uma interface  modular plug-in que se adéqua a aplicação. Conforme mostra o Item 4 da Figura 3.2 na página 3-3, o módulo  plug-in permite que o CFW500 atenda tanto as aplicações mais simples, quanto as aplicações com interfaces  de alto desempenho. 
+Todos os modelos de interface do CFW500 possuem comunicação em meio físico RS-485 com Modbus RTU  e recurso para transferência de dados via cartão de memória.
+CFW500 | 3-1  
+Sobre o CFW500 
+① = Conexão barramento CC  
+② ② 
+ = Conexão para resistor de  frenagem  
+① ① DC+ BR DC 
+3 
+Rede de  
+alimentação 
+R/L1/L S/L2/N T/L3 
+PE 
+Filtro RFI  interno  
+(disponível  nos  
+inversores  CFW500...C...) 
+Retificador  trifásico /  monofásico 
+Pré carga 
+Banco capacitores link CC 
+IGBT de frenagem (disponível  
+nos inversores CFW500...DB...) 
+Inversor com    
+transistores IGBT  e realimentação  de corrente 
+Realimentação  de tensão  
+U/T1 V/T2 W/T3 
+PE 
+Motor 
+POTÊNCIA  
+CONTROLE 
+HMI  
+Fontes para eletrônica e interfaces entre potência e controle 
+CPU 
+(remota)③   
+  
+HMI③ 
+CONTROLE 
+PLUG-IN PADRÃO 
+32 bits  "RISC" 
+EEPROM  (memória) 
+RS-485 PC Interfaces  
+Fonte 10 V 
+Fonte 24 V Saída 
+Software WLP  SUPERDRIVE (*) MODBUS 
+Entradas  
+digitais 
+(DI1 a DI4) (*) Entrada  
+analógica 
+(AI1) (*) 
+(RS-232,  
+RS-485  
+ou USB) 
+③ = Interface hómem-máquina 
+Cartão  
+plug-in  
+do  
+usuário 
+Cartão de memória  
+(MMF) 
+Acessório 
+analógica 
+(AO1) (*) 
+Saída digital  DO1 (RL1)  
+Saída digital  DO2 (TR) (*) 
+(*) O número de entradas e saídas, analógicas e digitais pode sofrer variações de acordo com o plug-in utilizado. Para maiores informações, consulte o guia  de instalação, configuração e operação do opcional com módulo plug-in ultilizado. 
+Figura 3.1: Blocodiagrama do CFW500
+3-2 | CFW500 
+Sobre o CFW500 
+1   
+2 
+3 
+6 
+5 
+  
+
+  
+
+3 3 
+4 
+1 – Suporte de fixação (para montagem em superfície) 2 – Suporte de fixação (para montagem em trilho DIN) 3 – Ventilador com suporte de fixação 
+4 – Módulo plug-in 
+5 – HMI 
+6 – Tampa frontal 
+Figura 3.2: Principais componentes do CFW500
+CFW500 | 3-3  
+Sobre o CFW500 
+3
+3-4 | CFW500 
+HMI e Programação Básica 
+4 HMI E PROGRAMAÇÃO BÁSICA 
+4.1 USO DA HMI PARA OPERAÇÃO DO INVERSOR 
+Através da HMI é possível a visualização e o ajuste de todos os parâmetros. A HMI apresenta dois modos de  operação: monitoração e parametrização. As funções das teclas e os campos do display ativos na HMI variam  de acordo com o modo de operação. O modo de parametrização é constituído de três níveis. 
+- Quando no modo parametrização,  nível 1: pressione esta tecla para  retornar ao modo de monitoração. 
+- Quando no modo parametrização,  nível 2: pressione esta tecla  para retornar ao nível 1 do modo  parametrização. 
+- Quando no modo parametrização,  nível 3: pressione esta tecla para  cancelar o novo valor (não salva o  
+novo valor) e irá retornar ao nível 2 do modo parametrização. 
+- Quando no modo monitoração:  pressione a tecla para aumentar a  velocidade. 
+- Quando no modo parametrização,  nível 1: pressione esta tecla para ir  ao grupo anterior. 
+- Quando no modo parametrização,  nível 2: pressione esta tecla para ir  ao próximo parâmetro. 
+- Quando no modo parametrização,  nível 3: pressione esta tecla  para incrementar conteúdo do  parâmetro. 
+Pressione esta tecla para definir a  direção de rotação do motor. Ativa quando: 
+P0223 = 2 ou 3 em LOC e/ou P0226 = 2 ou 3 em REM 
+Pressione esta tecla para alterar  entre o modo LOCAL e o REMOTO. Ativa quando: 
+P0220 = 2 ou 3 
+- Quando no modo monitoração: pressione esta  tecla para entrar no modo parametrização. 
+- Quando no modo parametrização, nível 1: 
+pressione esta tecla para selecionar o grupo de  parâmetros desejado – exibe os parâmetros do  
+4 
+grupo selecionado. 
+- Quando no modo parametrização, nível 2: 
+pressione esta tecla para exibir o parâmetro  
+– exibe o conteúdo do parâmetro para a  
+modificação. 
+- Quando no modo parametrização, nível 3: 
+pressione esta tecla para salvar o novo conteúdo  do parâmetro – retorna para o nível 2 do modo  
+parametrização.   
+- Quando no modo monitoração: pressione esta  tecla para diminuir a velocidade. 
+- Quando no modo parametrização, nível 1: 
+pressione esta tecla para ir ao próximo grupo. 
+- Quando no modo parametrização, nível 2: 
+pressione esta tecla para ir ao parâmetro anterior. - Quando no modo parametrização, nível 3: 
+pressione esta tecla para decrementar conteúdo  do parâmetro. 
+Pressione esta tecla para acelerar o motor com  
+tempo determinado pela rampa de aceleração. 
+Ativa quando: 
+P0224 = 0 em LOC ou 
+P0227 = 0 em REM 
+Pressione esta tecla para desacelerar o motor  
+com tempo determinado pela rampa de  
+desaceleração. 
+Ativa quando:  
+P0224 = 0 em LOC ou 
+P0227 = 0 em REM 
+Pressione esta tecla para acelerar o motor até a velocidade ajustada em P0122 pelo tempo  
+determinado pela rampa de aceleração. A velocidade do motor é mantida enquanto a tecla é  
+pressionada. Quando a tecla é liberada, o motor é desacelerado durante o tempo determinado  
+pela rampa de desaceleração, até a sua parada. 
+Esta função está ativa quando todas as condições abaixo forem satisfeitas: 
+1. Gira/Para = Para. 
+2. Habilita Geral = Ativo. 
+3. P0225 = 1 em LOC e/ou P0228 = 1 em REM. 
+Figura 4.1: Teclas da HMI 
+4.2 INDICAÇÕES NO DISPLAY DA HMI 
+As informações mostradas no display LCD da HMI estão divididas em seis campos: menu, estado, mostrador  secundário, unidade, mostrador principal e barra gráfica. Estes campos estão definidos na Figura 4.2 na página  4-2. O conjunto de mostradores: principal e secundário permitem alternar o foco para rolagem do número do  parâmetro ou valor do parâmetro de acordo com os níveis 2 e 3 do modo parametrização, respectivamente.
+CFW500 | 4-1  
+HMI e Programação Básica 
+Menu (para seleção  dos grupos de  
+parâmetros) –  
+somente um grupo  de parâmetros é  mostrado cada vez. 
+Estado do inversor 
+Mostrador secundário   
+Unidade de medida  
+(refere-se ao valor do  
+mostrador principal) 
+Barra para  
+monitoração  
+Mostrador principal 
+4 
+Figura 4.2: Áreas do display 
+Grupos de parâmetros disponíveis no campo Menu: 
+④ PARAM: todos os parâmetros. 
+④ READ: somente os parâmetros de leitura. 
+de variável 
+④ MODIF: somente parâmetros alterados em relação ao padrão de fábrica. 
+④ BASIC: parâmetros para aplicação básica. 
+④ MOTOR: parâmetros relacionados ao controle do motor. 
+④ I/O: parâmetros relacionados a entradas e saídas, digitais e analógicas. 
+④ NET: parâmetros relacionados as redes de comunicação. 
+④ HMI: parâmetros para configuração da HMI. 
+④ SPLC: parâmetros relacionados à SoftPLC. 
+④ STARTUP: parâmetros para Start-up orientado. 
+Estados do inversor: 
+④ LOC: fonte de comandos ou referências Local. 
+④ REM: fonte de comandos ou referências Remoto. 
+④ : sentido de giro através das setas. 
+④ CONF: estado CONFIG ativo. 
+④ SUB: subtensão. 
+④ RUN: execução. 
+4.3 MODOS DE OPERAÇÃO DA HMI 
+O modo de monitoração permite que o usuário visualize até três variáveis de interesse no mostrador principal,  secundário e barra gráfica. Tais áreas do display são definidas na Figura 4.2 na página 4-2. 
+O modo de parametrização é constituído de três níveis:  
+O nível 1 permite que o usuário selecione um dos itens do menu para direcionar a navegação nos parâmetros. 
+4-2 | CFW500 
+HMI e Programação Básica 
+O nível 2 permite a navegação entre os parâmetros do grupo selecionado pelo nível 1.  
+O nível 3, por sua vez, permite a edição do parâmetro selecionado no nível 2. Ao final deste nível o valor modificado  é salvo ou não se a tecla ENTER ou ESC é pressionada, respectivamente.  
+A Figura 4.3 na página 4-3 ilustra a navegação básica sobre os modos de operação da HMI. 
+Modo Monitoração
+	
+
+	④ É o estado inicial da HMI após a energização e da tela de inicialização,  com valores padrão de fábrica. 
+④ O campo menu não está ativo nesse modo. 
+④ Os campos mostrador principal, mostrador secundário da HMI e a barra  para monitoração indicam os valores de três parâmetros pré-definidos  por P0205, P0206 e P0207. 
+④ Partindo do modo de monitoração, ao pressionar a tecla ENTER/MENU comuta-se para o modo parametrização.
+	  
+
+	Monitoração 
+ENTER 
+BACK 
+MENU 
+ESC 
+Parametrização  
+Nível 1 
+ENTER 
+BACK 
+MENU 
+ESC 
+Parametrização  
+Nível 2 
+ENTER 
+BACK 
+ESC 
+MENU
+Parametrização  
+Nível 3 
+	Modo Parametrização
+	Nível 1: 
+④ Este é o primeiro nível do modo parametrização. É possível escolher o  grupo de parâmetros utilizando as teclas e . 
+④ Os campos: mostrador principal, mostrador secundário, barra para  monitoração de variável e unidades de medida não são mostrados nesse  nível. 
+④ Pressione a tecla ENTER/MENU para ir ao nível 2 do modo parametrização  – seleção de parâmetros. 
+④ Pressione a tecla BACK/ESC para retornar ao modo monitoração.
+	
+	Nível 2: 
+④ O número do parâmetro é exibido no mostrador principal e o seu conteúdo  no mostrador secundário. 
+④ Use as teclas e para encontrar o parâmetro desejado. ④ Pressione a tecla ENTER/MENU para ir ao nível 3 do modo parametrização  – alteração do conteúdo dos parâmetros. 
+④ Pressione a tecla BACK/ESC para retornar ao nível 1 do modo  parametrização.
+	
+	Nível 3: 
+④ O conteúdo do parâmetro é exibido no mostrador principal e o número  do parâmetro no mostrador secundário. 
+④ Use as teclas e para configurar o novo valor para o parâmetro  selecionado. 
+④ Pressione a tecla ENTER/MENU para confirmar a modificação (salvar  o novo valor) ou BACK/ESC para cancelar a modificação (não salva o  novo valor). Em ambos os casos a HMI retorna para o nível 2 do modo  parametrização.
+	
+	
+
+
+
+4 
+Figura 4.3: Modos de operação da HMI 
+NOTA! 
+Quando o inversor está em estado de Falha, o mostrador principal indica o número da mesma no  formato Fxxxx. A navegação é permitida após o acionamento da tecla ESC, assim a indicação  Fxxxx passa ao mostrador secundário até que a falta seja resetada.
+	
+
+
+
+NOTA! 
+Quando o inversor está em estado de Alarme o mostrador principal indica o número do alarme no  formato Axxxx. A navegação é permitida após o acionamento de qualquer tecla, assim a indicação  Axxxx passa ao mostrador secundário até que a situação de causa do alarme seja contornada.
+	
+
+
+
+CFW500 | 4-3  
+HMI e Programação Básica 
+4
+4-4 | CFW500 
+Instruções Básicas para Programação e Ajustes 
+5 INSTRUÇÕES BÁSICAS PARA PROGRAMAÇÃO E AJUSTES 5.1 ESTRUTURA DE PARÂMETROS 
+Com o objetivo de facilitar o usuário no processo de parametrização, os parâmetros do CFW500 foram distribuídos  em 10 grupos que podem ser selecionados individualmente na área Menu do display da HMI. Quando a tecla  enter/menu da HMI é pressionada no modo monitoração entra-se no modo de parametrização nível 1. Neste  modo é possível selecionar o grupo de parâmetros desejado, navegando através das teclas " " e " ". Para  mais detalhes sobre a utilização da HMI consultar o Capítulo 4 HMI E PROGRAMAÇÃO BÁSICA na página 4-1.  
+NOTA! 
+O inversor sai de fábrica com a frequência (modo V/f 50/60 Hz) e tensão, ajustados de acordo com  o mercado. 
+O reset para padrão de fábrica poderá alterar o conteúdo dos parâmetros relacionados com a  frequência conforme função de P0204. Na descrição detalhada, alguns parâmetros possuem valores  entre parênteses, os quais representam o valor padrão para operação em 50 Hz, logo o valor sem  parênteses é o padrão para operação em 60 Hz.
+	
+
+
+
+5 
+5.2 PARÂMETROS SELECIONADOS PELO MENU DA HMI 
+No primeiro nível do modo parametrização selecione o grupo para navegação dos níveis seguintes conforme a  tabela a seguir. 
+Tabela 5.1: Grupo de parâmetros acessados pelo MENU da HMI
+Grupo 
+	Parâmetros Contidos
+	PARAM 
+	Todos os parâmetros.
+	READ
+	Parâmetros utilizados somente para leitura: 
+P0001, P0002, P0003, P0004, P0005, P0006, P0007, P0009, P0011, P0012, P0013, P0014, P0015, P0016, P0017,  P0018, P0019, P0020, P0021, P0022, P0023, P0024, P0027, P0029, P0030, P0037, P0040, P0041, P0047, P0048,  P0049, P0050, P0051, P0052, P0053, P0054, P0055, P0060, P0061, P0062, P0063, P0064, P0065, P0070, P0071,  P0072, P0073, P0074, P0075, P0295, P0296, P0316, P0680, P0681, P0682, P0683, P0685, P0690, P0695, P0696,  P0697, P0698, P0705, P0706, P0707, P0708, P0709, P0719, P0720, P0721, P0722, P1000, P1002.
+	MODIF 
+	Somente parâmetros cujo conteúdo está diferente do padrão de fábrica.
+	BASIC 
+	Parâmetros para aplicação simples: rampas, velocidade mínima e máxima, corrente máxima e boost de torque. P0100, P0101, P0133, P0134, P0135 e P0136.
+	MOTOR
+	Parâmetros relacionados ao controle e dados do motor: 
+P0135, P0136, P0137, P0138, P0150, P0151, P0152, P0153, P0156, P0157, P0158, P0178, P0399, P0400, P0401,  P0402, P0403, P0404, P0407, P0409.
+	I/O
+	Grupos relacionados a entradas e saídas, digitais e analógicas: 
+P0012, P0013, P0014, P0015, P0016, P0017, P0018, P0019, P0020, P0021, P0022, P0105, P0220, P0221, P0222,  P0223, P0224, P0225, P0226, P0227, P0228, P0229, P0230, P0231, P0232, P0233, P0234, P0235, P0236, P0237,  P0238, P0239, P0240, P0241, P0242, P0243, P0244, P0245, P0246, P0247, P0248, P0249, P0250, P0251, P0252,  
+P0253, P0254, P0255, P0256, P0257, P0258, P0259, P0260, P0263, P0264, P0265, P0266, P0267, P0268, P0269,  P0270, P0271, P0275, P0276, P0277, P0278, P0279, P0287, P0288, P0290, P0293, P0533, P0535.
+	NET
+	Parâmetros relacionados às redes de comunicação: 
+P0308, P0310, P0311, P0312, P0313, P0314, P0316, P0680, P0681, P0682, P0683, P0684, P0685, P0690, P0695,  P0696, P0697, P0698, P0700, P0701, P0702, P0703, P0705, P0706, P0707, P0708, P0709, P0710, P0711, P0712,  P0713, P0714, P0715, P0716, P0717, P0718, P0719, P0720, P0721, P0722, P0740 ... P0968.
+	HMI 
+	Parâmetros para a configuração da HMI: 
+P0200, P0205, P0206, P0207, P0208, P0209, P0210, P0213, P0216, P0510, P0511, P0512, P0513, P0528, P0529.
+	SPLC 
+	Parâmetros relacionados à função SoftPLC: 
+P0510, P0511, P0512, P0513, P1000, P1001, P1002, P1010...P1059.
+	STARTUP 
+	Parâmetro para entrada no modo de “Start-up” Orientado para VVW: 
+P0202, P0399, P0400, P0401, P0402, P0403, P0404, P0407, P0408, P0409.
+	
+
+
+
+NOTA! 
+Além do grupo selecionado no campo menu da HMI, a visualização dos parâmetros na HMI depende  do hardware instalado e do modo de operação do CFW500. Portanto, observe o módulo plug-in  conectado bem como o modo de controle de motor VVW ou V/f. Por exemplo, se o módulo plug-in tem  somente a entrada analógica AI1, os parâmetros relacionados às demais entradas analógicas não são  mostrados. O mesmo ocorre com os parâmetros relacionados exclusivamente aos modos VVW e V/f.
+	
+
+
+
+CFW500 | 5-1  
+Instruções Básicas para Programação e Ajustes 
+5.3 HMI 
+No grupo “HMI” estão disponíveis parâmetros relacionados com a apresentação das informações no display,  iluminação e senha da HMI. Veja a descrição detalhada a seguir sobre os ajustes possíveis desses parâmetros. 
+P0000 – Acesso aos Parâmetros 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0 a 9999 Padrão: 0 
+Entrada de senha para liberação de acesso aos parâmetros. Uma vez que um valor de senha tenha sido  5 
+gravado em P0200, o acesso aos parâmetros somente é permitido se este valor de senha for programado em  P0000.  
+Após o ajuste de P0000 com um valor de senha, o P0000 indicará "1" ou "0", mantendo oculto o valor de  senha ajustado. Onde "1" libera o acesso aos parâmetros liberados e "0" bloqueia o acesso aos parâmetros. 
+NOTA! 
+O acesso aos parâmetros e P0000 é limpo juntamente com a desenergização do inversor.
+	
+
+
+
+P0200 – Senha 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0 = Inativa 
+1 = Ativa 
+1 a 9999 = Nova senha 
+HMI
+	
+
+
+
+Padrão: 0 
+Permite ativar a senha (ao inserir um novo valor para a mesma) ou desativá-la. Para mais detalhes referentes  ao uso deste parâmetro, consulte a Tabela 5.2 na página 5-2. 
+Tabela 5.2: Procedimento necessário para cada tipo de ação 
+Ação 
+	Procedimento
+	Ativar a senha.
+	1. Programe P0200 com o valor desejado para a senha (P0200 = senha).  
+2. Após este procedimento, o novo valor da senha está ativo e P0200 é automaticamente ajustado para  1 (senha ativa). (1)
+	Alterar a senha.
+	1. Ajuste o valor atual da senha (P0000 = senha). 
+2. Programe o valor desejado para a nova senha em P0200 (P0200 = nova senha). 3. Após este procedimento, o novo valor da senha está ativo e P0200 é automaticamente ajustado para  1 (senha ativa). (1)
+	Desativar a senha.
+	1. Ajuste o valor atual da senha (P0000 = senha). 
+2. Programe senha Inativa (P0200 = 0). 
+3. Após este procedimento, a senha está inativa. (2)
+	Desativar a senha. 
+	1. Ative um padrão de fábrica através de P0204. 
+2. Após este procedimento, a senha está inativa. (2)
+	
+
+
+
+Notas: 
+(1) Somente é permitida a alteração do conteúdo dos parâmetros quando P0000 for igual ao valor da senha. 
+(2) Está permitida a alteração do conteúdo dos parâmetros e P0000 está inacessível.
+5-2 | CFW500 
+Instruções Básicas para Programação e Ajustes 
+P0205 – Seleção Parâmetro do Display Principal P0206 – Seleção Parâmetro do Display Secundário P0207 – Seleção Parâmetro da Barra Gráfica 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0 a 1500 Padrão: P0205 = 2 P0206 = 1 
+P0207 = 3 
+HMI
+	
+
+
+
+5 
+Esses parâmetros definem quais parâmetros serão mostrados no display da HMI no modo monitoração. Mais  detalhes dessa programação podem ser vistos na Seção 5.5 AJUSTE DAS INDICAÇÕES DO DISPLAY NO  MODO MONITORAÇÃO na página 5-6. 
+P0208 – Referência Nominal 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+1 a 65535 Padrão: 600 (500) 
+HMI
+	
+
+
+
+Este parâmetro permite ajustar a escala dos parâmetros referência de velocidade P0001 e velocidade de  saída (motor) P0002 para o ponto de frequência nominal do motor dado por P0403. Desta maneira, pode-se  adequar a indicação de P0001 e P0002 para uma escala qualquer como a frequência de saída (Hz), velocidade  do motor (rpm) ou um valor percentual (%), por exemplo.  
+Juntamente com a unidade em P0209 e as casas decimais em P0210, a referência nominal (P0208) define  a indicação de velocidade na HMI do inversor. De acordo com o padrão de fábrica destes parâmetros, a  escala pré-ajustada no inversor está em “Hz” e com uma casa decimal (60,0 Hz ou 50,0 Hz). Por outro  lado, ajustando P0208 = 1800 ou 1500, P0209 = 3 e P0210 = 0, define-se uma escala em “rpm” sem casas  decimais (1800 rpm ou 1500 rpm).
+CFW500 | 5-3  
+Instruções Básicas para Programação e Ajustes 
+P0209 – Unidade de Engenharia da Referência 
+5 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0 = Sem Unidade 
+1 = V 
+2 = A 
+3 = rpm 
+4 = s 
+5 = ms 
+6 = N 
+7 = m 
+8 = Nm 
+9 = mA 
+10 = % 
+11 = ºC 
+12 = CV 
+13 = Hz 
+14 = HP 
+15 = h 
+16 = W 
+17 = kW 
+18 = kWh 
+19 = H 
+HMI
+	
+
+
+
+Padrão: 13  
+Esse parâmetro seleciona a unidade de engenharia que será apresentada nos parâmetros P0001 e P0002.  P0210 – Forma de Indicação da Referência 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0 = wxyz 
+1 = wxy.z 
+2 = wx.yz 
+3 = w.xyz 
+HMI
+	
+
+
+
+Padrão: 1  
+Este parâmetro permite ajustar a forma de indicação dos parâmetros P0001 e P0002. P0213 – Fator de Escala da Barra Gráfica 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+1 a 65535 Padrão: Conforme  modelo do  
+inversor  
+(P0295) 
+HMI
+	
+
+
+
+Este parâmetro configura o fundo de escala (100 %) da barra gráfica para indicação do parâmetro selecionado  por P0207.
+5-4 | CFW500 
+Instruções Básicas para Programação e Ajustes 
+NOTA! 
+A barra gráfica normalmente indica o valor definido por P0207 e P0210, porém em algumas situações  especiais, como carga de parâmetros, transferências de dados e autoajuste, a função da barra  gráfica é alterada para mostrar o progresso destas operações.
+	
+
+
+
+P0216 – Iluminação do Display da HMI 
+Faixa de  Valores: 
+0 = Desliga 1 = Liga 
+Padrão: 1 
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+HMI
+	
+
+
+
+5 
+A função deste parâmetro é ligar ou desligar a iluminação do display da HMI.  
+NOTA! 
+Quando a HMI remota está conectada e ativada por P0312 a iluminação da HMI local do CFW500  é cortada e o parâmetro P0216 passa a controlar a HMI remota.
+	
+
+
+
+5.4 PARÂMETROS DE BACKUP 
+As funções de BACKUP do CFW500 permitem que se salve o conteúdo dos parâmetros atuais do inversor em  uma memória específica (EEPROM) ou sobrescrever os parâmetros atuais com o conteúdo da memória específica. 
+P0204 – Carrega / Salva Parâmetros 
+Faixa de  Valores: 
+0 a 4 = Sem Função 
+5 = Carrega WEG 60 Hz 6 = Carrega WEG 50 Hz 7 = Carrega Usuário 1 
+8 = Carrega Usuário 2 
+9 = Salva Usuário 1 
+10 = Salva Usuário 2 
+11 = Carrega Padrão SoftPLC 12 a 15 = Reservado 
+Padrão: 0  
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: 
+Descrição: 
+Possibilita salvar os parâmetros atuais do inversor em uma área de memória não volátil (EEPROM) do módulo  de controle ou, o contrário, carregar os parâmetros com o conteúdo desta área. A Tabela 5.3 na página 5-6 descreve as ações realizadas por cada opção.
+CFW500 | 5-5  
+Instruções Básicas para Programação e Ajustes 
+Tabela 5.3: Opções do parâmetro P0204 
+P0204 
+	Ação
+	0 a 4 
+	Sem Função: nenhuma ação.
+	5 
+	Carrega WEG 60 Hz: carrega os parâmetros padrão no inversor com os ajustes de fábrica para 60 Hz.
+	6 
+	Carrega WEG 50 Hz: carrega os parâmetros padrão no inversor com os ajustes de fábrica para 50 Hz.
+	7 
+	Carrega Usuário 1: transfere o conteúdo da memória de parâmetros 1 para os parâmetros atuais do inversor.
+	8 
+	Carrega Usuário 2: transfere o conteúdo da memória de parâmetros 2 para os parâmetros atuais do inversor.
+	9 
+	Salva Usuário 1: transfere o conteúdo atual dos parâmetros para a memória de parâmetros 1.
+	10 
+	Salva Usuário 2: transfere o conteúdo atual dos parâmetros para a memória de parâmetros 2.
+	11 
+	Carrega Padrão SoftPLC: carrega o padrão de fábrica nos parâmetros da SoftPLC (P1010 a P1059).
+	12 a 15 
+	Reservado.
+	
+
+
+
+Para carregar os parâmetros de usuário 1 e/ou usuário 2 para a área de operação do CFW500 (P0204 = 7 ou 8)  é necessário que estas áreas tenham sido previamente salvas. 
+A operação de carregar uma destas memórias (P0204 = 7 ou 8), também pode ser realizada via entradas  digitais (DIx). Para mais detalhes referentes a esta programação, consulte a Seção 12.5 ENTRADAS DIGITAIS  
+5 
+na página 12-13. 
+NOTA! 
+Quando P0204 = 5 ou 6, os parâmetros P0296 (Tensão nominal), P0297 (Frequência de chaveamento)  e P0308 (Endereço serial), não serão alterados para o padrão de fábrica.
+	
+
+
+
+5.5 AJUSTE DAS INDICAÇÕES DO DISPLAY NO MODO MONITORAÇÃO 
+Sempre que o inversor é energizado o display da HMI vai para o modo de monitoração. Para facilitar a leitura dos  parâmetros do inversor, o display foi projetado para indicar 3 parâmetros simultaneamente, à escolha do usuário,  dois destes parâmetros (display principal e display secundário) são mostrados na forma numérica e o outro  parâmetro na forma de barra gráfica. A seleção destes parâmetros é feita via P0205, P0206 e P0207, conforme  indicado na Figura 5.1 na página 5-6. 
+Display secundário (selecionado por P0206) 
+Menu seleção de grupos de  parâmetros 
+Estado de operação do inversor 
+apresenta o conteúdo do parâmetro (xxxxx),  número do parâmetro (Pxxxx), indicação de  falha (Fxxx) ou alarme (Axxx) 
+Unidade de engenharia para o display  principal (selecionado por P0209) 
+Display principal (selecionado por P0205) apresenta o conteúdo do parâmetro  (xxxxx), número do parâmetro (Pxxxx),  
+Barra gráfica para monitoração  de parâmetro (selecionado por P0207) 
+indicação de falha (Fxxx) ou alarme (Axxx) 
+Figura 5.1: Tela na inicialização e campos do display 
+5.6 SITUAÇÕES PARA O ESTADO CONFIG 
+O estado CONFIG é indicado pelo status “CONF” da HMI, bem como nos parâmetros P0006 e P0680. Tal  estado indica que o CFW500 não pode habilitar os pulsos PWM de saída devido a configuração do inversor  estar incorreta ou incompleta.  
+A tabela abaixo mostra as situações do estado CONFIG, onde o usuário pode identificar a condição de origem  através do parâmetro P0047.
+5-6 | CFW500 
+Instruções Básicas para Programação e Ajustes 
+Tabela 5.4: Situações para o estado CONFIG 
+P0047 
+	Situação Origem do Estado CONFIG
+	0 
+	Fora do estado CONFIG, a HMI, P0006 e P0680 não devem indicar CONF.
+	1 
+	Duas ou mais DIx (P0263...P0270) programadas para Avanço (4).
+	2 
+	Duas ou mais DIx (P0263...P0270) programadas para Retorno (5).
+	3 
+	Duas ou mais DIx (P0263...P0270) programadas para Start (6).
+	4 
+	Duas ou mais DIx (P0263...P0270) programadas para Stop (7).
+	5 
+	Duas ou mais DIx (P0263...P0270) programadas para Sentido de Giro (8).
+	6 
+	Duas ou mais DIx (P0263...P0270) programadas para seleção LOC/REM (9).
+	7 
+	Duas ou mais DIx (P0263...P0270) programadas para Acelera E.P. (11).
+	8 
+	Duas ou mais DIx (P0263...P0270) programadas para Desacelera E.P. (12).
+	9 
+	Duas ou mais DIx (P0263...P0270) programadas para 2ª Rampa (14).
+	10 
+	Duas ou mais DIx (P0263...P0270) programadas para Man./Auto PID (22).
+	11 
+	Duas ou mais DIx (P0263...P0270) programadas para Desabilita Flying Start (24).
+	12 
+	Duas ou mais DIx (P0263...P0270) programadas para Bloqueia Programação (26).
+	13 
+	Duas ou mais DIx (P0263...P0270) programadas para Carrega Usuário 1 (27).
+	14 
+	Duas ou mais DIx (P0263...P0270) programadas para Carrega Usuário 2 (28).
+	15 
+	DIx (P0263...P0270) programada para Avanço (4) sem DIx (P0263...P0270) programada para Retorno (5) ou o inverso.
+	16 
+	DIx (P0263...P0270) programada para Start (6) sem DIx (P0263...P0270) programada para Stop (7) ou o inverso.
+	17 
+	Referencia (P0221 ou P0222) programada para Multispeed (8) sem DIx (P0263...P0270) programada para Multispeed (13)  ou o inverso.
+	18 
+	Referência (P0221 ou P0222) programada para Potenciômetro Eletrônico (7) sem DIx (P0263...P0270) programada  para 11 = Acelera E.P. ou o inverso.
+	19 
+	Comando Gira/Para (P0224 ou P0227) programado para DIx (1) sem DIx (P0263...P0270) programada para (1 = Gira/Para)  e sem DIx (P0263...P0270) programada para Habilita Geral (2) e sem DIx (P0263...P0270) programado para Parada Rápida  (3) e sem DIx (P0263...P0270) programada para Avanço (4) e sem DIx (P0263...P0270) programada para Start (6).
+	20 
+	Entrada digital DI2 (P0265) programada para PTC (29) ou entrada analógica AI3 (P0241) programada para PTC (4).
+	21 
+	P0203 programado para PID via AI1 (1) e referência (P0221 ou P0222) programada para AI1 (1).
+	22 
+	P0203 programado para PID via AI3 (2) e referência (P0221 ou P0222) programada para AI3 (3).
+	23 
+	P0203 programado para PID via FI (3) e referência (P0221 ou P0222) programada para FI (4).
+	24 
+	P0203 programado para PID via AI3 (2) e o módulo plug-in não tem AI3.
+	25 
+	Referência (P0221 ou P0222) programada para AI2 (2) ou AI3 (3) e o módulo plug-in não tem AI2 e AI3.
+	26 
+	P0312 programado para HMI Remota (0 ou 6) sem HMI conectada.
+	27 
+	Má configuração da curva V/f (P0142 a P0147 causam degrau de tensão na saída).
+	
+
+
+
+5 
+5.7 UNIDADES DE ENGENHARIA PARA SOFTPLC 
+Este grupo de parâmetros permite ao usuário configurar as unidades de engenharia para indicação na HMI dos  parâmetros do usuário do módulo SoftPLC.
+CFW500 | 5-7  
+Instruções Básicas para Programação e Ajustes 
+P0510 – Unidade de Engenharia 1 SoftPLC 
+5 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição 
+0 = Nenhuma 
+1 = V 
+2 = A 
+3 = rpm 
+4 = s 
+5 = ms 
+6 = N 
+7 = m 
+8 = Nm 
+9 = mA 
+10 = % 
+11 = °C 
+12 = CV 
+13 = Hz 
+14 = HP 
+15 = h 
+16 = W 
+17 = kW 
+18 = kWh 
+19 = H 
+HMI, SPLC
+	
+
+
+
+Padrão: 0 
+Este parâmetro seleciona a unidade de engenharia visualizada na HMI, ou seja, qualquer parâmetro do usuário  da softPLC que estiver associado à unidade de engenharia 1 será visualizado neste formato. 
+P0511 – Ponto Decimal para Unidade de Engenharia 1 SoftPLC  
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição 
+0 = wxyz 
+1 = wxy.z 
+2 = wx.yz 
+3 = w.xyz  
+HMI, SPLC
+	
+
+
+
+Padrão: 1 
+Este parâmetro seleciona o ponto decimal visualizado na HMI, ou seja, qualquer parâmetro do usuário da  SoftPLC que estiver associado a unidade de engenharia 1 será visualizado neste formato.
+5-8 | CFW500 
+Instruções Básicas para Programação e Ajustes 
+P0512 – Unidade de Engenharia 2 SoftPLC 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição 
+0 = Nenhuma 
+1 = V 
+2 = A 
+3 = rpm 
+4 = s 
+5 = ms 
+6 = N 
+7 = m 
+8 = Nm 
+9 = mA 
+10 = % 
+11 = °C 
+12 = CV 
+13 = Hz 
+14 = HP 
+15 = h 
+16 = W 
+17 = kW 
+18 = kWh 
+19 = H 
+HMI, SPLC
+	
+
+
+
+Padrão: 3 
+5 
+Este parâmetro seleciona a unidade de engenharia visualizada na HMI, ou seja, qualquer parâmetro do usuário  da SoftPLC que estiver associado a unidade de engenharia 2 será visualizado neste formato. 
+P0513 – Ponto Decimal para Unidade de Engenharia 2 SoftPLC 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição 
+0 = wxyz 
+1 = wxy.z 
+2 = wx.yz 
+3 = w.xyz  
+HMI, SPLC
+	
+
+
+
+Padrão: 0 
+Este parâmetro seleciona o ponto decimal visualizado na HMI, ou seja, qualquer parâmetro do usuário da  SoftPLC que estiver associado a unidade de engenharia 2 será visualizado neste formato.
+NOTA! 
+As unidades de engenharia 1 e 2 podem ser selecionadas em P0209 ou na janela “Configuração  dos Parâmetros do Usuário” no programa WLP.
+	
+
+
+
+CFW500 | 5-9  
+Instruções Básicas para Programação e Ajustes 
+5
+5-10 | CFW500 
+Identificação do Modelo do Inversor e Acessórios 
+6 IDENTIFICAÇÃO DO MODELO DO INVERSOR E ACESSÓRIOS 
+Para verificar o modelo do inversor, verifique o código existente nas etiquetas de identificação do produto. O  inversor possui duas etiquetas de identificação, uma completa, localizada na lateral do inversor e uma resumida,  localizada sob a HMI.  
+Uma vez verificado o código de identificação do modelo do inversor, é preciso interpretá-lo para compreender o  seu significado. Consulte o Capítulo 2 Informações Gerais do manual do usuário do CFW500. 
+A seguir são apresentados os parâmetros relacionados ao modelo do inversor os quais são modificados de  acordo com o modelo e a versão do inversor. Estes parâmetros devem estar de acordo com os dados lidos nas  etiquetas de identificação do produto. 
+6.1 DADOS DO INVERSOR  
+P0023 – Versão de Software Principal 
+P0024 – Versão de Software Secundário 
+6 
+Faixa de  Valores: 
+0,00 a 655,35 Padrão: 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ
+	
+
+
+
+Indicam as versões de software dos microprocessadores: principal, no cartão de controle CFW500 e  secundário, no módulo plug-in. Esses dados estão contidos na memória EEPROM localizada no cartão de  controle. 
+P0027 – Configuração do Módulo Plug-in 
+Faixa de  Valores: 
+0 a 11 Padrão: 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ
+	
+
+
+
+Esse parâmetro identifica o plug-in que se encontra conectado ao módulo de controle. A Tabela 6.1 na página  6-1 apresenta as interfaces disponíveis para o CFW500. 
+Tabela 6.1: Identificação dos módulos plug-in do CFW500
+Nome 
+	Descrição 
+	P0027
+	
+
+	Não há módulo plug-in conectado. 
+	0
+	CFW500-IOS 
+	Módulo plug-in padrão (I/O Standard). 
+	1
+	CFW500-IOD 
+	Módulo plug-in com acréscimo de entradas e saídas digitais (I/O Digital). 
+	2
+	CFW500-IOAD 
+	Módulo plug-in com acréscimo de entradas e saídas digitais e analógicas (I/O Analog and Digital). 
+	3
+	CFW500-IOR 
+	Módulo plug-in com acréscimo de saídas digitais a relé (I/O Relay). 
+	4
+	CFW500-CUSB 
+	Módulo plug-in com acréscimo de uma porta de comunicação USB. 
+	5
+	CFW500-CCAN 
+	Módulo plug-in com acréscimo de uma porta de comunicação CAN. 
+	6
+	CFW500-CRS232 
+	Módulo plug-in com acréscimo de uma porta de comunicação RS-232. 
+	7
+	CFW500-CPDP 
+	Módulo plug-in com comunicação Profibus. 
+	8
+	CFW500-CRS485 
+	Módulo plug-in com acréscimo de uma porta de comunicação RS-485. 
+	9
+	CFW500-CETH-IPCFW500-CEMB-TCP  CFW500-CEPN-IO
+	Módulo plug-in com comunicação Ethernet. 
+	11
+	
+
+
+
+CFW500 | 6-1  
+Identificação do Modelo do Inversor e Acessórios 
+P0029 – Configuração do Hardware de Potência 
+Faixa de  Valores: 
+0 a 63 Padrão: Conforme  modelo do  
+inversor 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ
+	
+
+
+
+Esse parâmetro identifica o modelo do inversor distinguindo a mecânica, tensão de alimentação e corrente  nominal conforme a Tabela 6.2 na página 6-2. 
+A partir de P0029 o CFW500 determina os parâmetros de corrente e tensão dependentes da identificação do  modelo. Por outro lado esta ação somente é efetivada no momento da carga padrão de fábrica (P0204 = 5 ou 6). 
+Tabela 6.2: Identificação dos modelos do CFW500 para as mecânicas A a E
+Tensão 
+	Rede 
+	Corrente 
+	Mecânica 
+	P0029
+	- 
+	- 
+	- 
+	- 
+	0
+	200-240 
+	Monofásico ou Mono/Tri 
+	1,6 
+	A 
+	1
+	200-240 
+	Monofásico ou Mono/Tri 
+	2,6 
+	A 
+	2
+	200-240 
+	Monofásico ou Mono/Tri 
+	4,3 
+	A 
+	3
+	200-240 
+	Monofásico ou Trifásico 
+	7,0 
+	A 
+	4
+	200-240 
+	Trifásico 
+	9,6 
+	A 
+	5
+	380-480 
+	Trifásico 
+	1,0 
+	A 
+	6
+	380-480 
+	Trifásico 
+	1,6 
+	A 
+	7
+	380-480 
+	Trifásico 
+	2,6 
+	A 
+	8
+	380-480 
+	Trifásico 
+	4,3 
+	A 
+	9
+	380-480 
+200-240 
+	Trifásico 
+Monofásico ou Trifásico 
+	6,1 
+7,3 
+	A 
+B 
+	10 
+11
+	200-240 
+	Monofásico ou Trifásico 
+	10,0 
+	B 
+	12
+	200-240 
+	Trifásico 
+	16,0 
+	B 
+	13
+	380-480 
+	Trifásico 
+	2,6 
+	B 
+	14
+	380-480 
+	Trifásico 
+	4,3 
+	B 
+	15
+	380-480 
+	Trifásico 
+	6,5 
+	B 
+	16
+	380-480 
+200-240 
+	Trifásico 
+Trifásico 
+	10,0 
+24,0 
+	B 
+C 
+	17 
+18
+	380-480 
+	Trifásico 
+	14,0 
+	C 
+	19
+	380-480 
+	Trifásico 
+	16,0 
+	C 
+	20
+	500-600 
+	Trifásico 
+	1,7 
+	C 
+	21
+	500-600 
+	Trifásico 
+	3,0 
+	C 
+	22
+	500-600 
+	Trifásico 
+	4,3 
+	C 
+	23
+	500-600 
+	Trifásico 
+	7,0 
+	C 
+	24
+	500-600 
+	Trifásico 
+	10,0 
+	C 
+	25
+	500-600 
+200-240 
+	Trifásico 
+Trifásico 
+	12,0 
+28,0 
+	C 
+D 
+	26 
+27
+	200-240 
+	Trifásico 
+	33,0 
+	D 
+	28
+	380-480 
+	Trifásico 
+	24,0 
+	D 
+	29
+	380-480 
+	Trifásico 
+	30,0 
+	D 
+	30
+	500-600 
+	Trifásico 
+	17,0 
+	D 
+	31
+	500-600 
+200-240 
+	Trifásico 
+Trifásico 
+	22,0 
+45,0 
+	D 
+E 
+	32 
+33
+	200-240 
+	Trifásico 
+	54,0 
+	E 
+	34
+	380-480 
+	Trifásico 
+	38,0 
+	E 
+	35
+	380-480 
+	Trifásico 
+	45,0 
+	E 
+	36
+	500-600 
+	Trifásico 
+	27,0 
+	E 
+	37
+	500-600 
+	Trifásico 
+	32,0 
+	E 
+	38
+	- 
+	- 
+	- 
+	- 
+	39 a 63
+	
+
+
+
+6 
+6-2 | CFW500 
+Identificação do Modelo do Inversor e Acessórios 
+P0295 – Corrente Nominal do Inversor 
+Faixa de  Valores: 
+0,0 a 200,0 A Padrão: Conforme  modelo do  
+inversor 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ
+	
+
+
+
+Este parâmetro apresenta a corrente nominal do inversor conforme apresentada na Tabela 6.2 na página 6-2. P0296 – Tensão Nominal da Rede 
+Faixa de  Valores: 
+0 = 200 - 240 V 1 = 380 - 480 V 2 = 500 - 600 V 
+Padrão: Conforme  modelo do 
+inversor 
+Propriedades: ro, cfg 
+6 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ
+	
+
+
+
+Este parâmetro apresenta a tensão nominal de alimentação do inversor conforme apresentado na Tabela 6.2  na página 6-2. 
+P0297 – Frequência de Chaveamento 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+2500 a 15000 Hz Padrão: 5000 Hz 
+Pode-se definir através desse parâmetro a frequência de chaveamento dos IGBTs do inversor. 
+A frequência de chaveamento do inversor pode ser ajustada de acordo com as necessidades de aplicação.  Frequências de chaveamento mais altas implicam em menor ruído acústico no motor. Entretanto, a escolha da  frequência de chaveamento resulta num compromisso entre o ruído acústico no motor, as perdas nos IGBT’s  do inversor e as máximas correntes permitidas. 
+A redução da frequência de chaveamento reduz efeitos relacionados à instabilidade do motor, que ocorrem em  determinadas condições de aplicação. Além disso, reduz as correntes de fuga para o terra, podendo evitar a  atuação das falhas F0074 (falta a terra) ou F0070 (sobrecorrente ou curto-circuito na saída).
+ATENÇÃO! 
+Quando os dados da corrente de saída em função da frequência de chaveamento forem diferentes  do padrão, consulte a tabela B.4 disponível no Anexo B - Especificações Técnicas, do manual do  usuário CFW500.
+	
+
+
+
+CFW500 | 6-3  
+Identificação do Modelo do Inversor e Acessórios 
+6
+6-4 | CFW500 
+Comando Lógico e Referência de Velocidade 
+7 COMANDO LÓGICO E REFERÊNCIA DE VELOCIDADE 
+O acionamento do motor elétrico conectado ao inversor depende do comando lógico e da referência definida por  uma das diversas fontes possíveis, tais como: teclas da HMI, entradas digitais (DIx), entradas analógicas (AIx),  interface Serial/USB, interface CANopen, interface DeviceNet, SoftPLC, etc. 
+O comando via HMI limita-se a um conjunto de funções pré-definidas para as teclas conforme Capítulo 4 HMI  E PROGRAMAÇÃO BÁSICA na página 4-1, da mesma forma que as entradas digitais (DIx), com as funções  implementadas nos parâmetros de P0263 a P0270.  
+Por outro lado, o comando via interfaces digitais como redes de comunicação e SoftPLC atuam diretamente  na palavra de controle do inversor através de parâmetros de controle e marcadores de sistema da SoftPLC,  respectivamente. 
+A referência de velocidade, por sua vez, é manipulada internamente ao CFW500 em 16 bits com sinal (-32768  a +32767) para uma faixa de -500,0 Hz a +500,0 Hz. Por outro lado, os fatores unidade, faixa e resolução da  referência dependem da fonte utilizada, conforme descrito a seguir na Seção 7.2 REFERÊNCIA DE VELOCIDADE  na página 7-7. 
+7.1 SELEÇÃO PARA COMANDO LÓGICO E REFERÊNCIA DE VELOCIDADE 
+A fonte para comando e referência do inversor é definida através dos parâmetros do inversor para duas situações  distintas: Local e Remoto, as quais podem ser comutadas dinamicamente durante a operação do inversor. Assim,  7 
+para uma determinada parametrização, o inversor dispõe de dois conjuntos para comando e referência, conforme  o blocodiagrama da Figura 7.1 na página 7-2. 
+O parâmetro P0220 determina a fonte de comando para as situações Local e Remoto. 
+Os parâmetros P0223, P0224 e P0225 definem os comandos na situação Local, os parâmetros P0226, P0227  e P0228 os comandos na situação Remoto, já o parâmetro P0105 determina a fonte para a seleção entre 1ª e  2ª Rampa. Esta estrutura de seleção da fonte de comandos é ilustrada na Figura 7.2 na página 7-3, onde o  parâmetro P0312 direciona a fonte da comunicação serial para os módulos plug-ins com duas portas. 
+Os parâmetros P0221 e P0222 definem a referência de velocidade nas situações Local e Remoto, respectivamente.  
+Esta estrutura de seleção da fonte para referência é ilustrada na Figura 7.3 na página 7-4, onde o parâmetro  P0312 direciona a fonte da comunicação serial para os módulos plug-ins com duas portas.
+CFW500 | 7-1  
+Comando Lógico e Referência de Velocidade 
+7 
+Todas as fontes de  comando e referência do  inversor (HMI, bornes,  redes e SoftPLC)  
+P0223 
+P0225 P0226 
+P0228 
+P0224 P0227 
+Sentido  de giro 
+Gira / 
+Para 
+JOG 
+Sentido  de giro 
+Gira / 
+Para 
+JOG 
+Palavra de  controle 
+Palavra de  controle 
+LOC REM 
+Palavra de controle 
+P0220 P0105 
+LOC/REM 2ª Rampa 
+P0221 
+P0222 
+Referência de velocidade 
+Referência de velocidade 
+LOC REM 
+Referência de velocidade 
+Figura 7.1: Blocodiagrama geral para comandos e referências
+7-2 | CFW500 
+Comando Lógico e Referência de Velocidade 
+HMI 
+IOS 
+CRS232 
+IOAD  
+IOD  
+IOR 
+CRS485 CUSB SoftPLC 
+P0312 
+Palavra de  
+controle do  
+inversor 
+Seleção de comandos  
+P0105 e P0223 a P0228 
+Teclas HMI 
+Dlx 
+Serial/USB 
+7 
+CCAN 
+CPDP 
+Ethernet 
+CANopen ou DeviceNet 
+Profibus DP Ethernet 
+SoftPLC 
+CO/DN/DP/Eth 
+Figura 7.2: Estrutura de seleção dos comandos
+CFW500 | 7-3  
+Comando Lógico e Referência de Velocidade 
+Seleção da referência  
+HMI 
+de frequência  
+P0221 ou P0222 
+Referência  
+Tecla (P0121)  
+FI  
+Entrada em frequência P0249 
+P0247 
+0 - Teclas HMI 
+4 - FI  
+17 - FI>0 
+IOS 
+IOD  IOR 
+Dlx Dlx 
+Dlx Dlx 
+Acel. 
+Desacel. 
+Potenciômetro eletrônico P0124 a P0131 
+P0131 
+P0130 
+P0129 
+P0128 
+P0127 
+P0126 
+P0125 
+7 - EP  
+8 - Multispeed  
+Dlx 
+7 
+P0124 
+000 001 010 011 100 101 110 111 Multispeed 
+P0232 
+ou  
+AI1 1 - AI1  
+IOAD  
+AI2 (*) 
+P0234 
+P0237 
+14 - AI1>0 
+5 - AI1+AI2>0 6 - AI1+AI2 2 - AI2  
+Referência de  velocidade do  inversor 
+CRS232 
+ou CRS485 CUSB 
+AI3 (*) 
+RS-485 (**) ou RS-232 
+USB 
+P0242 P0239 P0244 
+P0312 
+SoftPLC  
+15 - AI2>0 
+3 - AI3  
+16 - AI3>0 
+9 - Serial  ou USB 
+CCAN CPDP 
+Ethernet
+(**) 12 - SoftPLC 
+CANopen, DeviceNet,  
+Profibus DP ou Ethernet 
+11 - CO/DN/PB/Eth 
+(*) Disponível somente no módulo Plug-in CFW500-IOAD. 
+(**) Disponível em todos os módulos Plug-in. 
+Figura 7.3: Estrutura de seleção da referência de velocidade 
+7-4 | CFW500 
+Comando Lógico e Referência de Velocidade 
+P0220 – Seleção Local/Remoto 
+Faixa de  Valores: 
+0 = Sempre Local 
+1 = Sempre Remoto 
+2 = Tecla HMI Local / Remoto (LOC) 3 = Tecla HMI Local / Remoto (REM) 4 = Entrada Digital (DIx) 
+5 = Serial/USB (LOC) 
+6 = Serial/USB (REM) 
+7 = Sem Função 
+8 = Sem Função  
+9 = CO/DN/PB/Eth (LOC) 
+10 = CO/DN/PB/Eth (REM) 
+11 = SoftPLC  
+Padrão: 2  
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+I/O
+	
+
+
+
+Define a fonte de origem do comando que irá selecionar entre a situação Local e a situação Remoto, onde:  
+④ LOC: significa default situação Local.  
+7 
+④ REM: significa default situação Remoto.  
+④ DIx: conforme função programada para a entrada digital em P0263 a P0270. 
+④ CO/DN/PB/Eth: interface CANopen, DeviceNet, Profibus DP ou Ethernet. 
+P0221 – Seleção da Referência de Velocidade – Situação LOCAL 
+P0222 – Seleção da Referência de Velocidade – Situação REMOTO 
+Faixa de  Valores: 
+0 = Teclas HMI 
+1 = AI1 
+2 = AI2 
+3 = AI3 
+4 = Entrada em Frequência (FI) 5 = AI1 + AI2 > 0 (Soma AIs>0) 6 = AI1 + AI2 (Soma AIs) 7 = E.P. 
+8 = Multispeed 
+9 = Serial/USB 
+10 = Sem Função 
+11 = CO/DN/PB/Eth 
+12 = SoftPLC 
+13 = Sem Função 
+14 = AI1 > 0 
+15 = AI2 > 0 
+16 = AI3 > 0 
+17 = FI > 0 
+Padrão: P0221 = 0  P0222 = 1  
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI:
+I/O
+	
+
+
+
+CFW500 | 7-5  
+Comando Lógico e Referência de Velocidade 
+Descrição: 
+Definem a fonte de origem para a referência de velocidade na situação Local e na situação Remoto. Algumas observações sobre as opções desses parâmetros:  
+④ AIx: refere-se ao sinal da entrada analógica conforme Seção 12.1 ENTRADAS ANALÓGICAS na página 12-1.  ④ HMI: o valor da referência ajustado pelas teclas e está contido no parâmetro P0121. ④ E.P.: potenciômetro eletrônico, consulte Seção 12.5 ENTRADAS DIGITAIS na página 12-13. ④ Multispeed: consulte a Seção 12.5 ENTRADAS DIGITAIS na página 12-13.  
+④ Quando P0203 = 1, o valor programado em P0221 e P0222 passa a ser setpoint do PID e não mais a referência  de velocidade. O Setpoint do PID é mostrado em P0040 e salvo em P0525 quando a fonte são as teclas da HMI. 
+④ AIx > 0: os valores negativos da referência AIx são zerados. 
+④ CO/DN/PB/Eth: interface CANopen, DeviceNet, Profibus DP ou Ethernet. 
+P0223 – Seleção do Sentido do Giro – Situação LOCAL 
+P0226 – Seleção do Sentido do Giro – Situação REMOTO 
+7 
+Faixa de  Valores: 
+0 = Horário 
+1 = Anti-horário 
+2 = Tecla HMI (H) 
+3 = Teclas HMI (AH) 4 = DIx 
+5 = Serial/USB (H) 
+6 = Serial/USB (AH) 7 = Sem Função 
+8 = Sem Função 
+9 = CO/DN/PB/Eth (H) 10 = CO/DN/PB/Eth (AH) 11 = Sem Função 
+12 = SoftPLC  
+Padrão: P0223 = 2  P0226 = 4  
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+ I/O
+	
+
+
+
+Definem a fonte de origem para o comando “Sentido de Giro” na situação Local e Remoto, onde:  ④ H: significa default horário na energização do inversor.  
+④ AH: significa default anti-horário na energização do inversor.  
+④ DIx: consulte a Seção 12.5 ENTRADAS DIGITAIS na página 12-13. 
+④ A opção polaridade AI3 (11) define o sentido de giro anti-horário se a referida entrada analógica operacionalizada  pelo ganho e offset resultar em sinal negativo conforme Seção 12.1 ENTRADAS ANALÓGICAS na página 12-1.  
+④ CO/DN/PB/Eth: interface CANopen, DeviceNet, Profibus DP ou Ethernet.
+7-6 | CFW500 
+Comando Lógico e Referência de Velocidade 
+P0224 – Seleção do Gira/Para – Situação LOCAL P0227 – Seleção do Gira/Para – Situação REMOTO 
+Faixa de  Valores: 
+0 = Teclas HMI 1 = DIx 
+2 = Serial/USB 3 = Sem Função 4 = CO/DN/PB/Eth 5 = SoftPLC 
+Padrão: P0224 = 0  P0227 = 1  
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+ I/O
+	
+
+
+
+Definem a fonte de origem para o comando Gira/Para na situação Local e Remoto. Este comando corresponde  às funções implementadas em qualquer uma das fontes de comando capaz de habilitar o movimento do  motor, ou seja, Habilita Geral, Habilita Rampa, Avanço, Retorno, Liga, Desliga, JOG, etc. 
+P0225 – Seleção de JOG – Situação LOCAL 
+7 
+P0228 – Seleção de JOG – Situação REMOTO 
+Faixa de  Valores: 
+0 = Inativo 
+1 = Teclas HMI 2 = DIx 
+3 = Serial/USB 4 = Sem Função 5 = CO/DN/PB/Eth 6 = SoftPLC 
+Padrão: P0225 = 1  P0228 = 2 
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+ I/O
+	
+
+
+
+Definem a fonte de origem para a função JOG na situação Local e Remoto. A função JOG significa um  comando de Gira/Para adicionado à referência definida por P0122 veja Item 7.2.3 Parâmetros para Referência  de Velocidade na página 7-9. 
+7.2 REFERÊNCIA DE VELOCIDADE  
+A referência de velocidade é o valor aplicado na entrada do módulo de rampa de aceleração (P0001) para controle  da frequência aplicada na saída do inversor (P0002) e por consequência da velocidade no eixo do motor. 
+Internamente a CPU do inversor utiliza variáveis de 16 bits com sinal para tratamento das referências de velocidade.  Além disso, o fundo de escala da referência, frequência de saída e variáveis relacionadas são definidas em 500.0 Hz.  Por outro lado, dependendo da fonte, esta escala é alterada convenientemente em função da interface com o usuário  por padronização ou requisitos de aplicação. 
+De uma forma geral, as referências digitais são definidas por parâmetros como: teclas da HMI (P0121), Multispeed  (P0124 a P0131), E.P. e JOG, têm uma escala de 0.0 a 500.0 Hz com resolução de 0.1 Hz. Por outro lado, a  referência via entrada analógica utiliza a escala interna de 16 bits com sinal, com um fundo de escala em 500.0 Hz.  
+A referência de velocidade via HMI pode ser a tecla JOG ou potenciômetro eletrônico das teclas " " e " "  sobre o parâmetro P0121.
+CFW500 | 7-7  
+Comando Lógico e Referência de Velocidade 
+Já nas entradas digitais (DIx) a referência é definida de acordo com as funções pré-definidas para P0263 até P0270.  
+A referência de velocidade via entradas analógicas e entrada em frequência está de acordo com os parâmetros  de sinal, ganho e offset P0230 a P0250. O fundo de escala da referência é definido sempre por P0134, ou seja,  valor máximo na AIx equivale a referência de velocidade igual a P0134. 
+As referências digitais Serial/USB, CANopen, DeviceNet e SoftPLC atuam sobre uma escala padronizada chamada  “Velocidade 13 bits”, onde o valor 8192 (213) equivale a velocidade nominal do motor por P0403. Estas referências  são acessadas através dos parâmetros P0683, P0685 e do marcador de sistema da SoftPLC, respectivamente.  
+Embora as referências digitais tenham uma escala diferenciada e os parâmetros de referência de velocidade  com sua faixa de 0,0 a 500,0 Hz, conforme descrições anteriores. O valor da frequência na entrada da rampa  (P0001) é sempre limitado por P0133 e P0134. Por exemplo, a referência JOG é dada por P0122, este parâmetro  pode ser ajustado em até 500,0 Hz, porém o valor aplicado à entrada da rampa como referência será limitado  por P0134 quando a função é executada. 
+Tabela 7.1: Resumo de escalas e resolução das referências de velocidade 
+Referência 
+	Fundo de Escala 
+	Resolução
+	Entradas analógicas (AIx). 
+	- P0134 a P0134 
+	10 bits ou (P0134/1024).
+	Redes de comunicação e SoftPLC. 
+	-500,0 Hz a 500,0 Hz 
+	Velocidade 13 Bits (P0403/8192).
+	Parâmetros da HMI. 
+	-500,0 Hz a 500,0 Hz 
+	0,1 Hz
+	
+
+
+
+7.2.1 Limites para a Referência de Velocidade  
+7 
+Embora os parâmetros para ajuste da referência tenham uma faixa ampla de valores (0 a 500,0 Hz), o valor  aplicado a rampa é limitado por P0133 e P0134. Portanto, os valores em módulo fora desta faixa não terão efeito  sobre a referência.  
+P0133 – Referência de Velocidade Mínima 
+Faixa de  Valores: 
+0,0 a 500,0 Hz Padrão: 3,0 Hz 
+P0134 – Referência de Velocidade Máxima 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0,0 a 500,0 Hz Padrão: 66,0 (55,0) Hz 
+BASIC
+	
+
+
+
+Limites para a referência de velocidade do inversor. Estes limites são aplicados a qualquer fonte de referência,  mesmo no caso da referência de velocidade 13 bits.  
+7.2.2 Backup da Referência de Velocidade 
+P0120 – Backup da Referência de Velocidade 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI:
+0 = Inativo 
+1 = Ativo 
+2 = Backup por P0121 
+Padrão: 1 
+7-8 | CFW500 
+Comando Lógico e Referência de Velocidade 
+Descrição: 
+Esse parâmetro define a operação da função de backup da referência de velocidade entre as opções ativo  (P0120 = 1), inativo (P0120 = 0) e por P0121 (P0120 = 2). Esta função determina a forma do backup das  referências digitais e das fontes: HMI (P0121), E.P., Serial/USB (P0683), CANopen/DeviceNet (P0685), SoftPLC  (P0687) e Setpoint do PID (P0525) conforme Tabela 7.2 na página 7-9. 
+Tabela 7.2: Opções do parâmetro P0120 
+P0120 
+	Valor Inicial da Referência na Habilitação ou Energização
+	0 
+	Valor de P0133. 
+	1 
+	Último valor ajustado.
+	2 
+	Valor de P0121.
+	
+
+
+
+Se P0120 = Inativa, o inversor não salvará o valor da referência de velocidade quando for desabilitado. Assim,  quando o inversor for novamente habilitado, o valor da referência de velocidade assumirá o valor do limite  mínimo de velocidade (P0133).  
+Se P0120 = Ativa, o valor ajustado na referência não é perdido quando o inversor é desabilitado ou desenergizado.  
+Se P0120 = Backup por P0121, o valor inicial da referência é fixo por P0121 na habilitação ou energização do  inversor. 
+7.2.3 Parâmetros para Referência de Velocidade  
+7 
+P0121 – Referência de Velocidade via HMI 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0,0 a 500,0 Hz Padrão: 3,0 Hz 
+O parâmetro P0121 armazena a referência de velocidade via HMI (P0221 = 0 ou P0222 = 0). Quando as teclas " " e " " estiverem ativas e a HMI no modo de monitoração, o valor de P0121 é incrementado e mostrado no  display principal da HMI. Além disso, o P0121 é utilizado como entrada para a função de backup da referência. 
+NOTA! 
+O valor máximo de ajuste do parâmetro P0121 via HMI é limitado por P0134.
+	
+
+
+
+P0122 – Referência de Velocidade para JOG 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+-500,0 a 500,0 Hz Padrão: 5,0 Hz 
+Durante o comando de JOG, o motor acelera até o valor definido em P0122, seguindo a rampa de  aceleração ajustada de acordo com P0105. Este comando pode ser ativo por qualquer das fontes  conforme Seção 7.1 SELEÇÃO PARA COMANDO LÓGICO E REFERÊNCIA DE VELOCIDADE na página  7-1. Os valores negativos determinam um sentido de giro contrário ao definido pela palavra de comando do  inversor.
+CFW500 | 7-9  
+Comando Lógico e Referência de Velocidade 
+P0124 – Referência 1 Multispeed 
+Faixa de  Valores: 
+-500,0 a 500,0 Hz Padrão: 3,0 Hz 
+P0125 – Referência 2 Multispeed 
+Faixa de  Valores: 
+-500,0 a 500,0 Hz Padrão: 10,0 (5,0) Hz 
+P0126 – Referência 3 Multispeed 
+Faixa de  Valores: 
+-500,0 a 500,0 Hz Padrão: 20,0 (10,0) Hz 
+P0127 – Referência 4 Multispeed 
+Faixa de  
+Valores: 
+7 
+-500,0 a 500,0 Hz Padrão: 30,0 (20,0) Hz 
+P0128 – Referência 5 Multispeed 
+Faixa de  Valores: 
+-500,0 a 500,0 Hz Padrão: 40,0 (30,0) Hz 
+P0129 – Referência 6 Multispeed 
+Faixa de  Valores: 
+-500,0 a 500,0 Hz Padrão: 50,0 (40,0) Hz 
+P0130 – Referência 7 Multispeed 
+Faixa de  Valores: 
+-500,0 a 500,0 Hz Padrão: 60,0 (50,0) Hz 
+P0131 – Referência 8 Multispeed 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+-500,0 a 500,0 Hz Padrão: 66,0 (55,0) Hz 
+Através da combinação de até três entradas digitais é selecionado 1 entre 8 níveis que compõem a referência  Multispeed. Consulte a descrição das entradas digitais na Seção 12.5 ENTRADAS DIGITAIS na página 12-13,  bem como a seleção da referência na Seção 7.1 SELEÇÃO PARA COMANDO LÓGICO E REFERÊNCIA DE  VELOCIDADE na página 7-1. Os valores negativos determinam um sentido de giro contrário ao definido pela  palavra de comando do inversor (Bit 2 de P0682 e P0684). 
+7-10 | CFW500 
+Comando Lógico e Referência de Velocidade 
+A Figura 7.4 na página 7-11 e a Tabela 7.3 na página 7-11 ilustram o funcionamento do Multispeed, considerando  entradas digitais programadas para NPN em P0271. Embora a entrada digital mais significativa possa ser  programada na DI1, DI2, DI5 ou DI6, somente uma destas opções é permitida, caso contrário o estado config  (CONF), conforme Seção 5.6 SITUAÇÕES PARA O ESTADO CONFIG na página 5-6 é ativado para indicar  incompatibilidade da parametrização. 
+Frequência de  
+saída 
+P0127 
+P0126 
+P0125 
+P0124 
+DI1 ou DI2 
+DI5 ou DI6 
+P0131 
+P0130 
+P0129 
+P0128 
+Rampa de  
+aceleração 
+Tempo 
+Ativa 
+7 
+Inativa 
+Ativa 
+Inativa DI3 ou DI7 Ativa 
+DI4 ou DI8 
+Inativa 
+Figura 7.4: Gráfico de funcionamento da função Multispeed 
+Tabela 7.3: Velocidades Multispeed 
+8 Velocidades
+	
+
+	4 Velocidades
+	
+
+	
+
+	2 Velocidades
+	DI1 ou DI2 ou DI5 ou DI6 
+	DI3 ou DI7 
+	DI4 ou DI8 
+	Referência de Velocidade
+	Aberta 
+	Aberta 
+	Aberta 
+	P0124
+	Aberta 
+	Aberta 
+	0 V 
+	P0125
+	Aberta 
+	0 V 
+	Aberta 
+	P0126
+	Aberta 
+	0 V 
+	0 V 
+	P0127
+	0 V 
+	Aberta 
+	Aberta 
+	P0128
+	0 V 
+	Aberta 
+	0 V 
+	P0129
+	0 V 
+	0 V 
+	Aberta 
+	P0130
+	0 V 
+	0 V 
+	0 V 
+	P0131
+	
+
+
+
+7.2.4 Referência via Potenciômetro Eletrônico  
+A função Potenciômetro Eletrônico (E.P.) permite que a referência de velocidade seja ajustada por meio de 2  entradas digitais (uma para incrementá-la e a outra para decrementá-la). 
+Para habilitar essa função, deve-se primeiramente configurar a referência de velocidade via E.P., fazendo P0221 = 7  e/ou P0222 = 7. Após habilitada esta função, basta programar duas das entradas digitais (P0263 a P0270) em 11 ou  33 (Acelera E.P.) e 12 ou 34 (Desacelera E.P.).  
+A Figura 7.5 na página 7-12 ilustra o funcionamento da função E.P., usando a DI3 como Acelera E.P. (P0265 = 11),  a DI4 como Desacelera E.P. (P0266 = 12) e a DI1 como Gira/Para (P0263 = 1). Neste exemplo, o reset da referência  é feito com o inversor desabilitado e acionando ambas as entradas Acelera e Desacelera E.P. Além disso, pode-se  observar a ação das entradas individualmente, bem como a ação do backup da referência (P0120 = 1) quando o  comando Gira/Para é aberto e fechado novamente.
+CFW500 | 7-11  
+Comando Lógico e Referência de Velocidade 
+7 
+DIx - Acelera 
+DIx - Desacelera 
+Habilitação (RUN) 
+P0133 
+Frequência de Saída 
+DIx - Acelera 
+Reset 
+DIx - Desacelera 
+Gira/Para 
+& 
+Ativa 
+Ativa Inativa 
+RAMPA 
+Reset 
+Inativa 
+Ativa 
+Referência Inativa 
+Tempo Tempo Tempo Tempo 
+Figura 7.5: Gráfico de funcionamento da função E.P. 
+7.2.5 Entrada Analógica AIx e Entrada em Frequência FI  
+Os comportamentos das entradas analógica e em frequência são descritos em detalhe na Seção 12.1 ENTRADAS  ANALÓGICAS na página 12-1. Assim, após o devido tratamento do sinal, este é aplicado à entrada da rampa de  acordo com a seleção da referência descrita na Seção 7.1 SELEÇÃO PARA COMANDO LÓGICO E REFERÊNCIA  DE VELOCIDADE na página 7-1.  
+7.2.6 Referência de Velocidade 13 bits  
+A referência de velocidade 13 bits é uma escala baseada na velocidade nominal do motor (P0402) ou na  frequência nominal do motor (P0403). No CFW500, o parâmetro P0403 é tomado como base para a determinação  da referência de velocidade. Assim, o valor de velocidade 13 bits tem uma faixa de 16 bits com sinal, ou seja,  -32768 a 32767, porém a frequência nominal em P0403 equivale ao valor 8192. Portanto, o valor máximo da  faixa 32767 equivale a 4 vezes P0403. 
+A referência de velocidade 13 bits é usada nos parâmetros P0681, P0683, P0685 e nos marcadores de sistema  para a SoftPLC, os quais estão relacionados às interfaces com redes de comunicação e função SoftPLC do produto.  
+7.3 PALAVRA DE CONTROLE E ESTADO DO INVERSOR 
+A palavra de controle do inversor é o agrupamento de um conjunto de bits para determinar os comandos recebidos  pelo inversor de uma fonte externa. Por outro lado, a palavra de estado é outro conjunto de bits que definem os  estados do inversor. Desta forma, as palavras de controle e estado estabelecem uma interface para troca de  informações entre o inversor e um módulo externo, tal como uma rede de comunicação ou um controlador qualquer. 
+7-12 | CFW500 
+Comando Lógico e Referência de Velocidade 
+P0680 – Estado Lógico 
+Faixa de  Valores: 
+0000h a FFFFh Padrão: 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ, NET
+	
+
+
+
+A palavra de estado do inversor é única para todas as fontes e somente pode ser acessada para leitura.  Ela indica todos os estados e modos relevantes de operação do inversor. A função de cada bit de P0680 é  descrita na Tabela 7.4 na página 7-13. 
+Tabela 7.4: Palavra de estado 
+Bit 
+	Função 
+	Descrição
+	0 
+	Reservado.
+	
+
+	1 
+	Comando Gira. 
+	0: Não houve comando Gira. 
+1: Houve comando Gira.
+	2 e 3 
+	Reservado.
+	
+
+	4 
+	Parada Rápida. 
+	0: Parada Rápida inativa. 
+1: Parada Rápida ativa.
+	5 
+	2ª Rampa. 
+	0: 1ª Rampa de aceleração e desaceleração por P0100 e P0101. 
+1: 2ª Rampa de aceleração e desaceleração por P0102 e P0103.
+	6 
+	Estado Config.
+	0: Inversor operando normalmente. 
+1: Inversor em estado de configuração. Indica uma condição especial na qual o inversor não pode  ser habilitado, pois possui incompatibilidade de parametrização.
+	7 
+	Alarme. 
+	0: Inversor não está no estado de Alarme. 
+1: Inversor está no estado de Alarme.
+	8 
+	Girando. 
+	0: Motor está parado. 
+1: Inversor está girando conforme referência e comando.
+	9 
+	Habilitado. 
+	0: Inversor está desabilitado geral. 
+1: Inversor está Habilitado geral e pronto para girar motor.
+	10 
+	Horário. 
+	0: Motor girando no sentido anti-horário. 
+1: Motor girando no sentido horário.
+	11 
+	JOG. 
+	0: Função JOG inativa. 
+1: Função JOG ativa.
+	12 
+	Remoto. 
+	0: Inversor em modo Local. 
+1: Inversor em modo Remoto.
+	13 
+	Subtensão. 
+	0: Sem Subtensão. 
+1: Com Subtensão.
+	14 
+	Automático. 
+	0: Em modo Manual (função PID). 
+1: Em modo Automático (função PID).
+	15 
+	Falha. 
+	0: Inversor não está no estado de Falha. 
+1: Alguma falha registrada pelo inversor.
+	
+
+
+
+7 
+P0690 – Estado Lógico 2 
+Faixa de  Valores: 
+0000h a FFFFh Padrão: 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ, NET
+	
+
+
+
+O parâmetro P0690 apresenta outros bits de sinalização para funções exclusivamente implementadas no  CFW500. A função de cada bit de P0690 é descrita na Tabela 7.5 na página 7-14.
+CFW500 | 7-13  
+Comando Lógico e Referência de Velocidade 
+Tabela 7.5: Palavra de estado 
+Bit 
+	Função 
+	Descrição
+	0 a 3 
+	Reservado.
+	
+
+	4 
+	Redução Fs. 
+	0: Redução da frequência de saída inativa. 
+1: Redução da frequência de saída ativa. 
+	5 
+	Estado Dormir. 
+	0: Estado Dormir inativo. 
+1: Estado Dormir ativo.
+	6 
+	Rampa  
+Desaceleração.
+	0: Sem desaceleração. 
+1: Inversor desacelerando. 
+	7 
+	Rampa Aceleração. 
+	0: Sem aceleração. 
+1: Inversor acelerando. 
+	8 
+	Rampa Congelada. 
+	0: Rampa em operação normal. 
+1: A trajetória da rampa está congelada por alguma fonte de comando ou função interna.
+	9 
+	Setpoint Ok. 
+	0: Frequência de saída ainda não alcançou a referência.  
+1: Frequência de saída alcançou a referência.
+	10 
+	Regulação do  
+Barram. CC.
+	0: Regulação do Barramento CC ou Limitação de Corrente inativa.  
+1: Regulação do Barramento CC ou Limitação de Corrente ativa (P0150).
+	11 
+	Configuração em  
+50 Hz.
+	0: Padrão de fábrica carregado em 60 Hz (P0204 = 5). 
+1: Padrão de fábrica carregado em 50 Hz (P0204 = 6).
+	12 
+	Ride-Through. 
+	0: Sem execução Ride-Through. 
+1: Executando Ride-Through.
+	13 
+	Flying Start. 
+	0: Sem execução Flying Start. 
+1: Executando Flying Start.
+	14 
+	Frenagem CC. 
+	0: Frenagem CC inativa. 
+1: Frenagem CC ativa.
+	15 
+	Pulsos PWM. 
+	0: Pulsos de tensão PWM na saída desabilitados. 
+1: Pulsos de tensão PWM na saída habilitados.
+	
+
+
+
+7 
+P0682 – Controle Serial 
+P0684 – Controle CANopen/DeviceNet/Profibus DP/Ethernet 
+Faixa de  Valores: 
+0000h a FFFFh Padrão: 
+Propriedades: ro 
+Grupos de  
+Acesso via HMI: Descrição: 
+READ, NET
+	
+
+
+
+A palavra de controle do inversor para uma determinada fonte é acessível para leitura e escrita, porém para as  demais fontes somente é permitido o acesso para leitura. O inversor tem uma palavra comum para interface,  a qual é definida pela funcionalidade de seus bits separadamente conforme a Tabela 7.6 na página 7-15. 
+7-14 | CFW500 
+Comando Lógico e Referência de Velocidade 
+Tabela 7.6: Palavra de controle 
+Bit 
+	Função 
+	Descrição
+	0 
+	Habilita Rampa. 
+	0: Para motor por rampa de desaceleração. 
+1: Gira motor de acordo com a rampa de aceleração até atingir o valor da referência de velocidade.
+	1 
+	Habilita Geral. 
+	0: Desabilita geral o inversor, interrompendo a alimentação para o motor. 
+1: Habilita Geral o inversor, permitindo a operação do motor.
+	2 
+	Girar Horário. 
+	0: Girar motor no sentido oposto ao sinal da referência (Anti-horário). 
+1: Girar motor no sentido indicado pelo sinal da referência (Horário).
+	3 
+	Habilita JOG. 
+	0: Desabilita a função JOG. 
+1: Habilita a função JOG.
+	4 
+	Remoto. 
+	0: Inversor vai para o modo Local. 
+1: Inversor vai para o modo Remoto.
+	5 
+	2ª Rampa. 
+	0: Rampa de aceleração e desaceleração por P0100 e P0101. 
+1: Rampa de aceleração e desaceleração por P0102 e P0103.
+	6 
+	Parada Rápida. 
+	0: Desabilita Parada Rápida. 
+1: Habilita Parada Rápida.
+	7 
+	Reset de Falha. 
+	0: Sem função. 
+1: Se estiver em estado de falha, executa o reset da falha.
+	8 a 15 
+	Reservado.
+	
+
+	
+
+
+
+P0229 – Modo de Parada 
+Faixa de  Valores: 
+0 = Parada por Rampa 1 = Parada por Inércia 2 = Parada Rápida 
+Padrão: 0  
+7 
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+I/O
+	
+
+
+
+Define o modo de parada do motor quando o inversor recebe o comando “Para”. A Tabela 7.7 na página 7-15 descreve as opções desse parâmetro.  
+Tabela 7.7: Seleção do modo de parada 
+P0229 
+	Descrição
+	0 
+	O inversor aplicará a rampa de parada programada em P0101 e/ou P0103.
+	1 
+	O motor irá girar livre até parar.
+	2 
+	O inversor aplicará a rampa de parada programada em P0106.
+	
+
+
+
+NOTA! 
+Quando programado o modo de Parada por Inércia e a função Flying Start estiver desabilitada,  somente acione o motor se o mesmo estiver parado.
+	
+
+
+
+NOTA! 
+Este parâmetro se aplica a todas as fontes de comando do inversor, porém foi criado com o  objetivo de permitir que o comando via HMI fosse capaz de desabilitar o motor por inércia ao invés  de rampa de desaceleração. Desta maneira, quando P0229 = 1, o Bit 0 da palavra de controle  (Habilita Rampa) tem função análoga ao bit 1 (Habilita Geral). Da mesma forma, as funções das  entradas digitais como: Gira/Para, Avanço/Retorno e Comando a Três Fios desligam o motor por  inércia nesta condição de P0229.
+	
+
+
+
+7.3.1 Controle via Entradas HMI  
+Ao contrário das interfaces de redes e SoftPLC, os comandos da HMI não acessam diretamente a palavra de  controle do inversor, devido as limitações de funções das teclas e comportamento da HMI. O comportamento  da HMI é descrito no Capítulo 4 HMI E PROGRAMAÇÃO BÁSICA na página 4-1. 
+CFW500 | 7-15  
+Comando Lógico e Referência de Velocidade 
+7.3.2 Controle via Entradas Digitais  
+Ao contrário das interfaces de redes e SoftPLC, as entradas digitais não acessam diretamente a palavra de controle  do inversor, pois existem diversas funções para as DIx são definidas de acordo com as aplicações.  
+Tais funções das entradas digitais são detalhadas no Capítulo 12 ENTRADAS E SAÍDAS DIGITAIS E ANALÓGICAS  na página 12-1. 
+7 
+7-16 | CFW500 
+Tipos de Controle do Motor Disponíveis 
+8 TIPOS DE CONTROLE DO MOTOR DISPONÍVEIS 
+O inversor alimenta o motor com tensão, corrente e frequência variáveis, através das quais, consegue-se controlar  a velocidade do motor. Os valores aplicados ao motor seguem uma estratégia de controle, a qual depende do  tipo de controle do motor selecionado e dos ajustes dos parâmetros do inversor. 
+A escolha do tipo de controle adequado à aplicação depende das exigências estáticas e dinâmicas de torque  e velocidade da carga acionada, ou seja, o tipo do controle está ligado diretamente à performance requerida.  Além disso, o ajuste dos parâmetros envolvidos é de fundamental importância para alcançar tal performance. 
+O CFW500 é equipado com dois modos de controle para o motor de indução trifásico, ou seja: ④ Controle Escalar V/f: para aplicações básicas, sem regulação da velocidade de saída. ④ Controle Vetorial Sensorless VVW: para aplicações de alta performance na regulação da velocidade de saída. 
+No Capítulo 9 CONTROLE ESCALAR V/f na página 9-1 e Capítulo 10 CONTROLE VETORIAL VVW na página  10-1, estão descritos em detalhes, cada um destes tipos de controle, os parâmetros relacionados e orientações  referentes à utilização de cada um destes modos. 
+P0202 – Tipo de Controle 
+Faixa de  Valores: 
+0 = V/f 
+1 = Sem Função 2 = Sem Função 3 = Sem Função 4 = Sem Função 5 = VVW  
+Padrão: 0  
+8 
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: Descrição: 
+STARTUP
+	
+
+
+
+Seleciona o tipo de controle do motor de indução trifásico utilizado. 
+NOTA! 
+Quando o modo V V W é programado via HMI (P0202 = 5), o menu STARTUP é ativado  automaticamente, forçando um Start-up orientado para ajuste do modo vetorial. Veja Seção 10.2  COLOCAÇÃO EM FUNCIONAMENTO NO MODO VVW na página 10-8.
+	
+
+
+
+P0139 – Filtro da Corrente de Saída 
+Faixa de  
+Valores: 
+Propriedades: Grupos de  
+Acesso via HMI: Descrição: 
+0 a 9999 ms Padrão: 50 ms 
+Constante de tempo do filtro para a corrente total e ativa de saída. Deve-se considerar um tempo de resposta  do filtro igual a três vezes a constante de tempo ajustada em P0139 (50 ms).
+CFW500 | 8-1  
+Tipos de Controle do Motor Disponíveis 
+P0140 – Filtro da Compensação de Escorregamento 
+Faixa de  Valores: 
+0 a 9999 ms Padrão: 500 ms 
+Propriedades: VVW 
+Grupos de  
+Acesso via HMI: 
+Descrição: 
+Constante de tempo do filtro para a compensação de escorregamento na frequência de saída. Deve-se  considerar um tempo de resposta do filtro igual a três vezes a constante de tempo ajustada em P0140 (500 ms). 
+P0397 – Configuração do Controle 
+Faixa de  Valores: 
+Bit 0 = Comp. Regen. 
+Bit 1 = Comp. Tempo Morto Bit 2 = Estabilização de Is Bit 3 = Red. P0297 no A0050 
+Padrão: 000Bh 
+Propriedades: cfg 
+Grupos de  
+Acesso via HMI: 
+Descrição: 
+8 
+Este parâmetro de configuração é a entrada no formato hexadecimal, onde cada bit tem um significado de  acordo com a descrição abaixo. 
+④ Compensação do Escorregamento durante a Regeneração (Bit 0) 
+A regeneração é um modo de operação do inversor que ocorre quando o fluxo de potência parte do motor  para o inversor. O Bit 0 de P0397 (ajustado em 0) permite que a compensação de escorregamento seja  desligada nesta situação. Esta opção é particularmente útil quando a compensação durante a desaceleração  do motor é necessária. 
+④ Compensação do Tempo Morto (Bit 1) 
+O tempo morto é um intervalo de tempo introduzido no PWM necessário à comutação da ponte inversora de  potência. Por outro lado, o tempo morto gera distorções na tensão aplicada ao motor, as quais podem causar  redução do torque em baixas velocidades e oscilações de corrente em motores acima de 5 HP operando  a vazio. Desta forma, a compensação do tempo morto mede a largura dos pulsos de tensão na saída e  compensa esta distorção introduzida pelo tempo morto.  
+O Bit 1 de P0397 (ajustado em 0) permite que esta compensação seja desativada. Este recurso é útil quando  há algum problema relacionado ao circuito interno do inversor para realimentação de pulsos ocasionando  falha F0182. Então, a compensação e a falha podem ser desabilitadas enquanto a causa do problema não ser  solucionada.  
+④ Estabilização da Corrente de Saída (Bit 2) 
+Motores de alto rendimento com potência acima de 5 HP operam no limite da estabilidade, podendo ficar  instáveis quando acionados por inversores de frequência e operando a vazio. Portanto, nesta situação pode  ocorrer uma ressonância na corrente de saída que pode chegar ao nível de sobrecorrente F0070. O Bit 2 de  P0397 (ajustado em 1) ativa um algoritmo de regulação da corrente de saída em malha fechada, que tenta  compensar as oscilações de corrente ressonante, elevando o desempenho em situações de carga baixa/sem  carga.  
+④ Redução de P0297 em Alarme A0050 (Bit 3) 
+O Bit 3 do P0397 controla a ação da proteção de sobretemperatura, consulte a Seção 15.4 PROTEÇÃO DE  SOBRETEMPERATURA DOS IGBTs (F0051 e A0050) na página 15-5.
+8-2 | CFW500 
+Tipos de Controle do Motor Disponíveis 
+ATENÇÃO! 
+O ajuste padrão de P0397 atende a grande maioria das necessidades das aplicações do inversor. Evite modificar o seu conteúdo sem conhecimento das consequências associadas. Em caso de  dúvida consulte a assistência técnica WEG antes de alterar o P0397.
+	
+
+
+
+8
+CFW500 | 8-3  
+Tipos de Controle do Motor Disponíveis 
+8
+8-4 | CFW500 
+Controle Escalar (V/f) 
+9 CONTROLE ESCALAR V/f 
+Trata-se do controle clássico para motor de indução trifásico, baseado em uma curva que relaciona a frequência  e a tensão de saída. O inversor funciona como uma fonte de tensão e frequência variável gerando valores de  frequência e tensão de acordo com esta curva. É possível o ajuste desta curva, para motores padrão 50 Hz,  60 Hz ou especiais.  
+Conforme o blocodiagrama da Figura 9.1 na página 9-2, a referência de velocidade f* é limitada por P0133 e  P0134 e aplicada à entrada do bloco “CURVA V/f”, onde são obtidas a amplitude e frequência da tensão de saída  imposta ao motor. Para mais detalhes sobre a referência de velocidade veja o Capítulo 7 COMANDO LÓGICO E  REFERÊNCIA DE VELOCIDADE na página 7-1. 
+Através do monitoramento da corrente de saída total e ativa, e da tensão do barramento CC são implementados  compensadores e reguladores que auxiliam na proteção e desempenho do controle V/f. O funcionamento e  parametrização destes blocos são detalhados na Seção 11.2 LIMITAÇÃO DA TENSÃO DO BARRAMENTO CC  E DA CORRENTE DE SAÍDA na página 11-3.  
+A vantagem do controle V/f é a sua simplicidade e a necessidade de poucos ajustes. A colocação em funcionamento  é rápida e simples, em geral, necessita de pouca ou nenhuma modificação. Além disso, nos casos em que a  aplicação permite o ajuste da curva V/f, resulta em economia de energia. 
+O controle V/f ou escalar é recomendado para os seguintes casos: 
+④ Acionamento de vários motores com o mesmo inversor (acionamento multimotor).  
+④ Economia de energia no acionamento de cargas com relação quadrática de torque/velocidade. ④ Corrente nominal do motor é menor que 1/3 da corrente nominal do inversor.  
+④ Para propósito de testes, o inversor é ligado sem motor ou com um motor pequeno sem carga. 9 
+④ Aplicações onde a carga conectada ao inversor não é um motor de indução trifásico. 
+CFW500 | 9-1  
+Controle Escalar (V/f) 
+Rede 
+P0004 Ud 
+Sentido  
+de giro 
+PWM 
+Modulação  
+space vector  
+V, iW i 
+Io 
+MI  
+3φ 
+P0202 = 0 (Controle V/f) 
+P0137 
+m P0007 
+lxR 
+m 
+PWM 
+fo P0002 
+slip 
+f 
+Ângulo,  
+sextante 
+m 
+V, iW i 
+Cálculo de Ia 
+P0138 
+P0011 Ia 
+V, iW 
+i 
+Cálculo de Io 
+P0003 
+Io 
+9 
+P0150 = 1 ou P0150 = 3 
++ 
+Curva V/f 
++ 
++ 
+f 
++ 
+Acelera rampa  
+P0152 
+Ud 
+P0151 
+V 
+fUd 
+P0142 
+P0143  
+P0144  
+P0136 
+f 
+P0147 
+P0146  
+P0145 
+Regulação do Barramento CC 
+Hold de rampa  
+P0150 = 0 ou P0150 = 2 
+Ud 
+fUd 
+Ud 
+P0151 
+Hold 
++ 
+P0133 
+P0100-P0104 
++ 
+fr 
+P0134 
+t 
+Zero 
+Io P0135 
+P0151 
+f* 
+Limitação da  
+corrente de saída 
+Figura 9.1: Blocodiagrama do Controle Escalar V/f
+9-2 | CFW500
