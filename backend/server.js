@@ -78,3 +78,4 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 // Mantém a conexão estável para evitar Stopping Container
 server.keepAliveTimeout = 120000;
 server.headersTimeout = 125000;
+// Reiniciando sistema para deploy
