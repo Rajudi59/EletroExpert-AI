@@ -13,62 +13,76 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 /**
- * FUNÇÃO DE BUSCA: Vasculha todas as subpastas dentro de 'acervo'
+ * FUNÇÃO DE BUSCA INTELIGENTE: Navega em subpastas e evita sobrecarga
  */
 async function buscarConhecimentoTecnico() {
     try {
-        // O path.join resolve o problema de Windows vs Linux automaticamente
         const acervoPath = path.join(process.cwd(), 'frontend', 'acervo');
-        let conhecimentoExtraido = "";
+        let conhecimentoExtraido = "LISTA DE MANUAIS DISPONÍVEIS NO ACERVO:\n";
 
         if (fs.existsSync(acervoPath)) {
-            const lerRecursivo = async (diretorio) => {
-                const itens = fs.readdirSync(diretorio);
-                for (const item of itens) {
-                    const caminhoCompleto = path.join(diretorio, item);
-                    const stats = fs.lstatSync(caminhoCompleto);
-
-                    if (stats.isDirectory()) {
-                        await lerRecursivo(caminhoCompleto); // Entra na subpasta (ex: inversores)
+            // Função para listar todos os arquivos em todas as subpastas
+            const obterArquivos = (dir, listaDeArquivos = []) => {
+                const arquivos = fs.readdirSync(dir);
+                arquivos.forEach(arquivo => {
+                    const caminhoCompleto = path.join(dir, arquivo);
+                    if (fs.statSync(caminhoCompleto).isDirectory()) {
+                        obterArquivos(caminhoCompleto, listaDeArquivos);
                     } else {
-                        if (item.toLowerCase().endsWith('.pdf')) {
-                            const dataBuffer = fs.readFileSync(caminhoCompleto);
-                            const data = await pdf(dataBuffer);
-                            // Pega uma boa parte do manual (15.000 caracteres)
-                            conhecimentoExtraido += `\n--- MANUAL ENCONTRADO: ${item} ---\n${data.text.substring(0, 15000)}\n`;
-                        } else if (item.toLowerCase().endsWith('.txt')) {
-                            const conteudo = fs.readFileSync(caminhoCompleto, 'utf8');
-                            conhecimentoExtraido += `\n--- TEXTO ENCONTRADO: ${item} ---\n${conteudo}\n`;
-                        }
+                        listaDeArquivos.push(caminhoCompleto);
                     }
-                }
+                });
+                return listaDeArquivos;
             };
-            await lerRecursivo(acervoPath);
+
+            const todosArquivos = obterArquivos(acervoPath);
+            
+            // Filtramos apenas PDFs e TXTs
+            const manuaisParaLer = todosArquivos.filter(f => 
+                f.toLowerCase().endsWith('.pdf') || f.toLowerCase().endsWith('.txt')
+            );
+
+            // Lemos apenas os primeiros manuais para evitar "Erro 500" por tempo excedido
+            // Com 8GB de RAM, podemos ler os 5 primeiros arquivos de uma vez com folga
+            for (const caminho de manuaisParaLer.slice(0, 5)) {
+                const nomeArquivo = path.basename(caminho);
+                if (caminho.toLowerCase().endsWith('.pdf')) {
+                    const dataBuffer = fs.readFileSync(caminho);
+                    const data = await pdf(dataBuffer);
+                    conhecimentoExtraido += `\n--- CONTEÚDO DO MANUAL (${nomeArquivo}) ---\n${data.text.substring(0, 8000)}\n`;
+                } else {
+                    const conteudo = fs.readFileSync(caminho, 'utf8');
+                    conhecimentoExtraido += `\n--- DOCUMENTO (${nomeArquivo}) ---\n${conteudo}\n`;
+                }
+            }
         }
-        return conhecimentoExtraido || "AVISO: Nenhum manual foi localizado nas pastas.";
+        return conhecimentoExtraido || "O acervo está vazio ou a pasta não foi encontrada.";
     } catch (error) {
-        console.error("Erro ao ler arquivos:", error);
-        return "Erro técnico na leitura do acervo.";
+        console.error("Erro ao processar acervo:", error);
+        return "Erro técnico ao tentar ler os manuais do acervo.";
     }
 }
 
 app.post('/chat', async (req, res) => {
     try {
         const { question, image } = req.body;
+        
+        // Busca o conteúdo dos manuais
         const acervo = await buscarConhecimentoTecnico();
+        
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const promptSistema = `Você é o ElectroExpert-AI.
+        const promptSistema = `Você é o ElectroExpert-AI, um assistente técnico especializado em elétrica industrial.
         
-        CONTEÚDO DO SEU ACERVO TÉCNICO:
+        ACERVO TÉCNICO DISPONÍVEL:
         ${acervo}
 
-        REGRAS:
-        1. Use as informações dos manuais acima para responder.
-        2. Se encontrar a resposta, cite o nome do manual (ex: "De acordo com o manual do CFW500...").
-        3. Se não encontrar no acervo, avise que está usando conhecimento geral mas priorize a segurança.
+        DIRETRIZES:
+        1. Se a pergunta for sobre um parâmetro ou erro, procure nos manuais acima e cite o nome do arquivo.
+        2. Se não encontrar a informação exata no acervo, use seu conhecimento mas avise: "Não encontrei no acervo, mas seguindo a prática técnica..."
+        3. PRIORIDADE MÁXIMA: Segurança do operador e conformidade com NR-10/NR-12.
         
-        Pergunta: ${question}`;
+        PERGUNTA DO TÉCNICO: ${question}`;
 
         const result = await model.generateContent([
             promptSistema,
@@ -77,8 +91,9 @@ app.post('/chat', async (req, res) => {
 
         res.json({ answer: result.response.text() });
     } catch (error) {
-        res.status(500).json({ answer: "⚠️ Erro no servidor." });
+        console.error("Erro no endpoint de chat:", error);
+        res.status(500).json({ answer: "⚠️ Erro no servidor. O manual pode ser muito grande ou a chave API está instável." });
     }
 });
 
-app.listen(port, () => console.log(`⚡ Servidor ElectroExpert Ativo`));
+app.listen(port, () => console.log(`⚡ ElectroExpert Online - Sistema de Subpastas Operacional`));
