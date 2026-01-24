@@ -11,7 +11,7 @@ RUN npm install
 COPY . .
 
 # Informa a porta que a Railway utiliza
-EXPOSE 3000
+EXPOSE 8080
 
 # AJUSTE DEFINITIVO: O app.js está dentro da pasta backend
-CMD ["node", "backend/app.js"]
+CMD ["node", "backend/server.js"]
