@@ -9,57 +9,43 @@ const app = express();
 const port = process.env.PORT || 8080;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json({ limit: '20mb' }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 /**
- * FUNÇÃO DE BUSCA INTELIGENTE: Navega em subpastas e evita sobrecarga
+ * BUSCA INTELIGENTE EM TODAS AS SUBPASTAS
  */
-async function buscarConhecimentoTecnico() {
+async function buscarNoAcervo() {
     try {
         const acervoPath = path.join(process.cwd(), 'frontend', 'acervo');
-        let conhecimentoExtraido = "LISTA DE MANUAIS DISPONÍVEIS NO ACERVO:\n";
+        let conhecimentoExtraido = "";
 
-        if (fs.existsSync(acervoPath)) {
-            // Função para listar todos os arquivos em todas as subpastas
-            const obterArquivos = (dir, listaDeArquivos = []) => {
-                const arquivos = fs.readdirSync(dir);
-                arquivos.forEach(arquivo => {
-                    const caminhoCompleto = path.join(dir, arquivo);
-                    if (fs.statSync(caminhoCompleto).isDirectory()) {
-                        obterArquivos(caminhoCompleto, listaDeArquivos);
-                    } else {
-                        listaDeArquivos.push(caminhoCompleto);
-                    }
-                });
-                return listaDeArquivos;
-            };
+        if (!fs.existsSync(acervoPath)) return "Acervo não configurado.";
 
-            const todosArquivos = obterArquivos(acervoPath);
-            
-            // Filtramos apenas PDFs e TXTs
-            const manuaisParaLer = todosArquivos.filter(f => 
-                f.toLowerCase().endsWith('.pdf') || f.toLowerCase().endsWith('.txt')
-            );
+        // Função que varre todas as subpastas em busca de manuais
+        const varrerPastas = async (diretorio) => {
+            const itens = fs.readdirSync(diretorio);
+            for (const item of itens) {
+                const caminhoCompleto = path.join(diretorio, item);
+                const stat = fs.lstatSync(caminhoCompleto);
 
-            // Lemos apenas os primeiros manuais para evitar "Erro 500" por tempo excedido
-            // Com 8GB de RAM, podemos ler os 5 primeiros arquivos de uma vez com folga
-            for (const caminho de manuaisParaLer.slice(0, 5)) {
-                const nomeArquivo = path.basename(caminho);
-                if (caminho.toLowerCase().endsWith('.pdf')) {
-                    const dataBuffer = fs.readFileSync(caminho);
-                    const data = await pdf(dataBuffer);
-                    conhecimentoExtraido += `\n--- CONTEÚDO DO MANUAL (${nomeArquivo}) ---\n${data.text.substring(0, 8000)}\n`;
-                } else {
-                    const conteudo = fs.readFileSync(caminho, 'utf8');
-                    conhecimentoExtraido += `\n--- DOCUMENTO (${nomeArquivo}) ---\n${conteudo}\n`;
+                if (stat.isDirectory()) {
+                    await varrerPastas(caminhoCompleto); // Entra na próxima pasta (ex: inversores)
+                } else if (item.toLowerCase().endsWith('.pdf')) {
+                    console.log(`📖 Lendo manual: ${item}`);
+                    const buffer = fs.readFileSync(caminhoCompleto);
+                    const data = await pdf(buffer);
+                    // Pega os primeiros 10 mil caracteres para segurança e velocidade
+                    conhecimentoExtraido += `\n--- FONTE (${item}): ---\n${data.text.substring(0, 10000)}\n`;
                 }
             }
-        }
-        return conhecimentoExtraido || "O acervo está vazio ou a pasta não foi encontrada.";
+        };
+
+        await varrerPastas(acervoPath);
+        return conhecimentoExtraido || "Nenhum manual PDF encontrado nas pastas.";
     } catch (error) {
-        console.error("Erro ao processar acervo:", error);
-        return "Erro técnico ao tentar ler os manuais do acervo.";
+        console.error("Erro no Scanner:", error);
+        return "Erro ao processar manuais técnicos.";
     }
 }
 
@@ -67,22 +53,23 @@ app.post('/chat', async (req, res) => {
     try {
         const { question, image } = req.body;
         
-        // Busca o conteúdo dos manuais
-        const acervo = await buscarConhecimentoTecnico();
+        // O sistema vasculha as pastas (Inversores e outras que você criar)
+        const acervo = await buscarNoAcervo();
         
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const promptSistema = `Você é o ElectroExpert-AI, um assistente técnico especializado em elétrica industrial.
+        const promptSistema = `Você é o ElectroExpert-AI.
+        Abaixo está o conteúdo dos manuais técnicos encontrados no seu acervo (Pastas: Inversores e outros).
         
-        ACERVO TÉCNICO DISPONÍVEL:
+        ACERVO:
         ${acervo}
 
-        DIRETRIZES:
-        1. Se a pergunta for sobre um parâmetro ou erro, procure nos manuais acima e cite o nome do arquivo.
-        2. Se não encontrar a informação exata no acervo, use seu conhecimento mas avise: "Não encontrei no acervo, mas seguindo a prática técnica..."
-        3. PRIORIDADE MÁXIMA: Segurança do operador e conformidade com NR-10/NR-12.
+        REGRAS:
+        1. Se a informação sobre o parâmetro (ex: P0101) estiver no ACERVO, use-a e cite o manual.
+        2. Se não estiver, use seu conhecimento geral mas avise que não localizou no acervo técnico.
+        3. Priorize SEMPRE a segurança do técnico (NR-10).
         
-        PERGUNTA DO TÉCNICO: ${question}`;
+        PERGUNTA: ${question}`;
 
         const result = await model.generateContent([
             promptSistema,
@@ -91,9 +78,9 @@ app.post('/chat', async (req, res) => {
 
         res.json({ answer: result.response.text() });
     } catch (error) {
-        console.error("Erro no endpoint de chat:", error);
-        res.status(500).json({ answer: "⚠️ Erro no servidor. O manual pode ser muito grande ou a chave API está instável." });
+        console.error("Erro Chat:", error);
+        res.status(500).json({ answer: "⚠️ Erro ao processar. O manual pode ser muito pesado ou o servidor esgotou o tempo." });
     }
 });
 
-app.listen(port, () => console.log(`⚡ ElectroExpert Online - Sistema de Subpastas Operacional`));
+app.listen(port, () => console.log(`⚡ ElectroExpert pronto para expansão de acervo`));
