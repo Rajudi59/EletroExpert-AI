@@ -161,7 +161,7 @@
 
         try {
             // CORREÇÃO: Usando rota relativa para evitar erros na Railway
-            const response = await fetch("/api/ask", {
+            const response = await fetch("/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
