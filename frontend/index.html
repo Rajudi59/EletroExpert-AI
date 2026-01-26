@@ -20,7 +20,8 @@
             --cinza-bg: #e5e5e5;
             --cinza-input: #f1f3f4;
             --vermelho-fosco: #b84a4a;
-            --cinza-regua: #f8f9fa; /* Cinza bem claro para o início do degradê */
+            --grafite-escuro: #2c3e50; /* Cinza escuro industrial */
+            --grafite-medio: #455a64;
         }
 
         body {
@@ -29,49 +30,53 @@
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* RÉGUA SUPERIOR - DEGRADÊ CINZA CLARO PARA BRANCO */
+        /* RÉGUA SUPERIOR - DEGRADÊ ESCURO PROFISSIONAL */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: linear-gradient(to bottom, var(--cinza-regua) 0%, #ffffff 100%);
+            background: linear-gradient(to bottom, var(--grafite-escuro) 0%, #1a252f 100%);
             display: flex; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08); z-index: 1000;
-            border-bottom: 1px solid #ddd;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2); z-index: 1000;
+            border-bottom: 2px solid #111;
         }
 
         .nav-item {
             flex: 1; display: flex; align-items: center; justify-content: center;
             padding: 18px 5px; text-decoration: none; font-size: 11px; font-weight: 700;
-            color: #444; cursor: pointer; text-align: center; 
+            color: #ffffff; /* Letras em branco para destaque */
+            cursor: pointer; text-align: center; 
             background: transparent; border: none; outline: none;
-            transition: background 0.2s;
+            transition: background 0.3s;
+            text-transform: uppercase; /* Dá um tom mais sério */
+            letter-spacing: 0.5px;
         }
 
         .nav-item:not(:last-child) {
-            border-right: 1px solid #eee;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .nav-item:hover { background: rgba(0, 0, 0, 0.03); }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.1); }
 
-        .logo-item { color: var(--azul-link); font-size: 13px; }
-        .logo-item span { background: #ffcc00; color: #000; padding: 2px 4px; border-radius: 3px; margin-right: 4px; }
+        /* LOGOTIPO MANTÉM O DESTAQUE ORIGINAL */
+        .logo-item { font-size: 13px; color: #fff !important; }
+        .logo-item span { background: #ffcc00; color: #000; padding: 2px 5px; border-radius: 3px; margin-right: 4px; font-weight: 800; }
 
         /* ÁREA CENTRAL */
         .main-container { 
             flex: 1; width: 100%; max-width: 800px; 
-            margin: 90px auto 140px; padding: 0 15px; box-sizing: border-box;
+            margin: 95px auto 140px; padding: 0 15px; box-sizing: border-box;
         }
         
         .container-res {
             background: #fff; border-radius: 12px; padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none;
         }
 
-        /* VERMELHO FOSCO PARA SEGURANÇA E OBSERVAÇÕES */
+        /* VERMELHO FOSCO TÉCNICO */
         .alerta-seguranca, .obs-importante {
             background: #fff4f4; 
             border-left: 5px solid var(--vermelho-fosco);
             padding: 15px; font-size: 13px; color: var(--vermelho-fosco); 
-            margin-bottom: 15px; border-radius: 4px; line-height: 1.5; font-weight: 500;
+            margin-bottom: 15px; border-radius: 4px; line-height: 1.5; font-weight: 600;
         }
 
         /* BARRA DE COMANDO */
@@ -87,9 +92,9 @@
         }
 
         #pergunta {
-            flex: 1; border: none; background: #fff; padding: 10px 15px;
+            flex: 1; border: none; background: #fff; padding: 12px 15px;
             outline: none; font-size: 15px; font-family: inherit; resize: none;
-            border-radius: 20px; height: 42px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+            border-radius: 20px; height: 42px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .icon-btn { 
@@ -99,34 +104,34 @@
         
         .btn-mic-active { 
             background: var(--verde-rec) !important; color: white !important;
-            box-shadow: 0 0 10px var(--verde-rec);
+            box-shadow: 0 0 12px var(--verde-rec);
         }
 
         .send-btn { background: var(--azul-link); color: white; padding: 10px; }
 
         /* MODAL */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-        .modal-content { background: #fff; margin: 20% auto; padding: 25px; border-radius: 15px; width: 85%; max-width: 400px; box-sizing: border-box; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+        .modal-content { background: #fff; margin: 15% auto; padding: 25px; border-radius: 15px; width: 85%; max-width: 450px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
     <div class="nav-item logo-item"><span>⚡</span>Expert</div>
-    <button class="nav-item" onclick="abrirModal()">📝 REGISTRAR SOLUÇÃO</button>
-    <a href="mailto:electroexpertdio@gmail.com?subject=Contato ElectroExpert&body=Olá Dionizio, vim pelo site." class="nav-item">📧 CONTATO COMERCIAL</a>
+    <button class="nav-item" onclick="abrirModal()">📝 Registrar Solução</button>
+    <a href="mailto:electroexpertdio@gmail.com?subject=Contato ElectroExpert&body=Olá Dionizio, vim pelo site." class="nav-item">📧 Contato Comercial</a>
 </nav>
 
 <div class="main-container">
     <div id="resultado" class="container-res">
         <div class="alerta-seguranca">
-            ⚠️ <strong>SEGURANÇA (NR-10):</strong> Use EPIs, realize o bloqueio de energias e verifique a ausência de tensão antes de qualquer intervenção. A segurança do operador é prioridade absoluta.
+            ⚠️ <strong>SEGURANÇA (NR-10):</strong> Obrigatório uso de EPIs. Realize o bloqueio de energias e confirme a ausência de tensão. A vida do técnico é prioridade.
         </div>
         
-        <div id="conteudo" style="line-height: 1.6; font-size: 15px; color: #444;"></div>
+        <div id="conteudo" style="line-height: 1.7; font-size: 15px; color: #333;"></div>
 
         <div class="obs-importante" style="margin-top: 20px;">
-            ℹ️ <strong>OBSERVAÇÃO TÉCNICA:</strong> Esta resposta é baseada no acervo disponível. Consulte sempre o manual oficial do fabricante para confirmação de parâmetros.
+            ℹ️ <strong>OBSERVAÇÃO:</strong> Informação baseada no acervo técnico. Em caso de dúvida, não opere o equipamento e consulte o fabricante.
         </div>
     </div>
 </div>
@@ -135,7 +140,7 @@
     <div class="input-container">
         <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
         <button class="icon-btn" onclick="document.getElementById('camera-input').click()">📷</button>
-        <textarea id="pergunta" placeholder="Dúvida técnica ou código de erro..."></textarea>
+        <textarea id="pergunta" placeholder="Digite sua dúvida técnica..."></textarea>
         <button id="btn-mic" class="icon-btn" onclick="toggleVoz()">🎤</button>
         <button class="icon-btn send-btn" onclick="processarEntrada()">➤</button>
     </div>
@@ -143,11 +148,11 @@
 
 <div id="modalFeedback" class="modal">
     <div class="modal-content">
-        <h3 style="margin-top:0">Relatório de Solução</h3>
-        <textarea id="textoFeedback" style="width:100%; height:100px; border-radius:8px; padding:10px; border:1px solid #ddd;" placeholder="Como você resolveu esse problema?"></textarea>
+        <h3 style="margin-top:0; color: var(--grafite-escuro);">Relatório de Solução</h3>
+        <textarea id="textoFeedback" style="width:100%; height:120px; border-radius:8px; padding:12px; border:1px solid #ccc; font-family: inherit;" placeholder="Descreva como o problema foi resolvido..."></textarea>
         <div style="display:flex; gap:10px; margin-top:15px;">
-            <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px;" onclick="enviarFeedback()">SALVAR</button>
-            <button class="nav-item" style="flex:1; border-radius:8px; border: 1px solid #ddd;" onclick="fecharModal()">FECHAR</button>
+            <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px; padding: 12px;" onclick="enviarFeedback()">SALVAR AGORA</button>
+            <button class="nav-item" style="flex:1; border-radius:8px; border: 1px solid #ccc; color: #666; padding: 12px;" onclick="fecharModal()">CANCELAR</button>
         </div>
     </div>
 </div>
@@ -185,7 +190,7 @@
         const texto = textarea.value.trim();
         if(!texto) return;
         resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Analisando manuais...</em>";
+        conteudoDiv.innerHTML = "<em>Consultando base de dados técnica...</em>";
         try {
             const res = await fetch("/chat", {
                 method: "POST",
@@ -196,16 +201,16 @@
             conteudoDiv.innerHTML = data.answer.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             textarea.value = "";
             window.scrollTo(0, 0);
-        } catch (e) { conteudoDiv.innerHTML = "Falha na conexão com o servidor."; }
+        } catch (e) { conteudoDiv.innerHTML = "Erro de conexão com o servidor."; }
     }
 
     function abrirModal() { document.getElementById("modalFeedback").style.display = "block"; }
     function fecharModal() { document.getElementById("modalFeedback").style.display = "none"; }
     async function enviarFeedback() {
         const fb = document.getElementById("textoFeedback").value;
-        if(!fb) return alert("Por favor, descreva a solução.");
+        if(!fb) return alert("Por favor, relate a solução.");
         await fetch("/feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ feedback: fb }) });
-        alert("Experiência arquivada!"); fecharModal();
+        alert("Experiência salva com sucesso!"); fecharModal();
     }
 </script>
 </body>
