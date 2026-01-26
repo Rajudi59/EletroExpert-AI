@@ -1,0 +1,3334 @@
+﻿List Manual 
+SINAMICS 
+SINAMICS G120 
+CU230P-2 Control Units 
+Edition 04/2018 www.siemens.com/drives
+s 
+SINAMICS 
+SINAMICS G120 
+CU230P-2 Control Units List Manual 
+Valid for 
+Control Units Firmware version CU230P-2_HVAC 4.7 SP10 CU230P-2_BT 4.7 SP10 CU230P-2_DP 4.7 SP10 CU230P-2_PN 4.7 SP10 CU230P-2_CAN 4.7 SP10
+Fundamental safety  
+instructions 1 Parameters 2 Function diagrams 3 Faults and alarms 4 Appendix A 
+Index 
+04/2018 A5E33838102 
+Legal information
+Warning concept 
+This Manual contains information which you must observe to ensure your own personal safety as well as to avoid  material damage. The notices referring to your personal safety are highlighted in the manual by a safety alert  symbol, notices referring only to equipment damage have no safety alert symbol. Depending on the hazard level,  warnings are indicated in a descending order as follows: 
+  
+DANGER
+	indicates that death or serious injury will result if proper precautions are not taken.
+	
+
+
+
+  
+WARNING
+	indicates that death or serious injury could result if proper precautions are not taken.
+	
+
+
+
+  
+CAUTION
+	indicates that minor personal injury can result if proper precautions are not taken.
+	
+
+
+
+NOTICE
+	indicates that property damage can result if proper precautions are not taken.
+	
+
+
+
+If more than one level of danger is simultaneously applicable, the warning notice for the highest level is used. A  notice warning of injury to persons with a safety alert symbol may also include a warning relating to property  damage. 
+Qualified personnel 
+The product/system described in this documentation may only be operated by personnel qualified for the specific  task in accordance with the relevant documentation for the specific task, in particular its warning notices and safety  instructions. Qualified personnel are those who, based on their training and experience, are capable of identifying  risks and avoiding potential hazards when working with these products/systems. 
+Proper use of Siemens products 
+Note the following: 
+  
+WARNING
+	Siemens products are only permitted to be used for the applications envisaged in the catalog and in the associated  technical documentation. If third-party products and components are to be used, they must be recommended or  approved by Siemens. These products can only function correctly and safely if they are transported, stored, set up,  mounted, installed, commissioned, operated and maintained correctly. The permissible ambient conditions must be  adhered to. Information in the associated documentation must be observed.
+	
+
+
+
+Trademarks 
+All names identified with ® are registered trademarks of Siemens AG. Any other names used in this publication may  be trademarks whose use by third parties for their own purposes could violate the rights of the owner. 
+Disclaimer of liability 
+We have verified that the contents of this document correspond to the hardware and software described. Since  variance cannot be precluded entirely, we cannot guarantee full consistency. The information given in this document  is reviewed at regular intervals and any corrections that might be necessary are made in the subsequent editions. 
+Siemens AG 
+Division Digital Factory  Postfach 48 48 
+90026 NUREMBERG GERMANY 
+Article number: A5E33838102 
+04/2018 Subject to change without prior notice 
+Copyright © Siemens AG 2008 - 2018. All rights reserved 
+Table of contents 
+1 Fundamental safety instructions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.1 General safety instructions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.2 Warranty and liability for application examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.3 Industrial security . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 
+2 Parameters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 
+2.1 Overview of parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 2.1.1 Explanation of the parameter list . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 2.1.2 Number ranges of parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 
+2.2 List of parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 
+2.3 Parameters for data sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 524 2.3.1 Command Data Sets (CDS). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 524 2.3.2 Drive Data Sets (DDS) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 526 2.3.3 Motor data sets (MDS) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 531 2.3.4 Power unit Data Sets (PDS). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 533 
+2.4 BICO parameters (connectors/binectors). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 534 2.4.1 Binector inputs (BI). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 534 2.4.2 Connector inputs (CI) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 536 2.4.3 Binector outputs (BO). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 538 2.4.4 Connector outputs (CO) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 540 2.4.5 Connector/binector outputs (CO/BO) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 543 
+2.5 Parameters for write protection and know-how protection . . . . . . . . . . . . . . . . . . . . . . . . . . 545 2.5.1 Parameters with "WRITE_NO_LOCK". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 545 2.5.2 Parameters with "KHP_WRITE_NO_LOCK" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 545 2.5.3 Parameters with "KHP_ACTIVE_READ" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 546 
+2.6 Quick commissioning (p0010 = 1) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 547 3 Function diagrams . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 549 3.1 Table of contents . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 550 3.2 Explanations on the function diagrams . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 557 3.3 Input/output terminals. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 562 3.4 PROFIenergy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 574 3.5 Communication PROFIdrive (PROFIBUS/PROFINET), EtherNet/IP. . . . . . . . . . . . . . . . . . 577 3.6 CANopen communication . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 593 3.7 Communication, fieldbus interface (USS, Modbus, BACnet). . . . . . . . . . . . . . . . . . . . . . . . 600 3.8 Internal control/status words . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 607 3.9 Setpoint channel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 625 3.10 Vector control / U/f control . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 635
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 5 
+Table of contents 
+3.11 U/f control, Standard Drive Control (p0096 = 1). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 667 3.12 Vector control, Dynamic Drive Control (p0096 = 2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 674 3.13 Technology functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 694 3.14 Free function blocks. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 702 3.15 Technology controller . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 723 3.16 Signals and monitoring functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 729 3.17 Diagnostics. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 741 3.18 Data sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 747 
+4 Faults and alarms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 751 
+4.1 Overview of faults and alarms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 752 4.1.1 General . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 752 4.1.2 Explanation of the list of faults and alarms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 755 4.1.3 Number ranges of faults and alarms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 761 
+4.2 List of faults and alarms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 763 A Appendix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 843 A.1 ASCII table (characters that can be displayed) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 844 A.2 List of abbreviations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 847 Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 857
+SINAMICS G120 CU230P-2 Control Units 
+6 List Manual, 04/2018, A5E33838102 
+1 
+Fundamental safety instructions 
+Content 
+1.1 General safety instructions 8 1.2 Warranty and liability for application examples 8 1.3 Industrial security 9
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 7 
+1 Fundamental safety instructions 1.1 General safety instructions 
+1.1 General safety instructions 
+  
+WARNING
+	Danger to life if the safety instructions and residual risks are not observed 
+If the safety instructions and residual risks in the associated hardware documentation are not  observed, accidents involving severe injuries or death can occur. 
+• Observe the safety instructions given in the hardware documentation. • Consider the residual risks for the risk evaluation.
+	
+
+
+
+  
+WARNING
+	Malfunctions of the machine as a result of incorrect or changed parameter settings 
+As a result of incorrect or changed parameterization, machines can malfunction, which in turn  can lead to injuries or death. 
+• Protect the parameterization (parameter assignments) against unauthorized access. 
+• Handle possible malfunctions by taking suitable measures, e.g. emergency stop or  emergency off.
+	
+
+
+
+1.2 Warranty and liability for application examples 
+The application examples are not binding and do not claim to be complete regarding  configuration, equipment or any eventuality which may arise. The application examples do not  represent specific customer solutions, but are only intended to provide support for typical  tasks. You are responsible for the proper operation of the described products. These  application examples do not relieve you of your responsibility for safe handling when using,  installing, operating and maintaining the equipment.
+SINAMICS G120 CU230P-2 Control Units 
+8 List Manual, 04/2018 
+1 Fundamental safety instructions 
+1.3 Industrial security 
+1.3 Industrial security 
+Note 
+Industrial security 
+Siemens provides products and solutions with industrial security functions that support the  secure operation of plants, systems, machines and networks. 
+In order to protect plants, systems, machines and networks against cyber threats, it is  necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial  security concept. Siemens products and solutions only represent one component of such a  concept. 
+The customer is responsible for preventing unauthorized access to its plants, systems,  machines and networks. Systems, machines and components should only be connected to the  enterprise network or the internet if and to the extent necessary and with appropriate security  measures (e.g. use of firewalls and network segmentation) in place. 
+Additionally, Siemens’ guidance on appropriate security measures should be taken into  account. For more information about industrial security, please visit: 
+Industrial security (http://www.siemens.com/industrialsecurity). 
+Siemens’ products and solutions undergo continuous development to make them more  secure. Siemens strongly recommends to apply product updates as soon as available and to  always use the latest product versions. Use of product versions that are no longer supported,  and failure to apply latest updates may increase customer’s exposure to cyber threats. 
+To stay informed about product updates, subscribe to the Siemens Industrial Security  RSS Feed at: 
+Industrial security (http://www.siemens.com/industrialsecurity).
+  
+WARNING
+	Unsafe operating states resulting from software manipulation 
+Software manipulations (e.g. viruses, trojans, malware or worms) can cause unsafe  operating states in your system that may lead to death, serious injury, and property damage. 
+• Keep the software up to date. 
+• Incorporate the automation and drive components into a holistic, state-of-the-art industrial  security concept for the installation or machine. 
+• Make sure that you include all installed products into the holistic industrial security  concept. 
+• Protect files stored on exchangeable storage media from malicious software by with  suitable protection measures, e.g. virus scanners.
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 9 
+1 Fundamental safety instructions 
+1.3 Industrial security 
+SINAMICS G120 CU230P-2 Control Units 
+10 List Manual, 04/2018
+2 
+Parameters 
+Content 
+2.1 Overview of parameters 12 2.2 List of parameters 26 2.3 Parameters for data sets 524 2.4 BICO parameters (connectors/binectors) 534 2.5 Parameters for write protection and know-how protection 545 2.6 Quick commissioning (p0010 = 1) 547
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 11 
+2 Parameters 
+2.1 Overview of parameters 
+2.1 Overview of parameters 
+2.1.1 Explanation of the parameter list 
+Basic structure of the parameter descriptions 
+The data in the following example have been chosen at random. The table below contains all  the information that can be included in a parameter description. Some of the information is  optional. 
+The "List of parameters (Page 26)" has the following structure: 
+ - - - - - - - - - - - - Start of example - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+pxxxx[0...n] BICO: Full parameter name / abbreviated name 
+CU/PM variants Access level: 3 Calculated: p0340 = 1 Data type: FloatingPoint32 Can be changed: C(x), U, T Scaling: p2002 Dyn. index: CDS, p0170 
+Unit group: 6_2 Unit selection: p0505 Function diagram: 8070 
+Min Max Factory setting 
+0.00 [Nm] 10.00 [Nm] 0.00 [Nm] 
+Description: Text 
+Values: 0: Name and meaning of value 0 
+1: Name and meaning of value 1 
+2: Name and meaning of value 2 
+etc. 
+Recommendation: Text 
+Index: [0] = Name and meaning of index 0 
+[1] = Name and meaning of index 1 
+[2] = Name and meaning of index 2 
+etc. 
+Bit array: Bit Signal name 1 signal 0 signal FP 00 Name and meaning of bit 0 Yes No 8060 01 Name and meaning of bit 1 Yes No - 02 Name and meaning of bit 2 Yes No 8052 etc. 
+Dependency: Text 
+See also: pxxxx, rxxxx 
+See also: Fxxxxx, Axxxxx 
+Danger: Warning: Caution: Safety notices with a warning triangle       
+Notice: Safety notice without a warning triangleNote: Information that might be useful. 
+ - - - - - - - - - - - - End of example - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - The individual pieces of information are described in detail below. 
+SINAMICS G120 CU230P-2 Control Units 
+12 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+pxxxx[0...n] Parameter number 
+The parameter number is made up of a "p" or "r", followed by the parameter number and the  index or bit field (optional). 
+Examples of the representation in the parameter list: 
+• p... Adjustable parameters (read and write) 
+• r... Display parameters (read only) 
+• p0918 Adjustable parameter 918 
+• p2051[0...13] Adjustable parameter 2051, indices 0 to 13 
+• p1001[0...n] Adjustable parameter 1001, indices 0 to n (n = configurable) 
+• r0944 Display parameter 944 
+• r2129.0...15 Display parameter 2129 with bit field from bit 0 (smallest bit) to bit 15  (largest bit) 
+Other examples of notation in the documentation: 
+• p1070[1] Adjustable parameter 1070, index 1 
+• p2098[1].3 Adjustable parameter 2098, index 1 bit 3 
+• p0795.4 Adjustable parameter 795, bit 4 
+The following applies to adjustable parameters: 
+The parameter value as delivered is specified under "Factory setting" with the relevant unit in  square brackets. The value can be adjusted within the range defined by "Min" and "Max". 
+The term "linked parameterization" is used in cases where changes to adjustable parameters  affect the settings of other parameters. 
+Linked parameterization can occur, for example, as a result of the following actions and  parameters: 
+• Setting the PROFIBUS telegram (BICO interconnection) 
+p0922 
+• Setting component lists 
+p0230, p0300, p0301, p0400 
+• Automatically calculating and pre-assigning 
+p0340, p3900 
+• Restoring the factory settings 
+p0970 
+The following applies to display parameters: 
+The fields "Min", "Max" and "Factory setting" are specified with a dash "-" and the relevant unit  in square parentheses. 
+Note 
+The parameter list can contain parameters that are not visible in the expert lists of the particular  commissioning software (e.g. parameters for trace functions).
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 13 
+2 Parameters 
+2.1 Overview of parameters 
+BICO: Full parameter name/Abbreviated name 
+The following abbreviations can appear in front of the BICO parameter name: 
+• BI: Binector Input  
+This parameter is used for selecting the source of a digital signal. 
+• BO: Binector Output  
+This parameter is available as a digital signal for interconnection with other  
+parameters. 
+• CI: Connector Input Connector Input) 
+This parameter selects the source of an "analog" signal. 
+• CO: Connector Output  
+This parameter is available as an "analog" signal for interconnection with other  
+parameters. 
+• CO/BO: Connector/Binector Output  
+This parameter is available as an "analog" and digital signal for interconnection  
+with other parameters. 
+Note 
+A BICO input (BI/CI) cannot be interconnected with just any BICO output (BO/CO, signal  source). 
+When interconnecting a BICO input using the commissioning software, only the corresponding  possible signal sources are listed. 
+Function diagrams 1020 ... 1030 explain the symbols for BICO parameters and how to deal  with BICO technology. 
+CU/PM variants 
+Indicates for which Control Units (CU) and/or Power Modules (PM) the parameter is valid. If no  CU or PM is listed, then the parameter is valid for all variants. 
+The following information relating to "CU" and "PM" can be displayed under the parameter  number: 
+Table 2-1 Information in the "CU/PM variants" field
+CU/PM variants
+	 Meaning
+	
+
+	All Control Units have this parameter.
+	CU230P-2_BT
+	 CU230P-2 (exclusively for Siemens IC BT)
+	CU230P-2_CAN
+	 CU230P-2 with CAN interface
+	CU230P-2_DP
+	 CU230P-2 with PROFIBUS interface
+	CU230P-2_HVAC
+	 CU230P-2 with RS485 interface for USS, Modbus and BACnet
+	CU230P-2_PN
+	 CU230P-2 with PROFINET interface
+	PM230
+	 Power Module for pumps and fans (3 AC 400 V)
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+14 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+Table 2-1 Information in the "CU/PM variants" field, continued 
+Access level Calculated 
+CU/PM variants
+	 Meaning
+	PM240
+	 Power Module for standard applications with dynamic braking PM240 
+3 AC 400 V 
+PM240-2 
+1 AC / 3 AC 230 V; 3 AC 400 V; 3 AC 690 V 
+PM240P-2 
+3 AC 400 V; 3 AC 690 V
+	PM250
+	 Power Module (3 AC 400 V with energy recovery)
+	PM260
+	 Power Module (3 AC 690 V with energy recovery)
+	PM330
+	 Power Module for pumps and fans (3 AC 400 V; 3 AC 690 V)
+	
+
+
+
+Specifies the minimum access level required to be able to display and change the relevant  parameter. The required access level can be set using p0003. 
+The system uses the following access levels: 
+• 1: Standard (not adjustable, included in p0003 = 3) 
+• 2: Extended (not adjustable, included in p0003 = 3) 
+• 3: Expert 
+• 4: Service 
+Parameters with this access level are password protected. 
+Note 
+Parameter p0003 is CU-specific (belongs to the Control Unit). 
+A higher access level will also include the functions of the lower levels. 
+Specifies whether the parameter is influenced by automatic calculations. p0340 determines which calculations are to be performed: 
+• p0340 = 1 includes the calculations from p0340 = 2, 3, 4, 5. 
+• p0340 = 2 calculates the motor parameters (p0350 ... p0360, p0625). • p0340 = 3 includes the calculations from p0340 = 4, 5. 
+• p0340 = 4 only calculates the controller parameters. 
+• p0340 = 5 only calculates the controller limits. 
+Note 
+For p3900 > 0, p0340 = 1 is also called automatically. 
+After p1900 = 1, 2, p0340 = 3 is also called automatically.
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 15 
+2 Parameters 
+2.1 Overview of parameters 
+Parameters with a reference to p0340 after "Calculated" depend on the Power Module being  used and the motor. In this case, the values at "Factory setting" do not correspond to the actual  values because these values are calculated during the commissioning. This also applies to the  motor parameters. 
+Data type 
+The information on the data type can consist of the following two items (separated by a slash): • First item 
+Data type of the parameter 
+• Second item (for binector or connector input only) 
+Data type of the signal source to be interconnected (binector-/connector output). 
+Parameters can have the following data types: 
+• Integer8 I8 8-bit integer number 
+• Integer16 I16 16-bit integer number 
+• Integer32 I32 32-bit integer number 
+• Unsigned8 U8 8 bits without sign 
+• Unsigned16 U16 16 bits without sign 
+• Unsigned32 U32 32 bits without sign 
+• FloatingPoint32 Float 32-bit floating point number 
+Depending on the data type of the BICO input parameter (signal sink) and BICO-output  parameter (signal source), the following combinations are possible when creating  
+BICO-interconnections: 
+Table 2-2 Possible combinations of BICO interconnections
+
+
+	BICO input parameter
+	CI parameter
+	 BI parameter
+	BICO output parameter
+	 Unsigned32 /  
+Integer16
+	Unsigned32 /  
+Integer32
+	Unsigned32 /  
+FloatingPoint32
+	Unsigned32 / 
+ Binary
+	CO: Unsigned8
+	 x
+	 x
+	 –
+	 –
+	CO: Unsigned16
+	 x
+	 x
+	 –
+	 –
+	CO: Unsigned32
+	 x
+	 x
+	 –
+	 –
+	CO: Integer16
+	 x
+	 x
+	 r2050
+	 –
+	CO: Integer32
+	 x
+	 x
+	 r2060
+	 –
+	CO: FloatingPoint32
+	 x
+	 x
+	 x
+	 –
+	x: BICO interconnection permitted 
+Legend: x: 
+–: BICO interconnection not permitted 
+–: 
+BICO interconnection is only permitted for the specified CO parameters
+rxxxx: 
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+16 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+Table 2-2 Possible combinations of BICO interconnections, continued 
+
+
+	BICO input parameter
+	CI parameter
+	 BI parameter
+	BICO output parameter
+	 Unsigned32 /  
+Integer16
+	Unsigned32 /  
+Integer32
+	Unsigned32 /  
+FloatingPoint32
+	Unsigned32 / 
+ Binary
+	BO: Unsigned8
+	 –
+	 –
+	 –
+	 x
+	BO: Unsigned16
+	 –
+	 –
+	 –
+	 x
+	BO: Unsigned32
+	 –
+	 –
+	 –
+	 x
+	BO: Integer16
+	 –
+	 –
+	 –
+	 x
+	BO: Integer32
+	 –
+	 –
+	 –
+	 x
+	BO: FloatingPoint32
+	 –
+	 –
+	 –
+	 –
+	Legend: x: 
+x: BICO interconnection permitted 
+–: 
+–: BICO interconnection not permitted 
+rxxxx: 
+BICO interconnection is only permitted for the specified CO parameters
+	
+
+
+
+Can be changed 
+The "-" sign indicates that the parameter can be changed in any object state and that the  change will be effective immediately. 
+The information "C(x), T, U" ((x): optional) means that the parameter can be changed only in  the specified drive unit state and that the change will not take effect until the unit switches to  another state. One or more states are possible. 
+The following states are available: 
+• C(x) Commissioning C: Commissioning 
+Drive commissioning is in progress (p0010 > 0). 
+Pulses cannot be enabled. 
+The parameter can only be changed in the following drive commissioning settings  
+(p0010 > 0): 
+• C: Can be changed for all settings p0010 > 0. 
+• C(x): Can only be changed for the settings p0010 = x. 
+A modified parameter value does not take effect until drive commissioning mode is  
+exited with p0010 = 0. 
+• U Operation U: Run 
+Pulses are enabled. 
+• T Ready T: Ready to run 
+The pulses are not enabled and the status "C(x)" is not active.
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 17 
+2 Parameters 
+2.1 Overview of parameters 
+Normalization 
+Specification of the reference variable with which a signal value is automatically converted for  a BICO interconnection. 
+The following reference variables are available: 
+• p2000 … p2007: Reference speed, reference voltage, etc. 
+• PERCENT: 1.0 = 100 % 
+• 4000H: 4000 hex = 100 % (wort) or 4000 0000 hex = 100 % (double word) 
+• p0514: specific normalization 
+Refer to the description for p0514[0…9] and p0515[0…19] to p0524[0…19] 
+Dyn. index (dynamic index) 
+For parameters with a dynamic index [0...n], the following information is specified here: • Data set (if available). 
+• Parameter for the number of indices (n = number - 1). 
+The following information can be contained in this field: 
+• "CDS, p0170" (Command Data Set, CDS count) 
+Example: 
+p1070[0] 🡪 main setpoint [command data set 0] 
+p1070[1] 🡪 main setpoint [command data set 1], etc. 
+• "DDS, p0180" (Drive Data Set, DDS count) 
+• "MDS, p0130" (Motor Data Set, MDS count) 
+• "PDS, p0120" (Power unit Data Set, PDS count) 
+Data sets can only be created and deleted when p0010 = 15. 
+Note 
+Information on the data sets can be taken from the following references: 
+Operating Instructions SINAMICS G120 Frequency Converter with CU230P-2 HVAC,  CU230P-2 DP, CU230P-2 CAN Control Units.
+Unit group and unit selection 
+The standard unit of a parameter is specified in square parentheses after the values for "Min",  "Max", and "Factory setting". 
+For parameters where the unit can be switched over, the specifications for "Unit group" and  "Unit selection" determine the group to which this parameter belongs and with which parameter  the unit can be switched over. 
+Example: 
+Unit group: 7_1, unit selection: p0505 
+The parameter belongs to unit group 7_1 and the unit can be switched over using p0505. All the potential unit groups and possible unit selections are listed below. 
+SINAMICS G120 CU230P-2 Control Units 
+18 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+Table 2-3 Unit group (p0100) 
+Unit group
+	 Unit Choice for p0100 =
+012
+	 Reference variable for %
+	7_4
+	 Nm
+	 lbf ft
+	 Nm
+	 -
+	14_6
+	 kW
+	 hp
+	 kW
+	 -
+	25_1
+	 kg m2 
+	lb ft2 
+	kg m2 
+	-
+	27_1
+	 kg
+	 lb
+	 kg
+	 -
+	28_1
+	 Nm/A
+	 lbf ft/A
+	 Nm/A
+	 -
+	
+
+
+
+Table 2-4 Unit group (p0505) 
+Unit group
+	 Unit Choice for p0505 =
+1234
+	 Reference variable for %
+	2_1
+	 Hz
+	 %
+	 Hz
+	 %
+	 p2000
+	3_1
+	 1 rpm
+	 %
+	 1 rpm
+	 %
+	 p2000
+	5_1
+	 Vrms
+	 %
+	 Vrms
+	 %
+	 p2001
+	5_2
+	 V
+	 %
+	 V
+	 %
+	 p2001
+	5_3
+	 V
+	 %
+	 V
+	 %
+	 p2001
+	6_2
+	 Arms
+	 %
+	 Arms
+	 %
+	 p2002
+	6_5
+	 A
+	 %
+	 A
+	 %
+	 p2002
+	7_1
+	 Nm
+	 %
+	 lbf ft
+	 %
+	 p2003
+	7_2
+	 Nm
+	 Nm
+	 lbf ft
+	 lbf ft
+	 -
+	14_5
+	 kW
+	 %
+	 hp
+	 %
+	 r2004
+	14_10
+	 kW
+	 kW
+	 hp
+	 hp
+	 -
+	21_1
+	 °C
+	 °C
+	 °F
+	 °F
+	 -
+	21_2
+	 K
+	 K
+	 °F
+	 °F
+	 -
+	39_1
+	 1/s2 
+	%
+	 1/s2 
+	%
+	 p2007
+	
+
+
+
+Table 2-5 Unit group (p0595) 
+Unit group
+	 Unit Choice for p0595 =
+Value Unit
+	 Reference variable for %
+	9_1
+	 The values that can be set and the technological units are shown in p0595.
+	
+
+
+
+Table 2-6 Unit group (p11026)
+Unit group
+	 Unit selection for p11026 =
+Value Units
+	 Reference variable for %
+	9_2
+	 The values that can be set and the technological units are shown in p11026.
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 19 
+2 Parameters 
+2.1 Overview of parameters 
+Table 2-7 Unit group (p11126) 
+Unit group
+	 Unit selection for p11126 =
+Value Units
+	 Reference variable for %
+	9_3
+	 The values that can be set and the technological units are shown in p11126.
+	
+
+
+
+Table 2-8 Unit group (p11226) 
+Unit group
+	 Unit selection for p11226 =
+Value Units
+	 Reference variable for %
+	9_4
+	 The values that can be set and the technological units are shown in p11226.
+	
+
+
+
+Function diagram 
+The parameter is included in this function diagram. The structure of the parameter function and  its relationship with other parameters is shown in the specified function diagram. 
+Parameter values 
+Min. Minimum value of the parameter [unit] 
+Max Maximum value of the parameter [unit] 
+Factory setting Value when delivered [unit] 
+In the case of a binector/connector input, the signal source of the  
+default BICO interconnection is specified. A non-indexed connector  
+output is assigned the index [0]. 
+A different value may be displayed for certain parameters (e.g. p1800)  
+at the initial commissioning stage or when establishing the factory  
+settings. 
+Reason: 
+The setting of these parameters is determined by the operating  
+environment of the Control Unit (e.g. depending on converter type,  
+power unit).
+Description 
+Explanation of the function of a parameter 
+Values 
+Lists the possible values of a parameter. 
+Recommendation 
+Information about recommended settings. 
+SINAMICS G120 CU230P-2 Control Units 
+20 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+Index 
+The name and meaning of each individual index is specified for indexed parameters. 
+The following applies to the values (Min, Max, Factory setting) of indexed adjustable  parameters: 
+• Min, Max: 
+The adjustment range and unit apply to all indices. 
+• Factory setting: 
+When all indices have the same factory setting, index 0 is specified with the unit to  
+represent all indices. 
+When the indices have different factory settings, they are all listed individually with the unit. 
+Bit field 
+For parameters with bit fields, the following information is provided about each bit: 
+• Bit number and signal name  
+• Meaning for signal states 0 and 1 
+• Function diagram (FP) (optional).  
+The signal is shown on this function diagram. 
+Dependency 
+Conditions that must be fulfilled in conjunction with this parameter. Also includes special effects  that can occur between this parameter and others. 
+Where necessary, "Refer to:" indicates the following information: 
+• List of other relevant parameters to be considered. 
+• List of faults and alarms to be considered.
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 21 
+2 Parameters 
+2.1 Overview of parameters 
+Safety guidelines 
+Important information that must be observed to avoid the risk of physical injury or material  damage. 
+Information that must be observed to avoid any problems. 
+Information that the user may find useful. 
+Danger The description of this safety notice can be found at the beginning of this    manual, see "Legal information (Page 4)". 
+Warning The description of this safety notice can be found at the beginning of this  manual, see "Legal information (Page 4)". 
+Caution The description of this safety notice can be found at the beginning of this  manual, see "Legal information (Page 4)". 
+Notice The description of this safety notice can be found at the beginning of this  manual, see "Legal information (Page 4)". 
+Note Information that the user may find useful.
+SINAMICS G120 CU230P-2 Control Units 
+22 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+2.1.2 Number ranges of parameters 
+Note 
+The following number ranges represent an overview for all the parameters available for the  SINAMICS drive family. 
+The parameters for the product described in this List Manual are described in detail in "List of  parameters (Page 26)". 
+Parameters are grouped into the following number ranges: 
+Table 2-9 Number ranges for SINAMICS
+Range
+From To
+	 Description
+	0000
+	 0099
+	 Display and operation
+	0100
+	 0199
+	 Commissioning
+	0200
+	 0299
+	 Power section
+	0300
+	 0399
+	 Motor
+	0400
+	 0499
+	 Encoder
+	0500
+	 0599
+	 Technology and units, motor-specific data, probes
+	0600
+	 0699
+	 Thermal monitoring, maximum current, operating hours, motor data,  central probe
+	0700
+	 0799
+	 Control Unit terminals, measuring sockets
+	0800
+	 0839
+	 CDS, DDS data sets, motor changeover
+	0840
+	 0879
+	 Sequence control (e.g. signal source for ON/OFF1)
+	0880
+	 0899
+	 ESR, parking, control and status words
+	0900
+	 0999
+	 PROFIBUS/PROFIdrive
+	1000
+	 1199
+	 Setpoint channel (e.g. ramp-function generator)
+	1200
+	 1299
+	 Functions (e.g. motor holding brake)
+	1300
+	 1399
+	 U/f control
+	1400
+	 1799
+	 Closed-loop control
+	1800
+	 1899
+	 Gating unit
+	1900
+	 1999
+	 Power unit and motor identification
+	2000
+	 2009
+	 Reference values
+	2010
+	 2099
+	 Communication (fieldbus)
+	2100
+	 2139
+	 Faults and alarms
+	2140
+	 2199
+	 Signals and monitoring
+	2200
+	 2359
+	 Technology controller
+	2360
+	 2399
+	 Staging, hibernation
+	2500
+	 2699
+	 Position control (LR) and basic positioning (EPOS)
+	2700
+	 2719
+	 Reference values, display
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 23 
+2 Parameters 
+2.1 Overview of parameters 
+Table 2-9 Number ranges for SINAMICS, continued
+Range
+From To
+	 Description
+	2720
+	 2729
+	 Load gearbox
+	2800
+	 2819
+	 Logic operations
+	2900
+	 2930
+	 Fixed values (e. g. percentage, torque)
+	3000
+	 3099
+	 Motor identification results
+	3100
+	 3109
+	 Real-time clock (RTC)
+	3110
+	 3199
+	 Faults and alarms
+	3200
+	 3299
+	 Signals and monitoring
+	3400
+	 3659
+	 Infeed closed-loop control
+	3660
+	 3699
+	 Voltage Sensing Module (VSM), Braking Module internal
+	3700
+	 3779
+	 Advanced Positioning Control (APC)
+	3780
+	 3819
+	 Synchronization
+	3820
+	 3849
+	 Friction characteristic
+	3850
+	 3899
+	 Functions (e. g. long stator)
+	3900
+	 3999
+	 Management
+	4000
+	 4599
+	 Terminal Board, Terminal Module (e. g. TB30, TM31)
+	4600
+	 4699
+	 Sensor Module
+	4700
+	 4799
+	 Trace
+	4800
+	 4849
+	 Function generator
+	4950
+	 4999
+	 OA application
+	5000
+	 5169
+	 Spindle diagnostics
+	5200
+	 5230
+	 Current setpoint filter 5 ... 10 (r0108.21)
+	5400
+	 5499
+	 System droop control (e. g. shaft generator)
+	5500
+	 5599
+	 Dynamic grid support (solar)
+	5600
+	 5614
+	 PROFIenergy
+	5900
+	 6999
+	 SINAMICS GM/SM/GL/SL
+	7000
+	 7499
+	 Parallel connection of power units
+	7500
+	 7599
+	 SINAMICS SM120
+	7700
+	 7729
+	 External messages
+	7770
+	 7789
+	 NVRAM, system parameters
+	7800
+	 7839
+	 EEPROM read/write parameters
+	7840
+	 8399
+	 Internal system parameters
+	8400
+	 8449
+	 Real-time clock (RTC)
+	8500
+	 8599
+	 Data and macro management
+	8600
+	 8799
+	 CAN bus
+	8800
+	 8899
+	 Communication Board Ethernet (CBE), PROFIdrive
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+24 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.1 Overview of parameters 
+Table 2-9 Number ranges for SINAMICS, continued
+Range
+From To
+	 Description
+	8900
+	 8999
+	 Industrial Ethernet, PROFINET, CBE20
+	9000
+	 9299
+	 topology
+	9300
+	 9399
+	 Safety Integrated
+	9400
+	 9499
+	 Parameter consistency and storage
+	9500
+	 9899
+	 Safety Integrated
+	9900
+	 9949
+	 topology
+	9950
+	 9999
+	 Diagnostics, internal
+	10000
+	 10199
+	 Safety Integrated
+	11000
+	 11299
+	 Free technology controller 0, 1, 2
+	20000
+	 20999
+	 Free function blocks (FBLOCKS)
+	21000
+	 25999
+	 Drive Control Chart (DCC)
+	50000
+	 53999
+	 SINAMICS DC MASTER (closed-loop DC current control)
+	61000
+	 61001
+	 PROFINET
+	
+
+
+
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 25 
+2 Parameters 
+2.2 List of parameters 
+2.2 List of parameters 
+Product: SINAMICS G120, Version: 4711200, Language: eng 
+Objects: CU230P-2_HVAC, CU230P-2_DP, CU230P-2_CAN, CU230P-2_PN, CU230P-2_BT 
+r0002 Drive operating display / Drv op_display 
+Access level: 2 Calculated: - Data type: Integer16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 200 -  
+Description: Operating display for the drive. 
+Value: 0: Operation - everything enabled 
+10: Operation - set "enable setpoint" = "1" (p1142) 
+12: Operation - RFG frozen, set "RFG start" = "1" (p1141) 
+13: Operation - set "enable RFG" = "1" (p1140) 
+14: Operation - MotID, excitation running 
+16: Operation - withdraw braking with OFF1 using "ON/OFF1" = "1" 
+17: Operation - braking with OFF3 can only be interrupted with OFF2 
+18: Operation - brake on fault, remove fault, acknowledge 
+19: Operation - DC braking active (p1230, p1231) 
+21: Ready for operation - set "Enable operation" = "1" (p0852) 
+22: Ready for operation - de-magnetizing running (p0347) 
+31: Ready for switching on - set "ON/OFF1" = "0/1" (p0840) 
+35: Switching on inhibited - carry out first commissioning (p0010) 
+41: Switching on inhibited - set "ON/OFF1" = "0" (p0840) 
+42: Switching on inhibited - set "OC/OFF2" = "1" (p0844, p0845) 
+43: Switching on inhibited - set "OC/OFF3" = "1" (p0848, p0849) 
+44: Switching on inhibited - supply STO terminal w/ 24 V (hardware) 
+45: Switching on inhibited - remove fault, acknowledge fault 
+46: Switching on inhibited - exit commissioning mode (p0010) 
+70: Initialization 
+200: Wait for booting/partial booting 
+Dependency: Refer to: r0046 
+Notice: For several missing enable signals, the corresponding value with the highest number is displayed. Note: OC: Operating condition 
+RFG: Ramp-function generator 
+COMM: Commissioning 
+MotID: Motor data identification 
+p0003 Access level / Acc_level 
+Access level: 1 Calculated: - Data type: Integer16 
+Can be changed: C, U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+3 4 3 
+Description: Sets the access level to read and write parameters. 
+Value: 3: Expert 
+4: Service 
+Note: A higher set access level also includes the lower one. 
+Access level 3 (experts): 
+Expert know-how is required for these parameters (e.g. BICO parameterization). 
+Access level 4 (service): 
+For these parameters, it is necessary that authorized service personnel enter the appropriate password (p3950). 
+SINAMICS G120 CU230P-2 Control Units 
+26 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0010 Drive commissioning parameter filter / Drv comm. par_filt 
+Access level: 1 Calculated: - Data type: Integer16 
+Can be changed: C(1), T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 2800, 2818 
+Min Max Factory setting  
+0 49 1  
+Description: Sets the parameter filter to commission a drive. 
+Setting this parameter filters out the parameters that can be written into in the various commissioning steps. Value: 0: Ready 
+1: Quick commissioning 
+2: Power unit commissioning 
+3: Motor commissioning 
+5: Technological application/units 
+15: Data sets 
+29: Only Siemens internal 
+30: Parameter reset 
+39: Only Siemens internal 
+49: Only Siemens internal 
+Dependency: Refer to: r3996 
+Notice: When the parameter is reset to a value of 0, short-term communication interruptions may occur. Note: The drive can only be switched on outside the drive commissioning (inverter enable). To realize this, this parameter  must be set to 0. 
+By setting p3900 to a value other than 0, the quick commissioning is completed, and this parameter is automatically  reset to 0. 
+Procedure for "Reset parameter": Set p0010 to 30 and p0970 to 1. 
+Once the Control Unit has been booted up for the first time, the motor parameters suitable for the power unit have  been defined, and the control parameters have been calculated accordingly, p0010 is automatically reset to 0. p0010 = 3 is used for the subsequent commissioning of additional drive data sets (creating data sets: see p0010 =  15). 
+p0010 = 29, 39, 49: Only for internal Siemens use! 
+p0015 Macro drive unit / Macro drv unit 
+CU230P-2_DP CU230P-2_PN 
+Access level: 1 Calculated: - Data type: Unsigned32 Can be changed: C, C(1) Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0 999999 7  
+Description: Runs the corresponding macro files. 
+Dependency: Refer to: p1000, r8570 
+Notice: After the value has been modified, no further parameter modifications can be made and the status is shown in r3996.  Modifications can be made again when r3996 = 0. 
+When executing a specific macro, the corresponding programmed settings are made and become active. 
+Note: Macros available as standard are described in the technical documentation of the particular product. p0015 Macro drive unit / Macro drv unit 
+CU230P-2_HVAC CU230P-2_CAN CU230P-2_BT 
+Access level: 1 Calculated: - Data type: Unsigned32 Can be changed: C, C(1) Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0 999999 12 
+Description: Runs the corresponding macro files. 
+Dependency: Refer to: p1000, r8570 
+Notice: After the value has been modified, no further parameter modifications can be made and the status is shown in r3996.  Modifications can be made again when r3996 = 0. 
+When executing a specific macro, the corresponding programmed settings are made and become active. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 27 
+2 Parameters 
+2.2 List of parameters 
+Note: Macros available as standard are described in the technical documentation of the particular product. 
+r0018 Control Unit firmware version / Firmware version 
+Access level: 3 Calculated: - Data type: Unsigned32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 4294967295 -  
+Description: Displays the firmware version of the Control Unit. 
+Dependency: Refer to: r0197, r0198 
+Note: Example: 
+The value 1010100 should be interpreted as V01.01.01.00. 
+r0020 Speed setpoint smoothed / Speed setpoint 
+Access level: 2 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 3_1 Unit selection: p0505 Func. diagram: 5020, 6799 Min Max Factory setting  
+- [rpm] - [rpm] - [rpm] 
+Description: Displays the currently smoothed speed setpoint at the input of the speed controller or U/f characteristic (after the  interpolator). 
+Dependency: Refer to: r0060 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The speed setpoint is available smoothed (r0020) and unsmoothed (r0060). 
+r0021 CO: Actual speed smoothed / Actual speed 
+Access level: 2 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 3_1 Unit selection: p0505 Func. diagram: 6799 
+Min Max Factory setting  
+- [rpm] - [rpm] - [rpm] 
+Description: Displays the calculated and smoothed rotor speed. 
+Frequency components from the slip compensation (for induction motors) are not included. 
+Dependency: Refer to: r0022, r0063 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The speed actual value is available smoothed (r0021, r0022) and unsmoothed (r0063). 
+r0022 Actual speed rpm smoothed / Actual speed 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6799 
+Min Max Factory setting  
+- [rpm] - [rpm] - [rpm]
+Description: Displays the calculated and smoothed rotor speed. 
+Frequency components from the slip compensation (for induction motors) are not included. 
+r0022 is identical to r0021, however, it always has units of rpm and contrary to r0021 cannot be changed over. Dependency: Refer to: r0021, r0063 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The speed actual value is available smoothed (r0021, r0022) and unsmoothed (r0063). 
+SINAMICS G120 CU230P-2 Control Units 
+28 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0024 Output frequency smoothed / Output frequency 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6300, 6799 
+Min Max Factory setting  
+- [Hz] - [Hz] - [Hz] 
+Description: Displays the smoothed output frequency. 
+Frequency components from the slip compensation (for induction motors) are included. 
+Dependency: Refer to: r0066 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The output frequency is available smoothed (r0024) and unsmoothed (r0066). 
+r0025 CO: Output voltage smoothed / Output voltage 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2001 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 5730, 6300, 6799 Min Max Factory setting  
+- [Vrms] - [Vrms] - [Vrms] 
+Description: Displays the smoothed output voltage of the power unit. 
+Dependency: Refer to: r0072 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The output voltage is available smoothed (r0025) and unsmoothed (r0072). 
+r0026 CO: DC link voltage smoothed / DC link voltage 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2001 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6799 
+Min Max Factory setting  
+- [V] - [V] - [V] 
+Description: Displays the smoothed actual value of the DC link voltage. 
+Dependency: Refer to: r0070 
+Notice: When measuring a DC link voltage < 200 V, for the Power Module (e.g. PM240) a valid measured value is not  supplied. In this case, when an external 24 V power supply is connected, a value of approx. 24 V is displayed in the  display parameter. 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The DC link voltage is available smoothed (r0026) and unsmoothed (r0070). 
+r0026 sets itself to the lower value of the pulsating DC link voltage. 
+r0027 CO: Absolute actual current smoothed / Motor current 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 5730, 6799, 8850,  8950 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms]
+Description: Displays the smoothed absolute actual current value. 
+Dependency: Refer to: r0068 
+Notice: This smoothed signal is not suitable for diagnostics or evaluation of dynamic operations. In this case, the  unsmoothed value should be used. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 29 
+2 Parameters 
+2.2 List of parameters 
+Note: Smoothing time constant = 300 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The absolute current actual value is available smoothed (r0027) and unsmoothed (r0068). 
+r0028 Modulation depth smoothed / Mod_depth smth 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 5730, 6799, 8950 Min Max Factory setting  
+- [%] - [%] - [%] 
+Description: Displays the smoothed actual value of the modulation depth. 
+Dependency: Refer to: r0074 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The modulation depth is available smoothed (r0028) and unsmoothed (r0074). 
+r0029 Current actual value field-generating smoothed / Id_act smooth Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6799 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Displays the smoothed field-generating actual current. 
+Dependency: Refer to: r0076 
+Note: Smoothing time constant = 300 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The field-generating current actual value is available smoothed (r0029) and unsmoothed (r0076). 
+r0030 Current actual value torque-generating smoothed / Iq_act smooth Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6799 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Displays the smoothed torque-generating actual current. 
+Dependency: Refer to: r0078 
+Note: Smoothing time constant = 300 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The torque-generating current actual value is available smoothed (r0030) and unsmoothed (r0078). 
+r0031 Actual torque smoothed / Actual torque 
+Access level: 2 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2003 Dyn. index: - 
+Unit group: 7_1 Unit selection: p0505 Func. diagram: 5730, 6799 Min Max Factory setting  
+- [Nm] - [Nm] - [Nm]
+Description: Displays the smoothed torque actual value. 
+Dependency: Refer to: r0080 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+The torque actual value is available smoothed (r0031) and unsmoothed (r0080). 
+SINAMICS G120 CU230P-2 Control Units 
+30 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0032 CO: Active power actual value smoothed / Power 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: r2004 Dyn. index: - 
+Unit group: 14_10 Unit selection: p0505 Func. diagram: 5730, 6799, 8750,  8850, 8950 
+Min Max Factory setting  
+- [kW] - [kW] - [kW] 
+Description: Displays the smoothed actual value of the active power. 
+Dependency: Refer to: r0082 
+Notice: This smoothed signal is not suitable for diagnostics or evaluation of dynamic operations. In this case, the  unsmoothed value should be used. 
+Note: Power delivered at the motor shaft. 
+The active power is available smoothed (r0032 with 100 ms) and unsmoothed (r0082). 
+r0034 CO: Motor utilization thermal / Mot_util therm 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: PERCENT Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8017 
+Min Max Factory setting  
+- [%] - [%] - [%]
+Description: Display and connector output for the motor utilization from motor temperature model 1 (I2t). For firmware version < 4.7 SP6 or p0612.12 = 0: 
+- r0034 = (motor model temperature - 40 K) / (p0605 - 40 K) * 100 % 
+From firmware version 4.7 SP6 and p0612.12 = 1: 
+- r0034 = (motor model temperature - p0613) / (p0605 - p0613) * 100 % 
+Dependency: The thermal motor utilization is only determined when the motor temperature model 1 (I2t) is activated. The following conditions are a prerequisite for additional information. 
+- a temperature sensor has not been parameterized (p0600, p0601). 
+- the current corresponds to the stall current (p0318). 
+- speed n > 1 [rpm]. 
+For firmware version < 4.7 SP6 or p0612.12 = 0, the following applies: 
+- the temperature model operates with an ambient temperature of 20 °C. 
+A motor utilization of 100% is displayed (r0034 = 100 %) when the following conditions are permanently fulfilled: - the ambient temperature is 40 °C (model 1: p0625 = 40 °C, model 3: p0613 = 40 °C). 
+From firmware version 4.7 SP6 and p0612.12 = 1, the following applies: 
+- the ambient temperature can be adapted to the conditions using p0613. 
+Refer to: p0605, p0611, p0612, p0613, p0627, r0632 
+Refer to: F07011, A07012 
+Notice: After the drive is switched on, the system starts to determine the motor temperature with an assumed model value.  This means that the value for the motor utilization is only valid after a stabilization time. 
+Note: Smoothing time constant = 100 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+For r0034 = -200.0 %, the following applies: 
+The value is invalid (e.g. the motor temperature model is not activated or has been incorrectly parameterized). 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 31 
+2 Parameters 
+2.2 List of parameters 
+r0035 CO: Motor temperature / Mot temp 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2006 Dyn. index: - 
+Unit group: 21_1 Unit selection: p0505 Func. diagram: 8016, 8017 
+Min Max Factory setting  
+- [°C] - [°C] - [°C] 
+Description: Display and connector output for the actual temperature in the motor. 
+Note: For r0035 not equal to -200.0 °C, the following applies: 
+- this temperature display is valid. 
+- a KTY/PT1000 temperature sensor is connected. 
+- the thermal model for the induction motor is activated (p0612 bit 1 = 1 and temperature sensor deactivated: p0600  = 0 or p0601 = 0). 
+For r0035 equal to -200.0 °C, the following applies: 
+- this temperature display is not valid (temperature sensor error). 
+- a PTC sensor or bimetallic NC contact is connected. 
+- the temperature sensor of the synchronous motor is deactivated (p0600 = 0 or p0601 = 0). 
+r0036 CO: Power unit overload I2t / PM overload I2t 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: PERCENT Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8021 
+Min Max Factory setting  
+- [%] - [%] - [%] 
+Description: Displays the power unit overload determined using the I2t calculation. 
+A current reference value is defined for the I2t monitoring of the power unit. It represents the current that can be  conducted by the power unit without any influence of the switching losses (e.g. the continuously permissible current  of the capacitors, inductances, busbars, etc.). 
+If the I2t reference current of the power unit is not exceeded, then an overload (0 %) is not displayed. 
+In the other case, the degree of thermal overload is calculated, whereby 100% results in a trip. 
+Dependency: Refer to: p0290, p0294 
+Refer to: F30005 
+r0037[0...19] CO: Power unit temperatures / PM temperatures 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2006 Dyn. index: - Unit group: 21_1 Unit selection: p0505 Func. diagram: 8021 Min Max Factory setting  - [°C] - [°C] - [°C]
+Description: Display and connector output for the temperature in the power unit. Index: [0] = Inverter maximum value 
+[1] = Depletion layer maximum value 
+[2] = Rectifier maximum value 
+[3] = Air intake 
+[4] = Interior of power unit 
+[5] = Inverter 1 
+[6] = Inverter 2 
+[7...10] = Reserved 
+[11] = Rectifier 1 
+[12] = Reserved 
+[13] = Depletion layer 1 
+[14] = Depletion layer 2 
+[15] = Depletion layer 3 
+[16] = Depletion layer 4 
+[17] = Depletion layer 5 
+[18] = Depletion layer 6 
+[19] = Reserved 
+SINAMICS G120 CU230P-2 Control Units 
+32 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Notice: Only for internal Siemens troubleshooting. 
+Note: The value of -200 indicates that there is no measuring signal. 
+r0037[0]: Maximum value of the inverter temperatures (r0037[5...10]). 
+r0037[1]: Maximum value of the depletion layer temperatures (r0037[13...18]). 
+r0037[2]: Maximum value of the rectifier temperatures (r0037[11...12]). 
+The maximum value is the temperature of the hottest inverter, depletion layer, or rectifier. 
+r0037[2, 3, 6, 11, 14...18] is only relevant for chassis power units. 
+In the case of a fault, the particular shutdown threshold depends on the power unit, and cannot be read out. 
+r0037[0...19] CO: Power unit temperatures / PM temperatures 
+PM330 Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2006 Dyn. index: - 
+Unit group: 21_1 Unit selection: p0505 Func. diagram: 8021 
+Min Max Factory setting  
+- [°C] - [°C] - [°C] 
+Description: Display and connector output for the temperature in the power unit. 
+Index: [0] = Inverter maximum value 
+[1] = Depletion layer maximum value 
+[2] = Rectifier maximum value 
+[3] = Air intake 
+[4] = Interior of power unit 
+[5] = Inverter 1 
+[6] = Inverter 2 
+[7] = Inverter 3 
+[8] = Reserved 
+[9] = Reserved 
+[10] = Reserved 
+[11] = Rectifier 1 
+[12] = Reserved 
+[13] = Depletion layer 1 
+[14] = Depletion layer 2 
+[15] = Depletion layer 3 
+[16] = Depletion layer 4 
+[17] = Depletion layer 5 
+[18] = Depletion layer 6 
+[19] = Reserved 
+Notice: Only for internal Siemens troubleshooting. 
+Note: The value of -200 indicates that there is no measuring signal. 
+r0037[0]: Maximum value of the inverter temperatures (r0037[5...10]). 
+r0037[1]: Maximum value of the depletion layer temperatures (r0037[13...18]). 
+r0037[2]: Maximum value of the rectifier temperatures (r0037[11...12]). 
+The maximum value is the temperature of the hottest inverter, depletion layer, or rectifier. 
+In the case of a fault, the particular shutdown threshold depends on the power unit, and cannot be read out. 
+r0038 Power factor smoothed / Cos phi smooth 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6799, 8850, 8950 Min Max Factory setting  
+- - - 
+Description: Displays the smoothed actual power factor. This refers to the electrical power of the basic fundamental signals at the  converter output terminals. 
+Notice: For infeed units, the following applies: 
+For active powers < 25 % of the rated power, this does not provide any useful information. 
+Note: Smoothing time constant = 300 ms 
+The signal is not suitable as a process quantity and may only be used as a display quantity. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 33 
+2 Parameters 
+2.2 List of parameters 
+r0039[0...2] CO: Energy display / Energy display 
+Access level: 2 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [kWh] - [kWh] - [kWh] 
+Description: Displays the energy values at the output terminals of the power unit. 
+Recommendation: r0042 should be used as process energy display. R0039 supplies as Bico source floating point values in Ws. Index: [0] = Energy balance (sum) 
+[1] = Energy drawn 
+[2] = Energy fed back 
+Dependency: Refer to: p0040 
+Note: For index 0: 
+Difference between the energy drawn and energy that is fed back. 
+p0040 Reset energy consumption display / Energy usage reset Access level: 3 Calculated: - Data type: Unsigned8 
+Can be changed: U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 1 0  
+Description: Setting to reset the display in r0039 and r0041. 
+Procedure: 
+Set p0040 = 0 --> 1 
+The displays are reset and the parameter is automatically set to zero. 
+Dependency: Refer to: r0039 
+Note: When this display is reset (p0040), then the process energy display (r0042) is also reset. 
+r0041 Energy consumption saved / Energy cons saved 
+Access level: 2 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [kWh] - [kWh] - [kWh] 
+Description: Displays the saved energy referred to 100 operating hours. 
+Dependency: Refer to: p0040 
+Note: This display is used for a fluid-flow machine. 
+The flow characteristic is entered into p3320 ... p3329. 
+For an operating time of below 100 hours, the display is interpolated up to 100 hours. 
+r0042[0...2] CO: Process energy display / Proc energy disp 
+Access level: 2 Calculated: - Data type: Integer32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [Wh] - [Wh] - [Wh]
+Description: Display and connector output for the energy values at the output terminals of the power unit. Index: [0] = Energy balance (sum) 
+[1] = Energy drawn 
+[2] = Energy fed back 
+Dependency: Refer to: p0043 
+SINAMICS G120 CU230P-2 Control Units 
+34 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Note: The signal can be displayed as process variable (scaling: 1 = 1 Wh). 
+This is enabled in p0043. 
+The display is also reset with p0040 = 1. 
+If an enable is present in r0043 when the Control Unit powers up, then the value from r0039 is transferred into r0042. As r0039 serves as a reference signal for r0042, due to format reasons, the process energy display can only process  values of r0039 up to 2147483 kWh. r0039 should also be reset using this value. 
+p0043 BI: Enable energy usage display / Enab energy usage 
+Access level: 2 Calculated: - Data type: U32 / Binary 
+Can be changed: U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - 0  
+Description: Sets the signal source to enable/reset the process energy display in r0042. 
+BI: p0043 = 1 signal: 
+The process energy display is enabled in r0042. 
+Dependency: Refer to: r0042 
+p0045 Display values smoothing time constant / Disp_val T_smooth Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6799 
+Min Max Factory setting  
+0.00 [ms] 10000.00 [ms] 4.00 [ms] 
+Description: Sets the smoothing time constant for the following display values: 
+r0063[1], r0068[1], r0080[1], r0082[1]. 
+r0046.0...31 CO/BO: Missing enable signal / Missing enable sig 
+Access level: 1 Calculated: - Data type: Unsigned32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 2634 
+Min Max Factory setting  
+- - -  
+Description: Display and BICO output for missing enable signals that are preventing the closed-loop drive control from being  commissioned. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 OFF1 enable missing Yes No 7954 01 OFF2 enable missing Yes No - 02 OFF3 enable missing Yes No - 03 Operation enable missing Yes No - 04 DC braking enable missing Yes No - 08 Safety enable missing Yes No - 10 Ramp-function generator enable missing Yes No - 11 Ramp-function generator start missing Yes No - 12 Setpoint enable missing Yes No - 16 OFF1 enable internal missing Yes No - 17 OFF2 enable internal missing Yes No - 18 OFF3 enable internal missing Yes No - 19 Pulse enable internal missing Yes No - 20 DC braking internal enable missing Yes No - 21 Power unit enable missing Yes No - 25 Function bypass active Yes No - 26 Drive inactive or not operational Yes No - 27 De-magnetizing not completed Yes No - 30 Speed controller inhibited Yes No - 31 Jog setpoint active Yes No -
+Dependency: Refer to: r0002 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 35 
+2 Parameters 
+2.2 List of parameters 
+Note: The value r0046 = 0 indicates that all enable signals for this drive are present. 
+Bit 00 = 1 (enable signal missing), if: 
+- the signal source in p0840 is a 0 signal. 
+- there is a "switching on inhibited". 
+Bit 01 = 1 (enable signal missing), if: 
+- the signal source in p0844 or p0845 is a 0 signal. 
+Bit 02 = 1 (enable signal missing), if: 
+- the signal source in p0848 or p0849 is a 0 signal. 
+Bit 03 = 1 (enable signal missing), if: 
+- the signal source in p0852 is a 0 signal. 
+Bit 04 =1 (DC brake active) when: 
+- the signal source in p1230 has a 1 signal. 
+Bit 08 = 1 (enable signal missing), if: 
+- the "STO via terminals at the Power Module" function is selected. 
+Bit 10 = 1 (enable signal missing), if: 
+- the signal source in p1140 is a 0 signal. 
+Bit 11 = 1 (enable signal missing) if the speed setpoint is frozen, because: 
+- the signal source in p1141 is a 0 signal. 
+- the speed setpoint is entered from jogging and the two signal sources for jogging, bit 0 (p1055) and bit 1 (p1056)  have a 1 signal. 
+Bit 12 = 1 (enable signal missing), if: 
+- the signal source in p1142 is a 0 signal. 
+Bit 16 = 1 (enable signal missing), if: 
+- there is an OFF1 fault response. The system is only enabled if the fault is removed and was acknowledged and the  "switching on inhibited" withdrawn with OFF1 = 0. 
+Bit 17 = 1 (enable signal missing), if: 
+- commissioning mode is selected (p0010 > 0). 
+- there is an OFF2 fault response. 
+- the drive is not operational. 
+Bit 18 = 1 (enable signal missing), if: 
+- OFF3 has still not been completed or an OFF3 fault response is present. 
+Bit 19 = 1 (internal pulse enable missing), if: 
+- sequence control does not have a finished message. 
+Bit 20 = 1 (internal DC brake active), if: 
+- the drive is not in the state "Operation" or in "OFF1/OFF3". 
+- the internal pulse enable is missing (r0046.19 = 0). 
+Bit 21 = 1 (enable signal missing), if: 
+- the power unit does not issue an enable signal (e.g. because DC link voltage is too low). 
+- the hibernation mode is active. 
+Bit 25 = 1 (function bypass active) if: 
+- the bypass function is active. 
+Bit 26 = 1 (enable signal missing), if: 
+- the drive is not operational. 
+Bit 27 = 1 (enable signal missing), if: 
+- de-magnetization not completed. 
+Bit 30 = 1 (speed controller inhibited), if one of the following reasons is present: 
+- the pole position identification is active. 
+- motor data identification is active (only certain steps). 
+Bit 31 = 1 (enable signal missing), if: 
+- the speed setpoint from jog 1 or 2 is entered.
+SINAMICS G120 CU230P-2 Control Units 
+36 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0047 Motor data identification and speed controller optimization / MotID and n_opt 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 1 Calculated: - Data type: Integer16 Can be changed: - Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0 300 -  
+Description: Displays the actual status for the motor data identification (stationary measurement) and the speed controller  optimization (rotating measurement). 
+Value: 0: No measurement 
+115: Measurement q leakage inductance (part 2) 
+120: Speed controller optimization (vibration test) 
+140: Calculate speed controller setting 
+150: Measurement moment of inertia 
+170: Measurement magnetizing current and saturation characteristic 
+195: Measurement q leakage inductance (part 1) 
+200: Rotating measurement selected 
+220: identification leakage inductance 
+230: Identification rotor time constant 
+240: Identification stator inductance 
+250: Identification stator inductance LQLD 
+260: Identification circuit 
+270: Identification stator resistance 
+290: Identification valve lockout time 
+300: Stationary measurement selected 
+r0047 Motor data identification and speed controller optimization / MotID and n_opt PM330 Access level: 1 Calculated: - Data type: Integer16 Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 300 - 
+Description: Displays the actual status for the motor data identification (stationary measurement) and the speed controller  optimization (rotating measurement). 
+Value: 0: No measurement 
+115: Measurement q leakage inductance (part 2) 
+120: Speed controller optimization (vibration test) 
+140: Calculate speed controller setting 
+150: Measurement moment of inertia 
+170: Measurement magnetizing current and saturation characteristic 
+195: Measurement q leakage inductance (part 1) 
+200: Rotating measurement selected 
+220: identification leakage inductance 
+230: Identification rotor time constant 
+240: Identification stator inductance 
+250: Identification stator inductance LQLD 
+270: Identification stator resistance 
+290: Identification valve lockout time 
+295: Calibration output voltage measurement 
+300: Stationary measurement selected 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 37 
+2 Parameters 
+2.2 List of parameters 
+r0050.0...1 CO/BO: Command Data Set CDS effective / CDS effective 
+Access level: 3 Calculated: - Data type: Unsigned8 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8560 
+Min Max Factory setting  
+- - -  
+Description: Displays the effective Command Data Set (CDS). 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 CDS effective bit 0 ON OFF - 01 CDS effective bit 1 ON OFF - 
+Dependency: Refer to: p0810, p0811, r0836 
+Note: The Command Data Set selected using a binector input (e.g. p0810) is displayed using r0836. 
+r0051.0...1 CO/BO: Drive Data Set DDS effective / DDS effective 
+Access level: 2 Calculated: - Data type: Unsigned8 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8565 
+Min Max Factory setting  
+- - -  
+Description: Displays the effective Drive Data Set (DDS). 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 DDS effective bit 0 ON OFF - 01 DDS effective bit 1 ON OFF - 
+Dependency: Refer to: p0820, p0821, r0837 
+Note: When selecting the motor data identification routine and the rotating measurement, the drive data set changeover is  suppressed. 
+r0052.0...15 CO/BO: Status word 1 / ZSW 1 
+Access level: 2 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Display and connector output for status word 1. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 Ready for switching on Yes No - 01 Ready Yes No - 02 Operation enabled Yes No - 03 Fault present Yes No - 04 Coast down active (OFF2) No Yes - 05 Quick Stop active (OFF3) No Yes - 06 Switching on inhibited active Yes No - 07 Alarm present Yes No - 08 Deviation setpoint/actual speed No Yes - 09 Control request Yes No - 10 Maximum speed reached Yes No - 11 I, M, P limit reached No Yes - 13 Alarm motor overtemperature No Yes - 14 Motor rotates forwards Yes No - 15 Alarm drive converter overload No Yes -
+Notice: p2080 is used to define the signal sources of the PROFIdrive status word interconnection. 
+SINAMICS G120 CU230P-2 Control Units 
+38 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Note: For bit 03: 
+This signal is inverted if it is interconnected to a digital output. 
+For r0052: 
+The status bits have the following sources: 
+Bit 00: r0899 Bit 0 
+Bit 01: r0899 Bit 1 
+Bit 02: r0899 Bit 2 
+Bit 03: r2139 Bit 3 (or r1214.10 for p1210 > 0) 
+Bit 04: r0899 Bit 4 
+Bit 05: r0899 Bit 5 
+Bit 06: r0899 Bit 6 
+Bit 07: r2139 Bit 7 
+Bit 08: r2197 Bit 7 
+Bit 09: r0899 Bit 7 
+Bit 10: r2197 Bit 6 
+Bit 11: r0056 Bit 13 (negated) 
+Bit 13: r2135 Bit 14 (negated) 
+Bit 14: r2197 Bit 3 
+Bit 15: r2135 Bit 15 (negated) 
+r0053.0...11 CO/BO: Status word 2 / ZSW 2 
+Access level: 2 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Display and BICO output for status word 2. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 DC braking active Yes No - 01 |n_act| > p1226 (n_standstill) Yes No - 02 |n_act| > p1080 (n_min) Yes No - 03 I_act >= p2170 Yes No - 04 |n_act| > p2155 Yes No - 05 |n_act| <= p2155 Yes No - 06 |n_act| >= r1119 (n_set) Yes No - 07 Vdc <= p2172 Yes No - 08 Vdc > p2172 Yes No - 09 Ramp-up/ramp-down completed Yes No - 
+10 Technology controller output at the lower  limit 
+11 Technology controller output at the upper  limit 
+Yes No - Yes No -
+Notice: p2081 is used to define the signal sources of the PROFIdrive status word interconnection. Note: The following status bits are displayed in r0053: 
+Bit 00: r1239 Bit 8 
+Bit 01: r2197 Bit 5 (negated) 
+Bit 02: r2197 Bit 0 (negated) 
+Bit 03: r2197 Bit 8 
+Bit 04: r2197 Bit 2 
+Bit 05: r2197 Bit 1 
+Bit 06: r2197 Bit 4 
+Bit 07: r2197 Bit 9 
+Bit 08: r2197 Bit 10 
+Bit 09: r1199 Bit 2 (negated) 
+Bit 10: r2349 Bit 10 
+Bit 11: r2349 Bit 11 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 39 
+2 Parameters 
+2.2 List of parameters 
+r0054.0...15 CO/BO: Control word 1 / STW 1 
+Access level: 2 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Displays control word 1. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 ON/OFF1 Yes No - 01 OC / OFF2 No Yes - 02 OC / OFF3 No Yes - 03 Enable operation Yes No - 04 Enable ramp-function generator Yes No - 05 Continue ramp-function generator Yes No - 06 Enable speed setpoint Yes No - 07 Acknowledge fault Yes No - 08 Jog bit 0 Yes No 3030 09 Jog bit 1 Yes No 3030 10 Master control by PLC Yes No - 11 Direction reversal (setpoint) Yes No - 13 Motorized potentiometer raise Yes No - 14 Motorized potentiometer lower Yes No - 15 CDS bit 0 Yes No - 
+Note: The following control bits are displayed in r0054: 
+Bit 00: r0898 Bit 0 
+Bit 01: r0898 Bit 1 
+Bit 02: r0898 Bit 2 
+Bit 03: r0898 Bit 3 
+Bit 04: r0898 Bit 4 
+Bit 05: r0898 Bit 5 
+Bit 06: r0898 Bit 6 
+Bit 07: r2138 Bit 7 
+Bit 08: r0898 Bit 8 
+Bit 09: r0898 Bit 9 
+Bit 10: r0898 Bit 10 
+Bit 11: r1198 Bit 11 
+Bit 13: r1198 Bit 13 
+Bit 14: r1198 Bit 14 
+Bit 15: r0836 Bit 0 
+r0055.0...15 CO/BO: Supplementary control word / Suppl STW 
+Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 2513 
+Min Max Factory setting  
+- - -  
+Description: Display and BICO output for supplementary control word. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 Fixed setpoint bit 0 Yes No - 01 Fixed setpoint bit 1 Yes No - 02 Fixed setpoint bit 2 Yes No - 03 Fixed setpoint bit 3 Yes No - 04 DDS selection bit 0 Yes No - 05 DDS selection bit 1 Yes No - 08 Technology controller enable Yes No -
+SINAMICS G120 CU230P-2 Control Units 
+40 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+09 DC braking enable Yes No - 11 Reserved - - - 12 Reserved - - - 13 External fault 1 (F07860) No Yes - 15 CDS bit 1 Yes No - 
+Note: CDS: Command Data Set 
+DDS: Drive Data Set 
+The following control bits are displayed in r0055: 
+Bit 00: r1198.0 
+Bit 01: r1198.1 
+Bit 02: r1198.2 
+Bit 03: r1198.3 
+Bit 04: r0837.0 
+Bit 05: r0837.1 
+Bit 08: r2349.0 (negated) 
+Bit 09: r1239.11 
+Bit 13: r2138.13 (negated) 
+Bit 15: r0836.1 
+r0056.0...15 CO/BO: Status word, closed-loop control / ZSW cl-loop ctrl 
+PM230 
+PM240, PM330 
+Access level: 3 Calculated: - Data type: Unsigned16 Can be changed: - Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: 2526 Min Max Factory setting  - - -  
+Description: Display and BICO output for the status word of the closed-loop control. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 Initialization completed Yes No - 01 De-magnetizing completed Yes No - 02 Pulse enable available Yes No - 04 Magnetizing completed Yes No - 05 Voltage boost when starting Active Inactive 6301 06 Acceleration voltage Active Inactive 6301 07 Frequency negative Yes No - 08 Field weakening active Yes No - 09 Voltage limit active Yes No 6714 10 Slip limit active Yes No 6310 11 Frequency limit active Yes No - 
+12 Current limiting controller voltage output  active 
+Yes No - 
+13 Current/torque limiting Active Inactive 6060 14 Vdc_max controller active Yes No 6220,  6320 
+15 Vdc_min controller active Yes No 6220,  6320 
+r0056.0...13 CO/BO: Status word, closed-loop control / ZSW cl-loop ctrl 
+PM250 PM260 
+Access level: 3 Calculated: - Data type: Unsigned16 Can be changed: - Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: 2526 Min Max Factory setting  - - -  
+Description: Display and BICO output for the status word of the closed-loop control. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 Initialization completed Yes No - 01 De-magnetizing completed Yes No - 02 Pulse enable available Yes No - 04 Magnetizing completed Yes No -
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 41 
+2 Parameters 
+2.2 List of parameters 
+05 Voltage boost when starting Active Inactive 6301 06 Acceleration voltage Active Inactive 6301 07 Frequency negative Yes No - 08 Field weakening active Yes No - 09 Voltage limit active Yes No 6714 10 Slip limit active Yes No 6310 11 Frequency limit active Yes No - 
+12 Current limiting controller voltage output  active 
+Yes No - 
+13 Current/torque limiting Active Inactive 6060 
+r0060 CO: Speed setpoint before the setpoint filter / n_set before filt. Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 3_1 Unit selection: p0505 Func. diagram: 2701, 6030, 6799,  6822 
+Min Max Factory setting  
+- [rpm] - [rpm] - [rpm] 
+Description: Displays the actual speed setpoint at the input of the speed controller or U/f characteristic (after the interpolator). Dependency: Refer to: r0020 
+Note: The speed setpoint is available smoothed (r0020) and unsmoothed (r0060). 
+r0062 CO: Speed setpoint after the filter / n_set after filter 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 3_1 Unit selection: p0505 Func. diagram: 6020, 6030, 6031,  6822 
+Min Max Factory setting  
+- [rpm] - [rpm] - [rpm] 
+Description: Display and connector output for the speed setpoint after the setpoint filters. 
+r0063[0...2] CO: Actual speed / Actual speed 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 3_1 Unit selection: p0505 Func. diagram: 6020, 6730, 6799,  6841 
+Min Max Factory setting  
+- [rpm] - [rpm] - [rpm]
+Description: Display and connector output for the speed actual value. 
+Frequency components from the slip compensation (for induction motors) are not included. 
+Index: [0] = Unsmoothed 
+[1] = Smoothed with p0045 
+[2] = Calculated from f_set - f_slip (unsmoothed) 
+Dependency: Refer to: r0021, r0022 
+Note: The speed actual value r0063[0] – smoothed with p0045 – is additionally displayed in r0063[1]. r0063[1] can be used  as process variable for the appropriate smoothing time constant p0045. 
+The speed (r0063[2]) calculated from the output frequency and slip can only be compared with the speed actual  value (r0063[0]) in the steady-state. 
+For U/f control, the mechanical speed calculated from the output frequency and the slip is shown in r0063[2] even if  slip compensation is deactivated. 
+SINAMICS G120 CU230P-2 Control Units 
+42 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0064 CO: Speed controller system deviation / n_ctrl sys dev 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 3_1 Unit selection: p0505 Func. diagram: 6040, 6824 
+Min Max Factory setting  
+- [rpm] - [rpm] - [rpm] 
+Description: Displays the actual system deviation of the speed controller. 
+r0065 Slip frequency / f_Slip 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 2_1 Unit selection: p0505 Func. diagram: 6310, 6700, 6727,  6730, 6732 
+Min Max Factory setting  
+- [Hz] - [Hz] - [Hz] 
+Description: Displays the slip frequency for induction motors (ASM). 
+r0066 CO: Output frequency / f_outp 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2000 Dyn. index: - 
+Unit group: 2_1 Unit selection: p0505 Func. diagram: 6730, 6731, 6792,  6799, 6841, 6842, 6843 
+Min Max Factory setting  
+- [Hz] - [Hz] - [Hz] 
+Description: Display and connector output for the unsmoothed output frequency of the power unit. Frequency components from the slip compensation (induction motor) are included. 
+Dependency: Refer to: r0024 
+Note: The output frequency is available smoothed (r0024) and unsmoothed (r0066). 
+r0067 CO: Output current maximum / Current max 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_2 Unit selection: p0505 Func. diagram: 6300, 6640, 6724,  6828, 6850 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Display and connector output for the maximum output current of the power unit. 
+Dependency: The maximum output current is determined by the parameterized current limit and the motor and converter thermal  protection. 
+Refer to: p0290, p0640 
+r0068[0...1] CO: Absolute current actual value / I_act abs val 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_2 Unit selection: p0505 Func. diagram: 6300, 6714, 6799,  7017, 8017, 8021, 8022 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms]
+Description: Displays actual absolute current. 
+Index: [0] = Unsmoothed 
+[1] = Smoothed with p0045 
+Dependency: Refer to: r0027 
+Notice: The value is updated with the current controller sampling time. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 43 
+2 Parameters 
+2.2 List of parameters 
+Note: Absolute current value = sqrt(Iq^2 + Id^2) 
+The absolute value of the current actual value is available smoothed (r0027 with 300 ms, r0068[1] with p0045) and  unsmoothed (r0068[0]). 
+r0069[0...8] CO: Phase current actual value / I_phase act val 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_5 Unit selection: p0505 Func. diagram: 6730 
+Min Max Factory setting  
+- [A] - [A] - [A] 
+Description: Display and connector output for the measured actual phase currents as peak value. Index: [0] = Phase U 
+[1] = Phase V 
+[2] = Phase W 
+[3] = Phase U offset 
+[4] = Phase V offset 
+[5] = Phase W offset 
+[6] = Total U, V, W 
+[7] = Alpha component 
+[8] = Beta component 
+Note: In indices 3 ... 5, the offset currents of the 3 phases, which are added to correct the phase currents, are displayed. The sum of the 3 corrected phase currents is displayed in index 6. 
+r0070 CO: Actual DC link voltage / Vdc act val 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2001 Dyn. index: - 
+Unit group: 5_2 Unit selection: p0505 Func. diagram: 6723, 6724, 6730,  6731, 6799 
+Min Max Factory setting  
+- [V] - [V] - [V] 
+Description: Display and connector output for the measured actual value of the DC link voltage. Dependency: Refer to: r0026 
+Notice: When measuring a DC link voltage < 200 V, for the Power Module (e.g. PM240) a valid measured value is not  supplied. In this case, when an external 24 V power supply is connected, a value of approx. 24 V is displayed in the  display parameter. 
+Note: The DC link voltage is available smoothed (r0026) and unsmoothed (r0070). 
+r0071 Maximum output voltage / Voltage max 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2001 Dyn. index: - 
+Unit group: 5_1 Unit selection: p0505 Func. diagram: 6301, 6640, 6700,  6722, 6723, 6724, 6725, 6727 
+Min Max Factory setting  
+- [Vrms] - [Vrms] - [Vrms]
+Description: Displays the maximum output voltage. 
+Dependency: The maximum output voltage depends on the actual DC link voltage (r0070) and the maximum modulation depth  (p1803). 
+Note: As the (driven) motor load increases, the maximum output voltage drops as a result of the reduction in DC link  voltage. 
+SINAMICS G120 CU230P-2 Control Units 
+44 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0072 CO: Output voltage / U_output 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2001 Dyn. index: - 
+Unit group: 5_1 Unit selection: p0505 Func. diagram: 5700, 6730, 6731,  6799 
+Min Max Factory setting  
+- [Vrms] - [Vrms] - [Vrms] 
+Description: Display and connector output for the actual output voltage of the power unit. 
+Dependency: Refer to: r0025 
+Note: The output voltage is available smoothed (r0025) and unsmoothed (r0072). 
+r0073 Maximum modulation depth / Modulat_depth max 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: PERCENT Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6723, 6724 Min Max Factory setting  
+- [%] - [%] - [%] 
+Description: Displays the maximum modulation depth. 
+Dependency: Refer to: p1803 
+r0074 CO: Modulat_depth / Mod_depth 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: PERCENT Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 5730, 6730, 6731,  6799, 8940, 8950 
+Min Max Factory setting  
+- [%] - [%] - [%] 
+Description: Display and connector output for the actual modulation depth. 
+Dependency: Refer to: r0028 
+Note: For space vector modulation, 100% corresponds to the maximum output voltage without overcontrol. Values above 100 % indicate an overcontrol condition - values below 100% have no overcontrol. 
+The phase voltage (phase-to-phase, rms) is calculated as follows:(r0074 x r0070) / (sqrt(2) x 100 %). 
+The modulation depth is available smoothed (r0028) and unsmoothed (r0074). 
+r0075 CO: Current setpoint field-generating / Id_set 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_2 Unit selection: p0505 Func. diagram: 6700, 6714, 6725 Min Max Factory setting  
+- [Arms] - [Arms] - [Arms]
+Description: Display and connector output for the field-generating current setpoint (Id_set). 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1) 
+Note: This value is irrelevant for the U/f control mode. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 45 
+2 Parameters 
+2.2 List of parameters 
+r0076 CO: Current actual value field-generating / Id_act 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_2 Unit selection: p0505 Func. diagram: 5700, 5714, 5730,  6700, 6714, 6799 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Display and connector output for the field-generating current actual value (Id_act). Dependency: Refer to: r0029 
+Note: This value is irrelevant for the U/f control mode. 
+The field-generating current actual value is available smoothed (r0029) and unsmoothed (r0076). 
+r0077 CO: Current setpoint torque-generating / Iq_set 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_2 Unit selection: p0505 Func. diagram: 6700, 6710 Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Display and connector output for the torque-generating current setpoint. 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1) 
+Note: This value is irrelevant for the U/f control mode. 
+r0078 CO: Current actual value torque-generating / Iq_act 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: 6_2 Unit selection: p0505 Func. diagram: 6310, 6700, 6714,  6799 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Display and connector output for the torque-generating current actual value (Iq_act). Dependency: Refer to: r0030 
+Note: This value is irrelevant for the U/f control mode. 
+The torque-generating current actual value is available smoothed (r0030 with 300 ms) and unsmoothed (r0078). 
+r0079 CO: Torque setpoint / M_set 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2003 Dyn. index: - 
+Unit group: 7_1 Unit selection: p0505 Func. diagram: 6020, 6060, 6710 Min Max Factory setting  
+- [Nm] - [Nm] - [Nm] 
+Description: Display and connector output for the torque setpoint at the output of the speed controller. Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1) 
+r0080[0...1] CO: Torque actual value / Actual torque 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2003 Dyn. index: - 
+Unit group: 7_1 Unit selection: p0505 Func. diagram: 6714, 6799 Min Max Factory setting  
+- [Nm] - [Nm] - [Nm]
+Description: Display and connector output for actual torque value. 
+Index: [0] = Unsmoothed 
+[1] = Smoothed with p0045 
+SINAMICS G120 CU230P-2 Control Units 
+46 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1) 
+Refer to: r0031, p0045 
+Note: The value is available smoothed (r0031 with 100 ms, r0080[1] with p0045) and unsmoothed (r0080[0]). 
+r0082[0...2] CO: Active power actual value / P_act 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: r2004 Dyn. index: - 
+Unit group: 14_5 Unit selection: p0505 Func. diagram: 6714, 6799 
+Min Max Factory setting  
+- [kW] - [kW] - [kW] 
+Description: Displays the instantaneous active power. 
+Index: [0] = Unsmoothed 
+[1] = Smoothed with p0045 
+[2] = Electric power 
+Dependency: Refer to: r0032 
+Note: The mechanical active power is available smoothed (r0032 with 100 ms, r0082[1] with p0045) and unsmoothed  (r0082[0]). 
+r0083 CO: Flux setpoint / Flex setp 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: PERCENT Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 5722 
+Min Max Factory setting  
+- [%] - [%] - [%] 
+Description: Displays the flux setpoint. 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1) 
+r0084[0...1] CO: Flux actual value / Actual flux 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: PERCENT Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6730, 6731 
+Min Max Factory setting  
+- [%] - [%] - [%] 
+Description: Displays the flux actual value. 
+Index: [0] = Unsmoothed 
+[1] = Smoothed 
+r0087 CO: Actual power factor / Cos phi act 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - - 
+Description: Displays the actual active power factor. 
+This value refers to the electrical power of the basic fundamental signals at the output terminals of the converter. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 47 
+2 Parameters 
+2.2 List of parameters 
+r0089[0...2] Actual phase voltage / U_phase act val 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: p2001 Dyn. index: - 
+Unit group: 5_3 Unit selection: p0505 Func. diagram: 6730 
+Min Max Factory setting  
+- [V] - [V] - [V] 
+Description: Displays the actual phase voltage. 
+Index: [0] = Phase U 
+[1] = Phase V 
+[2] = Phase W 
+Note: The values are determined from the transistor switch-on duration. 
+p0096 Application class / Appl_class 
+PM240 Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6019 
+Min Max Factory setting  
+0 2 0  
+Description: Setting the commissioning and control view for various application classes. 
+Value: 0: Expert 
+1: Standard Drive Control (SDC) 
+2: Dynamic Drive Control (DDC) 
+Dependency: The parameter is preset when commissioning the system for the first time and for the factory setting, depending on  the power unit that is connected. 
+Depending on the setting, the ability to see control parameters is restricted depending on the particular application. The following applies for p0096 > 0: 
+The motor data identification routine is preset (p1900 = 2). 
+The following applies for p0096 = 1: 
+The motor type (p0300) synchronous or reluctance motor is not possible. 
+Note: When changing p0096 to 1 or 2, when completing commissioning, fast parameterization should be executed (p3900  > 0). 
+Depending on the setting, after quick commissioning and/or automatic parameterization, the procedure for motor  data identification as well as the setting of the operating mode and parameterization of the closed-loop control must  be appropriately adapted. 
+p0096 Application class / Appl_class 
+PM330 Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 6019 
+Min Max Factory setting  
+0 2 0 
+Description: Setting the commissioning and control view for various application classes. 
+Value: 0: Expert 
+2: Dynamic Drive Control (DDC) 
+Dependency: The parameter is preset when commissioning the system for the first time and for the factory setting, depending on  the power unit that is connected. 
+Depending on the setting, the ability to see control parameters is restricted depending on the particular application. The following applies for p0096 > 0: 
+The motor data identification routine is preset (p1900 = 2). 
+Note: When changing p0096 to 1 or 2, when completing commissioning, fast parameterization should be executed (p3900  > 0). 
+Depending on the setting, after quick commissioning and/or automatic parameterization, the procedure for motor  data identification as well as the setting of the operating mode and parameterization of the closed-loop control must  be appropriately adapted. 
+SINAMICS G120 CU230P-2 Control Units 
+48 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0100 IEC/NEMA mot stds / IEC/NEMA mot stds 
+Access level: 1 Calculated: - Data type: Integer16 
+Can be changed: C(1) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 2 0  
+Description: Defines whether the motor and drive converter power settings (e.g. rated motor power, p0307) are expressed in [kW]  or [hp]. 
+Depending on the selection, the rated motor frequency (p0310) is either set to 50 Hz or 60 Hz. 
+For p0100 = 0, 2, the following applies: The power factor (p0308) should be parameterized. 
+For p0100 = 1, the following applies: The efficiency (p0309) should be parameterized. 
+Value: 0: IEC-Motor (50 Hz, SI units) 
+1: NEMA motor (60 Hz, US units) 
+2: NEMA motor (60 Hz, SI units) 
+Dependency: If p0100 is changed, all of the rated motor parameters are reset. Only then are possible unit changeovers made. The units of all motor parameters are changed that are involved in the selection of IEC or NEMA (e.g. r0206, p0307,  r0333, r0334, p0341, p0344, r1969). 
+Refer to: r0206, p0210, p0300, p0304, p0305, p0307, p0308, p0309, p0310, p0311, p0314, p0320, p0322, p0323,  p0335, r0337, p1800 
+Note: The parameter value is not reset when the factory setting is restored (p0010 = 30, p0970). 
+p0124[0...n] CU detection via LED / CU detection LED 
+Access level: 3 Calculated: - Data type: Unsigned8 
+Can be changed: U, T Scaling: - Dyn. index: PDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 1 0  
+Description: Identification of the Control Unit using an LED. 
+Note: While p0124 = 1, the READY LED flashes green/orange or red/orange with 2 Hz at the appropriate Control Unit. 
+p0133[0...n] Motor configuration / Motor config 
+Access level: 2 Calculated: - Data type: Unsigned16 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - 0000 bin  
+Description: Configuration of the motor when commissioning the motor. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 Motor connection type Delta Star - 01 Motor 87 Hz operation Yes No -
+Dependency: For standard induction motors (p0301 > 10000), bit 0 is automatically pre-assigned the connection type of the  selected data set. 
+For p0100 > 0 (60 Hz rated motor frequency), it is not possible to select bit 1. 
+Refer to: p0304, p0305, p1082 
+Note: For bit 00: 
+When changing the bits, the rated motor voltage p0304 and the rated motor current p0305 are automatically  converted to the selected connection type (star/delta). 
+For bit 01: 
+87 Hz operation is only possible in the delta connection type. When selected, the maximum speed p1082 is  automatically pre-assigned for a maximum output frequency of 87 Hz. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 49 
+2 Parameters 
+2.2 List of parameters 
+p0170 Number of Command Data Sets (CDS) / CDS count 
+Access level: 2 Calculated: - Data type: Unsigned8 Can be changed: C(15) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8560 Min Max Factory setting  
+2 4 2  
+Description: Sets the number of Command Data Sets (CDS). 
+Dependency: Refer to: p0010, r3996 
+Notice: When the data sets are created, short-term communication interruptions may occur. Note: It is possible to toggle between command parameters (BICO parameters) using this data set changeover. 
+p0180 Number of Drive Data Sets (DDS) / DDS count 
+Access level: 3 Calculated: - Data type: Unsigned8 Can be changed: C(15) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8565 Min Max Factory setting  
+1 4 1  
+Description: Sets the number of Drive Data Sets (DDS). 
+Dependency: Refer to: p0010, r3996 
+Notice: When the data sets are created, short-term communication interruptions may occur. 
+r0197[0...1] Bootloader version / Bootloader vers 
+Access level: 4 Calculated: - Data type: Unsigned32 Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Displays the bootloader version. 
+Index 0: 
+Displays the bootloader version. 
+Index 1: 
+Displays the bootloader version 3 (for CU320-2 and CU310-2) 
+Value 0 means that boot loader 3 is not available. 
+Dependency: Refer to: r0018, r0198 
+Note: Example: 
+The value 1010100 should be interpreted as V01.01.01.00. 
+r0198[0...2] BIOS/EEPROM data version / BIOS/EEPROM vers 
+Access level: 4 Calculated: - Data type: Unsigned32 Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - - 
+Description: Displays the BIOS and EEPROM data version. 
+r0198[0]: BIOS version 
+r0198[1]: EEPROM data version EEPROM 0 
+r0198[2]: EEPROM data version EEPROM 1 
+Dependency: Refer to: r0018, r0197 
+Note: Example: 
+The value 1010100 should be interpreted as V01.01.01.00. 
+SINAMICS G120 CU230P-2 Control Units 
+50 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0200[0...n] Power unit code number actual / PU code no. act 
+Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: PDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Displays the unique code number of the power unit. 
+Note: r0200 = 0: No power unit data found 
+p0201[0...n] Power unit code number / PU code no 
+Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: C(2) Scaling: - Dyn. index: PDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 65535 0  
+Description: Sets the actual code number from r0200 to acknowledge the power unit being used. When commissioned for the first time, the code number is automatically transferred from r0200 into p0201. Note: The parameter is used to identify when the drive is being commissioned for the first time. The power unit commissioning can only be exited (p0201 = r0200), if the actual and acknowledged code numbers are  identical (p0010 = 2). 
+When the code number is changed, the connection voltage (p0210) is checked and, if necessary, adjusted. 
+r0203[0...n] Actual power unit type / PU actual type 
+Access level: 3 Calculated: - Data type: Integer16 
+Can be changed: - Scaling: - Dyn. index: PDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+2 400 - 
+Description: Displays the type of power unit found. 
+Value: 2: MICROMASTER 440 
+3: MICROMASTER 411 
+4: MICROMASTER 410 
+5: MICROMASTER 436 
+6: MICROMASTER 440 PX 
+7: MICROMASTER 430 
+100: SINAMICS S 
+101: SINAMICS S (value) 
+102: SINAMICS S (combi) 
+103: SINAMICS S120M (distributed) 
+112: PM220 (SINAMICS G120) 
+113: PM230 (SINAMICS G120) 
+114: PM240 (SINAMICS G120 / S120) 
+115: PM250 (SINAMICS G120 / S120) 
+116: PM260 (SINAMICS G120) 
+118: SINAMICS G120 Px 
+120: PM340 (SINAMICS S120 / G120) 
+126: SINAMICS ET200PRO 
+130: PM250D (SINAMICS G120D) 
+133: SINAMICS G120C 
+135: SINAMICS PMV40 
+136: SINAMICS PMV60 
+137: SINAMICS PMV80 
+138: SINAMICS G110M 
+150: SINAMICS G 
+151: PM330 (SINAMICS G120) 
+200: SINAMICS GM 
+250: SINAMICS SM 
+260: SINAMICS MC 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 51 
+2 Parameters 
+2.2 List of parameters 
+300: SINAMICS GL 
+350: SINAMICS SL 
+400: SINAMICS DCM 
+Note: For parallel circuit configurations, the parameter index is assigned to a power unit. 
+r0204[0...n] Power unit hardware properties / PU HW property 
+Access level: 3 Calculated: - Data type: Unsigned32 
+Can be changed: - Scaling: - Dyn. index: PDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Displays the properties supported by the power unit hardware. 
+Bit field: Bit Signal name 1 signal 0 signal FP 01 RFI filter available Yes No - 
+07 F3E regenerative feedback into the line  supply 
+Yes No - 
+08 Internal Braking Module Yes No - 12 Safe Brake Control (SBC) supported No Yes - 14 Internal LC output filter Yes No - 15 Line voltage 1-phase 3-phase - 
+p0205 Power unit application / PU application 
+PM230 PM330 
+Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1, 2) Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0 1 1  
+Description: The duty cycles can be overloaded provided that the drive converter is operated with its base load current before and  after the overload. This is based on a load duty cycle of 300 s. 
+Value: 0: Load duty cycle with high overload for vector drives 
+1: Load duty cycle with low overload for vector drives 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1), "Dynamic Drive Control" (DDC, p0096  = 2) 
+Refer to: r3996 
+Notice: The parameter value is not reset when the factory setting is restored (see p0010 = 30, p0970). When the power unit use is changed, short-term communication interruptions may occur. 
+Note: When the parameter is changed, all of the motor parameters (p0305 ... p0311), the technological application (p0500)  and the control mode (p1300) are pre-assigned according to the selected application. The parameter has no  influence when calculating the thermal overload. 
+p0205 can only be changed to the settings that are saved in the power unit EEPROM. 
+p0205 Power unit application / PU application 
+PM240 Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1, 2) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 7 0 
+Description: The duty cycles can be overloaded provided that the drive converter is operated with its base load current before and  after the overload. This is based on a load duty cycle of 300 s. 
+Value: 0: Load duty cycle with high overload for vector drives 
+1: Load duty cycle with low overload for vector drives 
+6: S1 duty cycle (for internal use) 
+7: S6 duty cycle (for internal use) 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1), "Dynamic Drive Control" (DDC, p0096  = 2) 
+Refer to: r3996 
+SINAMICS G120 CU230P-2 Control Units 
+52 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Notice: The parameter value is not reset when the factory setting is restored (see p0010 = 30, p0970). When the power unit use is changed, short-term communication interruptions may occur. 
+Note: When the parameter is changed, all of the motor parameters (p0305 ... p0311), the technological application (p0500)  and the control mode (p1300) are pre-assigned according to the selected application. The parameter has no  influence when calculating the thermal overload. 
+p0205 can only be changed to the settings that are saved in the power unit EEPROM. 
+p0205 Power unit application / PU application 
+PM250 PM260 
+Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1, 2) Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0 1 0  
+Description: The duty cycles can be overloaded provided that the drive converter is operated with its base load current before and  after the overload. This is based on a load duty cycle of 300 s. 
+Value: 0: Load duty cycle with high overload for vector drives 
+1: Load duty cycle with low overload for vector drives 
+Dependency: Not visible with application class: "Standard Drive Control" (SDC, p0096 = 1), "Dynamic Drive Control" (DDC, p0096  = 2) 
+Refer to: r3996 
+Notice: The parameter value is not reset when the factory setting is restored (see p0010 = 30, p0970). When the power unit use is changed, short-term communication interruptions may occur. 
+Note: When the parameter is changed, all of the motor parameters (p0305 ... p0311), the technological application (p0500)  and the control mode (p1300) are pre-assigned according to the selected application. The parameter has no  influence when calculating the thermal overload. 
+p0205 can only be changed to the settings that are saved in the power unit EEPROM. 
+r0206[0...4] Rated power unit power / PU P_rated 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: 14_6 Unit selection: p0100 Func. diagram: - 
+Min Max Factory setting  
+- [kW] - [kW] - [kW] 
+Description: Displays the rated power unit power for various load duty cycles. 
+Index: [0] = Rated value 
+[1] = Load duty cycle with low overload 
+[2] = Load duty cycle with high overload 
+[3] = S1 cont duty cyc 
+[4] = S6 load duty cycle 
+Dependency: IECdrives (p0100 = 0): Units kW 
+NEMA drives (p0100 = 1): Units hp 
+Refer to: p0100, p0205 
+r0207[0...4] Rated power unit current / PU PI_rated 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: 8021 Min Max Factory setting  - [Arms] - [Arms] - [Arms]
+Description: Displays the rated power unit power for various load duty cycles. Index: [0] = Rated value 
+[1] = Load duty cycle with low overload 
+[2] = Load duty cycle with high overload 
+[3] = S1 cont duty cyc 
+[4] = S6 load duty cycle 
+Dependency: Refer to: p0205 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 53 
+2 Parameters 
+2.2 List of parameters 
+r0207[0...4] Rated power unit current / PU PI_rated 
+PM330 Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8021 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Displays the rated power unit power for various load duty cycles. 
+Index: [0] = Rated value 
+[1] = Load duty cycle with low overload 
+[2] = Load duty cycle with high overload 
+[3] = S1 cont duty cyc 
+[4] = S6 load duty cycle 
+Dependency: Refer to: p0205 
+Note: Wide voltage range device 500 V - 690 V: 
+The rated current displayed refers to a supply voltage of 500 V. 
+r0208 Rated power unit line supply voltage / PU U_rated 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [Vrms] - [Vrms] - [Vrms] 
+Description: Displays the rated line supply voltage of the power unit. 
+r0208 = 400: 380 - 480 V +/-10 % 
+r0208 = 500: 500 - 600 V +/-10 % 
+r0208 = 690: 660 - 690 V +/-10 % 
+r0209[0...4] Power unit maximum current / PU I_max 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8750, 8850, 8950 Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Displays the maximum output current of the power unit. 
+Index: [0] = Catalog 
+[1] = Load duty cycle with low overload 
+[2] = Load duty cycle with high overload 
+[3] = S1 load duty cycle 
+[4] = S6 load duty cycle 
+Dependency: Refer to: p0205 
+p0210 Drive unit line supply voltage / U_connect 
+Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: C(2), T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+1 [V] 63000 [V] 400 [V]
+Description: Sets the drive unit supply voltage (rms value of the phase-to-phase line supply voltage). Dependency: Set p1254, p1294 (automatic detection of the Vdc switch-on levels) = 0. 
+The switch-in thresholds of the Vdc_max controller (r1242, r1282) are then directly determined using p0210. Notice: If, in the switched-off state (pulse inhibit), the supply voltage is higher than the entered value, the Vdc controller may  be automatically deactivated in some cases to prevent the motor from accelerating the next time the system is  switched on. In this case, an appropriate alarm A07401 is output. 
+SINAMICS G120 CU230P-2 Control Units 
+54 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Note: Setting ranges for p0210 as a function of the rated power unit voltage: 
+U_rated = 230 V: 
+- p0210 = 200 ... 240 V 
+U_rated = 400 V: 
+- p0210 = 380 ... 480 V 
+U_rated = 690 V: 
+- p0210 = 500 ... 690 V 
+p0219 Braking resistor braking power / R_brake P_brake 
+PM240 PM330 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: C(1, 2), T Scaling: - Dyn. index: - Unit group: 14_6 Unit selection: p0100 Func. diagram: - Min Max Factory setting  0.00 [kW] 20000.00 [kW] 0.00 [kW] 
+Description: Sets the braking power of the connected braking resistor. 
+Dependency: Refer to: p1127, p1240, p1280, p1531 
+Note: When setting a value for the braking power, the following calculations are made: 
+- p1240, p1280: Vdc_max control is deactivated. 
+- p1531 = - p0219: the power limit when generating is set (limited to - p1530). 
+- the minimum ramp-down time is calculated (p1127) as a function of p0341, p0342 and p1082 (not for vector control  with speed encoder). 
+If the parameter is reset again to zero, then the Vdc_max controller is reactivated and the power limit as well as the  ramp-down time are recalculated. 
+p0230 Drive filter type motor side / Drv filt type mot 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1, 2) Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0 4 0 
+Description: Sets the type of the filter at the motor side. 
+Value: 0: No filter 
+1: Motor reactor 
+2: dv/dt filter 
+3: Sine-wave filter Siemens 
+4: Sine-wave filter third-party 
+Dependency: The following parameters are influenced using p0230: 
+p0230 = 1: 
+--> p0233 (power unit, motor reactor) = filter inductance 
+p0230 = 3: 
+--> p0233 (power unit, motor reactor) = filter inductance 
+--> p0234 (power unit sine-wave filter capacitance) = filter capacitance 
+--> p0290 (power unit overload response) = inhibit pulse frequency reduction 
+--> p1082 (maximum speed) = Fmax filter / pole pair number 
+--> p1800 (pulse frequency) >= nominal pulse frequency of the filter 
+--> p1802 (modulator modes) = space vector modulation without overcontrol 
+p0230 = 4: 
+--> p0290 (power unit overload response) = inhibit pulse frequency reduction 
+--> p1802 (modulator modes) = space vector modulation without overcontrol 
+The user must set the following parameters according to the data sheet of the sine-wave filter and also the user must  check whether they are permitted. 
+--> p0233 (power unit, motor reactor) = filter inductance 
+--> p0234 (power unit sine-wave filter capacitance) = filter capacitance 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 55 
+2 Parameters 
+2.2 List of parameters 
+--> p1082 (maximum speed) = Fmax filter / pole pair number 
+--> p1800 (pulse frequency) >= nominal pulse frequency of the filter 
+Refer to: p0233, p0234, p0290, p1082, p1800, p1802 
+Note: The parameter cannot be changed if the power unit (e.g. PM260) is equipped with an internal sine-wave filter. For sine-wave filters, the test pulse evaluation to detect short-circuits is always deactivated. 
+Only motor reactor filter type can be selected for a synchronous reluctance motor (RESM). 
+If a filter type cannot be selected, then this filter type is not permitted for the power unit. 
+p0230 = 1: 
+Power units with output reactor are limited to output frequencies of 150 Hz. 
+p0230 = 3: 
+Power units with sine-wave filter are limited to output frequencies of 200 Hz. 
+p0230 Drive filter type motor side / Drv filt type mot 
+PM330 Access level: 1 Calculated: - Data type: Integer16 Can be changed: C(1, 2) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 2 0  
+Description: Sets the type of the filter at the motor side. 
+Value: 0: No filter 
+1: Motor reactor 
+2: dv/dt filter 
+Dependency: The following parameters are influenced using p0230: 
+p0230 = 1: 
+--> p0233 (power unit, motor reactor) = filter inductance 
+Refer to: p0233, p0234, p0290, p1082, p1800, p1802 
+Note: If a filter type cannot be selected, then this filter type is not permitted for the power unit. p0230 = 1: 
+Power units with output reactor are limited to output frequencies of 150 Hz. 
+r0231[0...1] Power cable length maximum / Cable length max 
+Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [m] - [m] - [m] 
+Description: Displays the maximum permissible cable lengths between the drive unit and motor. Index: [0] = Unshielded 
+[1] = Shielded 
+Note: The display value is used to provide information for service and maintenance. 
+p0233 Power unit motor reactor / PU mot reactor 
+Access level: 2 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 2), U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.000 [mH] 1000.000 [mH] 0.000 [mH]
+Description: Enter the inductance of a filter connected at the power unit output. 
+Dependency: This parameter is automatically pre-set when you select a filter via p0230 if a SIEMENS filter is defined for the power  unit. 
+Refer to: p0230 
+Note: When exiting the quick commissioning using p3900 = 1, the parameter value is set to the value of the defined  SIEMENS filter or to zero. For this reason, the parameter value of a third-party filter only has to be entered outside  the commissioning phase (p0010 = 0) and then the controller calculation (p0340 = 3) is carried out. 
+The parameter cannot be changed if the power unit (e.g. PM260) is equipped with an internal sine-wave filter. 
+SINAMICS G120 CU230P-2 Control Units 
+56 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0234 Power unit sine-wave filter capacitance / PU sine filter C 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 2 Calculated: - Data type: FloatingPoint32 Can be changed: C(1, 2), U, T Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0.000 [µF] 1000.000 [µF] 0.000 [µF] 
+Description: Enters the capacitance of a sine-wave filter connected at the power unit output. 
+Dependency: This parameter is automatically pre-set when you select a filter via p0230 if a SIEMENS filter is defined for the power  unit. 
+Refer to: p0230 
+Note: The parameter value includes the sum of all of the capacitances of a phase connected in series (phase - ground). When exiting the quick commissioning using p3900 = 1, the parameter value is set to the value of the defined  SIEMENS filter or to zero. For this reason, the parameter value of a third-party filter only has to be entered outside  the commissioning phase (p0010 = 0). 
+The parameter cannot be changed if the power unit (e.g. PM260) is equipped with an internal sine-wave filter. 
+p0235 Motor reactor in series number / L_mot in SeriesQty 
+PM240 Access level: 2 Calculated: - Data type: Unsigned8 Can be changed: C(1, 2) Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+1 3 1  
+Description: Sets the number of reactors connected in series at the power unit output. 
+Dependency: Refer to: p0230 
+Notice: The reactor inductances should be the same. 
+If the number of motor reactors connected in series does not correspond to this parameter value, then this can result  in an unfavorable control behavior. 
+r0238 Internal power unit resistance / PU R internal 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [ohm] - [ohm] - [ohm] 
+Description: Displays the internal resistance of the power unit (IGBT and line resistance). 
+p0247 Voltage measurement configuring / U_mes config 
+PM330 Access level: 3 Calculated: - Data type: Unsigned32 Can be changed: C(2), U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - 0000 0000 0010 0000 bin  
+Description: Sets the configuration for the output voltage measurement of the power unit. 
+Bit field: Bit Signal name 1 signal 0 signal FP 00 Activate voltage measurement Yes No - 01 Siemens internal Yes No - 02 Siemens internal Yes No - 
+05 Use voltage measured values for flying  restart 
+Yes No - 
+07 Voltage calibration when switching on Yes No - 08 Voltage monitoring when switching on Yes No - 09 Voltage monitoring cyclic Yes No -
+Note: The motor data identification must be executed when using the voltage measurement. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 57 
+2 Parameters 
+2.2 List of parameters 
+p0251[0...n] Operating hours counter power unit fan / PU fan t_oper 
+PM330 Access level: 3 Calculated: - Data type: Unsigned32 Can be changed: T Scaling: - Dyn. index: PDS, p0120 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 [h] 4294967295 [h] 0 [h] 
+Description: Displays the power unit fan operating hours. 
+The number of hours operated can only be reset to 0 in this parameter (e.g. after a fan has been replaced). Dependency: Refer to: p0252 
+Refer to: A30042 
+Note: For liquid-cooled chassis power units, the operating hours of the inner fan are displayed in p0251 and not in p0254. 
+p0252 Maximum operating time power unit fan / PU fan t_oper max PM330 Access level: 4 Calculated: - Data type: Unsigned32 Can be changed: T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 [h] 100000 [h] 40000 [h] 
+Description: Sets the maximum operating time of the power unit fan. 
+The prealarm (warning) is output 500 hours before this set value. 
+The monitoring is deactivated with p0252 = 0. 
+Dependency: Refer to: p0251 
+Refer to: A30042 
+Note: For PM330 power units, the maximum operating time of the fan on the power unit is saved and displayed in p0252.  The "Restore factory setting" function or a project download does not influence p0252. Users can manually change  the maximum operating time of the fan. The modified value is also saved to the power unit. 
+p0254[0...n] Operating hours counter power unit fan inside the converter / PU inner fan t_op PM330 Access level: 3 Calculated: - Data type: Unsigned32 Can be changed: T Scaling: - Dyn. index: PDS, p0120 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 [h] 4294967295 [h] 0 [h] 
+Description: Displays the power unit fan operating hours of the internal fan in the power unit. 
+The number of hours operated can only be reset to 0 in this parameter (e.g. after a fan has been replaced). Dependency: Refer to: A30042 
+Note: For liquid-cooled chassis power units, the operating hours of the inner fan are displayed in p0251 and not in p0254. 
+p0287[0...1] Ground fault monitoring thresholds / Gnd flt threshold 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.0 [%] 100.0 [%] [0] 6.0 [%] 
+[1] 16.0 [%]
+Description: Sets the shutdown thresholds for the ground fault monitoring. 
+The setting is made as a percentage of the maximum current of the power unit (r0209). 
+Index: [0] = Threshold at which precharging starts 
+[1] = Threshold at which precharging stops 
+Dependency: Refer to: p1901 
+Refer to: F30021 
+Note: This parameter is only relevant for chassis power units. 
+SINAMICS G120 CU230P-2 Control Units 
+58 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+r0289 CO: Maximum power unit output current / PU I_outp max 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: p2002 Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms] 
+Description: Displays the actual maximum output current of the power unit taking into account derating factors. p0290 Power unit overload response / PU overld response 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: Integer16 Can be changed: T Scaling: - Dyn. index: - Unit group: - Unit selection: - Func. diagram: 8021 Min Max Factory setting  0 13 2 
+Description: Sets the response to a thermal overload condition of the power unit. 
+The following quantities can result in a response to thermal overload: 
+- heat sink temperature (r0037[0]). 
+- chip temperature (r0037[1]). 
+- power unit overload I2t (r0036). 
+Possible measures to avoid thermal overload: 
+- reduce the output current limit r0289 and r0067 (for closed-loop speed control) or the output frequency (for U/f  control indirectly via the output current limit and the intervention of the current limiting controller). 
+- reduce the pulse frequency. 
+A reduction, if parameterized, is always realized after an appropriate alarm is output. 
+Value: 0: Reduce output current or output frequency 
+1: No reduction shutdown when overload threshold is reached 
+2: Reduce I_output or f_output and f_pulse (not using I2t) 
+3: Reduce the pulse frequency (not using I2t) 
+12: I_output or f_output and automatic pulse frequency reduction 
+13: Automatic pulse frequency reduction 
+Dependency: If a sine-wave filter is parameterized as output filter (p0230 = 3, 4), then only responses can be selected without  pulse frequency reduction (p0290 = 0, 1). 
+For a thermal power unit overload, an appropriate alarm or fault is output, and r2135.15 or r2135.13 set. 
+Refer to: r0036, r0037, p0230, r2135 
+Refer to: A05000, A05001, A07805 
+Notice: If the thermal overload of the power unit is not sufficiently reduced by the actions taken, the drive is always shut  down. This means that the power unit is always protected irrespective of the setting of this parameter. 
+Note: The setting p0290 = 0, 2 is only practical if the load decreases with decreasing speed (e.g. for applications with  variable torque such as for pumps and fans). 
+Under overload conditions, the current and torque limit are reduced, and therefore the motor is braked and forbidden  speed ranges (e.g. minimum speed p1080 and suppression [skip] speeds p1091 ... p1094) can be passed through. For p0290 = 2, 3, 12, 13, the I2t overload detection of the power unit does not influence the response "Reduce pulse  frequency". 
+When the motor data identification routine is selected, p0290 cannot be changed. 
+For short-circuit/ground fault detection, when the test pulse evaluation is active via p1901 "Test pulse evaluation  configuration", the pulse frequency at the instant of switch on is briefly reduced. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 59 
+2 Parameters 
+2.2 List of parameters 
+p0290 Power unit overload response / PU overld response 
+PM330 Access level: 4 Calculated: - Data type: Integer16 Can be changed: T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8021 
+Min Max Factory setting  
+0 3 2  
+Description: Sets the response to a thermal overload condition of the power unit. 
+The following quantities can result in a response to thermal overload: 
+- heat sink temperature (r0037[0]). 
+- chip temperature (r0037[1]). 
+- power unit overload I2t (r0036). 
+Possible measures to avoid thermal overload: 
+- reduce the output current limit r0289 and r0067 (for closed-loop speed control) or the output frequency (for U/f  control indirectly via the output current limit and the intervention of the current limiting controller). 
+- reduce the pulse frequency. 
+A reduction, if parameterized, is always realized after an appropriate alarm is output. 
+Value: 0: Reduce output current or output frequency 
+1: No reduction shutdown when overload threshold is reached 
+2: Reduce I_output or f_output and f_pulse (not using I2t) 
+3: Reduce the pulse frequency (not using I2t) 
+Dependency: If a sine-wave filter is parameterized as output filter (p0230 = 3, 4), then only responses can be selected without  pulse frequency reduction (p0290 = 0, 1). 
+For a thermal power unit overload, an appropriate alarm or fault is output, and r2135.15 or r2135.13 set. 
+Refer to: r0036, r0037, p0230, r2135 
+Refer to: A05000, A05001, A07805 
+Notice: If the thermal overload of the power unit is not sufficiently reduced by the actions taken, the drive is always shut  down. This means that the power unit is always protected irrespective of the setting of this parameter. 
+Note: The setting p0290 = 0, 2 is only practical if the load decreases with decreasing speed (e.g. for applications with  variable torque such as for pumps and fans). 
+Under overload conditions, the current and torque limit are reduced, and therefore the motor is braked and forbidden  speed ranges (e.g. minimum speed p1080 and suppression [skip] speeds p1091 ... p1094) can be passed through. For p0290 = 2, 3, the I2t overload detection of the power unit does not influence the response "Reduce pulse  frequency". 
+When the motor data identification routine is selected, p0290 cannot be changed. 
+For short-circuit/ground fault detection, when the test pulse evaluation is active via p1901 "Test pulse evaluation  configuration", the pulse frequency at the instant of switch on is briefly reduced. 
+p0292[0...1] Power unit temperature alarm threshold / PU T_alrm thresh 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8021 
+Min Max Factory setting  
+0 [°C] 25 [°C] [0] 5 [°C] 
+[1] 15 [°C]
+Description: Sets the alarm threshold for power unit overtemperatures. The value is set as a difference to the tripping (shutdown)  temperature. 
+Drive: 
+If this threshold is exceeded, an overload alarm is generated and the system responds as parameterized in p0290. Infeed: 
+When the threshold value is exceeded, only an overload alarm is output. 
+Index: [0] = Overtemperature heat sink 
+[1] = Temperature rise power semiconductor (chip) 
+Dependency: Refer to: r0037, p0290 
+Refer to: A05000, A05001 
+SINAMICS G120 CU230P-2 Control Units 
+60 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0294 Power unit alarm with I2t overload / PU I2t alrm thresh 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8021 
+Min Max Factory setting  
+10.0 [%] 100.0 [%] 95.0 [%] 
+Description: Sets the alarm threshold for the I2t power unit overload. 
+If this threshold is exceeded, an overload alarm is generated and the system responds as parameterized in p0290. Dependency: Refer to: r0036, p0290 
+Refer to: A07805 
+Note: The I2t fault threshold is 100 %. If this value is exceeded, fault F30005 is output. 
+p0295 Fan run-on time / Fan run-on time 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: U, T Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 [s] 600 [s] 0 [s] 
+Description: Sets the fan run-on time after the pulses for the power unit have been canceled. 
+Note: - Under certain circumstances, the fan can continue to run for longer than was set (e.g. as a result of the excessively  high heat sink temperature). 
+- For values less than 1 s, a 1 s run on time for the fan is active. 
+- for a PM230 power unit, sizes D - F the parameter is ineffective. 
+r0296 DC link voltage undervoltage threshold / Vdc U_lower_thresh Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [V] - [V] - [V] 
+Description: Threshold to detect a DC link undervoltage. 
+If the DC link voltage falls below this threshold, the drive unit is tripped due to a DC link undervoltage condition. Dependency: Refer to: F30003 
+r0297 DC link voltage overvoltage threshold / Vdc U_upper_thresh 
+Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: - 
+Unit group: - Unit selection: - Func. diagram: 8750, 8760, 8850,  8864, 8950, 8964 
+Min Max Factory setting  
+- [V] - [V] - [V]
+Description: Threshold to detect a DC link overvoltage. 
+If the DC link voltage exceeds the threshold specified here, the drive unit is tripped due to DC link overvoltage. Dependency: Refer to: F30002 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 61 
+2 Parameters 
+2.2 List of parameters 
+p0300[0...n] Motor type selection / Mot type sel 
+PM230 
+PM250, PM260 
+Access level: 2 Calculated: - Data type: Integer16 Can be changed: C(1, 3) Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: 6310 Min Max Factory setting  0 105 0 
+Description: Selecting the motor type. 
+The first digit of the parameter value always defines the general motor type and corresponds to the third-party motor  belonging to a motor list: 
+1 = induction motor 
+2 = synchronous motor 
+xx = motor without code number 
+xxx = motor with code number 
+The type information must be entered to filter motor-specific parameters and to optimize the operating characteristics  and behavior. For example, for synchronous motors, power factor (p0308) is neither used nor displayed (in the  BOP/IOP). 
+The following applies for values < 100: 
+Motor data must be manually entered. 
+The following applies for values >= 100: 
+Motor data are automatically loaded from an internal list. 
+Value: 0: No motor 
+1: Induction motor 
+2: Synchronous motor 
+10: 1LE1 induction motor (not a code number) 
+13: 1LG6 induction motor (not a code number) 
+17: 1LA7 induction motor (not a code number) 
+19: 1LA9 induction motor (not a code number) 
+100: 1LE1 induction motor 
+101: 1PC1 induction motor 
+105: 1LE5 induction motor 
+Dependency: When selecting p0300 = 10 ... 19, parameters p0335, p0626, p0627, and p0628 of the thermal motor model are pre assigned as a function of p0307 and p0311. 
+Caution: If a motor is selected, which is not contained in the motor lists (p0300 < 100), then the motor code number must be  reset (p0301 = 0), if previously a motor was parameterized from the motor list. 
+Notice: If a catalog motor is selected (p0300 >= 100) and an associated motor code number (p0301), then the parameters  that are associated with this list cannot be changed (write protection). The write protection is canceled if the motor  type p0300 is set to a non-Siemens motor that matches p0301 (e.g. p0300 = 1 for p0301 = 1xxxx). Write protection is  automatically canceled when the results of motor data identification are copied to the motor parameters. 
+The motor type of a catalog motor corresponds to the upper three digits of the code number or the following  assignment (if the particular motor type is listed): 
+Type/code number ranges 
+100 / 100xx, 110xx, 120xx, 130xx, 140xx, 150xx 
+Note: Once the Control Unit has been switched on for the first time or if the factory settings have been defined accordingly,  the motor type is preconfigured to induction motor (p0300 = 1). 
+If a motor type has not been selected (p0300 = 0), then the drive commissioning routine cannot be exited. 
+A motor type with a value above p0300 >= 100 describes motors for which a motor parameter list exists. 
+SINAMICS G120 CU230P-2 Control Units 
+62 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0300[0...n] Motor type selection / Mot type sel 
+PM240 Access level: 2 Calculated: - Data type: Integer16 Can be changed: C(1, 3) Scaling: - Dyn. index: MDS, p0130 
+Unit group: - Unit selection: - Func. diagram: 6310 
+Min Max Factory setting  
+0 603 0 
+Description: Selecting the motor type. 
+The first digit of the parameter value always defines the general motor type and corresponds to the third-party motor  belonging to a motor list: 
+1 = induction motor 
+2 = synchronous motor 
+6 = synchronous reluctance motor 
+xx = motor without code number 
+xxx = motor with code number 
+The type information must be entered to filter motor-specific parameters and to optimize the operating characteristics  and behavior. For example, for synchronous motors, power factor (p0308) is neither used nor displayed (in the  BOP/IOP). 
+The following applies for values < 100: 
+Motor data must be manually entered. 
+The following applies for values >= 100: 
+Motor data are automatically loaded from an internal list. 
+Value: 0: No motor 
+1: Induction motor 
+2: Synchronous motor 
+6: Reluctance motor 
+10: 1LE1 induction motor (not a code number) 
+13: 1LG6 induction motor (not a code number) 
+17: 1LA7 induction motor (not a code number) 
+19: 1LA9 induction motor (not a code number) 
+100: 1LE1 induction motor 
+101: 1PC1 induction motor 
+105: 1LE5 induction motor 
+108: 1PH8 induction motor 
+600: 1FP1 synchronous reluctance motor 
+603: 1FP3 synchronous reluctance motor OEM 
+Dependency: When selecting p0300 = 10 ... 19, parameters p0335, p0626, p0627, and p0628 of the thermal motor model are pre assigned as a function of p0307 and p0311. 
+For p0096 = 1 (Standard Drive Control) synchronous motor types cannot be selected. 
+Caution: If a motor is selected, which is not contained in the motor lists (p0300 < 100), then the motor code number must be  reset (p0301 = 0), if previously a motor was parameterized from the motor list. 
+Notice: If a catalog motor is selected (p0300 >= 100) and an associated motor code number (p0301), then the parameters  that are associated with this list cannot be changed (write protection). The write protection is canceled if the motor  type p0300 is set to a non-Siemens motor that matches p0301 (e.g. p0300 = 1 for p0301 = 1xxxx). Write protection is  automatically canceled when the results of motor data identification are copied to the motor parameters. 
+The motor type of a catalog motor corresponds to the upper three digits of the code number or the following  assignment (if the particular motor type is listed): 
+Type/code number ranges 
+100 / 100xx, 110xx, 120xx, 130xx, 140xx, 150xx 
+108 / 108xx, 118xx, 128xx, 138xx, 148xx, 158xx 
+Note: Once the Control Unit has been switched on for the first time or if the factory settings have been defined accordingly,  the motor type is preconfigured to induction motor (p0300 = 1). 
+If a motor type has not been selected (p0300 = 0), then the drive commissioning routine cannot be exited. 
+A motor type with a value above p0300 >= 100 describes motors for which a motor parameter list exists. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 63 
+2 Parameters 
+2.2 List of parameters 
+p0300[0...n] Motor type selection / Mot type sel 
+PM330 Access level: 2 Calculated: - Data type: Integer16 Can be changed: C(1, 3) Scaling: - Dyn. index: MDS, p0130 
+Unit group: - Unit selection: - Func. diagram: 6310 
+Min Max Factory setting  
+0 105 0 
+Description: Selecting the motor type. 
+The first digit of the parameter value always defines the general motor type and corresponds to the third-party motor  belonging to a motor list: 
+1 = induction motor 
+2 = synchronous motor 
+xx = motor without code number 
+xxx = motor with code number 
+The type information must be entered to filter motor-specific parameters and to optimize the operating characteristics  and behavior. For example, for synchronous motors, power factor (p0308) is neither used nor displayed (in the  BOP/IOP). 
+The following applies for values < 100: 
+Motor data must be manually entered. 
+The following applies for values >= 100: 
+Motor data are automatically loaded from an internal list. 
+Value: 0: No motor 
+1: Induction motor 
+2: Synchronous motor 
+10: 1LE1 induction motor (not a code number) 
+13: 1LG6 induction motor (not a code number) 
+14: 1xx1 SIMOTICS FD induction motor (not a code number) 
+17: 1LA7 induction motor (not a code number) 
+18: 1LA8 / 1PQ8 standard induction motor series 
+19: 1LA9 induction motor (not a code number) 
+100: 1LE1 induction motor 
+105: 1LE5 induction motor 
+Dependency: When the motor type is changed, the code number in p0301 may be reset to 0. 
+When selecting p0300 = 10 ... 19, parameters p0335, p0626, p0627, and p0628 of the thermal motor model are pre assigned as a function of p0307 and p0311. 
+Caution: If a motor is selected, which is not contained in the motor lists (p0300 < 100), then the motor code number must be  reset (p0301 = 0), if previously a motor was parameterized from the motor list. 
+Notice: If a catalog motor is selected (p0300 >= 100) and an associated motor code number (p0301), then the parameters  that are associated with this list cannot be changed (write protection). The write protection is canceled if the motor  type p0300 is set to a non-Siemens motor that matches p0301 (e.g. p0300 = 1 for p0301 = 1xxxx). Write protection is  automatically canceled when the results of motor data identification are copied to the motor parameters. 
+The motor type of a catalog motor corresponds to the upper three digits of the code number or the following  assignment (if the particular motor type is listed): 
+Type/code number ranges 
+100 / 100xx, 110xx, 120xx, 130xx, 140xx, 150xx 
+Note: Once the Control Unit has been switched on for the first time or if the factory settings have been defined accordingly,  the motor type is preconfigured to induction motor (p0300 = 1). 
+If a motor type has not been selected (p0300 = 0), then the drive commissioning routine cannot be exited. 
+A motor type with a value above p0300 >= 100 describes motors for which a motor parameter list exists. 
+SINAMICS G120 CU230P-2 Control Units 
+64 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0301[0...n] Motor code number selection / Mot code No. sel 
+Access level: 2 Calculated: - Data type: Unsigned16 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 65535 0  
+Description: The parameter is used to select a motor from a motor parameter list. 
+When changing the code number (with the exception to the value 0), all of the motor parameters are pre-assigned  from the internally available parameter lists. 
+Dependency: Code numbers can only be selected for motor types that correspond to the motor type selected in p0300. Refer to: p0300 
+Note: The motor code number can only be changed if the matching catalog motor was first selected in p0300. When selecting a catalog motor (p0300 >= 100), drive commissioning can only be exited if a code number is  selected. 
+If a change is made to a non-catalog motor, then the motor code number should be reset (p0301 = 0). 
+p0304[0...n] Rated motor voltage / Mot U_rated 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6301, 6724 
+Min Max Factory setting  
+0 [Vrms] 20000 [Vrms] 0 [Vrms] 
+Description: Sets the rated motor voltage (rating plate). 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: When the parameter value is entered the connection type of the motor (star-delta) must be taken into account. 
+Once the Control Unit has booted for the first time or if the factory settings have been restored, the parameter is pre assigned to match the power unit. 
+p0305[0...n] Rated motor current / Mot I_rated 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6301 
+Min Max Factory setting  
+0.00 [Arms] 10000.00 [Arms] 0.00 [Arms]
+Description: Sets the rated motor current (rating plate). 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+If p0305 is changed during quick commissioning (p0010 = 1), then the maximum current p0640 is pre-assigned  accordingly. 
+Note: When the parameter value is entered the connection type of the motor (star-delta) must be taken into account. 
+Once the Control Unit has booted for the first time or if the factory settings have been restored, the parameter is pre assigned to match the power unit. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 65 
+2 Parameters 
+2.2 List of parameters 
+p0306[0...n] Number of motors connected in parallel / Motor qty 
+Access level: 1 Calculated: - Data type: Unsigned8 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+1 50 1  
+Description: Sets the number (count) of motors that can be operated in parallel using one motor data set. Depending on the motor number entered, internally an equivalent motor is calculated. 
+The following should be observed in motors connected in parallel: 
+Rating plate data should only be entered for one motor: p0305, p0307 
+The following parameters are also only valid for one motor: p0320, p0341, p0344, p0350 ... p0361 
+All other motor parameters take into account the replacement/equivalent motor (e.g. r0331, r0333). 
+Recommendation: For motors connected in parallel, external thermal protection should be provided for each individual motor. Dependency: Refer to: r0331, r0370, r0373, r0374, r0376, r0377, r0382 
+Caution: The motors to be connected in parallel must be of the same type and size (same order no. (MLFB)). The mounting regulations when connecting motors in parallel must be carefully maintained! 
+The number of motors set must correspond to the number of motors that are actually connected in parallel. After changing p0306, it is imperative that the control parameters are adapted (e.g. using automatic calculation with  p0340 = 1, p3900 > 0). 
+For induction motors that are connected in parallel, but which are not mechanically coupled with one another, then  the following applies: 
+- an individual motor must not be loaded beyond its stall point. 
+Notice: If p0306 is changed during quick commissioning (p0010 = 1), then the maximum current p0640 is appropriately pre assigned. 
+Note: Only operation with U/f characteristic makes sense if more than 10 identical motors are connected in parallel. 
+p0307[0...n] Rated motor power / Mot P_rated 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: 14_6 Unit selection: p0100 Func. diagram: - 
+Min Max Factory setting  
+0.00 [kW] 100000.00 [kW] 0.00 [kW] 
+Description: Sets the rated motor power (rating plate). 
+Dependency: IECdrives (p0100 = 0): Units kW 
+NEMA drives (p0100 = 1): Units hp 
+NEMA drives (p0100 = 2): Unit kW 
+Refer to: p0100 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: Once the Control Unit has booted for the first time or if the factory settings have been restored, the parameter is pre assigned to match the power unit. 
+p0308[0...n] Rated motor power factor / Mot cos phi rated 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.000 1.000 0.000 
+Description: Sets the rated motor power factor (cos phi, rating plate). 
+For a parameter value of 0.000, the power factor is internally calculated and displayed in r0332. 
+Dependency: This parameter is only available for p0100 = 0, 2. 
+Refer to: p0100, p0309, r0332 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+SINAMICS G120 CU230P-2 Control Units 
+66 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+Note: The parameter is not used for synchronous motors (p0300 = 2xx). 
+Once the Control Unit has booted for the first time or if the factory settings have been restored, the parameter is pre assigned to match the power unit. 
+p0309[0...n] Rated motor efficiency / Mot eta_rated 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.0 [%] 99.9 [%] 0.0 [%] 
+Description: Sets the rated motor efficiency (rating plate). 
+For a parameter value of 0.0, the power factor is internally calculated and displayed in r0332. 
+Dependency: This parameter is only visible for NEMA motors (p0100 = 1, 2). 
+Refer to: p0100, p0308, r0332 
+Note: The parameter is not used for synchronous motors. 
+p0310[0...n] Rated motor frequency / Mot f_rated 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 1 Calculated: - Data type: FloatingPoint32 Can be changed: C(1, 3) Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: 6301 Min Max Factory setting  0.00 [Hz] 650.00 [Hz] 0.00 [Hz] 
+Description: Sets the rated motor frequency (rating plate). 
+Dependency: The number of pole pairs (r0313) is automatically re-calculated when the parameter is changed (together with  p0311), if p0314 = 0. 
+The rated frequency is restricted to values between 1.00 Hz and 650.00 Hz. 
+Refer to: p0311, r0313, p0314 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+If p0310 is changed during quick commissioning (p0010 = 1), the maximum speed p1082, which is also associated  with quick commissioning, is pre-assigned accordingly. The pre-assignment has been completed if the status display  r3996 returns to zero. 
+Note: Once the Control Unit has been booted up for the first time or if the factory settings have been defined accordingly,  the parameter is defined in accordance with the power unit. 
+p0310[0...n] Rated motor frequency / Mot f_rated 
+PM330 Access level: 1 Calculated: - Data type: FloatingPoint32 Can be changed: C(1, 3) Scaling: - Dyn. index: MDS, p0130 
+Unit group: - Unit selection: - Func. diagram: 6301 
+Min Max Factory setting  
+0.00 [Hz] 103.00 [Hz] 0.00 [Hz]
+Description: Sets the rated motor frequency (rating plate). 
+Dependency: The number of pole pairs (r0313) is automatically re-calculated when the parameter is changed (together with  p0311), if p0314 = 0. 
+The rated frequency is restricted to values between 1.00 Hz and 100.00 Hz. 
+Refer to: p0311, r0313, p0314 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+If p0310 is changed during quick commissioning (p0010 = 1), the maximum speed p1082, which is also associated  with quick commissioning, is pre-assigned accordingly. The pre-assignment has been completed if the status display  r3996 returns to zero. 
+Note: Once the Control Unit has been booted up for the first time or if the factory settings have been defined accordingly,  the parameter is defined in accordance with the power unit. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 67 
+2 Parameters 
+2.2 List of parameters 
+p0311[0...n] Rated motor speed / Mot n_rated 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.0 [rpm] 210000.0 [rpm] 0.0 [rpm] 
+Description: Sets the rated motor speed (rating plate). 
+For p0311 = 0, the rated motor slip of induction motors is internally calculated and displayed in r0330. 
+It is especially important to correctly enter the rated motor speed for vector control and slip compensation for U/f  control. 
+Dependency: If p0311 is changed and for p0314 = 0, the pole pair (r0313) is re-calculated automatically. Refer to: p0310, r0313, p0314 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+If p0311 is changed during quick commissioning (p0010 = 1), the maximum speed p1082, which is also associated  with quick commissioning, is pre-assigned accordingly. The pre-assignment has been completed if the status display  r3996 returns to zero. 
+Note: Once the Control Unit has been booted up for the first time or if the factory settings have been defined accordingly,  the parameter is defined in accordance with the power unit. 
+r0313[0...n] Motor pole pair number, actual (or calculated) / Mot PolePairNo act Access level: 3 Calculated: - Data type: Unsigned16 
+Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 5300 
+Min Max Factory setting  
+- - -  
+Description: Displays the number of motor pole pairs. The value is used for internal calculations. r0313 = 1: 2-pole motor 
+r0313 = 2: 4-pole motor, etc. 
+Dependency: For p0314 > 0, the entered value is displayed in r0313. 
+For p0314 = 0, the pole pair number (r0313) is automatically calculated from the rated power (p0307), rated  frequency (p0310) and rated speed (p0311). 
+Refer to: p0307, p0310, p0311, p0314 
+Note: For the automatic calculation, the pole pair number is set to the value of 2 if the rated speed or the rated frequency is  zero. 
+p0314[0...n] Motor pole pair number / Mot pole pair No. 
+Access level: 4 Calculated: - Data type: Unsigned16 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 255 0 
+Description: Sets the motor pole pair number. 
+p0314 = 1: 2-pole motor 
+p0314 = 2: 4-pole motor, etc. 
+Dependency: For p0314 = 0, the pole pair number is automatically calculated from the rated frequency (p0310) and the rated  speed (p0311) and displayed in r0313. 
+Notice: If p0314 is changed during quick commissioning (p0010 = 1), the maximum speed p1082, which is also associated  with quick commissioning, is pre-assigned accordingly. 
+For induction motors, it is only necessary to enter the value if the rated motor slip is so high that the pole pair number  r0313, obtained when making the calculation based on the rated frequency and rated speed, is too low. 
+SINAMICS G120 CU230P-2 Control Units 
+68 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0316[0...n] Motor torque constant / Mot kT 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: C(1, 3), U, T Scaling: - Dyn. index: MDS, p0130 Unit group: 28_1 Unit selection: p0100 Func. diagram: - Min Max Factory setting  0.00 [Nm/A] 400.00 [Nm/A] 0.00 [Nm/A] 
+Description: Sets the torque constant of the synchronous motor. 
+p0316 = 0: 
+The torque constant is calculated from the motor data. 
+p0316 > 0: 
+The selected value is used as torque constant. 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: This parameter is not used for induction motors (p0300 = 1xx). 
+p0318[0...n] Motor stall current / Mot I_standstill 
+PM240 Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: C(3) Scaling: - Dyn. index: MDS, p0130 
+Unit group: - Unit selection: - Func. diagram: 8017 
+Min Max Factory setting  
+0.00 [Arms] 10000.00 [Arms] 0.00 [Arms] 
+Description: Sets the stall current for synchronous motors (p0300 = 2xx), as well as for synchronous reluctance motors (p0300 =  6xx). 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The parameter is used for the I2t monitoring of the motor (refer to p0611). 
+This parameter is not used for induction motors (p0300 = 1xx). 
+p0320[0...n] Motor rated magnetizing current/short-circuit current / Mot I_mag_rated Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.000 [Arms] 5000.000 [Arms] 0.000 [Arms] 
+Description: Induction motors: 
+Sets the rated motor magnetizing current. 
+For p0320 = 0.000 the magnetizing current is internally calculated and displayed in r0331. 
+Synchronous motors: 
+Sets the rated motor short-circuit current. 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The magnetizing current p0320 for induction motors is reset when quick commissioning is exited with p3900 > 0. If, for induction motors, the magnetizing current p0320 is changed outside the commissioning phase (p0010 > 0),  then the magnetizing inductance p0360 is changed so that the EMF r0337 remains constant. 
+p0322[0...n] Maximum motor speed / Mot n_max 
+Access level: 1 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(1, 3) Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.0 [rpm] 210000.0 [rpm] 0.0 [rpm]
+Description: Sets the maximum motor speed. 
+Dependency: Refer to: p1082 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 69 
+2 Parameters 
+2.2 List of parameters 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+If p0322 is changed during quick commissioning (p0010 = 1), the maximum speed p1082, which is also associated  with quick commissioning, is pre-assigned accordingly. 
+Note: The parameter has no significance for a value of p0322 = 0. 
+p0323[0...n] Maximum motor current / Mot I_max 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 1 Calculated: - Data type: FloatingPoint32 Can be changed: C(1, 3) Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0.00 [Arms] 20000.00 [Arms] 0.00 [Arms] 
+Description: Sets the maximum permissible motor current (e.g. de-magnetizing current for synchronous motors). Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+If p0323 is changed during quick commissioning (p0010 = 1), then the maximum current p0640 is pre-assigned  accordingly. 
+Note: The parameter has no effect for induction motors. 
+The parameter has not effect for synchronous motors if a value of 0.0 is entered. The user-selectable current limit is  entered into p0640. 
+p0325[0...n] Motor pole position identification current 1st phase / Mot PolID I 1st Ph 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: U, T Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0.000 [Arms] 10000.000 [Arms] 0.000 [Arms] 
+Description: Sets the current for the 1st phase of the two-stage technique for pole position identification routine. The current of the 2nd phase is set in p0329. 
+The two-stage technique is selected with p1980 = 4. 
+Dependency: Refer to: p0329, p1980, r1992 
+Notice: When the motor code (p0301) is changed, it is possible that p0325 is not pre-assigned. p0325 can be pre-assigned using p0340 = 3. 
+Note: The value is automatically pre-assigned for the following events: 
+- For p0325 = 0 and automatic calculation of the closed-loop control parameters (p0340 = 1, 2, 3). - for quick commissioning (p3900 = 1, 2, 3). 
+p0327[0...n] Optimum motor load angle / Mot phi_load opt 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: 6721, 6838 Min Max Factory setting  0.0 [°] 135.0 [°] 90.0 [°]
+Description: Sets the optimum load angle for synchronous motors with reluctance torque. 
+The load angle is measured at the rated motor current. 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: This parameter has no significance for induction motors. 
+For synchronous motors without reluctance torque, a angle of 90 degrees must be set. 
+When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+SINAMICS G120 CU230P-2 Control Units 
+70 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0328[0...n] Motor reluctance torque constant / Mot kT_reluctance 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: 6721, 6836 Min Max Factory setting  -1000.00 [mH] 1000.00 [mH] 0.00 [mH] 
+Description: Sets the reluctance torque constant for synchronous motors with reluctance torque (e.g. 1FE ... motors). This parameter has no significance for induction motors. 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: For synchronous motors without reluctance torque, the value 0 must be set. 
+p0329[0...n] Motor pole position identification current / Mot PolID current 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0.0000 [Arms] 10000.0000 [Arms] 0.0000 [Arms] 
+Description: Sets the current for the pole position identification routine (p1980 = 1). 
+For a two-stage technique (p1980 = 4), the current is set for the 2nd phase. 
+The current for the 1st phase is set in p0325. 
+Dependency: The following applies for vector drives: 
+If a maximum current (p0323) was not parameterized, then p0329 is limited to the rated motor current. Refer to: p0325, p1980, r1992 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+r0330[0...n] Rated motor slip / Mot slip_rated 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [Hz] - [Hz] - [Hz] 
+Description: Displays the rated motor slip. 
+Dependency: The rated slip is calculated from the rated frequency, rated speed and number of pole pairs. Refer to: p0310, p0311, r0313 
+Note: The parameter is not used for synchronous motors (p0300 = 2xx). 
+r0331[0...n] Actual motor magnetizing current/short-circuit current / Mot I_mag_rtd act Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6722 
+Min Max Factory setting  
+- [Arms] - [Arms] - [Arms]
+Description: Induction motor: 
+Displays the rated magnetizing current from p0320. 
+For p0320 = 0, the internally calculated magnetizing current is displayed. 
+Synchronous motor: 
+Displays the rated short-circuit current from p0320. 
+Dependency: If p0320 was not entered, then the parameter is calculated from the rating plate parameters. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 71 
+2 Parameters 
+2.2 List of parameters 
+r0332[0...n] Rated motor power factor / Mot cos phi rated 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- - -  
+Description: Displays the rated power factor for induction motors. 
+For IEC motors, the following applies (p0100 = 0): 
+For p0308 = 0, the internally calculated power factor is displayed. 
+For p0308 > 0, this value is displayed. 
+For NEMA motors, the following applies (p0100 = 1, 2): 
+For p0309 = 0, the internally calculated power factor is displayed. 
+For p0309 > 0, this value is converted into the power factor and displayed. 
+Dependency: If p0308 is not entered, the parameter is calculated from the rating plate parameters. Note: The parameter is not used for synchronous motors (p0300 = 2xx). 
+r0333[0...n] Rated motor torque / Mot M_rated 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: 7_4 Unit selection: p0100 Func. diagram: - 
+Min Max Factory setting  
+- [Nm] - [Nm] - [Nm] 
+Description: Displays the rated motor torque. 
+Dependency: IEC drives (p0100 = 0): unit Nm 
+NEMA drives (p0100 = 1): unit lbf ft 
+Note: For induction motors, r0333 is calculated from p0307 and p0311. 
+For synchronous motors, r0333 is calculated from p0305, p0316, p0327 and p0328. 
+p0335[0...n] Motor cooling type / Mot cool type 
+Access level: 2 Calculated: - Data type: Integer16 
+Can be changed: C(1, 3), T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 128 0  
+Description: Sets the motor cooling system used. 
+Value: 0: Natural ventilation 
+1: Forced cooling 
+2: Liquid cooling 
+128: No fan 
+Dependency: For 1LA7 motors (p0300), the parameter is pre-set as a function of p0307 and p0311. Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The parameter influences the thermal 3-mass motor model. 
+1LA7 motors, frame size 56 are operated without fan. 
+r0337[0...n] Rated motor EMF / Mot EMF_rated 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [Vrms] - [Vrms] - [Vrms]
+Description: Displays the rated EMF of the motor. 
+Note: EMF: Electromotive force 
+SINAMICS G120 CU230P-2 Control Units 
+72 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0340[0...n] Automatic calculation motor/control parameters / Calc auto par 
+Access level: 2 Calculated: - Data type: Integer16 
+Can be changed: C(3), T Scaling: - Dyn. index: DDS, p0180 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0 5 0  
+Description: Setting to automatically calculate motor parameters and U/f open-loop and closed-loop control parameters from the  rating plate data. 
+Value: 0: No calculation 
+1: Complete calculation 
+2: Calculation of equivalent circuit diagram parameters 
+3: Calculation of closed-loop control parameters 
+4: Calculation of controller parameters 
+5: Calculation of technological limits and threshold values 
+Notice: After the value has been modified, no further parameter modifications can be made and the status is shown in r3996.  Modifications can be made again when r3996 = 0. 
+The following parameters are influenced using p0340: 
+p0340 = 1: 
+--> All of the parameters influenced for p0340 = 2, 3, 4, 5 
+--> p0341, p0342, p0344, p0612, p0640, p1082, p1231, p1232, p1333, p1349, p1611, p1654, p1726, p1825, p1828  ... p1832, p1909, p1959, p2000, p2001, p2002, p2003, p3927, p3928 
+p0340 = 2: 
+--> p0350, p0354 ... p0360 
+--> p0625 (matching p0350), p0626 ... p0628 
+p0340 = 3: 
+--> All of the parameters influenced for p0340 = 4, 5 
+--> p0346, p0347, p0622, p1320 ... p1327, p1582, p1584, p1616, p1755, p1756, p2178 
+p0340 = 4: 
+--> p1290, p1292, p1293, p1338, p1339, p1340, p1341, p1345, p1346, p1461, p1463, p1464, p1465, p1470, p1472,  p1703, p1715, p1717, p1740, p1756, p1764, p1767, p1780, p1781, p1783, p1785, p1786, p1795 
+p0340 = 5: 
+--> p1037, p1038, p1520, p1521, p1530, p1531, p1570, p1580, p1574, p1750, p1759, p1802, p1803, p2140, p2142,  p2148, p2150, p2161, p2162, p2163, p2164, p2170, p2175, p2177, p2194, p2390, p2392, p2393 
+Note: p0340 = 1 contains the calculations of p0340 = 2, 3, 4, 5. 
+p0340 = 2 calculates the motor parameters (p0350 ... p0360). 
+p0340 = 3 contains the calculations of p0340 = 4, 5. 
+p0340 = 4 only calculates the controller parameters. 
+p0340 = 5 only calculates the controller limits. 
+When quick commissioning is exited using p3900 > 0, p0340 is automatically set to 1. 
+At the end of the calculations, p0340 is automatically set to 0. 
+p0341[0...n] Motor moment of inertia / Mot M_mom of inert 
+Access level: 3 Calculated: p0340 = 1 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: 25_1 Unit selection: p0100 Func. diagram: 6020, 6030, 6031,  6822 
+Min Max Factory setting  
+0.000000 [kgm²] 100000.000000 [kgm²] 0.000000 [kgm²]
+Description: Sets the motor moment of inertia (without load). 
+Dependency: IEC drives (p0100 = 0): unit kg m^2 
+NEMA drives (p0100 = 1): unit lb ft^2 
+The parameter value is included, together with p0342, in the rated starting time of the motor. 
+Refer to: p0342, r0345 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 73 
+2 Parameters 
+2.2 List of parameters 
+Note: The product of p0341 * p0342 is used when the speed controller (p0340 = 4) is calculated automatically. 
+p0342[0...n] Ratio between the total and motor moment of inertia / Mot MomInert Ratio Access level: 3 Calculated: p0340 = 1 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6020, 6030, 6031,  6822 
+Min Max Factory setting  
+1.000 10000.000 1.000  
+Description: Sets the ratio between the total moment of inertia/mass (load + motor) and the intrinsic motor moment of inertia/mass  (no load). 
+Dependency: This means that together with p0341, the rated starting (accelerating time) of the motor is calculated for a vector  drive. 
+Refer to: p0341, r0345 
+Note: The product of p0341 * p0342 is used when the speed controller (p0340 = 4) is calculated automatically. 
+r0343[0...n] Rated motor current identified / Mot I_rated ident 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.00 [Arms] 10000.00 [Arms] - [Arms] 
+Description: Displays the identified rated motor current. 
+p0344[0...n] Motor weight (for the thermal motor model) / Mot weight th mod Access level: 3 Calculated: p0340 = 1 Data type: FloatingPoint32 
+Can be changed: C(3), T Scaling: - Dyn. index: MDS 
+Unit group: 27_1 Unit selection: p0100 Func. diagram: - 
+Min Max Factory setting  
+0.0 [kg] 50000.0 [kg] 0.0 [kg] 
+Description: Sets the motor weight. 
+Dependency: IEC drives (p0100 = 0): unit kg 
+NEMA drives (p0100 = 1): unit lb 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The parameter influences the thermal 3 mass model of the induction motor. 
+The parameter is not used for synchronous motors (p0300 = 2xx). 
+r0345[0...n] Nominal motor starting time / Mot t_start_rated 
+Access level: 3 Calculated: - Data type: FloatingPoint32 
+Can be changed: - Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+- [s] - [s] - [s]
+Description: Displays the rated motor starting time. 
+This time corresponds to the time from standstill up to reaching the motor rated speed and the acceleration with  motor rated torque (r0333). 
+Dependency: Refer to: r0313, r0333, p0341, p0342 
+SINAMICS G120 CU230P-2 Control Units 
+74 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0346[0...n] Motor excitation build-up time / Mot t_excitation 
+Access level: 3 Calculated: p0340 = 1,3 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.000 [s] 20.000 [s] 0.000 [s] 
+Description: Sets the excitation build-up time of the motor. 
+This involves the delay time between enabling the pulses and enabling the ramp-function generator. The induction  motor is magnetized during this time. 
+Caution: If there is insufficient magnetization under load or if the acceleration rate is too high, then an induction motor can stall  (refer to the note). 
+Note: The parameter is calculated using p0340 = 1, 3. 
+For induction motors, the result depends on the rotor time constant (r0384). If this time is excessively reduced, this  can result in an inadequate magnetizing of the induction motor. This is the case if the current limit is reached while  building up magnetizing. For induction motors, the parameter cannot be set to 0 s (internal limit: 0.1 * r0384). For permanent-magnet synchronous motors and vector control, the value depends on the stator time constant  (r0386). Here, it defines the time to establish the current for encoderless operation immediately after the pulses have  been enabled. 
+p0347[0...n] Motor de-excitation time / Mot t_de-excitat 
+Access level: 3 Calculated: p0340 = 1,3 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.000 [s] 20.000 [s] 0.000 [s] 
+Description: Sets the de-magnetizing time (for induction motors) after the inverter pulses have been canceled. The inverter pulses cannot be switched in (enabled) within this delay time. 
+Note: The parameter is calculated using p0340 = 1, 3. 
+For induction motors, the result depends on the rotor time constant (r0384). 
+if this time is shortened too much, then this can result in an inadequate de-magnetizing of the induction motor and in  an overcurrent condition when the pulses are subsequently enabled (only when the flying restart function is activated  and the motor is rotating). 
+p0350[0...n] Motor stator resistance cold / Mot R_stator cold 
+Access level: 3 Calculated: p0340 = 1,2 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.00000 [ohm] 2000.00000 [ohm] 0.00000 [ohm]
+Description: Sets the stator resistance of the motor at ambient temperature p0625 (phase value). Dependency: Refer to: p0625, r1912 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The motor identification routine determines the stator resistance from the total stator resistance minus the cable  resistance (p0352). 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 75 
+2 Parameters 
+2.2 List of parameters 
+p0352[0...n] Cable resistance / R_cable 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0.00000 [ohm] 120.00000 [ohm] 0.00000 [ohm] 
+Description: Resistance of the power cable between the power unit and motor. 
+Caution: The cable resistance should be entered prior to motor data identification. If it is used subsequently, the difference by  which p0352 was changed must be subtracted from the stator resistance p0350 or motor data identification must be  repeated. 
+Note: The parameter influences the temperature adaptation of the stator resistance. 
+The motor identification sets the cable resistance to 20% of the measured total resistance if p0352 is zero at the time  that the measurement is made. If p0352 is not zero, then the value is subtracted from the measured total stator  resistance to calculate stator resistance p0350. In this case, p0350 is a minimum of 10% of the measured value. The cable resistance is reset when quick commissioning is exited with p3900 > 0. 
+p0352[0...n] Cable resistance / R_cable 
+PM330 Access level: 3 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS, p0130 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.00000 [ohm] 120.00000 [ohm] 0.00000 [ohm] 
+Description: Resistance of the power cable between the power unit and motor. 
+Caution: The cable resistance should be entered prior to motor data identification. If it is used subsequently, the difference by  which p0352 was changed must be subtracted from the stator resistance p0350 or motor data identification must be  repeated. 
+The difference with which p0352 was manually changed, must also be subtracted from reference parameter p0629 of  the Rs measurement. 
+Note: The parameter influences the temperature adaptation of the stator resistance. 
+The motor identification sets the cable resistance to 20% of the measured total resistance if p0352 is zero at the time  that the measurement is made. If p0352 is not zero, then the value is subtracted from the measured total stator  resistance to calculate stator resistance p0350. In this case, p0350 is a minimum of 10% of the measured value. The cable resistance is reset when quick commissioning is exited with p3900 > 0. 
+p0354[0...n] Motor rotor resistance cold / Mot R_r cold 
+Access level: 3 Calculated: p0340 = 1,2 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6727 
+Min Max Factory setting  
+0.00000 [ohm] 300.00000 [ohm] 0.00000 [ohm]
+Description: Sets the rotor/secondary section resistance of the motor at the ambient temperature p0625. This parameter value is automatically calculated using the motor model (p0340 = 1, 2) or using the motor data  identification routine (p1910). 
+Dependency: Refer to: p0625 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The parameter is not used for synchronous motors (p0300 = 2). 
+SINAMICS G120 CU230P-2 Control Units 
+76 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0356[0...n] Motor stator leakage inductance / Mot L_stator leak. 
+Access level: 3 Calculated: p0340 = 1,2 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: - 
+Min Max Factory setting  
+0.00000 [mH] 1000.00000 [mH] 0.00000 [mH] 
+Description: Induction machine: sets the stator leakage inductance of the motor. 
+Synchronous motor: Sets the stator quadrature axis inductance of the motor. 
+This parameter value is automatically calculated using the motor model (p0340 = 1, 2) or using the motor  identification routine (p1910). 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: If the stator leakage inductance (p0356) for induction motors is changed outside the commissioning phase (p0010 >  0), the magnetizing inductance (p0360) is automatically adapted to the new EMF (r0337). You are then advised to  repeat the measurement for the saturation characteristic (p1960). 
+For permanent-magnet synchronous motors (p0300 = 2), this is the non-saturated value and is, therefore, ideal for a  low current. 
+For a controlled reluctance motor (p0300 = 6), this is the direct axis stator inductance at the rated operating point. p0357[0...n] Motor stator inductance d axis / Mot L_stator d 
+PM230 
+PM240 
+PM250, PM260 
+Access level: 3 Calculated: p0340 = 1,2 Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS, p0130 Unit group: - Unit selection: - Func. diagram: - Min Max Factory setting  0.00000 [mH] 1000.00000 [mH] 0.00000 [mH] 
+Description: Sets the stator direct-axis inductance of the synchronous motor. 
+This parameter value is automatically calculated using the motor model (p0340 = 1, 2) or using the motor  identification routine (p1910). 
+Note: For permanent-magnet synchronous motors (p0300 = 2), this is the non-saturated value and is ideal for a low current. For a controlled reluctance motor (p0300 = 6), this is the direct axis stator inductance at the rated operating point. 
+p0358[0...n] Motor rotor leakage inductance / Mot L_rot leak 
+Access level: 3 Calculated: p0340 = 1,2 Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6727 
+Min Max Factory setting  
+0.00000 [mH] 1000.00000 [mH] 0.00000 [mH]
+Description: Sets the rotor/secondary section leakage inductance of the motor. 
+The value is automatically calculated using the motor model (p0340 = 1, 2) or using the motor identification routine  (p1910). 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: If the rotor leakage inductance (p0358) for induction motors is changed outside the commissioning phase (p0010 >  0), then the magnetizing inductance (p0360) is automatically adapted to the new EMF (r0337). You are then advised  to repeat the measurement for the saturation characteristic (p1960). 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 77 
+2 Parameters 
+2.2 List of parameters 
+p0360[0...n] Motor magnetizing inductance / Mot Lh 
+Access level: 3 Calculated: p0340 = 1,2 Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6727 
+Min Max Factory setting  
+0.00000 [mH] 10000.00000 [mH] 0.00000 [mH] 
+Description: Sets the magnetizing inductance of the motor. 
+This parameter value is automatically calculated using the motor model (p0340 = 1, 2) or using the motor  identification routine (p1910). 
+Notice: When selecting a catalog motor (p0301), this parameter is automatically pre-assigned and is write protected.  Information in p0300 should be carefully observed when removing write protection. 
+Note: The parameter is not used for synchronous motors (p0300 = 2). 
+p0362[0...n] Motor saturation characteristic flux 1 / Mot saturat.flux 1 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 Min Max Factory setting  
+10.0 [%] 800.0 [%] 60.0 [%] 
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the y coordinate (flux) for the 1st value pair of the characteristic. 
+Sets the first flux value of the saturation characteristic as a [%] referred to the rated motor flux (100 %). Dependency: The following applies for the flux values: 
+p0362 < p0363 < p0364 < p0365 
+Refer to: p0366 
+Note: For induction motors, p0362 = 100 % corresponds to the rated motor flux. 
+When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+p0363[0...n] Motor saturation characteristic flux 2 / Mot saturat.flux 2 
+Access level: 4 Calculated: - Data type: FloatingPoint32 Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 Min Max Factory setting  
+10.0 [%] 800.0 [%] 85.0 [%]
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the y coordinate (flux) for the 2nd value pair of the characteristic. 
+Sets the second flux value of the saturation characteristic as a [%] referred to the rated motor flux (100 %). Dependency: The following applies for the flux values: 
+p0362 < p0363 < p0364 < p0365 
+Refer to: p0367 
+Note: For induction motors, p0363 = 100 % corresponds to the rated motor flux. 
+When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+SINAMICS G120 CU230P-2 Control Units 
+78 List Manual, 04/2018, A5E33838102 
+2 Parameters 
+2.2 List of parameters 
+p0364[0...n] Motor saturation characteristic flux 3 / Mot saturat.flux 3 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 Min Max Factory setting  
+10.0 [%] 800.0 [%] 115.0 [%] 
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the y coordinate (flux) for the 3rd value pair of the characteristic. 
+Sets the third flux value of the saturation characteristic as a [%] referred to the rated motor flux (100 %). 
+Dependency: The following applies for the flux values: 
+p0362 < p0363 < p0364 < p0365 
+Refer to: p0368 
+Note: For induction motors, p0364 = 100 % corresponds to the rated motor flux. 
+When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+p0365[0...n] Motor saturation characteristic flux 4 / Mot saturat.flux 4 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 Min Max Factory setting  
+10.0 [%] 800.0 [%] 125.0 [%] 
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the y coordinate (flux) for the 4th value pair of the characteristic. 
+Sets the fourth flux value of the saturation characteristic as a [%] referred to the rated motor flux (100 %). Dependency: The following applies for the flux values: 
+p0362 < p0363 < p0364 < p0365 
+Refer to: p0369 
+Note: For induction motors, p0365 = 100 % corresponds to the rated motor flux. 
+When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+p0366[0...n] Motor saturation characteristic I_mag 1 / Mot sat. I_mag 1 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 Min Max Factory setting  
+5.0 [%] 800.0 [%] 50.0 [%]
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the x coordinate (magnetizing current) for the 1st value pair of the characteristic. Sets the first magnetization current of the saturation characteristic in [%] with reference to the rated magnetization  current (r0331). 
+Dependency: The following applies for the magnetizing currents: 
+p0366 < p0367 < p0368 < p0369 
+Refer to: p0362 
+Note: When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+SINAMICS G120 CU230P-2 Control Units 
+List Manual, 04/2018, A5E33838102 79 
+2 Parameters 
+2.2 List of parameters 
+p0367[0...n] Motor saturation characteristic I_mag 2 / Mot sat. I_mag 2 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 
+Min Max Factory setting  
+5.0 [%] 800.0 [%] 75.0 [%] 
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the x coordinate (magnetizing current) for the 2nd value pair of the characteristic. Sets the second magnetization current of the saturation characteristic in [%] with reference to the rated  
+magnetization current (r0331). 
+Dependency: The following applies for the magnetizing currents: 
+p0366 < p0367 < p0368 < p0369 
+Refer to: p0363 
+Note: When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+p0368[0...n] Motor saturation characteristic I_mag 3 / Mot sat. I_mag 3 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 
+Min Max Factory setting  
+5.0 [%] 800.0 [%] 150.0 [%] 
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the x coordinate (magnetizing current) for the 3rd value pair of the characteristic. Sets the third magnetization current of the saturation characteristic in [%] with reference to the rated magnetization  current (r0331). 
+Dependency: The following applies for the magnetizing currents: 
+p0366 < p0367 < p0368 < p0369 
+Refer to: p0364 
+Note: When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+p0369[0...n] Motor saturation characteristic I_mag 4 / Mot sat. I_mag 4 
+Access level: 4 Calculated: - Data type: FloatingPoint32 
+Can be changed: C(3), U, T Scaling: - Dyn. index: MDS 
+Unit group: - Unit selection: - Func. diagram: 6723, 6838 
+Min Max Factory setting  
+5.0 [%] 800.0 [%] 210.0 [%]
+Description: The saturation characteristics (flux as a function of the magnetizing current) is defined using 4 points. This parameter specifies the x coordinate (magnetizing current) for the 4th value pair of the characteristic. Sets the fourth magnetization current of the saturation characteristic in [%] with reference to the rated magnetization  current (r0331). 
+Dependency: The following applies for the magnetizing currents: 
+p0366 < p0367 < p0368 < p0369 
+Refer to: p0365 
+Note: When quick commissioning is exited with p3900 > 0, then the parameter is reset if a catalog motor has not been  selected (p0300). 
+SINAMICS G120 CU230P-2 Control Units 
+80 List Manual, 04/2018, A5E33838102

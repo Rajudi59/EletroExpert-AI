@@ -1,0 +1,2999 @@
+﻿SINAMICS  
+SINAMICS G120, G120P, G120C,  G120D, G110M  
+Fieldbuses  
+Function Manual  
+Edition 04/2018, firmware V4.7 SP10 
+  
+04/2018, FW V4.7 SP10  
+A5E34229197B AE 
+___________________ Preface  
+Fundamental safety  
+instructions 1  ___________________ General information 2  ___________________ 
+Communication via  
+PROFIBUS and PROFINET 3  ___________________ 
+Communication via  
+EtherNet/IP 4  ___________________ Communication via RS485 5  ___________________ 
+Communication over  
+CANopen 6  ___________________ 
+Communication via AS-i -  
+___________________ only for G110M 7  Appendix A ___________________ 
+Legal information  
+Warning notice system  
+This manual contains notices you have to observe in order to ensure your personal safety, as well as to prevent  damage to property. The notices referring to your personal safety are highlighted in the manual by a safety alert  symbol, notices referring only to property damage have no safety alert symbol. These notices shown below are  graded according to the degree of danger. 
+  
+DANGER 
+	indicates that death or severe personal injury will result if proper precautions are not taken.
+	
+
+
+
+  
+WARNING 
+	indicates that death or severe personal injury may result if proper precautions are not taken.
+	
+
+
+
+  
+CAUTION 
+	indicates that minor personal injury can result if proper precautions are not taken.
+	
+
+
+
+NOTICE 
+	indicates that property damage can result if proper precautions are not taken.
+	
+
+
+
+If more than one degree of danger is present, the warning notice representing the highest degree of danger will  be used. A notice warning of injury to persons with a safety alert symbol may also include a warning relating to  property damage. 
+Qualified Personnel  
+The product/system described in this documentation may be operated only by personnel qualified for the specific  task in accordance with the relevant documentation, in particular its warning notices and safety instructions.  Qualified personnel are those who, based on their training and experience, are capable of identifying risks and  avoiding potential hazards when working with these products/systems. 
+Proper use of Siemens products  
+Note the following: 
+  
+WARNING 
+	Siemens products may only be used for the applications described in the catalog and in the relevant technical  documentation. If products and components from other manufacturers are used, these must be recommended  or approved by Siemens. Proper transport, storage, installation, assembly, commissioning, operation and  maintenance are required to ensure that the products operate safely and without any problems. The permissible  ambient conditions must be complied with. The information in the relevant documentation must be observed.
+	
+
+
+
+Trademarks  
+All names identified by ® are registered trademarks of Siemens AG. The remaining trademarks in this publication  may be trademarks whose use by third parties for their own purposes could violate the rights of the owner. 
+Disclaimer of Liability  
+We have reviewed the contents of this publication to ensure consistency with the hardware and software  described. Since variance cannot be precluded entirely, we cannot guarantee full consistency. However, the  information in this publication is reviewed regularly and any necessary corrections are included in subsequent  editions.
+Siemens AG 
+Division Digital Factory Postfach 48 48 
+90026 NÜRNBERG GERMANY 
+A5E34229197B AE 
+Ⓟ 04/2018 Subject to changeCopyright © Siemens AG 2014 - 2018. All rights reserved 
+Preface  
+About this manual  
+This manual describes the settings and preconditions that are required to communicate with  a higher-level control system with the subsequently listed fieldbus systems. 
+Fieldbuses for SINAMICS G120  
+● PROFIBUS DP 
+● PROFINET 
+● EtherNet/IP 
+● USS 
+● Modbus RTU 
+● CANopen 
+Additional fieldbuses for SINAMICS G120P  
+● BACnet MS/TP 
+● P1 
+Additional fieldbuses for SINAMICS G110M  
+● AS-Interface 
+Changes in this edition  
+Inverter settings are described in the context of the Startdrive PC commissioning tool. The  descriptions for settings using STARTER have been removed. 
+What is the meaning of the symbols in the manual?  
+  
+Reference to further information in the manual 
+  
+Download from the Internet 
+  
+DVD that can be ordered 
+End of a handling instruction. 
+❒
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 3 
+Preface 
+Fieldbuses 
+4 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE
+Table of contents  
+ Preface ................................................................................................................................................... 3  1 Fundamental safety instructions .............................................................................................................. 9  1.1 General safety instructions .......................................................................................................9 1.2 Warranty and liability for application examples ........................................................................9 1.3 Industrial security ....................................................................................................................10 2 General information .............................................................................................................................. 13  2.1 Ethernet and PROFINET protocols that are used ..................................................................14 3 Communication via PROFIBUS and PROFINET ................................................................................... 17  
+3.1 PROFIDRIVE profile - Cyclic communication.........................................................................17 3.1.1 Assigning control and status words ........................................................................................21 3.1.1.1 Control and status word 1.......................................................................................................21 3.1.1.2 Control and status word 2.......................................................................................................25 3.1.1.3 Control and status word 3.......................................................................................................26 3.1.2 NAMUR message word ..........................................................................................................28 3.1.3 Control and status word, encoder...........................................................................................29 3.1.4 Position actual value of the encoder.......................................................................................31 3.1.5 Extend telegrams and change signal interconnection............................................................33 3.1.6 Data structure of the parameter channel ................................................................................35 3.1.6.1 Application examples ..............................................................................................................39 3.1.7 Slave-to-slave communication................................................................................................41 
+3.2 PROFIDRIVE profile - Acyclic communication .......................................................................42 
+3.3 PROFIdrive profile - Diagnostic channels...............................................................................47 3.3.1 Diagnostics with PROFINET...................................................................................................48 3.3.2 Diagnostics with PROFIBUS ..................................................................................................50 
+3.4 Identification & maintenance data (I&M).................................................................................54 
+3.5 S7 communication ..................................................................................................................55 3.5.1 Directly accessing a SINAMICS G120 converter from a SIMATIC panel...............................55 
+3.6 Communication via PROFINET ..............................................................................................59 3.6.1 Converter with PROFINET interface.......................................................................................61 3.6.2 Integrating inverters into PROFINET......................................................................................62 3.6.3 PROFINET IO operation.........................................................................................................63 3.6.3.1 What do you have to set for communication via PROFINET?................................................63 3.6.3.2 Configuring communication to the control ..............................................................................63 3.6.3.3 Installing GSDML ....................................................................................................................65 3.6.3.4 Activating diagnostics via the control......................................................................................65 3.6.4 PROFIenergy ..........................................................................................................................65 3.6.4.1 General inverter behavior when in the PROFIenergy energy-saving mode...........................66 3.6.4.2 Supported PROFIenergy energy-saving modes.....................................................................66 3.6.4.3 Settings and displays for PROFIenergy in the inverter...........................................................67 3.6.4.4 Control commands and status queries ...................................................................................68
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 5 
+Table of contents 
+3.6.5 The inverter with PROFINET interface as Ethernet node...................................................... 70 
+3.7 Communication via PROFIBUS............................................................................................. 72 3.7.1 Inverters with PROFIBUS interface ....................................................................................... 73 3.7.2 What do you have to set for communication via PROFIBUS? .............................................. 75 3.7.3 Integrating inverters into PROFIBUS..................................................................................... 76 3.7.4 Configuring communication to the control system................................................................. 76 3.7.4.1 Configuring the communication using SIMATIC S7 control................................................... 76 3.7.4.2 Configuring the communication with a third-party control system ......................................... 76 3.7.4.3 Installing the GSD .................................................................................................................. 77 3.7.5 Setting the address ................................................................................................................ 78 
+3.8 Select telegram ...................................................................................................................... 79 4 Communication via EtherNet/IP ............................................................................................................ 81  4.1 Inverters with Ethernet/IP interface........................................................................................ 82 4.2 Connect converter to Ethernet/IP........................................................................................... 84 4.3 What do you need for communication via Ethernet/IP?......................................................... 85 
+4.4 Configuring communication via EtherNet/IP.......................................................................... 86 4.4.1 Communication settings......................................................................................................... 86 4.4.2 Special issues if you wish to use the ODVA AC/DC Drive profile ......................................... 87 
+4.5 Supported objects .................................................................................................................. 88 4.5.1 Supported ODVA AC/DC assemblies.................................................................................. 102 
+4.6 Create generic I/O module................................................................................................... 103 4.7 The inverter as an Ethernet station...................................................................................... 104 5 Communication via RS485 ................................................................................................................... 107  5.1 Inverter with RS485 interface............................................................................................... 108 5.2 Integrating inverters into a bus system via the RS485 interface ......................................... 110 
+5.3 Communication via USS...................................................................................................... 111 5.3.1 Basic settings for communication ........................................................................................ 111 5.3.1.1 Setting the address .............................................................................................................. 112 5.3.1.2 Parameters to set communication via USS ......................................................................... 113 5.3.2 Telegram structure............................................................................................................... 114 5.3.3 User data range of the USS telegram.................................................................................. 115 5.3.4 USS parameter channel....................................................................................................... 116 5.3.4.1 Telegram examples, length of the parameter channel = 4 .................................................. 120 5.3.5 USS process data channel (PZD)........................................................................................ 122 5.3.6 Time-out and other errors .................................................................................................... 123 
+5.4 Communication using Modbus RTU .................................................................................... 125 5.4.1 Basic settings for communication ........................................................................................ 126 5.4.1.1 Setting the address .............................................................................................................. 127 5.4.1.2 Parameters for Modbus communication settings................................................................. 128 5.4.2 Modbus RTU telegram......................................................................................................... 130 5.4.3 Baud rates and mapping tables ........................................................................................... 131 5.4.4 Mapping tables - inverter data ............................................................................................. 133 5.4.5 Acyclic communication via Modbus RTU............................................................................. 136 5.4.6 Write and read access using function codes ....................................................................... 137 5.4.7 Acyclically read and write parameter via FC 16................................................................... 140
+Fieldbuses 
+6 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Table of contents 
+5.4.7.1 Read parameter....................................................................................................................141 5.4.7.2 Write parameter ....................................................................................................................142 5.4.8 Communication procedure....................................................................................................144 5.4.9 Application example..............................................................................................................145 
+5.5 Communication via BACnet MS/TP - only CU230P-2 HVAC / BT .......................................146 5.5.1 Basic settings for communication .........................................................................................147 5.5.1.1 Setting the address ...............................................................................................................148 5.5.1.2 Parameters for setting communication via BACnet ..............................................................149 5.5.2 Supported services and objects............................................................................................151 5.5.3 Acyclic communication (general parameter access) via BACnet .........................................160 
+5.6 Communication via P1 - only CU230P-2 HVAC, CU230P-2 BT...........................................162 5.6.1 Basic settings for communication via P1 ..............................................................................163 5.6.2 Setting the address ...............................................................................................................164 5.6.3 Point numbers.......................................................................................................................165 
+6 Communication over CANopen ........................................................................................................... 169  6.1 Network management (NMT service)...................................................................................172 
+6.2 SDO services ........................................................................................................................175 6.2.1 Access to SINAMICS parameters via SDO ..........................................................................175 6.2.2 Access PZD objects via SDO ...............................................................................................177 
+6.3 PDO services ........................................................................................................................179 6.3.1 Predefined connection set ....................................................................................................182 6.3.2 Free PDO mapping...............................................................................................................184 6.3.3 Interconnect objects from the receive and transmit buffers..................................................187 6.3.4 Free PDO mapping for example of the actual current value and torque limit.......................189 
+6.4 CANopen operating modes ..................................................................................................191 6.5 RAM to ROM via the CANopen object 1010 ........................................................................193 
+6.6 Object directories ..................................................................................................................194 6.6.1 General objects from the CiA 301 communication profile ....................................................194 6.6.2 Free objects ..........................................................................................................................203 6.6.3 Objects from the CiA 402 drive profile..................................................................................204 
+6.7 Integrating the inverter into CANopen ..................................................................................206 6.7.1 Connecting inverter to CAN bus ...........................................................................................207 6.7.2 Setting the node ID and baud rate........................................................................................207 6.7.3 Setting the monitoring of the communication .......................................................................208 
+6.8 Error diagnostics ...................................................................................................................210 6.9 CAN bus sampling time ........................................................................................................214 7 Communication via AS-i - only for G110M ........................................................................................... 215  7.1 Setting the address ...............................................................................................................217 7.2 Single Slave mode................................................................................................................219 7.3 Dual Slave mode...................................................................................................................221 7.4 Assignment tables.................................................................................................................224 
+7.5 Cyclic and acyclic communication via CTT2 ........................................................................226 7.5.1 Cyclic communication ...........................................................................................................227
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 7 
+Table of contents 
+7.5.2 Acyclic communication - standard ....................................................................................... 228 7.5.3 Acyclic communication - manufacturer-specific................................................................... 228 
+A Appendix ............................................................................................................................................. 231  A.1 Application examples for communication with STEP7......................................................... 231 
+A.2 Manuals and technical support ............................................................................................ 232 A.2.1 Overview of the manuals ..................................................................................................... 232 A.2.2 Configuring support.............................................................................................................. 236 A.2.3 Product Support ................................................................................................................... 237 
+ Index ................................................................................................................................................... 239 
+Fieldbuses 
+8 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Fundamental safety instructions 1  
+1.1 General safety instructions  
+  
+WARNING 
+	Danger to life if the safety instructions and residual risks are not observed  
+If the safety instructions and residual risks in the associated hardware documentation are  not observed, accidents involving severe injuries or death can occur. 
+• Observe the safety instructions given in the hardware documentation. • Consider the residual risks for the risk evaluation.
+	
+
+
+
+  
+WARNING 
+	Malfunctions of the machine as a result of incorrect or changed parameter settings  
+As a result of incorrect or changed parameterization, machines can malfunction, which in  turn can lead to injuries or death. 
+• Protect the parameterization (parameter assignments) against unauthorized access. • Handle possible malfunctions by taking suitable measures, e.g. emergency stop or  emergency off.
+	
+
+
+
+1.2 Warranty and liability for application examples  
+Application examples are not binding and do not claim to be complete regarding  
+configuration, equipment or any eventuality which may arise. Application examples do not  represent specific customer solutions, but are only intended to provide support for typical  tasks. 
+As the user you yourself are responsible for ensuring that the products described are  
+operated correctly. Application examples do not relieve you of your responsibility for safe  handling when using, installing, operating and maintaining the equipment.
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 9 
+Fundamental safety instructions 1.3 Industrial security 
+1.3 Industrial security  
+Note  
+Industrial security  
+Siemens provides products and solutions with industrial security functions that support the  secure operation of plants, systems, machines and networks. 
+In order to protect plants, systems, machines and networks against cyber threats, it is  necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial  security concept. Siemens’ products and solutions constitute one element of such a concept. 
+Customers are responsible for preventing unauthorized access to their plants, systems,  machines and networks. Such systems, machines and components should only be  
+connected to an enterprise network or the Internet if and to the extent such a connection is  necessary and only when appropriate security measures (e.g. firewalls and/or network  segmentation) are in place.  
+For additional information on industrial security measures that may be implemented, please  visit: 
+Industrial security (http://www.siemens.com/industrialsecurity) 
+Siemens’ products and solutions undergo continuous development to make them more  secure. Siemens strongly recommends that product updates are applied as soon as they are  available and that the latest product versions are used. Use of product versions that are no  longer supported, and failure to apply the latest updates may increase customer’s exposure  to cyber threats.  
+To stay informed about product updates, subscribe to the Siemens Industrial Security RSS  Feed at: 
+Industrial security (http://www.siemens.com/industrialsecurity) 
+Further information is provided on the Internet: 
+Industrial Security Configuration Manual  
+(https://support.industry.siemens.com/cs/ww/en/view/108862708)
+Fieldbuses 
+10 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Fundamental safety instructions 
+1.3 Industrial security 
+  
+WARNING 
+	Unsafe operating states resulting from software manipulation  
+Software manipulations (e.g. viruses, trojans, malware or worms) can cause unsafe  operating states in your system that may lead to death, serious injury, and property  damage. 
+• Keep the software up to date. 
+• Incorporate the automation and drive components into a holistic, state-of-the-art  industrial security concept for the installation or machine. 
+• Make sure that you include all installed products into the holistic industrial security  concept. 
+• Protect files stored on exchangeable storage media from malicious software by with  suitable protection measures, e.g. virus scanners. 
+• Protect the drive against unauthorized changes by activating the "know-how protection"  drive function.
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 11
+Fundamental safety instructions 
+1.3 Industrial security 
+Fieldbuses 
+12 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE
+General information 2  
+Communication with the control, even when the line voltage is switched off  
+If, in your plant or system, communication with the control system should continue to function  even when the line voltage is switched off, then you must externally supply the  
+inverter/Control Unit with 24 V DC. To do this, use terminals 31 and 32 – or connector X01.  You can find additional details in the operating instructions for the inverter or the Control  Unit.
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 13 
+General information 
+2.1 Ethernet and PROFINET protocols that are used 
+2.1 Ethernet and PROFINET protocols that are used  
+The inverter supports the protocols listed in the following tables. The address parameters,  the relevant communication layer as well as the communication role and the communication  direction are specified for each protocol. 
+You require this information to set the appropriate safety measures to protect the automation  system, e.g. in the firewall. 
+As the security measures are limited to Ethernet and PROFINET networks, no PROFIBUS  protocols are listed in the table. 
+Table 2- 1 PROFINET protocols
+Protocol 
+	Port  
+number 
+	Layer  
+(2) Link layer  
+(4) Transport layer 
+	Function/description 
+	DCP:  
+Discovery and  configuration  protocol 
+	Not  
+relevant 
+	(2) Ethernet II and  
+IEEE 802.1Q and  
+Ethertype 0x8892  
+(PROFINET) 
+	Accessible stations, PROFINET Discovery and configuration  DCP is used by PROFINET to determine PROFINET devices and to  make basic settings. 
+DCP uses the special multicast MAC address:  
+xx-xx-xx-01-0E-CF, 
+xx-xx-xx = Organizationally Unique Identifier
+	LLDP: 
+Link Layer  
+Discovery  
+Protocol 
+	Not  
+relevant 
+	(2) Ethernet II and  
+IEEE 802.1Q and  
+Ethertype 0x88CC  
+(PROFINET) 
+	PROFINET Link Layer Discovery protocol  
+LLDP is used by PROFINET to determine and manage neighbor hood relationships between PROFINET devices. 
+LLDP uses the special multicast MAC address:  
+01-80-C2-00-00-0E
+	MRP: 
+Media Redun dancy Protocol 
+	Not  
+relevant 
+	(2) Ethernet II and  
+IEEE 802.1Q and  
+Ethertype 0x88E3  
+(PROFINET) 
+	PROFINET medium redundancy  
+MRP enables the control of redundant routes through a ring topolo gy. 
+MRP uses the special multicast MAC address:  
+xx-xx-xx-01-15-4E,  
+xx-xx-xx = Organizationally Unique Identifier
+	PTCP 
+Precision  
+Transparent  
+Clock Protocol 
+	Not  
+relevant 
+	(2) Ethernet II and  
+IEEE 802.1Q and  
+Ethertype 0x8892  
+(PROFINET) 
+	PROFINET send clock and time synchronization, based on IEEE  1588  
+PTC is used to implement send clock synchronization and time syn chronization between RJ45 ports, which are required for IRT opera tion.  
+PTCP uses the special multicast MAC address:  
+xx-xx-xx-01-0E-CF, 
+xx-xx-xx = Organizationally Unique Identifier
+	PROFINET IO  data 
+	Not  
+relevant 
+	(2) Ethernet II and  
+IEEE 802.1Q and  
+Ethertype 0x8892  
+(PROFINET) 
+	PROFINET Cyclic IO data transfer  
+The PROFINET IO telegrams are used to transfer IO data cyclically  between the PROFINET IO controller and IO devices via Ethernet.
+	PROFINET  
+Context Man ager 
+	34964 
+	(4) UDP 
+	PROFINET connection less RPC  
+The PROFINET context manager provides an endpoint mapper in  order to establish an application relationship (PROFINET AR).
+	
+
+
+
+Fieldbuses 
+14 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Table 2- 2 Ethernet/IP protocols 
+General information 
+2.1 Ethernet and PROFINET protocols that are used 
+
+
+Protocol 
+	Port  
+number 
+	Layer  
+(2) Link layer  
+(4) Transport layer 
+	Function/description 
+	Implicit mes 
+saging
+	2222 
+	(4) UDP 
+	Used for exchanging I/O data.  
+This is inactive when delivered. Is activated when selecting Ether Net/IP.
+	Explicit mes 
+saging
+	44818 
+	(4) TCP  
+(4) UDP
+	Used for parameter access (writing, reading).  
+This is inactive when delivered. Is activated when selecting Ether Net/IP.
+	
+
+
+
+Table 2- 3 Connection-oriented communication protocols
+Protocol 
+	Port  
+number 
+	Layer  
+(2) Link layer  
+(4) Transport layer 
+	Function/description 
+	ISO on TCP  
+(according to  RFC 1006)
+	102 
+	(4) TCP 
+	ISO-on-TCP protocol 
+ISO on TCP (according to RFC 1006) is used for the message oriented data exchange to a remote CPU, WinAC or devices of other  suppliers. 
+Communication with ES, HMI, etc. is activated in the factory setting,  and is always required.
+	SNMP  
+Simple Net 
+work Manage ment Protocol 
+	161 
+	(4) UDP 
+	Simple network management protocol  
+SNMP enables network management data to be read out and set  (SNMP managed objects) by the SNMP manager. 
+It is activated in the factory setting, and is always required
+	Reserved 
+	49152 ...  65535
+	(4) TCP 
+(4) UDP
+	Dynamic port area that is used for the active connection endpoint if  the application does not specify the local port.
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 15 
+General information 
+2.1 Ethernet and PROFINET protocols that are used 
+Fieldbuses 
+16 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE
+Communication via PROFIBUS and PROFINET 3  
+3.1 PROFIDRIVE profile - Cyclic communication  
+Depending on the Control Unit or inverter, there are different telegrams for communication  via PROFIBUS DP or PROFINET IO. The structure of the individual telegrams are listed  below. 
+The Startdrive commissioning tool or an operator panel only list the telegrams for selection  that are possible with your particular inverter. 
+How to commission the inverter and select a telegram are described in the operating  
+instructions. 
+  
+Overview of the manuals (Page 232) 
+Communication telegrams if "basic positioner" has been configured  
+The inverter has the following telegrams if you have configured the "Basic positioner"  
+function: 
+● Standard telegram 7, PZD-2/2 
+● Standard telegram 9, PZD-10/5 
+● SIEMENS telegram 110, PZD-12/7 
+● SIEMENS telegram 111, PZD-12/12 
+● Telegram 999, free interconnection 
+Telegrams 7, 9, 110 and 111 are described in the "Basic positioner" Function Manual  
+  
+Overview of the manuals (Page 232) 
+Communication telegrams for speed control  
+The send and receive telegrams of the inverter for closed-loop speed control are structured  as follows: 
+  
+Figure 3-1 16-bit speed setpoint
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 17 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+  
+
+Figure 3-2 32-bit speed setpoint 
+Figure 3-3 32-bit speed setpoint with 1 position encoder 
+Figure 3-4 32-bit speed setpoint with 2 position encoders 
+Figure 3-5 16-bit speed setpoint for VIK-Namur 
+Figure 3-6 16-bit speed setpoint with torque limiting 
+Figure 3-7 16-bit speed setpoint for PCS7
+Fieldbuses 
+18 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+
+Figure 3-8 16-bit speed setpoint with PKW range to read and write parameters 
+Figure 3-9 16-bit speed setpoint for PCS7 with PKW range to read and write parameters 
+Figure 3-10 Telegram with free interconnection and length 
+Abbreviation Explanation Abbreviation Explanation  
+PZD Process data PKW Parameter channel STW Control word PIST_GLATT Actual active power value, smoothed ZSW Status word M_LIM Torque limit 
+NSOLL_A Speed setpoint 16 bit FAULT_COD E 
+NSOLL_B Speed setpoint 32 bit WARN_COD E 
+NIST_A Speed actual value 16 bit MELD_NAMU R 
+NIST_B Speed actual value 32 bit G1_STW /  G2_STW 
+IAIST Current actual value G1_ZSW /  G2_ZSW 
+IAIST_GLATT Current actual value, smoothed G1_XIST1 /  G2_XIST1 
+MIST_GLATT Torque actual value, smoothed G1_XIST2 /  G2_XIST2 
+Fault code 
+Alarm code 
+Message according to the VIK-NAMUR  definition 
+Control word for encoder 1 or encoder 2 Status word for encoder 1 or encoder 2 
+Position actual value 1 from encoder 1 or  encoder 2 
+Position actual value 2 from encoder 1 or  encoder 2
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 19 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+Interconnection of the process data  
+Figure 3-11 Interconnection of the send words 
+Figure 3-12 Interconnection of the receive words 
+The telegrams use - with the exception of telegram 999 (free interconnection) - the word-by word transfer of send and receive data (r2050/p2051).  
+If you require an individual telegram for your application (e.g. for transferring double words),  you can adapt one of the predefined telegrams using parameters p0922 and p2079. For  details, please refer to the List Manual, function diagrams 2420 and 2472. 
+Fieldbuses 
+20 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.1 Assigning control and status words  
+Assigning control and status of words is specified in part by the definitions in the PROFIdrive  profile, Version 4.2 for the "Closed-loop speed control" operating mode; the other part is  assigned depending on the particular manufacturer. 
+A more detailed description of the individual control and status words is provided in the  following sections. 
+If you require an individual assignment for your application, you can adapt one of the existing  control and status words using p0922 and p2079.  
+Extend telegrams and change signal interconnection (Page 33) 
+3.1.1.1 Control and status word 1  
+Control word 1 is preassigned as follows: 
+● Telegrams 1, 2, 3 and 4: 
+– Bits 0 … 10 corresponding to the PROFIdrive profile, 
+– Bits 11… 15 manufacturer-specific 
+● Telegrams 7 and 9: 
+– Bits 0 … 11 corresponding to the PROFIdrive profile, 
+– Bits 12 … 15 manufacturer-specific 
+● Telegram 20 (VIK/NAMUR): 
+– Bits 0 … 11 corresponding to the PROFIdrive profile 
+– Bits 12 … 14 reserved 
+– Bit 15 corresponding to the PROFIdrive profile 
+Status word 1 is preassigned as follows: 
+● Telegrams 1, 2, 3 and 4: 
+– Bits 0 … 10 corresponding to the PROFIdrive profile, 
+– Bits 11… 15 manufacturer-specific 
+● Telegrams 7 and 9: 
+– Bits 0 … 13 corresponding to the PROFIdrive profile, 
+– Bits 14 … 15 manufacturer-specific 
+● Telegram 20 (VIK/NAMUR): 
+– Bits 0 … 11 corresponding to the PROFIdrive profile 
+– Bit 12 reserved 
+– Bits 13 … 15 corresponding to the PROFIdrive profile
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 21 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+Control word 1 (STW1) 
+Bit 
+	Significance 
+	Explanation 
+	Signal inter connection  in the in 
+verter 
+	Telegram 20 
+	All other tele grams 
+	0 
+	0 = OFF1 
+	The motor brakes with the ramp-down time  p1121 of the ramp-function generator. The  inverter switches off the motor at standstill.
+	p0840[0] =  r2090.0
+	0 → 1 = ON 
+	The inverter goes into the "ready" state. If, in  addition bit 3 = 1, then the inverter switches on  the motor.
+	1 
+	0 = OFF2 
+	Switch off the motor immediately, the motor  then coasts down to a standstill.
+	p0844[0] =  r2090.1
+	1 = No OFF2 
+	The motor can be switched on (ON com mand).
+	2 
+	0 = Quick stop (OFF3) 
+	Quick stop: The motor brakes with the OFF3  ramp-down time p1135 down to standstill.
+	p0848[0] =  r2090.2
+	1 = No quick stop (OFF3) 
+	The motor can be switched on (ON com mand).
+	3 
+	0 = Inhibit operation 
+	Immediately switch-off motor (cancel pulses). 
+	p0852[0] =  r2090.3 
+	1 = Enable operation 
+	Switch-on motor (pulses can be enabled). 
+	4 
+	0 = Disable RFG 
+	The inverter immediately sets its ramp function generator output to 0.
+	p1140[0] =  r2090.4
+	1 = Do not disable RFG 
+	The ramp-function generator can be enabled.
+	5 
+	0 = Stop RFG 
+	The output of the ramp-function generator  stops at the actual value.
+	p1141[0] =  r2090.5
+	1 = Enable RFG 
+	The output of the ramp-function generator  follows the setpoint.
+	6 
+	0 = Inhibit setpoint 
+	The inverter brakes the motor with the ramp down time p1121 of the ramp-function genera tor.
+	p1142[0] =  r2090.6
+	1 = Enable setpoint 
+	Motor accelerates with the ramp-up time  p1120 to the setpoint.
+	7 
+	0 → 1 = Acknowledge faults 
+	Acknowledge fault. If the ON command is still  active, the inverter switches to the "switching  on inhibited" state. 
+	p2103[0] =  r2090.7
+	8, 9 
+	Reserved
+	10 
+	0 = No control via PLC 
+	Inverter ignores the process data from the  fieldbus.
+	p0854[0] =  r2090.10
+	1 = Control via PLC 
+	Control via fieldbus, inverter accepts the pro cess data from the fieldbus.
+	11 
+	1 = Direction reversal 
+	Invert setpoint in the inverter. 
+	p1113[0] =  r2090.11
+	12 
+	Not used
+	13 
+	---1) 
+	1 = MOP up 
+	Increase the setpoint saved in the motorized  potentiometer.
+	p1035[0] =  r2090.13
+	
+
+
+
+Fieldbuses 
+22 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+Bit 
+	Significance 
+	Explanation 
+	Signal inter connection  in the in 
+verter 
+	Telegram 20 
+	All other tele grams 
+	14 
+	---1) 
+	1 = MOP down 
+	Reduce the setpoint saved in the motorized  potentiometer.
+	p1036[0] =  r2090.14
+	15 
+	CDS bit 0 
+	Reserved 
+	Changes over between settings for different  operation interfaces (command data sets).
+	p0810 =  
+r2090.15
+	
+
+
+
+1) If you change over from another telegram to telegram 20, then the assignment of the previous  telegram is kept. 
+Status word 1 (ZSW1) 
+Bit 
+	Significance 
+	Remarks 
+	Signal inter connection  in the in 
+verter 
+	Telegram 20 
+	All other tele 
+grams 
+	0 
+	1 = Ready for switching on 
+	Power supply switched on; electronics initial ized; pulses locked.
+	p2080[0] =  r0899.0
+	1 
+	1 = Ready 
+	Motor is switched on (ON/OFF1 = 1), no fault  is active. With the command "Enable opera tion" (STW1.3), the inverter switches on the  motor.
+	p2080[1] =  r0899.1
+	2 
+	1 = Operation enabled 
+	Motor follows setpoint. See control word 1,  bit 3.
+	p2080[2] =  r0899.2
+	3 
+	1 = Fault active 
+	The inverter has a fault. Acknowledge fault  using STW1.7.
+	p2080[3] =  r2139.3
+	4 
+	1 = OFF2 inactive 
+	Coast down to standstill is not active. 
+	p2080[4] =  r0899.4
+	5 
+	1 = OFF3 inactive 
+	Quick stop is not active. 
+	p2080[5] =  r0899.5
+	6 
+	1 = Switching on inhibited active 
+	It is only possible to switch on the motor after  an OFF1 followed by ON.
+	p2080[6] =  r0899.6
+	7 
+	1 = Alarm active 
+	Motor remains switched on; no acknowl edgement is necessary.
+	p2080[7] =  r2139.7
+	8 
+	1 = Speed deviation within the  tolerance range
+	Setpoint / actual value deviation within the  tolerance range.
+	p2080[8] =  r2197.7
+	9 
+	1 = Master control requested 
+	The automation system is requested to ac cept the inverter control.
+	p2080[9] =  r0899.9
+	10 
+	1 = Comparison speed reached or  exceeded
+	Speed is greater than or equal to the corre sponding maximum speed.
+	p2080[10] =  r2199.1
+	11 
+	1 = current or  torque limit  
+reached
+	1 = torque limit  reached
+	Comparison value for current or torque has  been reached or exceeded.
+	p2080[11] =  r0056.13 /  
+r1407.7
+	12 
+	---1) 
+	1 = Holding  
+brake open
+	Signal to open and close a motor holding  brake.
+	p2080[12] =  r0899.12
+	13 
+	0 = Alarm, motor overtemperature 
+	-- 
+	p2080[13] =  r2135.14
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 23 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+Bit 
+	Significance 
+	Remarks 
+	Signal inter connection  in the in 
+verter 
+	Telegram 20 
+	All other tele 
+grams 
+	14 
+	1 = Motor rotates clockwise 
+	Internal inverter actual value > 0 
+	p2080[14] =  r2197.3 
+	0 = Motor rotates counter 
+clockwise
+	Internal inverter actual value < 0
+	15 
+	1 = CDS display 
+	0 = Alarm, in 
+verter thermal  overload
+	
+
+	p2080[15] =  r0836.0 /  
+r2135.15
+	
+
+
+
+1) If you change over from another telegram to telegram 20, then the assignment of the previous  telegram is kept.
+Fieldbuses 
+24 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+3.1.1.2 Control and status word 2  
+Control word 2 is preassigned as follows: 
+● Bits 0 … 11 manufacturer-specific 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+● Bits 12 … 15 corresponding to the PROFIdrive profile 
+Status word 2 is preassigned as follows: 
+● Bits 0 … 11 manufacturer-specific 
+● Bits 12 … 15 corresponding to the PROFIdrive profile 
+Control word 2 (STW2)  
+Bit 
+	Meaning 
+	Signal interconnection in the  inverter 
+	Telegrams 2, 3 and 4 
+	Telegrams 9, 110 and 111 
+	0 
+	1 = drive data set selection DDS bit 0 
+	p0820[0] = r2093.0
+	1 
+	1 = drive data set selection DDS bit 1 
+	p0821[0] = r2093.1
+	2…6 
+	Reserved
+	7 
+	1 = parking axis is selected 
+	p0897 = r2093.7
+	8 
+	1 = travel to fixed stop  active
+	Reserved 
+	p1545[0] = r2093.8
+	9…11 
+	Reserved
+	12 
+	1 = master sign-of-life bit 0
+	p2045 = r2050[3]
+	13 
+	1 = master sign-of-life bit 1
+	14 
+	1 = master sign-of-life bit 3
+	15 
+	1 = master sign-of-life bit 4
+	
+
+
+
+Status word 2 (ZSW2) 
+Bit 
+	Meaning 
+	Signal interconnection in the  inverter 
+	0 
+	1 = Drive data set DDS effective, bit 0 
+	p2081[0] = r0051.0
+	1 
+	1 = Drive data set DDS effective, bit 1 
+	p2081[1] = r0051.1
+	2…4 
+	Reserved
+	
+
+	5 
+	1 = Alarm class bit 0 
+	p2081[5] = r2139.11
+	6 
+	1 = alarm class bit 1 
+	p2081[6] = r2139.12
+	7 
+	Reserved
+	
+
+	8 
+	1 = travel to fixed stop active 
+	p2081[8] = r1406.8
+	9 
+	Reserved
+	
+
+	10 
+	1 = pulses enabled 
+	p2081[10] = r0899.11
+	11 
+	Reserved
+	
+
+	12 
+	Slave sign-of-life bit 0
+	Internally interconnected
+	13 
+	Slave sign of life bit 1
+	14 
+	Slave sign of life bit 2
+	15 
+	Slave sign of life bit 3
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 25 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.1.3 Control and status word 3  
+Control word 3 is preassigned as follows: 
+● Bits 0 … 15 manufacturer-specific 
+Status word 3 is preassigned as follows: 
+● Bits 0 … 15 manufacturer-specific 
+Control word 3 (STW3)  
+Bit 
+	Meaning 
+	Explanation 
+	Signal interconnection  in the inverter 1) 
+	Telegram 350 
+	0 
+	1 = fixed setpoint bit 0 
+	Selects up to 16 different fixed  setpoints.
+	p1020[0] = r2093.0
+	1 
+	1 = fixed setpoint bit 1 
+	p1021[0] = r2093.1
+	2 
+	1 = fixed setpoint bit 2 
+	p1022[0] = r2093.2
+	3 
+	1 = fixed setpoint bit 3 
+	p1023[0] = r2093.3
+	4 
+	1 = DDS selection bit 0 
+	Changes over between settings  for different motors (drive data  sets).
+	p0820 = r2093.4
+	5 
+	1 = DDS selection bit 1 
+	p0821 = r2093.5
+	6 
+	Not used
+	7 
+	Not used
+	8 
+	1 = technology controller enable 
+	-- 
+	p2200[0] = r2093.8
+	9 
+	1 = enable DC braking 
+	-- 
+	p1230[0] = r2093.9
+	10 
+	Not used
+	11 
+	1 = Enable droop 
+	Enable or inhibit speed control ler droop.
+	p1492[0] = r2093.11
+	12 
+	1 = torque control active 
+0 = speed control active
+	Changes over the control mode  for vector control.
+	p1501[0] = r2093.12
+	13 
+	1 = no external fault 
+0 = external fault is active (F07860)
+	-- 
+	p2106[0] = r2093.13
+	14 
+	Not used
+	15 
+	1 = CDS bit 1 
+	Changes over between settings  for different operation interfaces  (command data sets).
+	p0811[0] = r2093.15
+	
+
+
+
+1) If you switch from telegram 350 to a different one, then the inverter sets all interconnections  p1020, … to "0". Exception: p2106 = 1.
+Fieldbuses 
+26 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+Status word 3 (ZSW3) 
+Bit 
+	Meaning 
+	Description 
+	Signal intercon nection in the  
+inverter 
+	0 
+	1 = DC braking active 
+	-- 
+	p2051[3] = r0053
+	1 
+	1 = |n_act | > p1226 
+	Absolute current speed > stationary  state detection
+	2 
+	1 = |n_act | > p1080 
+	Absolute actual speed > minimum  speed
+	3 
+	1 = i_act ≧ p2170 
+	Actual current ≥ current threshold  value
+	4 
+	1 = |n_act | > p2155 
+	Absolute actual speed > speed  threshold value 2
+	5 
+	1 = |n_act | ≦ p2155 
+	Absolute actual speed < speed  threshold value 2
+	6 
+	1 = |n_act | ≧ r1119 
+	Speed setpoint reached
+	7 
+	1 = DC link voltage ≦ p2172 
+	Actual DC link voltage ≦ threshold  value
+	8 
+	1 = DC link voltage > p2172 
+	Actual DC link voltage > threshold  value
+	9 
+	1 = ramp-up or ramp-down complet ed
+	Ramp-function generator is not  active.
+	10 
+	1 = technology controller output at  the lower limit
+	Technology controller output ≦  p2292
+	11 
+	1 = technology controller output at  the upper limit
+	Technology controller out 
+put > p2291
+	12 
+	Not used
+	13 
+	Not used
+	14 
+	Not used
+	15 
+	Not used
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 27 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.2 NAMUR message word  
+Fault word according to the VIK-NAMUR definition (MELD_NAMUR)  
+Table 3- 1 Fault word according to the VIK-NAMUR definition and interconnection with parameters  in the inverter
+Bit 
+	Significance 
+	P no. 
+	0 
+	1 = Control Unit signals a fault 
+	p2051[5] = r3113
+	1 
+	1 = line fault: Phase failure or inadmissible voltage
+	2 
+	1 = DC link overvoltage
+	3 
+	1 = Power Module fault, e.g. overcurrent or overtemperature
+	4 
+	1 = inverter overtemperature
+	5 
+	1 = ground fault/phase fault in the motor cable or in the motor
+	6 
+	1 = motor overload
+	7 
+	1 = communication error to the higher-level control system
+	8 
+	1 = fault in a safety-relevant monitoring channel
+	10 
+	1 = fault in the internal inverter communication
+	11 
+	1 = line fault
+	15 
+	1 = other fault
+	
+
+
+
+Fieldbuses 
+28 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+3.1.3 Control and status word, encoder  
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+Telegrams 3 and 4 allow the higher-level control system to directly access the encoder. 
+Direct access is necessary, if the higher-level control is responsible for the closed-loop  position control for the drive. 
+If you enable the "Basic positioner" position control in the inverter, then telegrams 3 and 4  cannot be selected, and the inverter handles the encoder control. 
+Control word encoder (G1_STW and G2_STW) 
+Bit 
+	Meaning 
+	Explanation 
+	Signal interconnec tion in the inverter 
+	
+
+	
+
+	Bit 7 = 0 
+	Bit 7 = 1
+	
+
+	0 
+	Function 1 
+	1 = search for refer ence cam 1 with a  positive start direction
+	1 = request flying referenc ing to the rising edge of  reference cam 1
+	Telegram 3: 
+Encoder 1: 
+p0480[0] = r2050[4] 
+Telegram 4: 
+Encoder 1: 
+p0480[0] = r2050[4] encoder 2: 
+p0480[1] = p2050[9] 
+Telegram 102: 
+Encoder 1: 
+p0480[0] = r2050[5] 
+Telegram 103: 
+Encoder 1: 
+p0480[0] = r2050[5] encoder 2: 
+p0480[1] = p2050[10]
+	1 
+	Function 2 
+	1 = search for refer ence cam 1 with a  negative start direction
+	1 = request flying referenc ing to the falling edge of  reference cam 1
+	2 
+	Function 3 
+	1 = search for refer ence cam 2 with a  positive start direction
+	1 = request flying referenc ing to the rising edge of  reference cam 2
+	3 
+	Function 4 
+	1 = search for refer ence cam 2 with a  negative start direction
+	1 = request flying referenc ing to the falling edge of  reference cam 2
+	4 
+	Command bit 0 
+	1 = activate the function requested using bit 0 … 3
+	5 
+	Command bit 1 
+	1 = read the value requested using bit 0 … 3
+	6 
+	Command bit 2 
+	Reserved
+	7 
+	Mode 
+	1 = flying referencing 
+0 = search for reference cams
+	8 
+… 
+12
+	Reserved 
+	---
+	13 
+	Cyclic absolute  value
+	1 = request for the cyclic transfer of the position actu al value in G1_XIST2 or G2_XIST2
+	14 
+	Parking 
+	1 = request to park the encoder
+	15 
+	Acknowledge 
+	0 → 1 = acknowledge encoder fault
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 29 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+Status word encoder (G1_ZSW and G2_ZSW) 
+Bit 
+	Meaning 
+	Explanation 
+	Signal interconnec tion in the inverter 
+	
+
+	
+
+	Bit 7 = 0 
+	Bit 7 = 1
+	
+
+	0 
+	Function 1 
+	1 = search for ref erence cam 1 is  active
+	1 = flying referencing to the rising  edge of reference cam 1 is active
+	Telegram 3: 
+Encoder 1: 
+p2051[4] = r0481[0] 
+Telegram 4: 
+Encoder 1: 
+p2051[4] = r0481[0]  encoder 2: 
+p2051[9] = r0481[1] 
+Telegram 102: 
+Encoder 1: 
+p2051[5] = r0481[0] 
+Telegram 103: 
+Encoder 1: 
+p2051[5] = r0481[0] encoder 2: 
+p2051[10] = r0481[0]
+	1 
+	Function 2 
+	1 = search for ref erence cam 1 is  active
+	1 = flying referencing to the falling  edge of reference cam 1 is active
+	2 
+	Function 3 
+	1 = search for ref erence cam 2 is  active
+	1 = flying referencing to the rising  edge of reference cam 2 is active
+	3 
+	Function 4 
+	1 = search for ref erence cam 2 is  active
+	1 = flying referencing to the falling  edge of reference cam 2 is active
+	4 
+	Status value 1 
+	1 = position actual  value is at refer 
+ence cam 1
+	1 = flying referencing to the rising  edge of reference cam 1 has been  completed
+	5 
+	Status value 2 
+	1 = position actual  value is at refer 
+ence cam 1
+	1 = flying referencing to the falling  edge of reference cam 1 has been  completed
+	6 
+	Status value 3 
+	1 = position actual  value is at refer 
+ence cam 2
+	1 = flying referencing to the rising  edge of reference cam 2 has been  completed
+	7 
+	Status value 4 
+	1 = position actual  value is at refer 
+ence cam 2
+	1 = flying referencing to the falling  edge of reference cam 2 has been  completed
+	8 
+	Reference  
+cam 1
+	1 = reference cam 1 supplies a high signal 
+0 = reference cam 1 supplies a low signal
+	9 
+	Reference  
+cam 2
+	1 = reference cam 2 supplies a high signal 
+0 = reference cam 2 supplies a low signal
+	10 
+	Reserved 
+	---
+	11 
+	Acknowledge 
+	1 = acknowledge encoder fault is active
+	12 
+	Reserved 
+	---
+	13 
+	Cyclic abso 
+lute value
+	1 = the position actual value is in G1_XIST2 or  G2_XIST2.
+	14 
+	Parking 
+	1 = the encoder is parked
+	15 
+	Fault 
+	1 = the encoder indicates its actual fault in r0483
+	
+
+
+
+Fieldbuses 
+30 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.4 Position actual value of the encoder  
+G1_XIST1 and G2_XIST1  
+In the factory setting, the inverter transfers the encoder position actual value with a fine  resolution of 11 bits to the higher-level control system. 
+
+Figure 3-13 G1_XIST1 and G2_XIST1 
+The transferred encoder signal has the following properties: 
+● After the inverter power supply has been switched on, the encoder signal = 0. 
+● The higher-level control must be able to handle a counter overflow of the encoder signal. 
+G1_XIST2 and G2_XIST2  
+In G1_XIST2 or G2_XIST2, the inverter transfers different values to the higher-level control  system: 
+
+Encoder x parked Gx_ZSW.14 = 1 
+Encoder fault x Gx_ZSW.15 = 1 
+Referencing encoder x Gx_ZSW.4 = 1 or Gx_ZSW.5 = 1 or Gx_ZSW.6 = 1 or Gx_ZSW.7 = 1 Figure 3-14 G1_XIST2 and G2_XIST2
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 31 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+The inverter transfers the position values in the same format (encoder pulse number and fine  resolution) the same as G1_XIST1 and G2_XIST1. 
+Table 3- 2 Fault code
+No. 
+	Explanation 
+	Possible cause 
+	1 
+	Encoder fault 
+	One or more encoder faults. 
+Observe the inverter message.
+	2 
+	Zero-mark monitoring 
+	---
+	3 
+	Encoder parking canceled 
+	Parking was already requested.
+	4 
+	Search for reference canceled 
+	• Encoder has no zero mark (reference mark). • Reference mark 2, 3 or 4 was requested. • Switchover to "Flying measurement" was re quested during search for reference. 
+• Command "Read value x" requested during  search for reference mark. 
+• Inconsistent position measured value with dis tance-coded reference marks.
+	5 
+	Retrieve reference value canceled 
+	• More than four values were requested. • No value requested. 
+• Requested value is not available.
+	6 
+	Flying referencing canceled 
+	• Reference cam has not been configured • During "Flying referencing" a changeover was  made to search for reference. 
+• During "Flying referencing" a request was issued  "Read value x".
+	7 
+	Retrieve measured value canceled 
+	• More than one value was requested. 
+• No value requested. 
+• Requested value is not available. 
+• Encoder is parked.
+	8 
+	Position actual value transfer canceled 
+	• No absolute encoder available. 
+• Alarm bit in the absolute value protocol set.
+	3841 
+	Encoder does not support the function 
+	---
+	
+
+
+
+Fieldbuses 
+32 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.5 Extend telegrams and change signal interconnection  
+Overview  
+When you have selected a telegram, the inverter interconnects the corresponding signals  with the fieldbus interface. Generally, these interconnections are locked so that they cannot  be changed. However, with the appropriate setting in the inverter, the telegram can be  extended or even freely interconnected. 
+Extending the telegram  
+Procedure  
+1. Set p0922 = 999. 
+2. Set parameter p2079 to the value of the corresponding telegram. 
+The interconnections contained in the telegram are locked. 
+3. Extend the telegram by "attaching" additional signals. 
+Interconnect additional PZD send words and PZD receive words with signals of your  choice via parameters r2050 and p2051. 
+You have extended the telegram. 
+❒ 
+Freely interconnecting signals in the telegram  
+Procedure  
+1. Set p0922 = 999. 
+2. Set p2079 = 999. 
+The interconnections contained in the telegram are enabled. 
+3. Interconnect additional PZD send words and PZD receive words with signals of your  choice via parameters r2050 and p2051. 
+You have freely interconnected the signals transferred in the telegram. 
+❒
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 33 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+Parameter  
+Parameter 
+	Description 
+	p0922 
+	PROFIdrive telegram selection
+	999: 
+	Free telegram (message frame) configuration
+	p2079 
+	PROFIdrive PZD telegram selection extended
+	The following values apply if you have still not enabled the "Basic positioner" function  in the inverter:
+	1: 
+2: 
+3: 
+4: 
+20: 
+350: 
+352: 
+353: 
+354:  
+999:
+	Standard telegram 1, PZD-2/2 
+Standard telegram 2, PZD-4/4 
+Standard telegram 3, PZD-5/9 
+Standard telegram 4, PZD-6/14 
+Standard telegram 20, PZD-2/6 
+SIEMENS telegram 350, PZD-4/4 
+SIEMENS telegram 352, PZD-6/6 
+SIEMENS telegram 353, PZD-2/2, PKW-4/4 
+SIEMENS telegram 354, PZD-6/6, PKW-4/4 
+Free telegram configuration
+	The following values apply if you have enabled the "Basic positioner" function in the  inverter:
+	7: 
+9: 
+110: 
+111: 
+999:
+	Standard telegram 7, PZD-2/2 
+Standard telegram 9, PZD-10/5 
+SIEMENS telegram 110, PZD-12/7 
+SIEMENS telegram 111, PZD-12/12 
+Free telegram configuration
+	r2050[0…11] 
+	PROFIdrive PZD receive word 
+Received PZD (setpoints) in the word format
+	p2051[0…16] 
+	PROFIdrive PZD send word 
+Sent PZD (actual values) in the word format
+	
+
+
+
+For further information about receive and send words, refer to the function block diagrams  2468 and 2470 in the List Manual. 
+Overview of the manuals (Page 232)
+Fieldbuses 
+34 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.6 Data structure of the parameter channel  
+Structure of the parameter channel  
+The parameter channel consists of four words. The 1st and 2nd words transfer the  
+parameter number, index and the type of task (read or write). The 3rd and 4th words contain  the parameter content. The parameter contents can be 16-bit values (such as baud rate) or  32-bit values (e.g. CO parameters). 
+Bit 11 in the 1st word is reserved and is always assigned 0.  
+
+You can find application examples relating to the parameter channel at the end of this  section.  
+AK: Request and response IDs  
+Bits 12 … 15 of the 1st The parameter channel words contain the request and response  identifier AK. 
+Table 3- 3 Request identifiers, control → inverter  
+AK 
+	Description 
+	Response identifier 
+	positive 
+	negative 
+	0 
+	No request 
+	0 
+	7 / 8
+	1 
+	Request parameter value 
+	1 / 2 
+	7 / 8
+	2 
+	Change parameter value (word) 
+	1 
+	7 / 8
+	3 
+	Change parameter value (double word) 
+	2 
+	7 / 8
+	4 
+	Request descriptive element 1) 
+	3 
+	7 / 8
+	6 2) 
+	Request parameter value (field) 1) 
+	4 / 5 
+	7 / 8
+	7 2) 
+	Change parameter value (field, word) 1) 
+	4 
+	7 / 8
+	8 2) 
+	Change parameter value (field, double word) 1) 
+	5 
+	7 / 8
+	9 
+	Request number of field elements 
+	6 
+	7 / 8
+	
+
+
+
+1) The required element of the parameter is specified in IND (2nd word). 
+2) The following request IDs are identical: 1 ≡ 6, 2 ≡ 7 3 ≡ 8.  
+We recommend that you use identifiers 6, 7, and 8.
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 35 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+Table 3- 4 Response identifiers, inverter → control 
+AK 
+	Description 
+	0 
+	No response
+	1 
+	Transfer parameter value (word)
+	2 
+	Transfer parameter value (double word)
+	3 
+	Transfer descriptive element 1)
+	4 
+	Transfer parameter value (field, word) 2)
+	5 
+	Transfer parameter value (field, double word) 2)
+	6 
+	Transfer number of field elements
+	7 
+	Inverter cannot process the request. 
+In the most significant word of the parameter channel, the inverter sends an error number to  the control, refer to the following table.
+	8 
+	No master controller status / no authorization to change parameters of the parameter chan nel interface
+	
+
+
+
+1) The required element of the parameter is specified in IND (2nd word). 
+2) The required element of the indexed parameter is specified in IND (2nd word).
+Fieldbuses 
+36 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+Table 3- 5 Error numbers for response identifier 7
+No. 
+	Description 
+	00 hex 
+	Illegal parameter number (access to a parameter that does not exist)
+	01 hex 
+	Parameter value cannot be changed (change request for a parameter value that cannot be  changed)
+	02 hex 
+	Lower or upper value limit exceeded (change request with a value outside the value limits)
+	03 hex 
+	Incorrect subindex (access to a subindex that does not exist)
+	04 hex 
+	No array (access with a subindex to non-indexed parameters)
+	05 hex 
+	Incorrect data type (change request with a value that does not match the data type of the  parameter)
+	06 hex 
+	Setting not permitted, only resetting (change request with a value not equal to 0 without  permission)
+	07 hex 
+	Descriptive element cannot be changed (change request to a descriptive element error  value that cannot be changed)
+	0B hex 
+	No master control (change request but with no master control, see also p0927.)
+	0C hex 
+	Keyword missing
+	11 hex 
+	Request cannot be executed due to the operating state (access is not possible for tempo rary reasons that are not specified)
+	14 hex 
+	Inadmissible value (change request with a value that is within the limits but which is illegal  for other permanent reasons, i.e. a parameter with defined individual values)
+	65 hex 
+	Parameter number is currently deactivated (depending on the mode of the inverter)
+	66 hex 
+	Channel width is insufficient (communication channel is too small for response)
+	68 hex 
+	Illegal parameter value (parameter can only assume certain values)
+	6A hex 
+	Request not included / task is not supported (the valid request identifications can be found  in table "Request identifications controller → inverter")
+	6B hex 
+	No change access for a controller that is enabled. (The operating state of the inverter  prevents a parameter change)
+	86 hex 
+	Write access only for commissioning (p0010 = 15) (operating state of the inverter prevents  a parameter change)
+	87 hex 
+	Know-how protection active, access locked
+	C8 hex 
+	Change request below the currently valid limit (change request to a value that lies within  the "absolute" limits, but is however below the currently valid lower limit)
+	C9 hex 
+	Change request above the currently valid limit (example: a parameter value is too large for  the inverter power)
+	CC hex 
+	Change request not permitted (change is not permitted as the access code is not availa ble)
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 37 
+Communication via PROFIBUS and PROFINET 
+3.1 PROFIDRIVE profile - Cyclic communication 
+PNU (parameter number) and page index  
+The parameter number is located in value PNU in the 1st word of the parameter channel  (PKE). 
+The page index is located in the 2nd word of the parameter channel (IND bit 7 … 0). 
+Parameter number 
+	PNU 
+	Page index 
+	0000 … 1999 
+	0000 … 1999 
+	0 hex
+	2000 … 3999 
+	0000 … 1999 
+	80 hex
+	6000 … 7999 
+	0000 … 1999 
+	90 hex
+	8000 … 9999 
+	0000 … 1999 
+	20 hex
+	10000 … 11999 
+	0000 … 1999 
+	A0 hex
+	20000 … 21999 
+	0000 … 1999 
+	50 hex
+	30000 … 31999 
+	0000 … 1999 
+	F0 hex
+	60000 … 61999 
+	0000 … 1999 
+	74 hex
+	
+
+
+
+Subindex  
+For indexed parameters, the parameter index is located in subindex (IND Bit 15 … 8) as  hexadecimal value. 
+PWE: Parameter value or connector  
+Parameter values or connectors can be located in the PWE. 
+Table 3- 6 Parameter value or connector
+ 
+	PWE 1 
+	PWE 2 
+	Parameter value 
+	Bit 15 … 0 
+	Bit 15 … 8 
+	Bit 7 … 0
+	0 
+	0 
+	8-bit value
+	0 
+	16-bit value
+	32-bit value
+	Connector 
+	Bit 15 … 0 
+	Bit 15 … 10 
+	Bit 9 … 0
+	Number of the connector 
+	3F hex 
+	The index or bit field  number of the con nector
+	
+
+
+
+Fieldbuses 
+38 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.6.1 Application examples  
+Read request: Read out serial number of the Power Module (p7841[2])  
+To obtain the value of the indexed parameter p7841, you must fill the telegram of the  parameter channel with the following data: 
+● PKE, Bit 12 … 15 (AK): = 6 (request parameter value (field)) 
+● PKE, Bit 0 … 10 (PNU): = 1841 (parameter number without offset) 
+Parameter number = PNU + offset (page index) 
+(7841 = 1841 + 6000) 
+● IND, bit 8 … 15 (subindex): = 2 (index of parameter) 
+● IND, bit 0 … 7 (page index): = 90 hex (offset 6000 corresponds to 90 hex) 
+● Because you want to read the parameter value, words 3 and 4 in the parameter channel  for requesting the parameter value are irrelevant. They should be assigned a value of 0,  for example. 
+Figure 3-15 Telegram for a read request from p7841[2] 
+Write request: Change restart mode (p1210)  
+The restart mode is inhibited in the factory setting (p1210 = 0). In order to activate the  automatic restart with "acknowledge all faults and restart for an ON command", p1210 must  be set to 26: 
+● PKE, bit 12 … 15 (AK): = 7 (change parameter value (field, word)) 
+● PKE, bit 0 … 10 (PNU): = 4BA hex (1210 = 4BA hex, no offset, as 1210 < 1999) 
+● IND, bit 8 … 15 (subindex): = 0 hex (parameter is not indexed) 
+● IND, bit 0 … 7 (page index): = 0 hex (offset 0 corresponds to 0 hex) 
+● PWE1, bit 0 … 15: = 0 hex  
+● PWE2, Bit 0 … 15: = 1A hex (26 = 1A hex) 
+Figure 3-16 Telegram, to activate the automatic restart with p1210 = 26
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 39 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+Write request: Assign digital input 2 with the function ON/OFF1 (p0840[1] = 722.2)  
+In order to link digital input 2 with ON/OFF1, you must assign parameter p0840[1] (source,  ON/OFF1) the value 722.2 (DI 2). To do this, you must populate the telegram of the  parameter channel as follows: 
+● PKE, bit 12 … 15 (AK): = 7 hex (change parameter value (field, word)) 
+● PKE, bit 0 … 10 (PNU): = 348 hex (840 = 348 hex, no offset, as 840 < 1999) 
+● IND, bit 8 … 15 (subindex): = 1 hex (CDS1 = Index 1) 
+● IND, bit 0 … 7 (page index): = 0 hex (offset 0 corresponds to 0 hex) 
+● PWE1, Bit 0 … 15: = 2D2 hex (722 = 2D2 hex) 
+● PWE2, Bit 10 … 15: = 3F hex (drive object - for SINAMICS G120, always 63 = 3f hex) ● PWE2, Bit 0 … 9: = 2 hex (Index of Parameter (DI 2 = 2)) 
+Figure 3-17 Telegram, to assign DI 2 with ON/OFF1 
+Application example, "Read and write to parameters"  
+Further information is provided on the Internet: 
+Application examples (https://support.industry.siemens.com/cs/ww/en/view/29157692)
+Fieldbuses 
+40 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.1 PROFIDRIVE profile - Cyclic communication 
+3.1.7 Slave-to-slave communication  
+"Direct data exchange" is sometimes called "slave-to-slave communication" or "data  exchange broadcast". Here, slaves exchange data without any direct involvement of the  master. 
+Example: An inverter uses the actual speed value of another inverter as its speed setpoint.  
+Definitions  
+● Publisher: Slave, which sends data for direct data exchange. 
+● Subscriber: Slave, which receives the data for direct data exchange from the publisher. ● Links and access points define the data that is used for direct data exchange. 
+Restrictions  
+● Direct data exchange in the current firmware version is only possible for inverters with  PROFIBUS communication. 
+● A maximum of 12 PZDs are permissible for each drive. 
+● A maximum of four links are possible from one subscriber to one or several publishers. 
+ Configuring slave-to-slave communication  
+Procedure  
+1. In the control, define: 
+– Which inverters operate as publisher (sender) or subscriber (receiver)? 
+– Which data or data areas do you use for direct data exchange? 
+2. In the inverter, define: 
+How does the subscriber process the data transferred using direct data exchange? 
+You have now configured slave-to-slave communication. 
+❒
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 41 
+Communication via PROFIBUS and PROFINET 
+3.2 PROFIDRIVE profile - Acyclic communication 
+3.2 PROFIDRIVE profile - Acyclic communication  
+The inverter supports the following types of acyclic communication: 
+● For PROFIBUS: 
+acyclic communication via data set 47  
+● For PROFINET: 
+acyclic communication via B02E hex and B02F hex 
+The maximum data length per request is 240 bytes. 
+Note  
+Values in italics  
+Values in italics in the following tables mean that you have to adjust these values for a  specific request. 
+Reading parameter values  
+Table 3- 7 Request to read parameters 
+Data block 
+	Byte n 
+	Bytes n + 1 
+	n 
+	Header 
+	Reference 00 hex ... FF hex 
+	01 hex: Read job 
+	0
+	01 hex (ID of drive objects, at G120 al ways = 1)
+	Number of parameters (m) 
+	2
+	Address, parameter 1 
+	Attribute 
+10 hex: Parameter value 
+20 hex: Parameter description
+	Number of the indices 
+00 hex ... EA hex 
+(For parameters without index: 00 hex)
+	4
+	Parameter number 0001 hex ... FFFF hex 
+	6
+	Number of the 1st index 0000 hex ... FFFF hex 
+(for parameters without index: 0000 hex)
+	8
+	… 
+	…
+	Address, parameter 2 
+	… 
+	…
+	… 
+	… 
+	…
+	Address, parameter m 
+	… 
+	…
+	
+
+
+
+Fieldbuses 
+42 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Table 3- 8 Inverter response to a read request
+Communication via PROFIBUS and PROFINET 3.2 PROFIDRIVE profile - Acyclic communication 
+
+
+Data block 
+	Byte n 
+	Bytes n + 1 
+	n 
+	Header 
+	Reference (identical to a read request) 
+	01 hex: Inverter has executed the read re quest. 
+81 hex: Inverter was not able to completely  execute the read request.
+	0
+	01 hex (ID of drive objects, at G120 al ways = 1)
+	Number of parameters (m)  
+(identical to the read request)
+	2
+	Values, parameter 1 
+	Format 
+02 hex: Integer8 
+03 hex: Integer16 
+04 hex: Integer32 
+05 hex: Unsigned8 
+06 hex: Unsigned16 
+07 hex: Unsigned32 
+08 hex: FloatingPoint 
+0A hex: OctetString 
+0D hex: TimeDifference 
+34 hex: TimeOfDay without date indication 35 hex: TimeDifference with date indication 36 hex: TimeDifference without date indication 41 hex: Byte 
+42 hex: Word 
+43 hex: Double word 
+44 hex: Error
+	Number of index values or - for a negative  response - number of error values
+	4
+	Value of the 1st index or - for a negative response - error value 1 
+You can find the error values in a table at the end of this section.
+	6
+	… 
+	…
+	Values, parameter 2 
+	…
+	
+
+	… 
+	…
+	
+
+	Values, parameter m 
+	…
+	
+
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 43 
+Communication via PROFIBUS and PROFINET 
+3.2 PROFIDRIVE profile - Acyclic communication 
+Changing parameter values  
+Table 3- 9 Request to change parameters 
+Data block 
+	Byte n 
+	Bytes n + 1 
+	n 
+	Header 
+	Reference 00 hex ... FF hex 
+	02 hex: Change request 
+	0
+	01 hex (ID of drive objects, at G120 al ways = 1)
+	Number of parameters (m) 01 hex ... 27 hex 
+	2
+	Address, parameter 1 
+	10 hex: Parameter value 
+	Number of indices 
+00 hex ... EA hex  
+(00 hex and 01 hex are equivalents)
+	4
+	Parameter number 0001 hex ... FFFF hex 
+	6
+	Number of the 1st index 0001 hex ... FFFF hex 
+	8
+	… 
+	…
+	Address, parameter 2 
+	…
+	
+
+	… 
+	… 
+	…
+	Address, parameter m 
+	…
+	
+
+	Values, parameter 1 
+	Format 
+02 hex: Integer 8 
+03 hex: Integer 16 
+04 hex: Integer 32 
+05 hex: Unsigned 8 
+06 hex: Unsigned 16 
+07 hex: Unsigned 32 
+08 hex: Floating Point 
+0A hex: Octet String 
+0D hex: Time Difference 
+34 hex: TimeOfDay without date indication 35 hex: TimeDifference with date indication 36 hex: TimeDifference without date indication 41 hex: Byte 
+42 hex: Word 
+43 hex: Double word
+	Number of index values 
+00 hex ... EA hex
+	
+
+	Value of the 1st index
+	
+
+	…
+	
+
+	Values, parameter 2 
+	…
+	
+
+	… 
+	…
+	
+
+	Values, parameter m 
+	…
+	
+
+	
+
+
+
+Table 3- 10 Response, if the inverter has executed the change request
+Data block 
+	Byte n 
+	Bytes n + 1 
+	n 
+	Header 
+	Reference (identical to a change request) 
+	02 hex (change request successful) 
+	0
+	01 hex (ID of drive objects, at G120 al ways = 1)
+	Number of parameters (identical to a change  request)
+	2
+	
+
+
+
+Fieldbuses 
+44 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 
+3.2 PROFIDRIVE profile - Acyclic communication 
+Table 3- 11 Response if the inverter was not able to completely execute the change request 
+Data block 
+	Byte n 
+	Bytes n + 1 
+	n 
+	Header 
+	Reference (identical to a change request) 
+	82 hex: (Inverter was not able to completely  execute the write request)
+	0
+	01 hex (ID of drive objects, at G120 al ways = 1)
+	Number of parameters (identical to a change  request)
+	2
+	Values, parameter 1 
+	Format 
+40 hex: Zero (change request for this data  block executed) 
+44 hex: Error (change request for this data  block not executed)
+	Number of error values  
+00 hex  
+01 hex or 02 hex
+	4
+	Only for "Error" - error value 1  
+You can find the error values in the table at the end of this section.
+	6
+	Only for "Error" - error value 2  
+Error value 2 is either zero, or it contains the number of the first index where the error oc curred.
+	8
+	Values, parameter 2 
+	...
+	
+
+	... 
+	… 
+	…
+	Values, parameter m 
+	...
+	
+
+	
+
+
+
+Error values  
+Table 3- 12 Error value in the parameter response
+Error  
+value 1 
+	Meaning 
+	00 hex 
+	Illegal parameter number (access to a parameter that does not exist)
+	01 hex 
+	Parameter value cannot be changed (change request for a parameter value that cannot be changed)
+	02 hex 
+	Lower or upper value limit exceeded (change request with a value outside the value limits)
+	03 hex 
+	Incorrect subindex (access to a parameter index that does not exist)
+	04 hex 
+	No array (access with a subindex to non-indexed parameters)
+	05 hex 
+	Incorrect data type (change request with a value that does not match the data type of the parameter)
+	06 hex 
+	Setting not permitted, only resetting (change request with a value not equal to 0 without permission)
+	07 hex 
+	Descriptive element cannot be changed (change request to a descriptive element that cannot be changed)
+	09 hex 
+	Description data not available (access to a description that does not exist, parameter value is available)
+	0B hex 
+	No master control (change request but with no master control)
+	0F hex 
+	Text array does not exist (although the parameter value is available, the request is made to a text array that  does not exist)
+	11 hex 
+	Request cannot be executed due to the operating state (access is not possible for temporary reasons that are  not specified)
+	14 hex 
+	Inadmissible value (change request with a value that is within the limits but which is illegal for other permanent  reasons, i.e. a parameter with defined individual values)
+	15 hex 
+	Response too long (the length of the actual response exceeds the maximum transfer length)
+	16 hex 
+	Illegal parameter address (illegal or unsupported value for attribute, number of elements, parameter number,  subindex or a combination of these)
+	17 hex 
+	Illegal format (change request for an illegal or unsupported format)
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 45 
+Communication via PROFIBUS and PROFINET 
+3.2 PROFIDRIVE profile - Acyclic communication 
+Error  
+value 1 
+	Meaning 
+	18 hex 
+	Number of values not consistent (number of values of the parameter data to not match the number of elements  in the parameter address)
+	19 hex 
+	Drive object does not exist (access to a drive object that does not exist)
+	20 hex 
+	Parameter text cannot be changed
+	21 hex 
+	Service is not supported (illegal or not support request ID).
+	6B hex 
+	A change request for a controller that has been enabled is not possible. (The inverter rejects the change re quest because the motor is switched on. Please observe the "Can be changed" parameter attribute (C1, C2, U,  T) in the List Manual.  
+Manuals and technical support (Page 232))
+	6C hex 
+	Unknown unit.
+	6E hex 
+	Change request is only possible when the motor is being commissioned (p0010 = 3).
+	6F hex 
+	Change request is only possible when the power unit is being commissioned (p0010 = 2).
+	70 hex 
+	Change request is only possible for quick commissioning (basic commissioning) (p0010 = 1).
+	71 hex 
+	Change request is only possible if the inverter is ready (p0010 = 0).
+	72 hex 
+	Change request is only possible for a parameter reset (restore to factory setting) (p0010 = 30).
+	73 hex 
+	Change request possible only during commissioning of the safety functions (p0010 = 95).
+	74 hex 
+	Change request is only possible when a technological application/unit is being commissioned (p0010 = 5).
+	75 hex 
+	Change request is only possible in a commissioning state (p0010 ≠ 0).
+	76 hex 
+	Change request is not possible for internal reasons (p0010 = 29).
+	77 hex 
+	Change request is not possible during download.
+	81 hex 
+	Change request is not possible during download.
+	82 hex 
+	Accepting the master control is inhibited via BI: p0806.
+	83 hex 
+	Desired interconnection is not possible(the connector output does not supply a float value although the con nector input requires a float value)
+	84 hex 
+	Inverter does not accept a change request (inverter is busy with internal calculations. See parameter r3996 in  the inverter List Manual.  
+Manuals and technical support (Page 232))
+	85 hex 
+	No access methods defined.
+	86 hex 
+	Write access only during commissioning of the data records (p0010 = 15) (operating status of the inverter pre vents a parameter change.)
+	87 hex 
+	Know-how protection active, access locked
+	C8 hex 
+	Change request below the currently valid limit (change request to a value that lies within the "absolute" limits,  but is however below the currently valid lower limit)
+	C9 hex 
+	Change request above the currently valid limit(example: a parameter value is too large for the inverter power)
+	CC hex 
+	Change request not permitted (change is not permitted as the access code is not available)
+	
+
+
+
+Fieldbuses 
+46 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+3.3 PROFIdrive profile - Diagnostic channels  
+The inverters provide the diagnostics standardized for PROFIBUS and PROFINET. This  means that it is possible to directly output faults and alarms at an HMI (control system  screen).  
+Here, PROFINET offers more functions than PROFIBUS 
+● PROFIBUS: Faults without component assignment 
+● PROFINET: Faults and alarms with component assignment 
+The fault and alarm messages are saved in the inverter in the following parameters ● r0947[0 … 63]: Fault number 
+● r2122[0 … 63]: Alarm code 
+● r3120[0 … 63]: Components which are involved with the fault (only for PROFINET) ● r3121[0 … 63]: Components which are involved with the alarm (only for PROFINET) The inverter transfers the messages in the sequence in which they occurred 
+The control generates the time stamp when the messages are received
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 47 
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+3.3.1 Diagnostics with PROFINET  
+PROFINET uses the channel diagnostics to transfer PROFIdrive message classes. 9000 hex Hardware/software error 900A hex Position/speed actual value incorrect or not  available 
+9001 hex Network fault 900B hex Internal (DRIVE-CLiQ) communication error 9002 hex Supply voltage fault 900C hex Infeed faulted 
+9003 hex DC link overvoltage 900D hex Braking module faulted 9004 hex Power electronics faulted 900E hex Line filter faulted 
+9005 hex Overtemperature of the electronic components 900F hex External measured value / signal state outside  the permissible range 
+9006 hex Ground fault / inter-phase short circuit 9010 hex Application / technological function faulted 9007 hex Motor overload 9011 hex Error in the parameterization / configuration  /commissioning procedure 
+9008 hex Communication error to the higher-level control  system 
+9009 hex Safety monitoring channel has identified an  error 
+Figure 3-18 Structure of the channel diagnostics
+9012 hex General drive fault 9013 hex Auxiliary unit faulted 
+Fieldbuses 
+48 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+Reading out diagnostics data  
+The control requests the diagnostics data from the inverter using "Read data set", e.g. using  a read record with index 800C hex. 
+The following rules apply: 
+● 1 Message block (=ChannelDiagnosisData) 
+if (one or several) faults of the same message class are detected at the inverter 
+● n message blocks 
+if at the inverter, n faults of different message classes are detected 
+Further information is provided in the Internet: To access this link, you must be a member of  PROFIBUS and PROFINET International (PI). 
+PROFINET IO specification (http://www.profibus.com/nc/download/specifications 
+standards/downloads/profinet-io-specification/display/)
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 49 
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+3.3.2 Diagnostics with PROFIBUS  
+The following objects belonging to a diagnostics message in PROFIBUS 
+● Standard diagnostics 
+– Sequence: always at the first position of the message 
+– Length is always 6 bytes 
+● Identifier-related diagnostics 
+– Sequence: at the second, third or fourth position 
+– Identification using the header, 
+– For SINAMICS G120, the length is always 2 bytes 
+● Status messages/module status 
+– Sequence: at the second, third or fourth position 
+– Identification using the header, 
+– Length for SINAMICS G120:  
+- 5 bytes for configuration using GSD  
+- 6 bytes when configuring using the object library 
+● Channel-related diagnostics 
+– Sequence: at the second, third or fourth position 
+– Identification using the header, 
+– Length is always 3 bytes 
+● Diagnostics alarm with DS0 / DS1  
+– Sequence: always at the last position of the message 
+– Slot-specific the actual state of the slot responsible for the message is transferred. 
+Note  
+Precondition for diagnostics via PROFIBUS  
+The master must operate in the DPV1 mode for diagnostics via Profibus.
+Fieldbuses 
+50 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+Default diagnostics  
+The following values are decisive for the diagnostics: 
+• Ext_Diag: Group signal for diagnostics in the slave:  
+- 0: No fault is active 
+- 1: At least one alarm or fault is active 
+• Ext_Diag_Overflow:  
+Display for the diagnostics overflow in the slave (for more than 240 bytes) 
+Identifier-related diagnostics  
+The identifier-related diagnostics provides a bit (KB_n) for each slot allocated when configuring the  device. If a diagnostics message is active at a slot, then it's KB_n = 1. 
+For G120 only one slot is allocated: 
+• KB_0 when configuring with the GSD 
+• KB_3 when configuring with the object manager
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 51 
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+Status messages, module status  
+For G120, independent of the status, for all slots “00” is always output, i.e. valid user data. 
+Channel-related data  
+2 Undervoltage 22 Motor overload 
+3 Overvoltage 23 Commun. with controller faulted 9 Error 24 Safety monit. Detected an error 16 Hardware/software error 25 Act. Position/speed value error 17 Line supply/filter faulted 26 Internal communication faulted 18 DC link overvoltage 27 Infeed faulted 
+19 Power electronics faulted 28 Braking controller faulted 
+20 Electronic component overtemp. 29 External signal state error 
+21 Ground/phase fault detected 30 Application/function faulted 
+When several faults are allocated at one inverter with the same message class, then only one mes sage is displayed.
+Fieldbuses 
+52 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.3 PROFIdrive profile - Diagnostic channels 
+Diagnostics alarm with DS0 / DS1  
+
+1) Alarm specifier  
+1: Fault is active and the slot is not OK 2: Fault is resolved and the slot is OK 3: Fault is resolved and the slot is not OK 2) Channel fault present 
+0: No fault is active 
+1: Fault is active 
+3) Internal fault 
+0: No fault is active 
+1: Fault is active 
+4) Module fault 
+0: No fault is active 
+1: Fault is active 
+5) Channel information present 1: DS1 exists 
+6) Type of class module = 0011  (distributed) 
+A table with the message classes is provided in the List Manual of the inverter. Overview of the manuals (Page 232)
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 53 
+Communication via PROFIBUS and PROFINET 
+3.4 Identification & maintenance data (I&M) 
+3.4 Identification & maintenance data (I&M)  
+I&M data  
+The inverter supports the following identification and maintenance (I&M) data. 
+I&M  
+data 
+	Format 
+	Explanation 
+	Associated  
+parameters 
+	Example for the  content 
+	I&M0 
+	u8[64] PROFIBUS u8[54] PROFINET
+	Inverter-specific data, read only 
+	- 
+	See below
+	I&M1 
+	Visible String [32] 
+	Plant/system identifier 
+	p8806[0 … 31] 
+	"ak12- 
+ne.bo2=fu1"
+	Visible String [22] 
+	Location code 
+	p8806[32 … 53] "sc2+or45" 
+	
+
+	I&M2 
+	Visible String [16] 
+	Date 
+	p8807[0 … 15] 
+	"2013-01-21  
+16:15"
+	I&M3 
+	Visible String [54] 
+	Any comment 
+	p8808[0 … 53] 
+	-
+	I&M4 
+	Octet String[54] 
+	Check signature to track chang es for Safety Integrated.  
+This value can be changed by  the user. 
+The test signature is reset to the  value generated by the machine  is p8805 = 0 is used. 
+	p8809[0 … 53] 
+	Values of  
+r9781[0] and  
+r9782[0]
+	
+
+
+
+When requested, the inverter transfers its I&M data to a higher-level control or to a PC/PG  with installed STEP 7 or TIA Portal. 
+I&M0 
+Designation 
+	Format 
+	Example for the  content 
+	Valid for  
+PROFINET 
+	Valid for  
+PROFIBUS 
+	Manufacturer-specific 
+	u8[10] 
+	00 … 00 hex 
+	--- 
+	✓
+	MANUFACTURER_ID 
+	u16 
+	42d hex  
+(=Siemens)
+	✓ 
+	✓
+	ORDER_ID 
+	Visible String  [20]
+	„6SL3246-0BA22- 1FA0“
+	✓ 
+	✓
+	SERIAL_NUMBER 
+	Visible String  [16]
+	„T-R32015957“ 
+	✓ 
+	✓
+	HARDWARE_REVISION 
+	u16 
+	0001 hex 
+	✓ 
+	✓
+	SOFTWARE_REVISION 
+	char, u8[3] 
+	„V“ 04.70.19 
+	✓ 
+	✓
+	REVISION_COUNTER 
+	u16 
+	0000 hex 
+	✓ 
+	✓
+	PROFILE_ID 
+	u16 
+	3A00 hex 
+	✓ 
+	✓
+	PROFILE_SPECIFIC_TYPE 
+	u16 
+	0000 hex 
+	✓ 
+	✓
+	IM_VERSION 
+	u8[2] 
+	01.02 
+	✓ 
+	✓
+	IM_SUPPORTED 
+	bit[16] 
+	001E hex 
+	✓ 
+	✓
+	
+
+
+
+Fieldbuses 
+54 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.5 S7 communication 
+3.5 S7 communication  
+Communication via the S7 protocol facilitates the following: 
+● Access to the inverter with Startdrive. 
+● Remote maintenance of the inverter with Startdrive across network boundaries. 
+Remote maintenance across network boundaries  
+(https://support.industry.siemens.com/cs/ww/en/view/97550333)  
+● Control of the inverter directly via SIMATIC Panels via PROFIBUS or PROFINET without  higher-level control. 
+ Directly accessing a SINAMICS G120 converter from a SIMATIC panel (Page 55)  
+Note  
+Number of S7 protocol connections  
+The inverter supports four S7 protocol connections. Two of these are required for Startdrive.  Each of the remaining two are available for access to the inverter via SIMATIC Panels. 
+3.5.1 Directly accessing a SINAMICS G120 converter from a SIMATIC panel  
+Example of direct access to the inverter via a SIMATIC panel  
+You want to use the SIMATIC panel to do the following: 
+● Switch the inverter on and off 
+● Enter a setpoint 
+● Display the actual value and status 
+Requirements  
+You have installed the following software packages on your computer and made the  following settings:  
+● WINCCflex 2008 SP1 or higher 
+● Startdrive 
+● You have configured the inverter in Startdrive 
+● Inverter and panel are connected with one another via PROFIBUS or PROFINET. ● The same baud rates are set in the inverter and in the panel. 
+● The bus address configured in WinCC flexible matches the bus address of the inverter.
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 55 
+Communication via PROFIBUS and PROFINET 3.5 S7 communication 
+Adjusting settings in the inverter  
+Procedure 
+1. Make the following settings and releases so that the inverter can accept commands from  the panel: 
+– Set the two signal sources for OFF2 (p0844 and p0845) to 1:  
+p0844 = 1 
+p0845 = 1 
+– Set the two signal sources for OFF3 (p0848 and p0849) to 1:  
+p0848 = 1 
+p0849 = 1 
+– Set the releases for the ramp-up encoder  
+p1140 = 1 
+p1141 = 1 
+– Set the setpoint release 
+p1142 = 1 
+2. Adjust the parameters for the ON/OFF1 command from the SIMATIC panel 
+– Set p0840[0] = 2094.0  
+In doing so, you connect up the ON/OFF1 command using the Bit 0 of the BiCo  
+transformer 2094. The signal source for this parameter is p2099. 
+– Now set p2099[0] = p2900  
+In doing so, you give the ON/OFF1 command by setting P2900 = 1 (ON) or 0 (OFF1) 3. Set parameters for the setpoint default 
+– Set  
+P1070 = 1001 (fixed setpoint 1 as setpoint) 
+P1016 = 1 (direct selection of the speed setpoint) 
+P1020 = 1 (speed fixed setpoint selection, Bit 0) 
+4. Actual value and status word 
+No further settings are required by the inverter for displaying the speed list value (r0021)  and the status word (r0052). 
+You have now made the settings in the inverter. 
+❒
+Fieldbuses 
+56 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.5 S7 communication 
+Settings at the SIMATIC panel  
+Procedure 
+1. Configure the connection using WinCC flexible  
+– Enter a name for the connection 
+– Set the value in the "Active" column to "On" 
+– Select "SIMATIC S7 300/400" as the communication driver. 
+– Set the value in the "Online" column to "On" 
+2. Make the following settings for the configured connection: 
+– Select the interface (IF1 B for PROFIBUS, "Ethernet" for PROFINET) 
+– Set the baud rate for PROFIBUS 
+– Assign a bus address (PROFIBUS) or an IP address (PROFINET) 
+– Select S7ONLINE as the access point 
+– If no other control is connected to the inverter, select "Only master on bus" 
+– Select cyclical operation. 
+3. ON/OFF1:  
+– Create a variable for the parameter p2900, which refers to the address "Data module  2900 with the data word DBD 0 (data type double word)": 
+DB2900.DBD 0 
+You can switch ON/OFF1 on the panel using one or two buttons. 
+4. Setpoint 
+– Create a variable for the parameter 1001, which refers to the address "Data module  1001 with the data word DBD 0 (data type real)": 
+DB1001.DBD 0 
+You can display it through an I/O field. 
+5. Actual value display 
+– Create a variable for the parameter r0021, which refers to the address "Data module  21 with the data word DBD 0 (data type real)": 
+DB21.DBD 0 
+You can display it through an I/O field. 
+6. Status display 
+– Create a variable for the parameter r0052, which refers to the address "Data module  52 with the data word DBW 0 (data type word)": 
+DB52.DBW 0 
+You can display it through an I/O field with a binary display, for example. 
+You have now made the most important settings in the SIMATIC panel. 
+❒
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 57 
+Communication via PROFIBUS and PROFINET 3.5 S7 communication 
+General information for accessing inverter parameters  
+You must create a variable with the following structure for each parameter that you want to  display or change using the SIMATIC panel: DBX DBY Z 
+● X: Data module number ≙ Parameter number 
+● Y: Data type (can be found in the parameter list) 
+● Z: Data module offset ≙ Parameter index 
+Figure 3-19 Accessing inverter parameters using a SINAMICS G120 as example
+Fieldbuses 
+58 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+3.6 Communication via PROFINET  
+You can either integrate the inverter in a PROFINET network or communicate with the  inverter via Ethernet. 
+The inverter in PROFINET IO operation  
+
+Figure 3-20 The inverter in PROFINET IO operation 
+The inverter supports the following functions: 
+● RT 
+● IRT: The inverter forwards the clock synchronism, but does not support clock  
+synchronism. 
+● MRP: Media redundancy, impulsed with 200 ms. Requirement: Ring topology 
+● MRPD: Media redundancy, bumpless. Requirement: IRT and the ring topology created in  the control 
+● Diagnostic alarms in accordance with the error classes specified in the PROFIdrive  profile. 
+● Device replacement without removable data storage medium 
+● Shared Device for Control Units with fail-safe functions 
+The inverter as Ethernet node  
+
+Figure 3-21 The inverter as Ethernet node
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 59 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+Further information on PROFINET  
+Further information on PROFINET can be found on the Internet: 
+● PROFINET – the Ethernet standard for automation  
+(http://w3.siemens.com/mcms/automation/en/industrial 
+communications/profinet/Pages/Default.aspx) 
+● PROFINET system description  
+(https://support.industry.siemens.com/cs/ww/en/view/19292127)
+Fieldbuses 
+60 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+3.6.1 Converter with PROFINET interface  
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+The pin assignment and the connectors that you require for your inverter are listed in the  following tables. 
+You can implement either a ring or line-type topology using the two sockets at the inverter.  You only require one of the two sockets at the beginning and end of a line. 
+You can use switches to realize other topologies. 
+Table 3- 13 Assignment table
+Inverter/Control Unit 
+	Connection via 
+	X150 P1/ 
+X150 P2 
+(RJ45)
+
+	X03/X04 
+(RJ45)
+
+	X03/X04 
+(M12)
+
+	
+	G120
+	
+
+	
+
+	
+
+	• CU230P-2 PN 
+	x
+	
+
+	
+
+	• CU240E-2 PN 
+	x
+	
+
+	
+
+	• CU240E-2 PN-F 
+	x
+	
+
+	
+
+	• CU250S-2 PN 
+	x
+	
+
+	
+
+	
+	G120C
+	
+
+	
+
+	
+
+	• G120C PN 
+	x
+	
+
+	
+
+	
+	G120D
+	
+
+	
+
+	
+
+	• CU240D-2 PN 
+	
+
+	
+
+	x
+	• CU240D-2 PN-F 
+	
+
+	
+
+	x
+	• CU250D-2 PN-F 
+	
+
+	
+
+	x
+	
+	• CU240D-2 PN-F [PP] 
+	
+
+	x
+	
+
+	• CU250D-2 PN-F [PP] 
+	
+
+	x
+	
+
+	
+	G110M
+	
+
+	
+
+	
+
+	• CU240M PN 
+	
+
+	
+
+	x
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 61 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+Table 3- 14 Connector pin assignments 
+Signal 
+	X150 P1/ 
+X150 P2 
+(RJ45)
+
+	X03/X04 
+(RJ45)
+
+	X03/X04 
+(M12)
+
+	TX-, transmit data - 
+	1 
+	1 
+	1
+	RX+, receive data + 
+	3 
+	2 
+	2
+	TX+ Transmit data + 
+	2 
+	3 
+	3
+	RX-, receive data - 
+	6 
+	6 
+	4
+	--- 
+	4 
+	4 
+	---
+	--- 
+	5 
+	5 
+	---
+	--- 
+	7 
+	7 
+	---
+	--- 
+	8 
+	8 
+	---
+	
+
+
+
+Recommended connector  
+RJ45, IP20: 6GK1901-1BB10-2Ax0  
+Information for assembling the SIMATIC NET Industrial Ethernet FastConnect RF45 plug  180 can be found on the Internet: 
+Assembly instructions for the SIMATIC NET Industrial Ethernet FastConnect RJ45 plug  (http://support.automation.siemens.com/WW/view/en/37217116/133300) 
+3.6.2 Integrating inverters into PROFINET  
+To connect the inverter to a control via PROFINET, proceed as follows: 
+Procedure  
+1. Integrate the inverter in the bus system (e.g. ring topology) of the control using  
+PROFINET cables and the two PROFINET sockets X150-P1 and X150-P2 or X03 and  X04. 
+The position of the sockets is available in the operating instructions for the inverter.  
+Pin assignment: Converter with PROFINET interface (Page 61).  
+The maximum permitted cable length from the previous station and to the subsequent  one is 100 m. 
+2. Externally supply the inverter with 24 V DC through terminals 31 and 32 or via X01. 
+The external 24 V supply is only required if communications with the control system  
+should also operate when the line voltage is switched off. 
+You have now connected the inverter to the control system via PROFINET 
+❒
+Fieldbuses 
+62 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+3.6.3 PROFINET IO operation  
+3.6.3.1 What do you have to set for communication via PROFINET?  
+Check the communication settings using the following table. If you answer "Yes" to the  questions, you have correctly set the communication settings and can control the inverter via  the fieldbus. 
+Questions 
+	Answer/description 
+	Is the inverter correctly connected to the bus net work? 
+	Integrating inverters into PROFINET (Page 62)
+	Do the IP address and device name in the inverter  and control match? 
+	Configuring communication to the  control (Page 63)
+	Is the same telegram set in the inverter the same as  in the higher-level control? 
+	Setting the telegram in the control
+	Are the signals that the inverter and the control  exchange via PROFINET correctly interconnected?
+	Interconnect signals in the inverter in conform ance with PROFIdrive. 
+PROFIDRIVE profile - Cyclic communi cation (Page 17) 
+PROFIDRIVE profile - Acyclic commu nication (Page 42)
+	
+
+
+
+Communication with the control, even when the line voltage is switched off  
+If, in your plant or system, communication with the control system should continue to function  even when the line voltage is switched off, then you must externally supply the  
+inverter/Control Unit with 24 V DC. To do this, use terminals 31 and 32 – or connector X01.  You can find additional details in the operating instructions for the inverter or the Control  Unit. 
+3.6.3.2 Configuring communication to the control  
+Configuring the communication using SIMATIC S7 control  
+If the inverter is not included in the hardware library, you have the following options: 
+● Install the most up to date Startdrive version 
+● Install the GSDML of the inverter using "Options/Manage general station description  (GSD)" in the components catalog. 
+Configuring the communication using a non-Siemens control  
+1. Import the device file (GSDML) of the inverter into the engineering tool for your control  system. 
+2. Configure the communication.
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 63 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+Configuring communication with Startdrive  
+Proceed as follows to make the settings for communication with the control system. 
+● Activate the following windows in Startdrive: "View/Project tree" and "View/Inspector  window". 
+● Open the drive in the project tree and double click on "Device configuration". 
+This opens the dialog in the inspector window for setting the PROFINET interface. ● Click on "Ethernet addresses". 
+● Enter the appropriate values. 
+
+You have configured communication with the control system. 
+❒ 
+You can enter or read out data directly via the parameter view. To do this, select the  "Communication" parameter group and the "Show advanced parameters" option.
+Fieldbuses 
+64 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+3.6.3.3 Installing GSDML  
+Procedure  
+1. Save the GSDML to your PC. 
+– With Internet access: 
+GSDML (https://support.industry.siemens.com/cs/ww/en/ps/13222/dl) 
+– Without Internet access: 
+Insert a memory card into the inverter. 
+Set p0804 = 12. 
+The inverter writes the GSDML as zipped file (*.zip) into directory  
+/SIEMENS/SINAMICS/DATA/CFG on the memory card. 
+2. Unzip the GSDML file on your computer. 
+3. Import the GSDML into the engineering system of the controller. 
+You have now installed the GSDML in the engineering system of the controller. 
+❒ 
+3.6.3.4 Activating diagnostics via the control  
+The converter provides the functionality to transmit fault and alarm messages (diagnostic  messages) to the higher-level control according to the PROFIdrive error classes.  
+The functionality must be selected in the higher-level controller and activated by powering  up. 
+3.6.4 PROFIenergy  
+PROFIenergy is an energy management standard for production plants, based on the  PROFINET communication protocol. The functionality is certified and described in the  PROFIenergy profile of the PNO. 
+The control transfers the PROFIenergy commands in acyclic operation to the inverter in data  set 80A0 hex. 
+The inverters support the PROFIenergy profile V1.1 and the function unit class 3. 
+Parameters r5600 to p5614 are reserved for PROFIenergy functions in the inverter. 
+An application example for energy savings with PROFIenergy is available in the Internet at: PROFIenergy - saving energy with SIMATIC S7  
+(https://support.industry.siemens.com/cs/ww/en/view/41986454)
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 65 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+3.6.4.1 General inverter behavior when in the PROFIenergy energy-saving mode  ● When the PROFIenergy energy-saving mode is active, the inverter issues alarm A08800. 
+● If the PROFIenergy energy-saving mode is active, the RDY-LED flashes green as follows:  500 ms on, 3000 ms off. 
+
+● When the PROFIenergy energy-saving mode is active, the inverter does not send any  diagnostic alarms. 
+● If the bus connection to the control system is interrupted while the inverter is in the  energy-saving mode, the inverter exits the energy-saving mode and resumes normal  operation. 
+● The inverter changes into normal operation if the control system goes into the stop  condition while the inverter is in the energy-saving mode. 
+3.6.4.2 Supported PROFIenergy energy-saving modes  
+G110M, G120 and G120C inverters support the PROFIenergy energy-saving mode 2. G120D inverters support the PROFIenergy energy-saving mode 1. 
+PROFIenergy energy-saving mode 2  
+Parameter r5600 shows the active PROFIenergy energy-saving mode. 
+Connector parameter r5613 indicates whether the PROFIenergy energy-saving mode is  active. You can set additional responses using these parameters. 
+PROFIenergy energy-saving mode 1  
+PROFIenergy energy-saving mode 1 is an expansion of PROFIenergy energy-saving mode  2.  
+With PROFIenergy energy-saving mode 1, the inverter offers the following additional  functions:  
+● The inverter switches off the power supply for its digital outputs if they are not  
+interconnected with r5613.x (displays the energy-saving mode) or are being used as  safety-relevant outputs. 
+● The inverter switches off the supply voltage of its encoders unless they are HTL encoders  assigned to the position controller.
+Fieldbuses 
+66 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 
+3.6 Communication via PROFINET 
+3.6.4.3 Settings and displays for PROFIenergy in the inverter  
+Pause time  
+● Minimum pause time: p5602 
+– When the pause time, which is sent using command "Start_Pause", is equal to or  greater than the value in p5602[1], then the inverter goes into the energy-saving  
+mode. 
+– When the pause time is less than p5602[1], the inverter rejects the command  
+"Start_Pause" with 50 hex (no appropriate pause mode). 
+● Maximum pause time: p5606 
+Inhibiting PROFIenergy  
+If you set p5611.0 = 1, you block the response of the inverter to PROFIenergy control  commands. In this case, the inverter rejects the "Start_Pause" command with 50 hex (no  appropriate pause mode). 
+Transition into the energy-saving mode from the PROFIdrive states ready (S3) and operation (S4)  
+If you set p5611.2 = 1, you allow the transition into the energy-saving mode from the  PROFIdrive states ready (S3) and operation (S4). 
+To do so, you must set one of the following settings:  
+● p5611.1 = 1: With the transition to the energy-saving mode, the inverter issues an OFF1  command and enters the start-inhibit state (S1). 
+● p5611.1 = 0: You can use p5614 to interconnect a signal source that switches the inverter  off and places it in the start inhibited state (S1). 
+If the control sends the command "End_Pause" or "Start_Pause" with a pause time of 0, then  the inverter does not restart, even if the appropriate enable signals are still set.  
+An OFF1/on command is required in order that the inverter restarts. 
+PROFIenergy measured values 
+PROFIenergy 
+	
+
+	SINAMICS source parameters 
+	Range of  
+values 
+	Measured value 
+	Accuracy 
+	Unit 
+	ID 
+	Name 
+	Domain 
+	Class 
+	Number 
+	Name 
+	34 
+	Active power 
+	1 
+	12 
+	W 
+	r0032 
+	Active power smoothed 
+	r2004
+	166 
+	Power factor 
+	1 
+	12 
+	1 
+	r0038 
+	Smoothed power factor 
+	0 … 1
+	200 
+	Active energy import 
+	2 
+	11 
+	Wh 
+	r0039[1] 
+	Energy accepted 
+	-
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 67 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+3.6.4.4 Control commands and status queries  
+PROFIenergy control commands  
+● Start_Pause 
+Dependent on the pause duration, switches into the energy-saving mode. 
+– For p5611.2 = 0, from operating states S1 (switching on inhibited) or S2 (ready to  switch on) 
+– For p5611.2 = 1, also from operating states S3 (ready) or S4 (operation). 
+● Start_Pause_with_time_response 
+Dependent on the pause duration switches into the energy-saving mode and also  
+specifies the transition times in the command response. 
+– For p5611.2 = 0, from operating states S1 (switching on inhibited) or S2 (ready to  switch on) 
+– For p5611.2 = 1, also from operating states S3 (ready) or S4 (operation). 
+● End_Pause 
+Switches from energy-saving mode to the operating state. 
+Cancels the switching from the operating state to the energy-saving mode. 
+PROFIenergy status requests  
+● List_Energy_Saving_Modes  
+Determines all supported energy-saving modes. 
+● Get_Mode  
+Determines information about the selected energy-saving mode. 
+● PEM_Status  
+Determines the current PROFIenergy status. 
+● PEM_Status_with_CTTO  
+Determines the current PROFIenergy status, such as the PEM_Status, together with the  regular transition time to the operating state. 
+● PE_ldentify  
+Determines the supported PROFIenergy commands. 
+● Query_Version  
+Shows the implemented PROFIenergy profile. 
+● Get_Measurement_List  
+This command returns the measured value IDs that can be accessed using the  
+"Get_Measurement_Values" command. 
+● Get_Measurement_List_with_object_number 
+This command returns the measured value IDs and the associated object number that  can be accessed using the "Get_Measurement_Values_with_object_number" command.
+Fieldbuses 
+68 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+● Get_Measurement_Values  
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+The command returns the requested measured value using the measured value ID 
+● Get_Measurement_Values_with_object_number 
+The command returns the requested measured values using the measured value ID and  the object number. The object number corresponds to the drive object ID. 
+Error values  
+Table 3- 15 Error values in the parameter response
+Error  
+value 1 
+	Meaning 
+	001 hex 
+	Invalid Service_Request_ID
+	03 hex 
+	Invalid Modifier
+	04 hex 
+	Invalid Data_Structure_Identifier_RQ
+	06 hex 
+	No PE energy-saving mode supported
+	07 hex 
+	Response too long
+	08 hex 
+	Invalid Block Header 
+	50 hex 
+	No suitable energy-saving mode available
+	51 hex 
+	Time is not supported
+	52 hex 
+	Impermissible PE_Mode_ID
+	53 hex 
+	No switch to energy saving mode because of state operate
+	54 hex 
+	service or function temporarily not available
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 69 
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+3.6.5 The inverter with PROFINET interface as Ethernet node.  
+As default setting, the inverter is set for PROFINET IO communication. Alternatively, you  have the option of integrating the inverter into an Ethernet network via the PROFINET  interface. 
+This means that from any location in a network, you can use Startdrive to make diagnostic  queries, change parameters or carry out commissioning work. 
+PROFINET I/O communication is not possible with the inverter as Ethernet node. 
+Integrating an inverter into an Ethernet network (assigning an IP address)  
+Procedure  
+1. Set p8924 (PN DHCP mode) = 2 oder 3 
+– p8924 = 2: The DHCP server assigns the IP address based on the MAC address of  the inverter. 
+– p8924 = 3: The DHCP server assigns the IP address based on the device name of the  inverter. 
+2. Save the settings with p8925 = 2. The next time that the inverter switches on, it retrieves  the IP address, and you can address the inverter as Ethernet node. 
+Note  
+Immediate switchover without restart  
+The switchover to DHCP is performed immediately and without a restart if the change is  carried out with the Ethernet/IP command "Set Attribute Single" (class F5 hex, attribute  3). The following options are available: 
+• via an Ethernet/IP controller 
+• via an Ethernet/IP commissioning tool 
+You have now integrated the inverter into Ethernet. 
+❒ 
+Displays  
+r8930: Device name of the inverter 
+r8934: Operating mode, PN or DHCP 
+r8935: MAC address 
+Additional information  
+You can find information about parameters and messages (A08565) in the List Manual of the  inverter. 
+Overview of the manuals (Page 232).
+Fieldbuses 
+70 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Additional options of integrating inverters into Ethernet  
+Communication via PROFIBUS and PROFINET 3.6 Communication via PROFINET 
+You also have the option of integrating the inverter into Ethernet using Proneta or STEP7, for  example. 
+Here is the example of the "Edit Ethernet station" screen form from Step 7, which you can  use to make the required settings.
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 71 
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+3.7 Communication via PROFIBUS  
+
+The PROFIBUS DP interface has the following functions: 
+● Cyclic communication 
+● Acyclic communication 
+● Diagnostic alarms 
+General information on PROFIBUS DP can be found in the Internet: 
+● PROFIBUS information  
+(https://support.industry.siemens.com/cs/ww/en/view/1971286) 
+● Installation guidelines of the PNO (http://www.profibus.com/downloads/installation guide/)
+Fieldbuses 
+72 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+3.7.1 Inverters with PROFIBUS interface  
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+You can find the connectors and the connector assignments of the PROFIBUS DP interface  in the following tables. 
+You can implement a line-type topology using the two connectors at the inverter. You can  use switches to realize other topologies. 
+Table 3- 16 Assignment table - connectors
+Inverter/Control Unit 
+	Connection via 
+	X126 
+(D Sub - sock et)
+
+	X03, on 
+(M12)
+
+	X04, off 
+(M12)
+
+	
+	G120
+	
+
+	
+
+	
+
+	• CU230P-2 DP 
+	x
+	
+
+	
+
+	• CU240B-2 DP 
+	x
+	
+
+	
+
+	• CU240E-2 DP 
+	x
+	
+
+	
+
+	• CU240E-2 DP-F 
+	x
+	
+
+	
+
+	• CU250S-2 DP 
+	x
+	
+
+	
+
+	
+	G120C
+	
+
+	
+
+	
+
+	• G120C DP 
+	x
+	
+
+	
+
+	
+	G120D
+	
+
+	
+
+	
+
+	• CU240D-2 DP 
+	
+
+	x 
+	x
+	• CU240D-2 DP-F 
+	
+
+	x 
+	x
+	• CU250D-2 DP-F 
+	
+
+	x 
+	x
+	
+	G110M
+	
+
+	
+
+	
+
+	• CU240M DP 
+	
+
+	x 
+	x
+	
+
+
+
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 73 
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+Table 3- 17 Connector pin assignments 
+Signal 
+	X126 
+(D Sub - socket)
+	X03, on 
+(M12)
+
+	X04, off 
+(M12)
+
+	Shield, ground connection 
+	1 
+	5 
+	5
+	--- 
+	2 
+	1 
+	1
+	RxD/TxD-P, receive and transmit (B/B’) 
+	3 
+	4 
+	4
+	CNTR-P, control signal 
+	4 
+	--- 
+	---
+	DGND, reference potential for data (C/C’) 
+	5 
+	--- 
+	---
+	VP, supply voltage 
+	6 
+	--- 
+	---
+	--- 
+	7 
+	3 
+	3
+	RxD/TxD-N, receive and transmit (A/A’) 
+	8 
+	2 
+	2
+	--- 
+	9 
+	--- 
+	---
+	
+
+
+
+Recommended PROFIBUS connectors  
+We recommend connectors with the following article numbers for connecting the PROFIBUS  cable: 
+● 6GK1500-0FC10 
+● 6GK1500-0EA02
+Fieldbuses 
+74 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+3.7.2 What do you have to set for communication via PROFIBUS?  
+Configuring PROFIBUS communication  
+You require the appropriate engineering system to configure PROFIBUS communication in  the PROFIBUS master. 
+If required, load the GSD file of the inverter into the engineering system. 
+Configuring communication to the control system (Page 76) 
+Setting the address  
+Set the address of the PROFIBUS slave. 
+Setting the address (Page 78) 
+Setting the telegram  
+Set the telegram in the inverter as in the PROFIBUS master. Interconnect the telegrams in  the control program of the PROFIBUS master with the signals of your choosing. 
+PROFIDRIVE profile - Cyclic communication (Page 17) 
+Application examples  
+You can find application examples for PROFIBUS communication on the Internet: 
+Controlling the speed of a SINAMICS G110M/G120/G120C/G120D with S7-300/400F  via PROFINET or PROFIBUS, with Safety Integrated (via terminal) and HMI  
+(https://support.industry.siemens.com/cs/ww/en/view/60441457) 
+Controlling the speed of a SINAMICS G110M / G120 (Startdrive) with S7-1500 (TO) via  PROFINET or PROFIBUS, with Safety Integrated (via terminal) and HMI  
+(https://support.industry.siemens.com/cs/ww/en/view/78788716)
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 75 
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+3.7.3 Integrating inverters into PROFIBUS  
+To connect the inverter to a control system via PROFIBUS DP, proceed as follows: 
+Procedure  
+1. Integrate the inverter into the bus system (e.g. line-type topology) using PROFIBUS  cables. 
+– Inverters with IP20 degree of protection: via socket X126 
+– Inverters with degree of protection IP65 (CU240D/CU250D) via X03 and X04 
+The position of the socket is explained in the operating instructions for the inverter.  
+Pin assignment: Inverters with PROFIBUS interface (Page 73). 
+The maximum permitted cable length to the previous station and the subsequent one is  100 m at a baud rate of 12 Mbit/s. You can achieve a maximum cable length of 400 m by  using a maximum of 3 repeaters. 
+2. Externally supply the inverter with 24 V DC through terminals 31 and 32 or via X01. 
+The external 24 V supply is only required if communications with the control system  should also operate when the line voltage is switched off. 
+You have now connected the inverter to the control system using PROFIBUS DP. 
+❒ 
+3.7.4 Configuring communication to the control system  
+Configure the communication in the control system after you have connected the inverter to  the bus. 
+3.7.4.1 Configuring the communication using SIMATIC S7 control  
+● If the inverter is listed in the component catalog in the TIA Portal, you can configure the  communication in the SIMATIC control. 
+● If the inverter is not listed in the hardware library, you can either install the newest  Startdrive version or install the GSD of the inverter via "Extras/GSD-Install file" in HW Config. 
+3.7.4.2 Configuring the communication with a third-party control system  
+If you are working with a third-party control system, you must install the device file (GSD) of  the inverter in the control before you configure the communication.  
+Installing the GSD (Page 77) .  
+If you have installed the GSD, configure the communication. To do this, follow the  
+documentation of your control system.
+Fieldbuses 
+76 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+3.7.4.3 Installing the GSD  
+Procedure  
+1. Save the GSD on your PC via one of the following methods. 
+– With Internet access: 
+GSD (http://support.automation.siemens.com/WW/view/en/22339653/133100) – Without Internet access: 
+Insert a memory card into the inverter. 
+Set p0804 to 12. 
+The inverter writes the GSD as zipped file (*.zip) into directory  
+/SIEMENS/SINAMICS/DATA/CFG on the memory card. 
+2. Unzip the GSD file on your computer. 
+3. Import the GSD in the engineering system of the controller. 
+You have now installed the GSD file in the engineering system of the controller.  
+❒
+Fieldbuses 
+Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE 77 
+Communication via PROFIBUS and PROFINET 3.7 Communication via PROFIBUS 
+3.7.5 Setting the address  
+  
+Valid address area: 1 … 125 
+You have the following options for setting the address: 
+● Using the address switch on the Control Unit: 
+
+Figure 3-22 Address switch with example for bus address 10 
+The address switch has priority over the other settings. 
+● Using Startdrive or an operator panel via parameter p0918 (default setting: p0918 = 126) It is only possible to change p0918 if an invalid address is set in the address switch. 
+If you are working with Startdrive, back up the settings so they are not lost if the power  fails. 
+You can find the position of the address switch in the operating instructions for the inverter. Manuals and technical support (Page 232) 
+Activating the changed bus address  
+Procedure  
+1. Set the address as described above. 
+2. Switch off the inverter power supply. 
+3. Wait until all LEDs on the inverter are dark. 
+4. Switch on the inverter power supply again. 
+Your settings become effective after switching on. 
+You have now set the bus address. 
+❒
+Fieldbuses 
+78 Function Manual, 04/2018, FW V4.7 SP10, A5E34229197B AE

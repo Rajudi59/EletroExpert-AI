@@ -1,0 +1,2690 @@
+﻿Edition 04/2018 
+Operating instructions 
+SINAMICS 
+SINAMICS G120 
+Low voltage inverters 
+Built-in units with CU250S-2 Control Units and  encoder evaluation 
+www.siemens.com/drives
+  
+
+SINAMICS 
+SINAMICS G120 
+Converter with the CU250S-2  Control Units 
+Operating Instructions 
+Edition 04/2018, Firmware V4.7 SP10 
+04/2018, FW V4.7 SP10 
+A5E31759476B AG 
+Changes in the current edition 
+Fundamental safety  
+instructions 1 Introduction 2 Description 3 Installing 4 Commissioning 5 Advanced commissioning 6 
+Saving the settings and  
+series commissioning 7 
+Alarms, faults and system  
+messages 8 Corrective maintenance 9 Technical data 10 Appendix A
+Legal information 
+Warning notice system 
+This manual contains notices you have to observe in order to ensure your personal safety, as well as to prevent  damage to property. The notices referring to your personal safety are highlighted in the manual by a safety alert  symbol, notices referring only to property damage have no safety alert symbol. These notices shown below are  graded according to the degree of danger. 
+  
+DANGER
+	indicates that death or severe personal injury will result if proper precautions are not taken.
+	
+
+
+
+  
+WARNING
+	indicates that death or severe personal injury may result if proper precautions are not taken.
+	
+
+
+
+  
+CAUTION
+	indicates that minor personal injury can result if proper precautions are not taken.
+	
+
+
+
+NOTICE
+	indicates that property damage can result if proper precautions are not taken.
+	
+
+
+
+If more than one degree of danger is present, the warning notice representing the highest degree of danger will be  used. A notice warning of injury to persons with a safety alert symbol may also include a warning relating to property  damage. 
+Qualified Personnel 
+The product/system described in this documentation may be operated only by personnel qualified for the specific  task in accordance with the relevant documentation, in particular its warning notices and safety instructions. Qualified  personnel are those who, based on their training and experience, are capable of identifying risks and avoiding  potential hazards when working with these products/systems. 
+Proper use of Siemens products 
+Note the following: 
+  
+WARNING
+	Siemens products may only be used for the applications described in the catalog and in the relevant technical  documentation. If products and components from other manufacturers are used, these must be recommended or  approved by Siemens. Proper transport, storage, installation, assembly, commissioning, operation and  maintenance are required to ensure that the products operate safely and without any problems. The permissible  ambient conditions must be complied with. The information in the relevant documentation must be observed.
+	
+
+
+
+Trademarks 
+All names identified by ® are registered trademarks of Siemens AG. The remaining trademarks in this publication  may be trademarks whose use by third parties for their own purposes could violate the rights of the owner. 
+Disclaimer of Liability 
+We have reviewed the contents of this publication to ensure consistency with the hardware and software described.  Since variance cannot be precluded entirely, we cannot guarantee full consistency. However, the information in  this publication is reviewed regularly and any necessary corrections are included in subsequent editions. 
+Siemens AG 
+Division Digital Factory Postfach 48 48 
+90026 NÜRNBERG GERMANY 
+A5E31759476B AG 
+Ⓟ 04/2018 Subject to change 
+Copyright © Siemens AG 2013 - 2018. All rights reserved
+Changes in the current edition 
+Essential changes with respect to Edition 09/2017 
+New hardware 
+● PM240-2 Power Module, FSG 
+Power Module with IP20 degree of protection (Page 35) 
+Dimensioned drawings, drilling dimensions for the PM240-2 Power Module, IP20  
+(Page 62) 
+Specific technical data, 400 V inverters (Page 457) 
+Specific technical data, 690 V inverters (Page 467) 
+New functions 
+Firmware version 4.7 SP10 (Page 481) 
+Corrections 
+● Article number of the PM240-2 PT Power Module, 132 kW, corrected. 
+Technical data, PM240-2 Power Modules (Page 445) 
+● Dimensions of the PM240-2 Power Module corrected. 
+Dimensioned drawings, drilling dimensions for the PM240-2 Power Module, IP20  
+(Page 62) 
+● Setting the feedback signal for the line contactor control corrected. 
+Line contactor control (Page 355) 
+● SSI encoder and Endat 2.1 encoder are permissible for speed control. 
+Installing encoders (Page 121) 
+● PROFIdrive control word 2, bit 8 corrected 
+PROFIdrive status word 2, bit 7 corrected 
+Telegrams (Page 184) 
+Revised descriptions 
+● Only commissioning using the Startdrive PC-based tool is described. Commissioning with  STARTER has been removed. 
+Exceptions: Write and know-how protection. 
+You can find information on commissioning with STARTER on the Internet: 
+ Operating Instructions, 09/2017 Edition (https://support.industry.siemens.com/cs/ww/ en/view/109751322) 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 3
+Changes in the current edition 
+Converter with the CU250S-2 Control Units 
+4 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Table of contents 
+Changes in the current edition......................................................................................................................3 1 Fundamental safety instructions.................................................................................................................13 1.1 General safety instructions.....................................................................................................13 1.2 Equipment damage due to electric fields or electrostatic discharge......................................19 1.3 Warranty and liability for application examples......................................................................20 1.4 Industrial security...................................................................................................................21 1.5 Residual risks of power drive systems...................................................................................23 2 Introduction.................................................................................................................................................25 2.1 About the Manual...................................................................................................................25 2.2 Guide through the manual......................................................................................................26 3 Description..................................................................................................................................................29 3.1 Identifying the converter.........................................................................................................30 3.2 Directives and standards........................................................................................................31 3.3 Overview of Control Units......................................................................................................33 
+3.4 Power Modules......................................................................................................................34 3.4.1 Power Module with IP20 degree of protection.......................................................................35 3.4.2 Power Module with Push-Through technology.......................................................................37 
+3.5 Components for the Power Modules......................................................................................38 3.5.1 Accessories for shielding.......................................................................................................38 3.5.2 Line filter.................................................................................................................................39 3.5.3 Line reactor............................................................................................................................40 3.5.4 Output reactor........................................................................................................................42 3.5.5 du/dt filter plus VPL................................................................................................................45 3.5.6 Sine-wave filter.......................................................................................................................47 3.5.7 Braking resistor......................................................................................................................48 3.5.8 Brake Relay............................................................................................................................50 3.5.9 Safe Brake Relay...................................................................................................................50 
+3.6 Motors and multi-motor drives that can be operated..............................................................51 3.7 Encoder and Sensor Module..................................................................................................52 4 Installing.....................................................................................................................................................53 
+4.1 EMC-compliant installation of a machine or system..............................................................53 4.1.1 Control cabinet.......................................................................................................................54 4.1.2 Cables....................................................................................................................................55 4.1.3 Electromechanical components.............................................................................................58 
+4.2 Installing reactors, filters and braking resistors......................................................................59 4.3 Installing Power Modules.......................................................................................................60 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 5
+Table of contents 
+4.3.1 Basic installation rules for built-in units..................................................................................60 4.3.2 Dimensioned drawings, drilling dimensions for the PM240-2 Power Module, IP20...............62 4.3.3 Dimension drawings, drilling dimensions for PM240-2 Power Modules in push-through  
+technology..............................................................................................................................65 4.3.4 Dimensioned drawings, drilling dimensions for the PM250 Power Module............................69 
+4.4 Connecting the line supply and motor....................................................................................72 4.4.1 Permissible line supplies........................................................................................................72 4.4.1.1 TN line system.......................................................................................................................73 4.4.1.2 TT line system........................................................................................................................75 4.4.1.3 IT system................................................................................................................................76 4.4.2 Protective conductor..............................................................................................................77 4.4.3 Connecting an inverter with the PM240-2 Power Module......................................................79 4.4.4 Connecting the inverter with the PM250 Power Module........................................................84 4.4.5 Connecting the motor to the inverter in a star or delta connection.........................................86 4.4.6 Connecting a motor holding brake.........................................................................................87 4.4.6.1 Installing a Brake Relay - PM250 Power Module...................................................................89 4.4.6.2 Installing a Brake Relay - PM240-2 Power Module................................................................90 
+4.5 Connecting the interfaces for the inverter control..................................................................91 4.5.1 Overview of the interfaces on the front and upper side..........................................................92 4.5.2 Terminal strips behind the upper front door...........................................................................93 4.5.3 Terminal strips behind the lower front door............................................................................94 4.5.4 Fieldbus and encoder interfaces on the lower side................................................................95 4.5.5 Factory interface settings.......................................................................................................96 4.5.6 Default setting of the interfaces..............................................................................................98 4.5.7 Fail-safe digital input............................................................................................................109 4.5.8 Wire up the terminal strip and connect the shield................................................................110 4.5.9 Connecting the temperature contact of the braking resistor................................................113 4.5.10 Fieldbus interfaces...............................................................................................................113 4.5.11 Connecting the inverter to PROFINET.................................................................................114 4.5.11.1 Communication via PROFINET IO and Ethernet.................................................................114 4.5.11.2 Connecting the PROFINET cable to the inverter.................................................................115 4.5.11.3 What do you have to set for communication via PROFINET?.............................................116 4.5.11.4 Installing GSDML.................................................................................................................117 4.5.12 Connecting the inverter to PROFIBUS.................................................................................117 4.5.12.1 Connecting the PROFIBUS cable to the inverter.................................................................118 4.5.12.2 What do you have to set for communication via PROFIBUS?.............................................118 4.5.12.3 Installing the GSD................................................................................................................119 4.5.12.4 Setting the address..............................................................................................................119 
+4.6 Installing encoders...............................................................................................................121 5 Commissioning.........................................................................................................................................125 5.1 Commissioning guidelines...................................................................................................125 5.2 Tools to commission the inverter.........................................................................................126 
+5.3 Preparing for commissioning................................................................................................127 5.3.1 Collecting motor data...........................................................................................................127 5.3.2 Forming DC link capacitors..................................................................................................128 5.3.3 Inverter factory setting..........................................................................................................130 5.3.4 Inverter function modules.....................................................................................................132 
+5.4 Quick commissioning with a PC...........................................................................................134 
+Converter with the CU250S-2 Control Units 
+6 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Table of contents 
+5.4.1 Creating a project.................................................................................................................134 5.4.2 Transfer inverters connected via USB into the project.........................................................135 5.4.3 Starting wizards for the quick commissioning......................................................................136 5.4.4 Standard Drive Control.........................................................................................................139 5.4.5 Dynamic Drive Control.........................................................................................................141 5.4.6 Expert...................................................................................................................................143 5.4.7 Configuring encoders...........................................................................................................147 5.4.8 Adapting the encoder data...................................................................................................148 5.4.9 Loading the settings into the inverter...................................................................................149 5.4.10 Identify motor data...............................................................................................................150 
+5.5 Restoring the factory setting................................................................................................152 5.5.1 Resetting the safety functions to the factory setting.............................................................153 5.5.2 Restore the factory settings (without safety functions).........................................................155 
+6 Advanced commissioning.........................................................................................................................157 6.1 Overview of the converter functions.....................................................................................157 6.2 Sequence control when switching the motor on and off.......................................................161 
+6.3 Adapt the default setting of the terminal strip.......................................................................164 6.3.1 Digital inputs.........................................................................................................................165 6.3.2 Digital outputs......................................................................................................................168 6.3.3 Analog inputs.......................................................................................................................170 6.3.4 Analog outputs.....................................................................................................................174 
+6.4 Controlling clockwise and counter-clockwise rotation via digital inputs...............................177 6.4.1 Two-wire control, method 1..................................................................................................178 6.4.2 Two-wire control, method 2..................................................................................................179 6.4.3 Two-wire control, method 3..................................................................................................180 6.4.4 Three-wire control, method 1...............................................................................................181 6.4.5 Three-wire control, method 2...............................................................................................182 
+6.5 Drive control via PROFIBUS or PROFINET.........................................................................183 6.5.1 Receive data and send data................................................................................................183 6.5.2 Telegrams............................................................................................................................184 6.5.3 Control and status word 1....................................................................................................187 6.5.4 Control and status word 2....................................................................................................190 6.5.5 Control and status word 3....................................................................................................191 6.5.6 NAMUR message word........................................................................................................193 6.5.7 Control and status word, encoder........................................................................................194 6.5.8 Position actual value of the encoder....................................................................................196 6.5.9 Parameter channel...............................................................................................................198 6.5.10 Examples for using the parameter channel..........................................................................201 6.5.11 Extending the telegram........................................................................................................203 6.5.12 Slave-to-slave communication.............................................................................................205 6.5.13 Acyclically reading and writing inverter parameters.............................................................205 
+6.6 Drive control via Modbus RTU.............................................................................................206 6.7 Drive control via USS...........................................................................................................209 6.8 Drive control via Ethernet/IP................................................................................................212 6.9 Drive control via CANopen...................................................................................................213 6.10 Jogging.................................................................................................................................214 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 7
+Table of contents 
+6.11 Limit position control............................................................................................................216 6.12 Switching over the drive control (command data set)..........................................................218 6.13 Motor holding brake.............................................................................................................220 
+6.14 Free function blocks.............................................................................................................224 6.14.1 Overview..............................................................................................................................224 6.14.2 Runtime groups and run sequence......................................................................................224 6.14.3 List of the free function blocks..............................................................................................225 6.14.4 Scaling.................................................................................................................................236 6.14.5 Activating free function block...............................................................................................237 6.14.6 Further information...............................................................................................................237 
+6.15 Selecting physical units........................................................................................................238 6.15.1 Motor standard.....................................................................................................................238 6.15.2 System of units.....................................................................................................................238 6.15.3 Technological unit of the technology controller....................................................................240 6.15.4 Setting the system of units and technology unit...................................................................240 
+6.16 Extended messages.............................................................................................................242 
+6.17 Safe Torque Off (STO) safety function.................................................................................244 6.17.1 Function description.............................................................................................................244 6.17.2 Commissioning STO............................................................................................................246 6.17.2.1 Safety functions password...................................................................................................246 6.17.2.2 Configuring a safety function................................................................................................248 6.17.2.3 Interconnecting the "STO active" signal...............................................................................249 6.17.2.4 Setting the filter for fail-safe digital inputs............................................................................250 6.17.2.5 Setting the forced checking procedure (test stop)................................................................252 6.17.2.6 Finalizing online commissioning...........................................................................................254 6.17.2.7 Checking the assignment of the digital inputs......................................................................255 6.17.2.8 Acceptance - completion of commissioning.........................................................................256 
+6.18 Setpoints..............................................................................................................................258 6.18.1 Overview..............................................................................................................................258 6.18.2 Analog input as setpoint source...........................................................................................260 6.18.3 Specifying the setpoint via the fieldbus................................................................................262 6.18.4 Motorized potentiometer as setpoint source........................................................................264 6.18.5 Fixed speed setpoint as setpoint source..............................................................................267 6.18.6 Pulse input as source of setpoint value................................................................................271 
+6.19 Setpoint calculation..............................................................................................................273 6.19.1 Overview..............................................................................................................................273 6.19.2 Invert setpoint.......................................................................................................................274 6.19.3 Inhibit direction of rotation....................................................................................................275 6.19.4 Skip frequency bands and minimum speed.........................................................................276 6.19.5 Speed limitation....................................................................................................................277 6.19.6 Ramp-function generator.....................................................................................................278 
+6.20 PID technology controller.....................................................................................................283 
+6.21 Motor control........................................................................................................................288 6.21.1 Reactor, filter and cable resistance at the inverter output....................................................288 6.21.2 V/f control.............................................................................................................................289 6.21.2.1 Characteristics of U/f control................................................................................................291 6.21.2.2 Optimizing motor starting.....................................................................................................294 
+Converter with the CU250S-2 Control Units 
+8 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Table of contents 
+6.21.2.3 Optimizing the motor startup for application class Standard Drive Control..........................296 6.21.3 Vector control.......................................................................................................................298 6.21.3.1 Structure of the vector control..............................................................................................298 6.21.3.2 Default setting as a result of the application class Dynamic Drive Control..........................300 6.21.3.3 Checking the encoder signal................................................................................................300 6.21.3.4 Optimizing the speed controller............................................................................................300 6.21.3.5 Advanced settings................................................................................................................303 6.21.3.6 Friction characteristic...........................................................................................................306 6.21.3.7 Moment of inertia estimator..................................................................................................308 6.21.4 Torque control......................................................................................................................314 6.21.5 Application examples for closed-loop motor control.............................................................315 
+6.22 Electrically braking the motor...............................................................................................316 6.22.1 DC braking...........................................................................................................................318 6.22.2 Compound braking...............................................................................................................321 6.22.3 Dynamic braking..................................................................................................................323 6.22.4 Braking with regenerative feedback to the line....................................................................325 
+6.23 Overcurrent protection.........................................................................................................326 6.24 Inverter protection using temperature monitoring................................................................327 6.25 Motor protection with temperature sensor............................................................................330 6.26 Motor protection by calculating the temperature..................................................................333 6.27 Motor and inverter protection by limiting the voltage............................................................335 
+6.28 Monitoring the driven load....................................................................................................337 6.28.1 Breakdown protection..........................................................................................................338 6.28.2 No-load monitoring...............................................................................................................338 6.28.3 Blocking protection...............................................................................................................339 6.28.4 Torque monitoring................................................................................................................340 6.28.5 Rotation monitoring..............................................................................................................341 6.28.6 Speed deviation monitoring..................................................................................................342 
+6.29 Flying restart – switching on while the motor is running.......................................................344 6.30 Automatic restart..................................................................................................................346 6.31 Kinetic buffering (Vdc min control).......................................................................................350 6.32 Efficiency optimization..........................................................................................................352 6.33 Line contactor control...........................................................................................................355 6.34 Calculating the energy saving for fluid flow machines.........................................................357 6.35 Switchover between different settings..................................................................................359 
+7 Saving the settings and series commissioning.........................................................................................361 
+7.1 Saving settings on a memory card.......................................................................................362 7.1.1 Memory cards......................................................................................................................362 7.1.2 Saving setting on memory card............................................................................................365 7.1.3 Transferring the setting from the memory card....................................................................368 7.1.4 Safely remove the memory card..........................................................................................370 7.1.5 Activate message for a memory card that is not inserted....................................................372 
+7.2 Saving settings on a PC.......................................................................................................373 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 9
+Table of contents 
+7.3 Saving settings to an operator panel....................................................................................375 7.4 Other ways to back up settings............................................................................................377 7.5 Write protection....................................................................................................................378 
+7.6 Know-how protection............................................................................................................380 7.6.1 Extending the exception list for know-how protection..........................................................382 7.6.2 Activating and deactivating know-how protection................................................................383 
+8 Alarms, faults and system messages.......................................................................................................387 8.1 Operating states indicated on LEDs.....................................................................................388 8.2 System runtime....................................................................................................................392 8.3 Identification & maintenance data (I&M)..............................................................................393 8.4 Alarms, alarm buffer, and alarm history...............................................................................394 8.5 Faults, alarm buffer and alarm history..................................................................................397 8.6 List of alarms and faults.......................................................................................................401 
+9 Corrective maintenance............................................................................................................................411 9.1 Spare parts compatibility......................................................................................................411 
+9.2 Replacing inverter components............................................................................................412 9.2.1 Overview of replacing converter components......................................................................413 9.2.2 Replacing a Control Unit with enabled safety function.........................................................415 9.2.3 Replacing the Control Unit without the safety functions enabled.........................................418 9.2.4 Replacing the Control Unit without data backup..................................................................421 9.2.5 Replacing a Control Unit with active know-how protection..................................................421 9.2.6 Replacing a Power Module with enabled safety function.....................................................424 9.2.7 Replacing a Power Module without the safety function being enabled................................425 
+9.3 Replacing an encoder..........................................................................................................426 9.3.1 Replacing the encoder - same encoder type.......................................................................426 9.3.2 Replacing the encoder - different encoder type...................................................................427 
+9.4 Firmware upgrade and downgrade......................................................................................429 9.4.1 Upgrading the firmware........................................................................................................431 9.4.2 Firmware downgrade...........................................................................................................433 9.4.3 Correcting an unsuccessful firmware upgrade or downgrade..............................................435 
+9.5 Reduced acceptance after a component has been replaced and a firmware change.........436 9.6 If the converter no longer responds.....................................................................................437 10 Technical data..........................................................................................................................................439 10.1 Technical data, CU250S-2 Control Unit...............................................................................439 10.2 Overload capability of the inverter........................................................................................444 
+10.3 Technical data, PM240-2 Power Modules...........................................................................445 10.3.1 High overload - low overload PM240-2................................................................................445 10.3.2 Ambient conditions...............................................................................................................445 10.3.3 General technical data, 200 V inverters...............................................................................447 10.3.4 Specific technical data, 200 V inverters...............................................................................448 10.3.5 Current derating depending on the pulse frequency, 200 V inverters..................................455 
+Converter with the CU250S-2 Control Units 
+10 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Table of contents 
+10.3.6 General technical data, 400 V inverters...............................................................................456 10.3.7 Specific technical data, 400 V inverters...............................................................................457 10.3.8 Current derating depending on the pulse frequency, 400 V inverters..................................465 10.3.9 General technical data, 690 V inverters...............................................................................466 10.3.10 Specific technical data, 690 V inverters...............................................................................467 10.3.11 Current derating depending on the pulse frequency, 690 V inverters..................................470 
+10.4 Technical data, PM250 Power Module................................................................................471 10.4.1 Ambient conditions...............................................................................................................472 10.4.2 General technical data, PM250............................................................................................473 10.4.3 Specific technical data, PM250............................................................................................474 10.4.4 Current reduction depending upon pulse frequency............................................................476 
+10.5 Data regarding the power loss in partial load operation.......................................................477 10.6 Restrictions for special ambient conditions..........................................................................478 A Appendix...................................................................................................................................................481 
+A.1 New and extended functions................................................................................................481 A.1.1 Firmware version 4.7 SP10..................................................................................................481 A.1.2 Firmware version 4.7 SP9....................................................................................................483 A.1.3 Firmware version 4.7 SP6....................................................................................................485 A.1.4 Firmware version 4.7 SP3....................................................................................................486 A.1.5 Firmware version 4.7............................................................................................................489 A.1.6 Firmware version 4.6 SP6....................................................................................................490 A.1.7 Firmware version 4.6............................................................................................................491 
+A.2 Activating licensed functions................................................................................................492 A.2.1 Licensing..............................................................................................................................492 A.2.2 Creating or displaying the license key..................................................................................493 A.2.3 Writing the license key to the card.......................................................................................496 
+A.3 Handling the BOP 2 operator panel.....................................................................................498 A.3.1 Changing settings using BOP-2...........................................................................................499 A.3.2 Changing indexed parameters.............................................................................................500 A.3.3 Directly entering the parameter number and value..............................................................501 A.3.4 A parameter cannot be changed..........................................................................................502 
+A.4 Interconnecting signals in the inverter..................................................................................503 A.4.1 Fundamentals......................................................................................................................503 A.4.2 Application example.............................................................................................................505 
+A.5 Application Examples...........................................................................................................507 A.5.1 Setting an absolute encoder................................................................................................507 A.5.2 Connecting a fail-safe digital input.......................................................................................511 
+A.6 Acceptance tests for the safety functions.............................................................................513 A.6.1 Recommended acceptance test...........................................................................................513 A.6.2 Acceptance test STO (basic functions)................................................................................514 A.6.3 Machine documentation.......................................................................................................516 A.6.4 Documenting the settings for the basic functions, firmware V4.4 ... V4.7 SP6....................518 
+A.7 Manuals and technical support............................................................................................519 A.7.1 Overview of the manuals......................................................................................................519 A.7.2 Configuring support..............................................................................................................521 A.7.3 Product Support...................................................................................................................522 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 11
+Table of contents 
+Index.........................................................................................................................................................523 
+Converter with the CU250S-2 Control Units 
+12 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Fundamental safety instructions 1 1.1 General safety instructions 
+  
+  
+
+  
+WARNING
+	Electric shock and danger to life due to other energy sources 
+Touching live components can result in death or severe injury. 
+● Only work on electrical devices when you are qualified for this job.  
+● Always observe the country-specific safety rules. 
+Generally, the following six steps apply when establishing safety:  
+1. Prepare for disconnection. Notify all those who will be affected by the procedure. 2. Isolate the drive system from the power supply and take measures to prevent it being  switched back on again. 
+3. Wait until the discharge time specified on the warning labels has elapsed.  4. Check that there is no voltage between any of the power connections, and between any  of the power connections and the protective conductor connection. 
+5. Check whether the existing auxiliary supply circuits are de-energized. 6. Ensure that the motors cannot move. 
+7. Identify all other dangerous energy sources, e.g. compressed air, hydraulic systems, or  water. Switch the energy sources to a safe state. 
+8. Check that the correct drive system is completely locked. 
+After you have completed the work, restore the operational readiness in the inverse sequence. 
+	
+
+
+
+  
+WARNING
+	Risk of electric shock and fire from supply networks with an excessively high impedance 
+Excessively low short-circuit currents can lead to the protective devices not tripping or tripping  too late, and thus causing electric shock or a fire. 
+● In the case of a conductor-conductor or conductor-ground short-circuit, ensure that the  short-circuit current at the point where the inverter is connected to the line supply at least  meets the minimum requirements for the response of the protective device used. 
+● You must use an additional residual-current device (RCD) if a conductor-ground short  circuit does not reach the short-circuit current required for the protective device to respond.  The required short-circuit current can be too low, especially for TT supply systems.
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 13
+Fundamental safety instructions 1.1 General safety instructions 
+  
+  
+  
+
+  
+WARNING
+	Risk of electric shock and fire from supply networks with an excessively low impedance 
+Excessively high short-circuit currents can lead to the protective devices not being able to  interrupt these short-circuit currents and being destroyed, and thus causing electric shock or  a fire. 
+● Ensure that the prospective short-circuit current at the line terminal of the inverter does  not exceed the breaking capacity (SCCR or Icc) of the protective device used.
+	
+
+
+
+  
+WARNING
+	Electric shock if there is no ground connection  
+For missing or incorrectly implemented protective conductor connection for devices with  protection class I, high voltages can be present at open, exposed parts, which when touched,  can result in death or severe injury. 
+● Ground the device in compliance with the applicable regulations. 
+	
+
+
+
+  
+WARNING
+	Electric shock due to connection to an unsuitable power supply 
+When equipment is connected to an unsuitable power supply, exposed components may  carry a hazardous voltage that might result in serious injury or death. 
+● Only use power supplies that provide SELV (Safety Extra Low Voltage) or PELV-  (Protective Extra Low Voltage) output voltages for all connections and terminals of the  electronics modules.
+	
+
+
+
+WARNING
+	Electric shock due to equipment damage 
+Improper handling may cause damage to equipment. For damaged devices, hazardous  voltages can be present at the enclosure or at exposed components; if touched, this can  result in death or severe injury.  
+● Ensure compliance with the limit values specified in the technical data during transport,  storage and operation.  
+● Do not use any damaged devices.
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+14 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+
+Fundamental safety instructions 
+1.1 General safety instructions 
+WARNING
+	Electric shock due to unconnected cable shield 
+Hazardous touch voltages can occur through capacitive cross-coupling due to unconnected  cable shields. 
+● As a minimum, connect cable shields and the conductors of power cables that are not  used (e.g. brake cores) at one end at the grounded housing potential.
+	
+
+
+
+WARNING
+	Arcing when a plug connection is opened during operation 
+Opening a plug connection when a system is operation can result in arcing that may cause  serious injury or death. 
+● Only open plug connections when the equipment is in a voltage-free state, unless it has  been explicitly stated that they can be opened in operation.
+	
+
+
+
+WARNING
+	Electric shock due to residual charges in power components 
+Because of the capacitors, a hazardous voltage is present for up to 5 minutes after the power  supply has been switched off. Contact with live parts can result in death or serious injury. ● Wait for 5 minutes before you check that the unit really is in a no-voltage condition and  start work.
+	
+
+
+
+NOTICE
+	Property damage due to loose power connections 
+Insufficient tightening torques or vibration can result in loose power connections. This can  result in damage due to fire, device defects or malfunctions. 
+● Tighten all power connections to the prescribed torque. 
+● Check all power connections at regular intervals, particularly after equipment has been  transported.
+	
+
+
+
+WARNING
+	Spread of fire from built-in devices 
+In the event of fire outbreak, the enclosures of built-in devices cannot prevent the escape of  fire and smoke. This can result in serious personal injury or property damage.  ● Install built-in units in a suitable metal cabinet in such a way that personnel are protected  
+against fire and smoke, or take other appropriate measures to protect personnel. ● Ensure that smoke can only escape via controlled and monitored paths.
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 15
+Fundamental safety instructions 
+1.1 General safety instructions 
+WARNING
+	Active implant malfunctions due to electromagnetic fields 
+Inverters generate electromagnetic fields (EMF) in operation. People with active implants in  the immediate vicinity of this equipment are at particular risk. 
+● As the operator of an EMF-emitting installation, assess the individual risks of persons with  active implants. The following clearances are usually adequate: 
+– No clearance to closed control cabinets and shielded MOTION-CONNECT supply  cables 
+– Forearm length (approx. 35 cm clearance) to distributed drive systems and open  control cabinets
+	
+
+
+
+WARNING
+	Unexpected movement of machines caused by radio devices or mobile phones 
+When radio devices or mobile phones with a transmission power > 1 W are used in the  immediate vicinity of components, they may cause the equipment to malfunction.  Malfunctions may impair the functional safety of machines and can therefore put people in  danger or lead to property damage. 
+● If you come closer than around 2 m to such components, switch off any radios or mobile  phones. 
+● Use the "SIEMENS Industry Online Support app" only on equipment that has already been  switched off.
+	
+
+
+
+NOTICE
+	Damage to motor insulation due to excessive voltages 
+When operated on systems with grounded line conductor or in the event of a ground fault in  the IT system, the motor insulation can be damaged by the higher voltage to ground. If you  use motors that have insulation that is not designed for operation with grounded line  conductors, you must perform the following measures: 
+● IT system: Use a ground fault monitor and eliminate the fault as quickly as possible. ● TN or TT systems with grounded line conductor: Use an isolating transformer on the line  side.
+	
+
+
+
+WARNING
+	Fire due to inadequate ventilation clearances 
+Inadequate ventilation clearances can cause overheating of components with subsequent  fire and smoke. This can cause severe injury or even death. This can also result in increased  downtime and reduced service lives for devices/systems.  
+● Ensure compliance with the specified minimum clearance as ventilation clearance for the  respective component. 
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+16 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Fundamental safety instructions 
+1.1 General safety instructions 
+WARNING
+	Unrecognized dangers due to missing or illegible warning labels 
+Dangers might not be recognized if warning labels are missing or illegible. Unrecognized  dangers may cause accidents resulting in serious injury or death. 
+● Check that the warning labels are complete based on the documentation. ● Attach any missing warning labels to the components, where necessary in the national  language. 
+● Replace illegible warning labels.
+	
+
+
+
+NOTICE
+	Device damage caused by incorrect voltage/insulation tests 
+Incorrect voltage/insulation tests can damage the device. 
+● Before carrying out a voltage/insulation check of the system/machine, disconnect the  devices as all converters and motors have been subject to a high voltage test by the  manufacturer, and therefore it is not necessary to perform an additional test within the  system/machine.
+	
+
+
+
+WARNING
+	Unexpected movement of machines caused by inactive safety functions 
+Inactive or non-adapted safety functions can trigger unexpected machine movements that  may result in serious injury or death.  
+● Observe the information in the appropriate product documentation before commissioning. ● Carry out a safety inspection for functions relevant to safety on the entire system, including  all safety-related components. 
+● Ensure that the safety functions used in your drives and automation tasks are adjusted  and activated through appropriate parameterizing.  
+● Perform a function test. 
+● Only put your plant into live operation once you have guaranteed that the functions relevant  to safety are running correctly.
+	
+
+
+
+Note 
+Important safety notices for Safety Integrated functions 
+If you want to use Safety Integrated functions, you must observe the safety notices in the Safety  Integrated manuals. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 17
+Fundamental safety instructions 
+1.1 General safety instructions 
+WARNING
+	Malfunctions of the machine as a result of incorrect or changed parameter settings 
+As a result of incorrect or changed parameterization, machines can malfunction, which in turn  can lead to injuries or death. 
+● Protect the parameterization (parameter assignments) against unauthorized access. ● Handle possible malfunctions by taking suitable measures, e.g. emergency stop or  emergency off.
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+18 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Fundamental safety instructions 
+1.2 Equipment damage due to electric fields or electrostatic discharge 
+1.2 Equipment damage due to electric fields or electrostatic discharge 
+Electrostatic sensitive devices (ESD) are individual components, integrated circuits, modules  or devices that may be damaged by either electric fields or electrostatic discharge. 
+
+NOTICE
+	Equipment damage due to electric fields or electrostatic discharge 
+Electric fields or electrostatic discharge can cause malfunctions through damaged individual  components, integrated circuits, modules or devices. 
+● Only pack, store, transport and send electronic components, modules or devices in their  original packaging or in other suitable materials, e.g conductive foam rubber of aluminum  foil. 
+● Only touch components, modules and devices when you are grounded by one of the  following methods: 
+– Wearing an ESD wrist strap 
+– Wearing ESD shoes or ESD grounding straps in ESD areas with conductive flooring ● Only place electronic components, modules or devices on conductive surfaces (table with  ESD surface, conductive ESD foam, ESD packaging, ESD transport container).
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 19
+Fundamental safety instructions 
+1.3 Warranty and liability for application examples 
+1.3 Warranty and liability for application examples 
+Application examples are not binding and do not claim to be complete regarding configuration,  equipment or any eventuality which may arise. Application examples do not represent specific  customer solutions, but are only intended to provide support for typical tasks. 
+As the user you yourself are responsible for ensuring that the products described are operated  correctly. Application examples do not relieve you of your responsibility for safe handling when  using, installing, operating and maintaining the equipment. 
+Converter with the CU250S-2 Control Units 
+20 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+1.4 Industrial security 
+Note 
+Industrial security 
+Fundamental safety instructions 1.4 Industrial security 
+Siemens provides products and solutions with industrial security functions that support the  secure operation of plants, systems, machines and networks. 
+In order to protect plants, systems, machines and networks against cyber threats, it is  necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial  security concept. Siemens’ products and solutions constitute one element of such a concept. 
+Customers are responsible for preventing unauthorized access to their plants, systems,  machines and networks. Such systems, machines and components should only be connected  to an enterprise network or the Internet if and to the extent such a connection is necessary  and only when appropriate security measures (e.g. firewalls and/or network segmentation) are  in place.  
+For additional information on industrial security measures that may be implemented, please  visit: 
+Industrial security (http://www.siemens.com/industrialsecurity) 
+Siemens’ products and solutions undergo continuous development to make them more secure.  Siemens strongly recommends that product updates are applied as soon as they are available  and that the latest product versions are used. Use of product versions that are no longer  supported, and failure to apply the latest updates may increase customer’s exposure to cyber  threats.  
+To stay informed about product updates, subscribe to the Siemens Industrial Security RSS  Feed at: 
+Industrial security (http://www.siemens.com/industrialsecurity) 
+Further information is provided on the Internet: 
+Industrial Security Configuration Manual (https://support.industry.siemens.com/cs/ww/en/ view/108862708) 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 21
+Fundamental safety instructions 
+1.4 Industrial security 
+WARNING
+	Unsafe operating states resulting from software manipulation 
+Software manipulations (e.g. viruses, trojans, malware or worms) can cause unsafe operating  states in your system that may lead to death, serious injury, and property damage. ● Keep the software up to date.  
+● Incorporate the automation and drive components into a holistic, state-of-the-art industrial  security concept for the installation or machine. 
+● Make sure that you include all installed products into the holistic industrial security concept. ● Protect files stored on exchangeable storage media from malicious software by with  suitable protection measures, e.g. virus scanners. 
+● Protect the drive against unauthorized changes by activating the "know-how protection"  drive function.
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+22 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+1.5 Residual risks of power drive systems 
+Fundamental safety instructions 1.5 Residual risks of power drive systems 
+When assessing the machine- or system-related risk in accordance with the respective local  regulations (e.g., EC Machinery Directive), the machine manufacturer or system installer must  take into account the following residual risks emanating from the control and drive components  of a drive system: 
+1. Unintentional movements of driven machine or system components during commissioning,  operation, maintenance, and repairs caused by, for example, 
+– Hardware and/or software errors in the sensors, control system, actuators, and cables  and connections 
+– Response times of the control system and of the drive 
+– Operation and/or environmental conditions outside the specification 
+– Condensation/conductive contamination 
+– Parameterization, programming, cabling, and installation errors 
+– Use of wireless devices/mobile phones in the immediate vicinity of electronic  
+components 
+– External influences/damage 
+– X-ray, ionizing radiation and cosmic radiation 
+2. Unusually high temperatures, including open flames, as well as emissions of light, noise,  particles, gases, etc., can occur inside and outside the components under fault conditions  caused by, for example: 
+– Component failure 
+– Software errors 
+– Operation and/or environmental conditions outside the specification 
+– External influences/damage 
+3. Hazardous shock voltages caused by, for example: 
+– Component failure 
+– Influence during electrostatic charging 
+– Induction of voltages in moving motors 
+– Operation and/or environmental conditions outside the specification 
+– Condensation/conductive contamination 
+– External influences/damage 
+4. Electrical, magnetic and electromagnetic fields generated in operation that can pose a risk  to people with a pacemaker, implants or metal replacement joints, etc., if they are too close 
+5. Release of environmental pollutants or emissions as a result of improper operation of the  system and/or failure to dispose of components safely and correctly 
+6. Influence of network-connected communication systems, e.g. ripple-control transmitters or  data communication via the network 
+For more information about the residual risks of the drive system components, see the relevant  sections in the technical user documentation. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 23
+Fundamental safety instructions 
+1.5 Residual risks of power drive systems 
+Converter with the CU250S-2 Control Units 
+24 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Introduction 2 
+2.1 About the Manual 
+Who requires the operating instructions and what for? 
+These operating instructions primarily address fitters, commissioning engineers and machine  operators. The operating instructions describe the devices and device components and enable  the target groups being addressed to install, connect-up, set, and commission the converters  safely and in the correct manner. 
+What is described in the operating instructions? 
+These operating instructions provide a summary of all of the information required to operate  the converter under normal, safe conditions. 
+The information provided in the operating instructions has been compiled in such a way that  it is sufficient for all standard applications and enables drives to be commissioned as efficiently  as possible. Where it appears useful, additional information for entry level personnel has been  added. 
+The operating instructions also contain information about special applications. Since it is  assumed that readers already have a sound technical knowledge of how to configure and  parameterize these applications, the relevant information is summarized accordingly. This  relates, e.g. to operation with fieldbus systems and safety-related applications. 
+What is the meaning of the symbols in the manual? 
+ Reference to further information in the manual 
+Download from the Internet 
+ DVD that can be ordered 
+End of a handling instruction. 
+❒ 
+Examples of inverter function symbols 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 25
+Introduction 
+2.2 Guide through the manual 
+2.2 Guide through the manual 
+Section 
+ Description (Page 29) 
+	In this section you will find answers to the following questions: 
+● How is the inverter marked? 
+● Which components make up the inverter? 
+● Which optional components are available for the inverter? 
+● What is the purpose of the optional components? 
+● Which motors can be fed from the inverter? 
+● Which commissioning tools are there?
+	 Installing (Page 53) 
+	● Which sequence is recommended when installing the inverter? ● What does EMC-compliant installation actually mean? 
+● Which options are available to install optional components below the inverter? ● What are the inverter dimensions? 
+● Which mounting and installation materials are required when installing the inverter? ● To which line supplies can the inverter be connected? 
+● How is the inverter connected to the line supply? 
+● How is the braking resistor connected to the inverter? 
+● Which terminals and fieldbus interfaces does the inverter have? ● What are the interface functions?
+	 Commissioning (Page 125) 
+	● Which motor data is required for commissioning 
+● How is the inverter set in the factory? 
+● What is the commissioning procedure? 
+● How do you restore the inverter factory settings?
+	 Advanced commissioning  
+(Page 157)
+	● Which functions are included in the inverter firmware? 
+● How do the functions interoperate with one another? 
+● How are the functions set?
+	 Saving the settings and ser‐ ies commissioning (Page 361)
+	● Why is it necessary to back up the inverter settings? 
+● Which options are available to back up the settings? 
+● How does the data backup function? 
+● How do you prevent the inverter settings from being changed? ● How do you prevent the inverter settings from being read out?
+	 Corrective maintenance  
+(Page 411)
+	● How are inverter components replaced? 
+● How do you change the firmware version of the inverter?
+	 Alarms, faults and system  
+messages (Page 387)
+	● What is the meaning of the LEDs provided on the inverter? 
+● How does the system runtime respond? 
+● How does the inverter save alarms and faults? 
+● What do the inverter alarms and faults mean? 
+● How are inverter faults resolved? 
+● Which I&M data is saved in the inverter?
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+26 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Introduction 
+2.2 Guide through the manual 
+Section 
+ Technical data (Page 439) 
+	In this section you will find answers to the following questions: 
+● What is the inverter technical data? 
+● What do "High Overload" and "Low Overload" mean?
+	 Appendix (Page 481) 
+	● What are the new functions of the current firmware? 
+● What are the most important inverter parameters? 
+● How is the inverter operated using the BOP-2 Operator Panel? ● How does the device trace function in STARTER? 
+● How can signal interconnections be changed in the inverter firmware? ● What does "BiCo technology" mean? 
+● Where can you find additional manuals and information about the inverter?
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 27
+Introduction 
+2.2 Guide through the manual 
+Converter with the CU250S-2 Control Units 
+28 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Description 3 
+Use for the intended purpose 
+The inverter described in this manual is a device to control a three-phase motor. The inverter  is designed for installation in electrical installations or machines. 
+It has been approved for industrial and commercial use on industrial networks. Additional  measures have to be taken when connected to public grids. 
+The technical specifications and information about connection conditions are indicated on the  rating plate and in the operating instructions. 
+Use of third-party products 
+This document contains recommendations relating to third-party products. Siemens accepts  the fundamental suitability of these third-party products.  
+You can use equivalent products from other manufacturers.  
+Siemens does not accept any warranty for the properties of third-party products. 
+Use of OpenSSL 
+This product contains software developed in the OpenSSL project for use within the OpenSSL  toolkit.  
+This product contains cryptographic software created by Eric Young.  
+This product contains software developed by Eric Young. 
+Further information is provided on the Internet: 
+ OpenSSL (https://www.openssl.org/) 
+ Cryptsoft (mailto:eay@cryptsoft.com) 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 29
+Description 
+3.1 Identifying the converter 
+3.1 Identifying the converter 
+Main components of the inverter 
+Each SINAMICS G120 inverter comprises a Control  
+Unit and Power Module. 
+● The Control Unit controls and monitors the Power  
+Module and the connected motor.  
+● The Power Module provides the connections for  
+line supply and motor.  
+3RZHU 0RGXOH 
+  
+  
+&RQWURO 8QLW 
+The following data is provided on the Power Module type plate (①): 
+● Designation, e.g. PM240-2 Power Module 
+● Technical data: Voltage, current and power 
+● Article number, e.g. 6SL3210-1PE21-1UL0 
+● Version, e.g. A02 
+The following data can be found on the Control Unit type plate (②): 
+● Designation, e.g. CU250S-2 DP Control Unit  
+● Article number, e.g. 6SL3246-0BA22-1PA0 
+● Version, e.g. 02 (hardware), 4.7 (firmware) 
+Further inverter components 
+The following components are available so that you can adapt the inverter to different  applications and ambient conditions: 
+● Line filter (Page 39)  
+● Line reactor (Page 40)  
+● Output reactor (Page 42)  
+● Sine-wave filter (Page 47)  
+● Braking resistor (Page 48)  
+● Brake relay to control a motor holding brake (Page 50) 
+Converter with the CU250S-2 Control Units 
+30 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Description 
+3.2 Directives and standards 
+3.2 Directives and standards 
+Relevant directives and standards 
+The following directives and standards are relevant for the inverters: 
+European Low Voltage Directive 
+The inverters fulfil the requirements stipulated in the Low-Voltage Directive 2014/35/EU, if they  are covered by the application area of this directive. 
+European Machinery Directive 
+The inverters fulfil the requirements stipulated in the Machinery Directive 2006/42/EU, if they  are covered by the application area of this directive. 
+However, the use of the inverters in a typical machine application has been fully assessed for  compliance with the main regulations in this directive concerning health and safety. 
+Directive 2011/65/EU 
+The inverter fulfills the requirements of Directive 2011/65/EU relating to the restriction of the  use of certain hazardous substances in electrical and electronic devices (RoHS). 
+European EMC Directive 
+By completely complying with IEC/EN 61800-3, it has been proven that the inverter is in  compliance with directive 2004/108/EC or 2014/30/EU. 
+Underwriters Laboratories (North American market) 
+Inverters provided with one of the test symbols displayed fulfil the requirements stipulated for  the North American market as a component of drive applications, and are appropriately listed. 
+EMC requirements for South Korea 
+The inverters with the KC marking on the rating plate satisfy the EMC requirements for South  Korea. 
+Eurasian conformity 
+The inverters comply with the requirements of the Russia/Belarus/Kazakhstan customs union  (EAC). 
+Australia and New Zealand (RCM formerly C-Tick) 
+The inverters showing the test symbols fulfil the EMC requirements for Australia and New  Zealand. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 31
+Description 
+3.2 Directives and standards 
+Immunity to voltage drop of semiconductor process equipment. 
+The inverters comply with the requirements of standard SEMI F47-0706. 
+Quality systems 
+Siemens AG employs a quality management system that meets the requirements of ISO 9001  and ISO 14001. 
+Certificates for download 
+● EC Declaration of Conformity: (https://support.industry.siemens.com/cs/ww/de/view/ 58275445) 
+● Certificates for the relevant directives, prototype test certificates, manufacturers  declarations and test certificates for functions relating to functional safety ("Safety  
+Integrated"): (http://support.automation.siemens.com/WW/view/en/22339653/134200) 
+● Certificates for products that were certified by UL: (http://database.ul.com/cgi-bin/XYV/ template/LISEXT/1FRAME/index.html)  
+● Certificates for products that were certified by TÜV SÜD: (https://www.tuev-sued.de/ industrie_konsumprodukte/zertifikatsdatenbank)  
+Standards that are not relevant 
+China Compulsory Certification 
+The inverters do not fall in the area of validity of the China Compulsory Certification (CCC). 
+Converter with the CU250S-2 Control Units 
+32 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Description 
+3.3 Overview of Control Units 
+3.3 Overview of Control Units 
+Versions 
+The CU250S-2 Control Units differ with regard to the type of fieldbus. 
+Table 3-1 Control Unit versions 
+Designation 
+	Article number 
+	Fieldbus
+	CU250S-2 
+	6SL3246-0BA22-1BA0 
+	USS, Modbus RTU
+	CU250S-2 DP 
+	6SL3246-0BA22-1PA0 
+	PROFIBUS
+	CU250S-2 PN 
+	6SL3246-0BA22-1FA0 
+	PROFINET, EtherNet/IP
+	CU250S-2 CAN 
+	6SL3246-0BA22-1CA0 
+	CANopen
+	
+
+
+
+Shield connection kit for the Control Unit 
+The shield connection kit is an optional component. The shield connection kit comprises the  following components: 
+● Shield plate 
+● Elements for optimum shield support and strain relief of the signal and communication  cables 
+Article number for the SINAMICS CU Screening Termination Kit 4: 6SL3264-1EA00-0LA0. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 33
+Description 
+3.4 Power Modules 
+3.4 Power Modules 
+Important data on the Power Modules is provided in this section. Further information is  contained in the Hardware Installation Manual of the Power Module. 
+ Overview of the manuals (Page 519) 
+All power data refers to rated values or to power for operation with low overload (LO). You can operate the CU250S-2 Control Unit with the following Power Modules: 
+● PM240-2, in IP20 degree of protection and push-through technology 
+● PM240P-2 
+● PM250 
+Converter with the CU250S-2 Control Units 
+34 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+3.4.1 Power Module with IP20 degree of protection 
+30      
+)6$     )6& 
+Figure 3-1 Examples of Power Modules with IP20 degree of protection PM240-2 for standard applications 
+Description 
+3.4 Power Modules 
+30      
+)6'     )6* 
+The PM240-2 Power Module is available without a filter or with an integrated class A line filter.  The PM240-2 permits dynamic braking via an external braking resistor. 
+Table 3-2 1-phase/3-phase 200 VAC … 240 VAC, article number 6SL3210-1PB… and 6SL3210-1PC… 
+Frame size 
+Power (kW) 
+	FSA 
+0.55 … 0.75 
+	FSB 
+1.1 … 2.2 
+	FSC 
+3.0 … 4.0 
+	FSD 
+11 … 18.5 
+	FSE 
+22 … 30 
+	FSF 
+37 … 55
+	
+
+
+
+Table 3-3 3-phase 380 VAC … 480 VAC, article number 6SL3210-1PE… 
+Frame size 
+Power (kW) 
+	FSA 
+0.55 … 3.0 
+	FSB 
+4.0 … 7.5 
+	FSC 
+11 … 15 
+	FSD 
+18.5 … 37 
+	FSE 
+45 … 55 
+	FSF 
+75 … 132 
+	FSG 
+160 … 250
+	
+
+
+
+Table 3-4 3-phase 500 VAC … 690 VAC, article number 6SL3210-1PH… 
+Frame size 
+Power (kW) 
+	FSD 
+11 … 37 
+	FSE 
+45 … 55 
+	FSF 
+75 … 132 
+	FSG 
+160 … 250
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 35
+Description 
+3.4 Power Modules 
+PM250 for standard applications with energy recovery 
+The PM250 Power Module is available without a filter or with integrated class A line filter. The  PM250 permits dynamic braking with energy recovery into the line supply. 
+Table 3-5 3-phase 380 VAC … 480 VAC, article number 6SL3225-0BE… 
+Frame size 
+Power (kW) 
+	FSC 
+7.5 … 15 
+	FSD 
+18.5 … 30 
+	FSE 
+37 … 45 
+	FSF 
+55 … 90
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+36 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Description 
+3.4 Power Modules 
+3.4.2 Power Module with Push-Through technology 
+Figure 3-2 Examples of Power Modules with Push-Through technology FSA … FSC 
+PM240-2 with Push-Through technology for standard applications 
+The PM240-2 Power Module is available with Push-Through technology without a filter or with  an integrated class A line filter. The PM240-2 allows dynamic braking using an external braking  resistor. 
+Table 3-6 1-phase/3-phase 200 VAC … 240 VAC, article number 6SL3211-1PB… 
+Frame size 
+Power (kW) 
+	FSA 
+0.75 
+	FSB 
+2.2 
+	FSC 
+4.0 
+	FSD 
+18.5 
+	FSE 
+30 
+	FSF 
+55
+	
+
+
+
+Table 3-7 3-phase 380 VAC … 480 VAC, article number 6SL3211-1PE…  
+Frame size 
+Power (kW) 
+	FSA 
+3.0 
+	FSB 
+7.5 
+	FSC 
+15 
+	FSD 
+37 
+	FSE 
+55 
+	FSF 
+132
+	
+
+
+
+Table 3-8 3 AC 500 V … 690 V, Article No. 6SL3211-1PH… 
+Frame size 
+Power (kW) 
+	FSD 
+37 
+	FSE 
+55 
+	FSF 
+132
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 37
+Description 
+3.5 Components for the Power Modules 
+3.5 Components for the Power Modules 
+3.5.1 Accessories for shielding 
+Shield connection kit 
+Establish the shield and strain relief for the power connec‐ 
+tions using the shield connection kit. 
+The shield connection kit comprises a shield plate and  
+serrated strips with screws. 
+Table 3-9 Article numbers for the shield connection kit 
+Frame size 
+FSA 
+	PM240-2 
+The shield connection kit is included in  the scope of delivery
+	PM250 Power Module 
+6SL3262-1AA00-0BA0
+	FSB 
+	6SL3262-1AB00-0DA0
+	FSC 
+	6SL3262-1AC00-0DA0
+	FSD 
+	6SL3262-1AD00-0DA0
+	FSE 
+	6SL3262-1AD00-0DA0
+	FSF 
+	6SL3262-1AF00-0DA0
+	FSG 
+	---
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+38 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+3.5.2 Line filter 
+Description 
+3.5 Components for the Power Modules 
+With a line filter, the inverter can achieve a higher radio interference class. 
+NOTICE
+	Overloading the line filter when connected to line supplies that are not permissible 
+The line filter is only suitable for operation on TN or TT line supplies with a grounded neutral  point. If operated on other line supplies, the line filter will be thermally overloaded and will be  damaged.  
+● For inverters equipped with line filter, only connect to TN or TT line supplies with a  grounded neutral point.
+	
+
+
+
+External line filters for PM250 
+Power Module 
+FSC 6SL3225-0BE25‑5AA0,  
+6SL3225-0BE27‑5AA0,  
+6SL3225-0BE31‑1AA0
+	Power 
+7.5 kW … 15.0 kW 
+	Class B line filter according to  EN55011: 2009 
+6SL3203-0BD23-8SA0
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 39
+Description 
+3.5 Components for the Power Modules 
+3.5.3 Line reactor 
+The line reactor supports the overvoltage protection, smoothes the  
+harmonics in the line supply and bridges commutation dips. For the  
+Power Modules subsequently listed, a line reactor is suitable in order  
+to dampen the specified effects. 
+The figure on the right-hand side shows as example the line reactors  
+for the PM240-2 Power Modules, FSB. 
+The line requirements for deployment of a line reactor depends on the Power Module:  Technical data (Page 439) 
+NOTICE
+	Damage to the inverter as a result of a missing line reactor 
+Depending on the Power Module and line supply, if a line reactors is not used, this can result  in damage to the inverter and other components in the electrical plant or system. ● Install a line reactor if the relative short-circuit voltage of the line supply is below 1%
+	
+
+
+
+Line reactors for PM240-2, 380 V … 480 V 
+Power Module 
+FSA 6SL3210-1PE11-8 . L1,  
+6SL3210-1PE12-3 . L1,  
+6SL3210-1PE13-2 . L1
+	Power 
+0.55 kW … 1.1 kW 
+	Line reactor 
+6SL3203-0CE13-2AA0
+	FSB 
+	6SL3210-1PE14-3 . L1,  
+6SL321 . -1PE16-1 . L1,  
+6SL321 . -1PE18-0 . L1
+	1.5 kW … 3 kW 
+	6SL3203-0CE21-0AA0
+	FSC 
+	6SL3210-1PE21-1 . L0,  
+6SL3210-1PE21-4 . L0,  
+6SL321 . -1PE21-8 . L0
+	4 kW … 7.5 kW 
+	6SL3203-0CE21-8AA0
+	6SL3210-1PE22-7 . L0,  
+6SL321 . -1PE23-3 . L0
+	11 kW … 15 kW 
+	6SL3203-0CE23-8AA0
+	
+
+
+
+FSD … FSG: A line reactor is not required. 
+Line reactors for PM240-2 Power Module, 500 V … 690 V 
+A line reactor is not required. 
+Converter with the CU250S-2 Control Units 
+40 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Line reactors for PM240-2, 200 V … 240 V 
+Description 
+3.5 Components for the Power Modules 
+
+
+Power Module 
+FSA 6SL3210-1PB13-0 . L0,  
+6SL3210-1PB13-8 . L0
+	Power 
+0.55 kW … 0.75 kW 
+	Line reactor 
+6SL3203-0CE13-2AA0
+	FSB 
+	6SL3210-1PB15-5 . L0,  
+6SL3210-1PB17-4 . L0,  
+6SL321 . -1PB21-0 . L0
+	1.1 kW … 2.2 kW 
+	6SL3203-0CE21-0AA0
+	FSC 
+	6SL3210-1PB21-4 . L0,  
+6SL321 . -1PB21-8 . L0
+	3 kW … 4 kW 
+	6SL3203-0CE21-8AA0
+	6SL321 . -1PC22-2 . L0,  
+6SL3210-1PC22-8 . L0
+	5.5 kW … 7.5 kW 
+	6SL3203-0CE23-8AA0
+	
+
+
+
+FSD … FSF: A line reactor is not required. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 41
+Description 
+3.5 Components for the Power Modules 
+3.5.4 Output reactor 
+Output reactors reduce the voltage stress on the motor windings and  
+the load placed on the inverter as a result of capacitive recharging  
+currents in the cables. One or two output reactors are required for  
+longer motor cables. 
+You will find more information about permissible motor cable lengths  
+in the Hardware Installation Manual for the Power Module. 
+ Overview of the manuals (Page 519) 
+The figure on the right-hand side shows as example the output reactors  
+for PM240-2 Power Modules, FSB and FSC. 
+NOTICE
+	Overheating of the output reactor if the pulse frequency is too high 
+The output reactor is dimensioned for the inverter pulse frequency set in the factory. Inverter  operation with pulse frequencies higher than the factory setting can result in thermal overload  of the output reactor. Excessively high temperatures damage the output reactor. ● Operate the inverter with an output reactor with a maximum pulse frequency ≤ factory  setting.
+	
+
+
+
+Output reactors for PM240-2 Power Modules, 380 V … 480 V 
+Power Module FSA 
+	6SL3210‑1PE11‑8 . L1,  
+6SL3210‑1PE12‑3 . L1,  
+6SL3210‑1PE13‑2 . L1,  
+6SL3210‑1PE14‑3 . L1,  
+6SL3210‑1PE16‑1 . L1
+	Power 
+0.55 kW … 2.2 kW 
+	Output reactor 
+6SL3202‑0AE16‑1CA0
+	
+
+	6SL321 . ‑1PE18‑0 . L1 
+	3 kW 
+	6SL3202‑0AE18‑8CA0
+	FSB 
+	6SL3210‑1PE21‑1 . L0,  
+6SL3210‑1PE21‑4 . L0,  
+6SL321 . ‑1PE21‑8 . L0
+	4 kW … 7.5 kW 
+	6SL3202‑0AE21‑8CA0
+	FSC 
+	6SL3210‑1PE22‑7 . L0,  
+6SL321 . ‑1PE23‑3 . L0
+	11 kW … 15 kW 
+	6SL3202‑0AE23‑8CA0
+	FSD 
+	6SL3210‑1PE23‑8 . L0 
+6SL3210‑1PE24‑5 . L0 
+6SL3210‑1PE26‑0 . L0 
+6SL3210‑1PE27‑5 . L0
+	18.5 kW … 37 kW 
+	6SE6400‑3TC07‑5ED0
+	FSE 
+	6SL3210‑1PE28‑8 . L0,  
+6SL3210‑1PE31‑1 . L0,  
+6SL3210‑1PE31‑5 . L0,  
+6SL3210‑1PE31‑8 . L0
+	45 kW … 90 kW 
+	6SE6400‑3TC14‑5FD0
+	FSF 
+	6SL3210‑1PE32‑1 . L0 
+	110 kW 
+	6SL3000‑2BE32‑1AA0
+	6SL3210‑1PE32‑5 . L0 
+	132 kW 
+	6SL3000‑2BE32‑6AA0
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+42 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Description 
+3.5 Components for the Power Modules 
+6SL3210‑1PE33‑0 . L0 
+	Power 
+160 kW 
+	Output reactor 
+6SL3000‑2BE33‑2AA0
+	6SL3210‑1PE33‑7 . L0 
+	200 kW 
+	6SL3000‑2BE33‑8AA0
+	6SL3210‑1PE34‑8 . L0 
+	250 kW 
+	6SL3000‑2BE35‑0AA0
+	
+
+
+
+Power Module 
+FSG 
+Output reactors for PM240-2 Power Modules, 500 V … 690 V 
+Power Module FSF 
+	6SL3210‑1PH28‑0 . L0,  
+6SL3210‑1PH31‑0 . L0
+	Power 
+75 kW … 90 kW 
+	Output reactor 
+6SL3000‑2AH31‑0AA0
+	
+
+	6SL3210‑1PH31‑2 . L0,  
+6SL3210‑1PH31‑4 . L0
+	110 kW … 132 kW 
+	6SL3000‑2AH31‑5AA0
+	FSG 
+	6SL3210‑1PH31‑7CL0 
+	160 kW 
+	6SL3000‑2AH31‑8AA0
+	6SL3210‑1PH32‑1CL0 
+	200 kW 
+	6SL3000‑2AH32‑4AA0
+	6SL3210‑1PH32‑5CL0 
+	250 kW 
+	6SL3000‑2AH32‑6AA0
+	
+
+
+
+Output reactors for PM240-2 Power Modules, 200 V … 240 V 
+Power Module 
+FSA 6SL3210‑1PB13‑0 . L0,  
+6SL321 . ‑1PB13‑8 . L0
+	Power 
+0.55 kW … 0.75 kW 
+	Output reactor 
+6SL3202‑0AE16‑1CA0
+	FSB 
+	6SL3210‑1PB15‑5 . L0 
+	1.1 kW
+	6SL3210‑1PB17‑4 . L0 
+	1.5 kW 
+	6SL3202‑0AE18‑8CA0
+	FSB 
+	6SL321 . ‑1PB21‑0 . L0 
+	2.2 kW 
+	6SL3202‑0AE21‑8CA0
+	FSC 
+	6SL3210‑1PB21‑4 . L0,  
+6SL321 . ‑1PB21‑8 . L0
+	3 kW … 4 kW
+	6SL321 . ‑1PC22‑2 . L0,  
+6SL3210‑1PC22‑8 . L0
+	5.5 kw … 7.5 kW 
+	6SL3202‑0AE23‑8CA0
+	FSD 
+	6SL3210‑1PC24‑2UL0,  
+6SL3210‑1PC25‑4UL0,  
+6SL3210‑1PC26‑8UL0
+	11 kW … 18.5 kW 
+	6SE6400‑3TC07‑5ED0
+	FSE 
+	6SL3210‑1PC28‑0UL0,  
+6SL3210‑1PC31‑1UL0
+	22 kW … 55 kW 
+	6SE6400‑3TC14‑5FD0
+	FSF 
+	6SL3210‑1PC31‑3UL0,  
+6SL3210‑1PC31‑6UL0,  
+6SL3210‑1PC31‑8UL0
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 43
+Description 
+3.5 Components for the Power Modules 
+Output reactors for PM250 Power Module 
+Power Module 
+FSC 6SL3225-0BE25‑5 . A0,  
+6SL3225-0BE27‑5 . A0,  
+6SL3225-0BE31‑1 . A0
+	Power 
+7.5 kW … 15.0 kW 
+	Output reactor 
+6SL3202-0AJ23-2CA0
+	FSD 
+	6SL3225-0BE31-5 . A0 
+	18.5 kW 
+	6SE6400-3TC05-4DD0
+	6SL3225-0BE31-8 . A0 
+	22 kW 
+	6SE6400-3TC03-8DD0
+	6SL3225-0BE32-2 . A0 
+	30 kW 
+	6SE6400-3TC05-4DD0
+	FSE 
+	6SL3225-0BE33-0 . A0 
+	37 kW 
+	6SE6400-3TC08-0ED0
+	6SL3225-0BE33-7 . A0 
+	45 kW 
+	6SE6400-3TC07-5ED0
+	FSF 
+	6SL3225-0BE34-5 . A0 
+	55 kW 
+	6SE6400-3TC14-5FD0
+	6SL3225-0BE35-5 . A0 
+	75 kW 
+	6SE6400-3TC15-4FD0
+	6SL3225-0BE37-5 . A0 
+	90 kW 
+	6SE6400-3TC14-5FD0
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+44 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+3.5.5 du/dt filter plus VPL 
+Description 
+3.5 Components for the Power Modules 
+A combination of du/dt filter and a voltage peak limiter (VPL) – du/dt  
+filter plus VPL – are available to suppress voltage peaks.  
+When using the du/dt filter plus VPL, the output frequency must not  
+exceed 150 Hz. The pulse frequency may not exceed 4 kHz. 
+Further information is provided on the Internet: 
+ Sales Release and Operating Instructions (https://support.industry.siemens.com/cs/ww/ en/view/109756054) 
+du/dt filters plus VPL for PM240‑2 Power Modules, 380 V … 480 V 
+Power Module 
+FSA 6SL3210‑1PE11‑8 . L1,  
+6SL3210‑1PE12‑3 . L1,  
+6SL3210‑1PE13‑2 . L1,  
+6SL3210‑1PE14‑3 . L1,  
+6SL3210‑1PE16‑1 . L1,  
+6SL321 . ‑1PE18‑0 . UL1
+	Power 
+0.55 kW … 3.0 kW 
+	du/dt filter plus VPL  
+JTA:TEF1203-0GB
+	FSB 
+	6SL3210‑1PE21‑1 . L0,  
+6SL3210‑1PE21‑4 . L0,  
+6SL321 . ‑1PE21‑8 . L0
+	4.0 kW … 7.5 kW 
+	JTA:TEF1203-0GB
+	FSC 
+	6SL3210‑1PE22‑7 . L0,  
+6SL321 . ‑1PE23‑3 . L0
+	11 kW … 15 kW 
+	JTA:TEF1203-0HB
+	FSD 
+	6SL3210-1PE23-8 . L0 
+	18.5 kW 
+	JTA:TEF1203-0HB
+	6SL3210-1PE24-5 . L0, 
+6SL3210-1PE26-0 . L0
+	22 kW, 30 kW 
+	JTA:TEF1203-0JB
+	FSD 
+FSE
+	6SL321 . -1PE27-5 . L0, 
+6SL3210-1PE28-8 . L0
+	37 kW, 45 kW 
+	JTA:TEF1203-0KB
+	FSE 
+FSF
+	6SL321 . -1PE31-1 . L0, 
+6SL3210-1PE31-5 . L0
+	55 kW, 75 kW 
+	JTA:TEF1203-0LB
+	FSF 
+	6SL3210-1PE31-8 . L0, 
+6SL3210-1PE32-1 . L0, 
+6SL321 . -1PE32-5 . L0
+	90 kW … 132 kW 
+	JTA:TEF1203-0MB
+	
+
+
+
+du/dt filters plus VPL for PM240‑2 Power Modules, 500 V … 690 V 
+6SL3210-1PH21-4 . L0 
+6SL3210-1PH22-0 . L0 
+6SL3210-1PH22-3 . L0
+	Power 
+11 kW … 18.5 kW 
+	du/dt filter plus VPL  
+JTA:TEF1203-0GB
+	6SL3210-1PH22-7 . L0 
+6SL3210-1PH23-5 . L0 
+6SL3210-1PH24-2 . L0
+	22 kW … 37 kW 
+	JTA:TEF1203-0HB
+	
+
+
+
+Power Module 
+FSD 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 45
+Description 
+3.5 Components for the Power Modules 
+Power Module 
+FSE 6SL3210-1PH25-2 . L0 
+6SL3210-1PH26-2 . L0
+	Power 
+45 kW, 55 kW 
+	du/dt filter plus VPL  
+JTA:TEF1203-0JB
+	FSF 
+	6SL3210-1PH28-0 . L0 
+6SL3210-1PH31-0 . L0
+	75 kW, 90 kW 
+	JTA:TEF1203-0KB
+	6SL3210-1PH31-2 . L0 
+6SL3210-1PH31-4 . L0
+	110 kW, 132 kW 
+	JTA:TEF1203-0LB
+	FSG 
+	6SL3210-1PH31-7CL0  
+6SL3210-1PH32-1CL0  
+6SL3210-1PH32-5CL0
+	160 kW … 250 kW 
+	JTA:TEF1203-0MB
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+46 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+3.5.6 Sine-wave filter 
+Description 
+3.5 Components for the Power Modules 
+The sine-wave filter at the inverter output limits the voltage rate-of 
+rise and the peak voltages at the motor winding. The maximum per‐ 
+missible length of motor feeder cables is increased to 300 m.  
+The following applies when using a sine-wave filter: 
+● Operation is only permissible with pulse frequencies from 4 kHz  
+to 8 kHz.  
+From 110 kW power rating of the Power Modules (according to  
+the type plate) only 4 kHz is permissible. 
+● The inverter power is reduced by 5%. 
+● The maximum output frequency of the inverter is 150 Hz at 380 V to 480 V. 
+● Operation and commissioning may only be performed with the motor connected, as the  sine-wave filter is not no-load proof. 
+● An output reactor is superfluous. 
+Sine-wave filter for PM250 Power Module 
+Power Module FSC 
+	6SL3225-0BE25‑5 . A0 
+	Power 
+7.5 kW 
+	Sine-wave filter 
+6SL3202-0AE22-0SA0
+	
+
+	6SL3225-0BE27‑5 . A0,  
+6SL3225-0BE31‑1 . A0
+	11.0 kW … 15.0 kW 
+	6SL3202-0AE23-3SA0
+	FSD 
+	6SL3225-0BE31-5 . A0,  
+6SL3225-0BE31-8 . A0
+	18.5 kW … 22 kW 
+	6SL3202-0AE24-6SA0
+	6SL3225-0BE32-2 . A0 
+	30 kW 
+	6SL3202-0AE26-2SA0
+	FSE 
+	6SL3225-0BE33-0 . A0,  
+6SL3225-0BE33-7 . A0
+	37 kW … 45 kW 
+	6SL3202-0AE28-8SA0
+	FSF 
+	6SL3225-0BE34-5 . A0,  
+6SL3225-0BE35-5 . A0
+	55 kW … 75 kW 
+	6SL3202-0AE31-5SA0
+	6SL3225-0BE37-5 . A0 
+	90 kW 
+	6SL3202-0AE31-8SA0
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 47
+Description 
+3.5 Components for the Power Modules 
+3.5.7 Braking resistor 
+The braking resistor allows loads with a high moment of inertia to be quickly  
+braked. 
+The Power Module controls the braking resistor via its integrated braking module. 
+The figure shown on the right-hand side shows as example the braking resistor  
+for a PM240-2 Power Module, FSB. 
+Braking resistors for PM240-2, 380 V … 480 V 
+Power Module FSA 
+	6SL3210‑1PE11‑8 . L1,  
+6SL3210‑1PE12‑3 . L1,  
+6SL3210‑1PE13‑2 . L1,  
+6SL3210‑1PE14‑3 . L1
+	Power 
+0.55 kW … 1.5 kW 
+	Braking resistor 
+6SL3201‑0BE14‑3AA0
+	
+
+	6SL321 . ‑1PE16‑1 . L1,  
+6SL321 . ‑1PE18‑0 . L1
+	2.2 kW … 3.0 kW 
+	6SL3201‑0BE21‑0AA0
+	FSB 
+	6SL3210‑1PE21‑1 . L0,  
+6SL3210‑1PE21‑4 . L0,  
+6SL321 . ‑1PE21‑8 . L0
+	4 kW … 7.5 kW 
+	6SL3201‑0BE21‑8AA0
+	FSC 
+	6SL3210‑1PE22‑7 . L0,  
+6SL321 . ‑1PE23‑3 . L0
+	11 kW … 15 kW 
+	6SL3201‑0BE23‑8AA0
+	FSD 
+	6SL3210‑1PE23‑8 . L0,  
+6SL3210‑1PE24‑5 . L0
+	18.5 kW … 22 kW 
+	JJY:023422620001
+	6SL3210‑1PE26‑0 . L0,  
+6SL3210‑1PE27‑5 . L0
+	30 kW … 37 kW 
+	JJY:023424020001
+	FSE 
+	6SL3210‑1PE28‑8 . L0,  
+6SL3210‑1PE31‑1 . L0
+	45 kW … 55 kW 
+	JJY:023434020001
+	FSF 
+	6SL3210‑1PE31‑5 . L0, 
+6SL3210‑1PE31‑8 . L0,
+	75 kW … 90 kW 
+	JJY:023454020001
+	6SL3210‑1PE32‑1 . L0, 
+6SL3210‑1PE32‑5 . L0
+	90 kW … 132 kW 
+	JJY:023464020001
+	FSG 
+	6SL3210‑1PE33‑0AL0,  
+6SL3210‑1PE33‑7AL0,  
+6SL3210‑1PE34‑8AL0
+	160 kW … 250 kW 
+	6SL3000‑1BE32‑5AA0
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+48 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Braking resistors for PM240-2, 500 V … 690 V 
+Description 
+3.5 Components for the Power Modules 
+
+
+Power Module 
+FSD 6SL3210‑1PH21‑4 . L0,  
+6SL3210‑1PH22‑0 . L0,  
+6SL3210‑1PH22‑3 . L0,  
+6SL3210‑1PH22‑7 . L0,  
+6SL3210‑1PH23‑5 . L0,  
+6SL3210‑1PH24‑2 . L0
+	Power 
+11 kW … 37 kW 
+	Braking resistor 
+JJY:023424020002
+	FSE 
+	6SL3210‑1PH25‑2 . L0,  
+6SL3210‑1PH26‑2 . L0
+	45 kW … 55 kW 
+	JJY:023434020002
+	FSF 
+	6SL3210‑1PH28‑0 . L0, 
+6SL3210‑1PH31‑0 . L0,
+	75 kW … 90 kW 
+	JJY:023464020002
+	6SL3210‑1PH31‑2 . L0, 
+6SL3210‑1PH31‑4 . L0
+	110 kW … 132 kW 
+	JJY:023464020002
+	FSG 
+	6SL3210‑1PH31‑7CL0,  
+6SL3210‑1PH32‑1CL0,  
+6SL3210‑1PH32‑5CL0
+	160 kW … 250 kW 
+	6SL3000‑1BH32‑5AA0
+	
+
+
+
+Braking resistors for PM240-2, 200 V … 240 V 
+ Power Module 
+FSA 6SL3210‑1PB13‑0 . L0,  
+6SL321 . ‑1PB13‑8 . L0
+	Power 
+0.55 kW … 0.75 kW 
+	Braking resistor 
+JJY:023146720008
+	FSB 
+	6SL3210‑1PB15‑5 . L0,  
+6SL3210‑1PB17‑4 . L0,  
+6SL321 . ‑1PB21‑0 . L0
+	1.1 kW … 2.2 kW 
+	JJY:023151720007
+	FSC 
+	6SL3210‑1PB21‑4 . L0,  
+6SL321 . ‑1PB21‑8 . L0
+	3 kW … 4 kW 
+	JJY:02 3163720018
+	6SL3210‑1PC22‑2 . L0,  
+6SL3210‑1PC22‑8 . L0
+	5.5 kW … 7.5 kW 
+	JJY:023433720001
+	FSD 
+	6SL3210‑1PC24‑2UL0, 
+6SL3210‑1PC25‑4UL0, 
+6SL3210‑1PC26‑8UL0
+	11 kW … 18.5 kW 
+	JJY:023422620002
+	FSE 
+	6SL3210‑1PC28‑0UL0, 
+6SL3210‑1PC31‑1UL0
+	22 kW … 30 kW 
+	JJY:023423320001
+	FSF 
+	6SL3210‑1PC31‑3UL0, 
+6SL3210‑1PC31‑6UL0, 
+6SL3210‑1PC31‑8UL0
+	37 kW … 55 kW 
+	JJY:023434020003
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 49
+Description 
+3.5 Components for the Power Modules 
+3.5.8 Brake Relay 
+The Brake Relay has a switch contact (NO contact) for controlling a  
+motor holding brake. 
+Article number: 6SL3252‑0BB00‑0AA0 
+The following Power Modules have a connection possibility for the  
+Brake Relay: 
+● PM240-2 
+● PM240P-2 
+● PM250 
+3.5.9 Safe Brake Relay 
+The Safe Brake Relay controls a 24 V motor brake and monitors the  
+brake control for a short-circuit or interrupted cable. 
+Article number: 6SL3252-0BB01-0AA0 
+The following Power Modules have a connection possibility for the  
+Brake Relay: 
+● PM240-2 
+● PM240P-2 
+● PM250 
+Converter with the CU250S-2 Control Units 
+50 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Description 
+3.6 Motors and multi-motor drives that can be operated 
+3.6 Motors and multi-motor drives that can be operated 
+Siemens motors that can be operated 
+You can connect standard induction motors to the inverter. 
+You can find information on further motors on the Internet: 
+ Motors that can be operated (https://support.industry.siemens.com/cs/ww/en/view/ 
+100426622) 
+Third-party motors that can be operated 
+You can operate standard asynchronous motors from other manufacturers with the inverter: 
+NOTICE
+	Insulation failure due to unsuitable third-party motor 
+A higher load occurs on the motor insulation in inverter mode than with line operation. Damage  to the motor winding may occur as a result. 
+● Please observed the notes in the System Manual "Requirements for third-party motors"
+	
+
+
+
+Further information is provided on the Internet: 
+ Requirements for third-party motors (https://support.industry.siemens.com/cs/ww/en/ view/79690594) 
+Multi-motor operation 
+Multi-motor operation involves simultaneously operating several motors from one inverter. For  standard induction motors, multi-motor operation is generally permissible. 
+Additional preconditions and restrictions relating to multi-motor operation are available on the  Internet: 
+ Multi-motor drive (http://support.automation.siemens.com/WW/view/en/84049346) 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 51
+Description 
+3.7 Encoder and Sensor Module 
+3.7 Encoder and Sensor Module 
+You can connect the following encoders to the Control Unit: 
+● For the position or speed control 
+– Resolver  
+– HTL encoder 
+– TTL encoder 
+– Sine/cosine encoder 
+– EnDat 2.1 
+● For the position control 
+– SSI encoder 
+You require a Sensor Module to connect a non-DRIVE-CLiQ-capable encoder to the DRIVE CLiQ interface of the inverter. 
+Sensor Module 
+	SMC10 
+	Article number 
+6SL3055-0AA00-5AA3 
+	Permissible encoders 
+Resolvers
+	
+
+	SMC20 
+	6SL3055-0AA00-5BA3 
+	sin/cos encoders, absolute encoders En‐ dat 2.1, SSI encoders
+	
+	SMC30 
+	6SL3055-0AA00-5CA2 
+	HTL or TTL encoders, SSI encoders
+	
+	SME20 
+	6SL3055-0AA00-5EA3 
+	sin/cos encoder
+	SME25 
+	6SL3055-0AA00-5HA3 
+	Absolute encoder Endat 2.1, SSI encoder
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+52 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 4 
+4.1 EMC-compliant installation of a machine or system 
+The inverter is designed for operation in industrial environments where strong electromagnetic  fields are to be expected. 
+Reliable and disturbance-free operation is only guaranteed for EMC-compliant installation. To achieve this, subdivide the control cabinet and the machine or system into EMC zones: 
+EMC zones 
+&RQWURO FDELQHW /LQH VXSSO\ 
+)XVHV  VZLWFKHV  DQG  
+FRQWDFWRUV 
+/LQH UHDFWRU RU OLQH ILOWHU 
+,QYHUWHU 
+2XWSXW UHDFWRU RU  
+VLQH ZDYH ILOWHU 
+%UDNLQJ UHVLVWRU 
+   9 SRZHU VXSSO\ 
++LJKHU OHYHO FRQWURO  V\VWHP 
+&RQQHFWLRQ RI VHQVRUV   H J  SRVLWLRQ  SUHVVXUH  RU  WHPSHUDWXUH 
+'ULYHQ PDFKLQH 
+Figure 4-1 Example of the EMC zones of a plant or machine 
+Inside the control cabinet 
+● Zone A: Line supply connection 
+● Zone B: Power electronics 
+Devices in Zone B generate energy-rich electromagnetic fields. 
+● Zone C: Control and sensors 
+Devices in Zone C do not generate any energy-rich electromagnetic fields themselves, but  their functions can be impaired by electromagnetic fields. 
+Outside the control cabinet 
+● Zone D: Motors, braking resistors 
+Devices in Zone D generate electromagnetic fields with a significant amount of energy 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 53
+Installing 
+4.1 EMC-compliant installation of a machine or system 
+4.1.1 Control cabinet 
+● Assign the various devices to zones in the control cabinet. 
+● Electromagnetically uncouple the zones from each other by means of one of the following  actions: 
+– Side clearance ≥ 25 cm 
+– Separate metal enclosure 
+– Large-area partition plates 
+● Route cables of various zones in separate cable harnesses or cable ducts. 
+● Install filters or isolation amplifiers at the interfaces of the zones. 
+Control cabinet assembly 
+● Connect the door, side panels, top and base plate of the control cabinet with the control  cabinet frame using one of the following methods: 
+– Electrical contact surface of several cm² for each contact location 
+– Several screw connections 
+– Short, finely stranded, braided copper wires with cross-sections  
+≥ 95 mm² / 000 (3/0) (‑2) AWG 
+● Install a shield support for shielded cables that are routed out of the control cabinet. 
+● Connect the PE bar and the shield support to the control cabinet frame through a large  surface area to establish a good electrical connection. 
+● Mount the control cabinet components on a bare metal mounting plate. 
+● Connect the mounting plate to the control cabinet frame and PE bar and shield support  through a large surface area to establish a good electrical connection. 
+● For screw connections onto painted or anodized surfaces, establish a good conductive  contact using one of the following methods: 
+– Use special (serrated) contact washers that cut through the painted or anodized surface.  – Remove the insulating coating at the contact locations. 
+Measures required for several control cabinets 
+● Install equipotential bonding for all control cabinets. 
+● Screw the frames of the control cabinets together at several locations through a large  surface area using serrated washers to establish a good electrical connection. 
+● In plants and systems where the control cabinets are lined up next to one another, and  which are installed in two groups back to back, connect the PE bars of the two cabinet  groups at as many locations as possible. 
+Converter with the CU250S-2 Control Units 
+54 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.1 EMC-compliant installation of a machine or system 
+7UDQVIRUPHU0RXQWLQJ SODWH  
+&RQWURO FDELQHW   &RQWURO FDELQHW   
+)XVHV  VZLWFKHV DQG  
+FRQWDFWRUV 
+/  /  /  1 
+3( 
+/LQH ILOWHU 
+,QYHUWHU 
+2XWSXW UHDFWRU RU  VLQH ZDYH ILOWHU 
+6KLHOG VXSSRUW 
+(OHFWULFDOO\  
+FRQGXFWLYH  
+FRQQHFWLRQV  WKURXJK D ODUJH  VXUIDFH DUHD 
+3( 
+(TXLSRWHQWLDO ERQGLQJ )RXQGDWLRQ 
+3( 3( 'ULYHQ PDFKLQH 
+Figure 4-2 Grounding and high-frequency equipotential bonding measures in the control cabinet and  in the plant/system  
+Further information 
+Additional information about EMC-compliant installation is available in the Internet: 
+ EMC installation guideline (http://support.automation.siemens.com/WW/view/en/ 
+60612658) 
+4.1.2 Cables 
+Cables with a high level of interference and cables with a low level of interference are  connected to the inverter: 
+● Cables with a high level of interference: 
+– Cable between the line filter and inverter 
+– Motor cable 
+– Cable at the inverter DC link connection 
+– Cable between the inverter and braking resistor 
+● Cables with a low level of interference: 
+– Cable between the line and line filter 
+– Signal and data cables 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 55
+Installing 
+4.1 EMC-compliant installation of a machine or system 
+Cable routing inside the cabinet 
+● Route the power cables with a high level of interference so that there is a minimum  clearance of 25 cm to cables with a low level of interference. 
+If the minimum clearance of 25 cm is not possible, insert separating metal sheets between  the cables with a high level of interference and cables with a low level of interference.  Connect these separating metal sheets to the mounting plate to establish a good electrical  connection. 
+● Cables with a high level of interference and cables with a low level of interference may only  cross over at right angles: 
+● Keep all of the cables as short as possible. 
+● Route all of the cables close to the mounting plates or cabinet frames.  
+● Route signal and data cables - as well as the associated equipotential bonding cables -  parallel and close to one another. 
+● Twist incoming and outgoing unshielded individual conductors. 
+Alternatively, you can route incoming and outgoing conductors in parallel, but close to one  another. 
+● Ground any unused conductors of signal and data cables at both ends. 
+● Signal and data cables must only enter the cabinet from one side, e.g. from below. ● Using shielded cables for the following connections: 
+– Cable between the inverter and line filter 
+– Cable between the inverter and output reactor or sine-wave filter 
+&RQWURO FDELQHW 
+&RQQHFW VKLHOG 
+(OHFWULFDOO\  
+FRQGXFWLYH  
+)XVHV  VZLWFKHV DQG  FRQWDFWRUV 
+/LQH ILOWHU 
+,QYHUWHU 
+0RXQWLQJ SODWH  
+&RQQHFW VKLHOG 
+&RQQHFW VKLHOG 
+%UDNLQJ UHVLVWRU 
+2XWSXW UHDFWRU RU  
+VLQH ZDYH ILOWHU 
+6KLHOG VXSSRUW 
+FRQQHFWLRQV  WKURXJK D ODUJH  VXUIDFH DUHD 
+Figure 4-3 Routing inverter cables inside and outside a control cabinet 
+Converter with the CU250S-2 Control Units 
+56 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Routing cables outside the control cabinet 
+Installing 
+4.1 EMC-compliant installation of a machine or system 
+● Maintain a minimum clearance of 25 cm between cables with a high level of interference  and cables with a low level of interference. 
+● Using shielded cables for the following connections: 
+– Inverter motor cable 
+– Cable between the inverter and braking resistor 
+– Signal and data cables 
+● Connect the motor cable shield to the motor enclosure using a PG gland that establishes  a good electrical connection. 
+Requirements relating to shielded cables 
+● Use cables with finely-stranded, braided shields. 
+● Connect the shield to at least one end of the cable. 
+  
+%DUH VKLHOG 
+  
+&RQQHFW VKLHOG 
+6KLHOG SODWH 
+7RRWKHG  
+WDSH 
++RVH FODPS 
+Figure 4-4 Examples for EMC-compliant shield support 
+0RXQWLQJ SODWH  
+● Attach the shield to the shield support directly after the cable enters the cabinet. 
+● Do not interrupt the shield. 
+● Only use metallic or metallized plug connectors for shielded data cables. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 57
+Installing 
+4.1 EMC-compliant installation of a machine or system 
+4.1.3 Electromechanical components 
+Surge voltage protection circuit 
+● Connect surge voltage protection circuits to the following components: 
+– Coils of contactors 
+– Relays 
+– Solenoid valves  
+– Motor holding brakes  
+● Connect the surge voltage protection circuit directly at the coil. 
+● Use RC elements or varistors for AC-operated coils and freewheeling diodes or varistors  for DC-operated coils. 
+Converter with the CU250S-2 Control Units 
+58 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.2 Installing reactors, filters and braking resistors 
+4.2 Installing reactors, filters and braking resistors 
+Installing reactors, filters and braking resistors 
+The following supplementary components may be required depending on the Power Modules  and the particular application: 
+● Line reactors 
+● Filter 
+● Braking resistors 
+● Brake Relay 
+Installing these components is described in the documentation provided. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 59
+Installing 
+4.3 Installing Power Modules 
+4.3 Installing Power Modules 
+4.3.1 Basic installation rules for built-in units 
+Protection against the spread of fire 
+The device may be operated only in closed housings or in control cabinets with protective  covers that are closed, and when all of the protective devices are used. The installation of the  device in a metal control cabinet or the protection with another equivalent measure must  prevent the spread of fire and emissions outside the control cabinet. 
+Protection against condensation or electrically conductive contamination 
+Protect the device, e.g. by installing it in a control cabinet with degree of protection IP54  according to IEC 60529 or NEMA 12. Further measures may be necessary for particularly  critical operating conditions. 
+If condensation or conductive pollution can be excluded at the installation site, a lower degree  of control cabinet protection may be permitted. 
+Installing 
+NOTICE
+	Overheating due to inadmissible mounting 
+If mounted in an inadmissible fashion, the Power Module can overheat and therefore be  damaged. 
+● Follow the mounting instructions.
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+60 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Rules for admissible mounting: 
+Installing 
+4.3 Installing Power Modules 
+● Only mount the Power Module in a vertical position with the motor connectors at the bottom. 
+● Maintain the minimum clearances to other components. 
+● Use the specified installation parts and components. 
+● Comply with the specified torques. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 61
+Installing 
+4.3 Installing Power Modules 
+4.3.2 Dimensioned drawings, drilling dimensions for the PM240-2 Power Module, IP20 The following dimension drawings and drilling patterns are not to scale. 
+Frame sizes FSA ... FSC 
+:LGWK 
+'HSWK 
++HLJKW ZLWKRXW  
+VKLHOG SODWH 
+6KLHOG SODWH 
+&8 
+23 
+ F 
+K
+)6$ 
+     
++HLJKW ZLWKRXW VKLHOG  
+SODWH 
+E 
+:LGWK 
+'HSWK 
+&8 
+23 
+E 
+ F 
+K
+6KLHOG  
+SODWH 
+)6% )6& 
+Table 4-1 Dimensions depend on the operator panel (OP) that is inserted 
+Frame  
+size 
+FSA 
+	Width  
+[mm] 
+73 
+	Height [mm] 
+	Mounting depth in the cabinet with  Control Unit (CU) [mm] 2)
+	without shield  
+plate 
+196 
+	with shield plate 276 
+	without OP 
+227 
+	with OP 1)
+238
+	FSB 
+	100 
+	292 
+	370 
+	227 
+	238
+	FSC 
+	140 
+	355 
+	432 
+	227 
+	238
+	
+
+
+
+1) BOP-2, IOP-2 or blanking cover 
+2) Power Module depth without Control Unit: 165 mm 
+Table 4-2 Drilling dimensions, cooling clearances and fixing 
+Frame  
+size 
+FSA 
+	Drilling dimensions [mm] 
+	Cooling air clearances [mm] 1) 
+	Fixing/torque [Nm] 
+3 x M4 / 2.5
+	h 
+186 
+	b 
+62.3 
+	c 
+6 
+	Top 
+80 
+	Bottom 
+100 
+	Front 
+100 
+	FSB 
+	281 
+	80 
+	6 
+	80 
+	100 
+	100 
+	4 x M4 / 2.5
+	FSC 
+	343 
+	120 
+	6 
+	80 
+	100 
+	100 
+	4 x M5 / 3.5
+	
+
+
+
+1) The Power Module is designed for mounting without any lateral cooling air clearance. For tolerance  reasons, we recommend a lateral clearance of approx. 1 mm. 
+Converter with the CU250S-2 Control Units 
+62 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Frame sizes FSD … FSF +HLJKW ZLWKRXW VKLHOG SODWH 
+:LGWK 
+'HSWK ZLWK &8 
+23 
+Installing 
+4.3 Installing Power Modules 
+E 
+F 
+K 
++HLJKW ZLWK VKLHOG SODWH 
+'HSWK 
+6KLHOG  
+SODWH 
+Table 4-3 Dimensions depend on the operator panel (OP) that is inserted 1) 
+Frame  
+size 
+FSD 
+	Width  
+[mm] 
+200 
+	Height [mm] 
+	Mounting depth in the cabinet with  Control Unit (CU) [mm] 2)
+	without shield  
+plate 
+472 
+	with shield plate 624 
+	without OP 
+256 
+	with OP 1)
+267
+	FSE 
+	275 
+	551 
+	728 
+	256 
+	267
+	FSF 
+	305 
+	709 
+	965 
+	376 
+	387
+	FSG 
+	305 
+	1000 
+	1286 
+	376 
+	387
+	
+
+
+
+1) BOP-2, IOP-2 or blanking cover 
+2) Power Module depth without Control Unit: FSD, FSE 237 mm, FSF 357 mm, FSG 358 mm 
+Table 4-4 Drilling dimensions, cooling clearances and fixing 
+Frame  
+size 
+FSD 
+	Drilling dimensions [mm] 
+	Cooling air clearances [mm] 1) 
+	Fixing/torque [Nm] 
+ 4 x M5 / 6.0
+	h 
+430 
+	b 
+170 
+	c 
+7 
+	Top 2) 
+300 
+	Bottom 2) 
+350 
+	Front 
+100
+	FSE 
+	509 
+	230 
+	8.5 
+	300 
+	350 
+	100
+	 4 x M6 / 10
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 63
+Installing 
+4.3 Installing Power Modules 
+Frame  
+size 
+FSF 
+	Drilling dimensions [mm] 
+	Cooling air clearances [mm] 1) 
+	Fixing/torque [Nm] 
+4 x M8 / 25
+	h 
+680 
+	b 
+270 
+	c 
+13 
+	Top 2) 
+300 
+	Bottom 2) 
+350 
+	Front 
+100 
+	FSG 
+	970.5 
+	265 
+	15 
+	300 
+	350 
+	100 
+	4 x M8 / 25
+	
+
+
+
+1) The Power Module is designed for mounting without any lateral cooling air clearance. For tolerance  reasons, we recommend a lateral clearance of approx. 1 mm. 
+2) The top and bottom cooling air clearances refer to the Power Module without shield plate 
+Converter with the CU250S-2 Control Units 
+64 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.3 Installing Power Modules 
+4.3.3 Dimension drawings, drilling dimensions for PM240-2 Power Modules in push through technology 
+The following dimension drawings and drilling patterns are not to scale. 
+Frame sizes FSA ... FSC 
+Panel thickness of the control cabinet ≤ 3.5 mm 
+:LGWK 
+7  
+'HSWK(OHFWULFDO FDELQHW FXWRXW DQG PRXQWLQJ KROHV  
+7  
+&8 
+  
+E 
+  
+F 
+23 
+E 
+   PP 
+F 
+D 
+   PP 
+D 
+)6$ )6& 
++HLJKW 
+D 
+D F 
+)6% 
+H 
+  
+G 
+D D 
+D 
+D 
+F 
+  
+G 
+H 
+D D 
+0RXQWLQJ KROH IRU WKH PRXQWLQJ IUDPH 
+  
+6KLHOG  
+SODWH 
+Figure 4-5 Dimension drawing and drilling dimensions for frame sizes FSA ... FSC 
+Table 4-5 Dimensions depend on the operator panel (OP) that is inserted 
+Frame  
+size 
+FSA 
+	Width  
+[mm] 
+126 
+	Height [mm] 
+	Mounting depth in the cabinet with  Control Unit (CU) [mm]
+	without shield  
+plate 
+238 
+	with shield plate 322 
+	without OP 
+180 
+	with OP 1)
+191
+	FSB 
+	154 
+	345 
+	430 
+	180 
+	191
+	FSC 
+	200 
+	411 
+	500 
+	180 
+	191
+	
+
+
+
+1) BOP-2, IOP-2 or blanking cover 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 65
+Installing 
+4.3 Installing Power Modules 
+Table 4-6 Cooling air clearances and additional dimensions  
+Frame  
+size 
+FSA …  
+FSC
+	Power Module depth [mm] 171 
+	T1 
+118 
+	T2 
+53 
+	Cooling air clearances [mm] 1)
+	Top 
+80 
+	Bottom 
+100 
+	Front 
+100
+	
+
+
+
+1) The Power Module is designed for mounting without any lateral cooling air clearance. For tolerance  reasons, we recommend a lateral clearance of 1 mm. 
+Table 4-7 Electrical cabinet cutout and mounting holes 
+Frame  
+size 
+FSA 
+	Control cabinet cutout [mm] 
+	Fixing/torque [Nm] 
+ 8 × M5 / 3.5
+	a 
+103 
+	b 
+106 
+	c 
+27 
+	d 
+198 
+	e 
+88
+	FSB 
+	148 
+	134 
+	34.5 
+	304 
+	116 
+	8 × M5 / 3.5
+	FSC 
+	123 
+	174 
+	30.5 
+	365 
+	156 
+	10 × M5 / 3.5
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+66 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.3 Installing Power Modules 
+Frame sizes FSD … FSF 
+Panel thickness of the control cabinet ≤ 3.5 mm 
+:LGWK 
+7  &8 
+23 
+&XWRXWV RI WKH FRQWURO FDELQHW DQG PRXQWLQJ KROHV     
++HLJKW   3RZHU 0RGXOH 
+    
+    
+  
+    
+)6' 
+    
+       
+    
+    
+)6) 
+      
+    
+       
+    
++HLJKW  WRWDO 
+   ෪   PP   
+    
+    
+  
+    
+   
+     
+   ෪     PP   
+       
+6KLHOG SODWH 
+7  7  'HSWK 
+)6( 
+   ෪   PP   
+    
+      
+           
+  
+0RXQWLQJ KROH IRU WKH PRXQWLQJ  IUDPH 
+Figure 4-6 Dimension drawing and drilling dimensions for frame sizes FSD ... FSF 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 67
+Installing 
+4.3 Installing Power Modules 
+Table 4-8 Dimensions depend on the operator panel (OP) that is inserted 1) 
+Frame  
+size 
+FSD 
+	Width  
+[mm] 
+275 
+	Height [mm] 
+	Mounting depth in the cabinet with  Control Unit (CU) [mm]
+	without shield  
+plate 
+517 
+	with shield plate 650 
+	without OP 
+158 
+	with OP 1)
+169
+	FSE 
+	354 
+	615 
+	722 
+	158 
+	169
+	FSF 
+	384 
+	754 
+	1021 
+	196 
+	207
+	
+
+
+
+1) BOP-2, IOP-2 or blanking cover 
+Table 4-9 Cooling air clearances and additional dimensions 
+Frame  
+size 
+FSD, FSE 
+	Power Module depth [mm] 237 
+	T1 
+141 
+	T2 
+97.5 
+	Cooling air clearances [mm]
+	Top 
+350 
+	Bottom 
+350 
+	Front 
+29
+	FSF 
+	358 
+	177.5 
+	180.5 
+	80 
+	100 
+	100
+	
+
+
+
+Table 4-10 Mounting 
+Frame  
+size 
+FSD, FSE 
+	Fixing/torque [Nm] 
+10 × M5 / 3.5
+	FSF 
+	12 × M6 / 5.9
+	
+
+
+
+Converter with the CU250S-2 Control Units 
+68 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.3 Installing Power Modules 
+4.3.4 Dimensioned drawings, drilling dimensions for the PM250 Power Module The following dimension drawings and drilling patterns are not to scale. 
+Frame size FSC 
+    
+    
+    
+&8 
+23 
+  
+    
+    
+    
+Table 4-11 Dimensions depend on the operator panel (OP) that is inserted 
+Frame  
+size 
+FSC 
+	Mounting depth in the cabinet with Control Unit (CU) [mm]
+	without OP 
+227 
+	with OP 1)
+238
+	
+
+
+
+1) BOP-2, IOP-2 or blanking cover 
+Table 4-12 Cooling air clearances and fastening 
+Frame  
+size 
+FSC 
+	Cooling air clearances [mm] 1) 
+	Fixing/torque [Nm] 
+4 x M5 / 3
+	Top 
+125 
+	Bottom 
+125 
+	Front 
+65 
+	
+
+
+
+1) You can mount the Power Modules without any lateral cooling air clearance. For tolerance reasons,  we recommend a lateral clearance of approx. 1 mm. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 69
+Installing 
+4.3 Installing Power Modules Frame sizes FSD … FSF :LGWK 
++HLJKW 
+6KLHOG SODWH 
+'HSWK 
+&8 
+23 
+E 
+F 
+K 
+Table 4-13 Dimensions depend on the operator panel (OP) that is inserted 1) 
+Frame  
+size 
+FSD with‐ out filter
+	Width  
+[mm] 
+275 
+	Height [mm] 
+	Mounting depth in the cabinet with  Control Unit (CU) [mm] 2)
+	without shield  
+plate 
+419 
+	with shield plate 542 
+	without OP 
+266 
+	with OP 1)
+277
+	FSD with  filter
+	275 
+	512 
+	635 
+	266 
+	277
+	FSE with‐ out filter
+	275 
+	499 
+	622 
+	266 
+	277
+	FSE with  filter
+	275 
+	635 
+	758 
+	266 
+	277
+	FSF with‐ out filter
+	350 
+	634 
+	792 
+	378 
+	389
+	FSF with  filter
+	350 
+	934 
+	1092 
+	378 
+	389
+	
+
+
+
+1) BOP-2, IOP-2 or blanking cover 
+2) Power Module depth without Control Unit: FSD, FSE 204 mm, FSF 316 mm 
+Converter with the CU250S-2 Control Units 
+70 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.3 Installing Power Modules 
+Table 4-14 Drilling dimensions, cooling clearances and fixing 
+Frame size 
+FSD without filter 
+	Drilling dimensions [mm] 
+	Cooling air clearances [mm] 1) 
+	Fixing/torque  
+[Nm] 
+ 4 x M6 / 6
+	b 
+235 
+	h 
+325 
+	c 
+11 
+	Top 
+300 
+	Bottom 
+300 
+	Front 
+65
+	FSD with filter 
+	235 
+	419 
+	11 
+	300 
+	300 
+	65
+	 4 x M6 / 6
+	FSE without filter 
+	235 
+	405 
+	11 
+	300 
+	300 
+	65
+	 4 x M6 / 6
+	FSE with filter 
+	235 
+	541 
+	11 
+	300 
+	300 
+	65
+	 4 x M6 / 6
+	FSF without filter 
+	300 
+	598 
+	11 
+	350 
+	350 
+	65 
+	4 x M8 / 13
+	FSF with filter 
+	300 
+	898 
+	11 
+	350 
+	350 
+	65 
+	4 x M8 / 13
+	
+
+
+
+1) You can mount the Power Modules without any lateral cooling air clearance. For tolerance reasons,  we recommend a lateral clearance of approx. 1 mm. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 71
+Installing 
+4.4 Connecting the line supply and motor 
+4.4 Connecting the line supply and motor 
+
+WARNING
+	Electric shock when the motor terminal box is open 
+As soon as the inverter is connected to the line supply, the motor connections of the inverter  may carry dangerous voltages. When the motor is connected to the inverter, there is danger  to life through contact with the motor terminals if the motor terminal box is open. ● Close the motor terminal box before connecting the inverter to the line supply.
+	
+
+
+
+Note 
+Fault protection for the motor circuit 
+The electronic overcurrent trip complies with the requirements laid down in IEC  60364-3-2:2005/AMD1:- Section 411 for protection against electric shock. ● Observe the installation specifications provided in this manual. 
+● Observe the applicable installation standards. 
+● Ensure the continuity of the protective conductor. 
+4.4.1 Permissible line supplies 
+Restrictions for installation altitudes above 2000 m 
+Above an installation altitude of 2000 m, the permissible line supplies are restricted. 
+ Restrictions for special ambient conditions (Page 478) 
+Converter with the CU250S-2 Control Units 
+72 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+Installing 
+4.4 Connecting the line supply and motor 
+Screw for functional grounding on the converter, frame size FSG 
+If you wish to use the inverters with integrated C3 line filter, please note the information in the  sections "TN line system", "TT line system" and "IT system" below. 
+Figure 4-7 Remove screw for functional grounding 
+4.4.1.1 TN line system 
+A TN line system transfers the PE protective  conductor to the installed plant or system us‐ ing a cable. 
+Generally, in a TN line system the neutral  point is grounded. There are versions of a TN  system with a grounded line conductor, e.g.  with grounded L1. 
+([DPSOH  6HSDUDWH WUDQVIHU RI 1 DQG 3(   JURXQGHG QHXWUDO SRLQW 
+/  
+/  
+/  
+1 
+3( 
+A TN line system can transfer the neutral con‐ 
+ductor N and the PE protective conductor ei‐ 
+ther separately or combined. 
+Converter with the CU250S-2 Control Units 
+7UDQVIRUPHU RU  JHQHUDWRU 
+7R WKH V\VWHP 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 73
+Installing 
+4.4 Connecting the line supply and motor 
+Inverter connected to a TN system 
+● Inverters with integrated line filter:  
+– Operation on TN line systems with grounded neutral point permissible. 
+– Operation on TN line systems with grounded line conductor not permissible. 
+Note 
+Special feature of FSG inverters 
+FSG inverters with integrated C3 line filter can be operated in TN line systems ≤ 600 V  with a grounded line conductor if you remove the screw for functional grounding. 
+Figure 4-7 Remove screw for functional grounding (Page 73) 
+If you remove the screw for functional grounding, the EMC properties deteriorate and  the requirements of Class C3 are no longer met. 
+● Inverters with external line filter:  
+– Operation on TN line systems with grounded neutral point permissible. 
+– Operation on TN line systems with grounded line conductor not permissible. 
+● Inverter without line filter: 
+– Operation on all TN line systems ≤ 600 V permissible 
+– Operation on TN line systems > 600 V and grounded neutral point permissible. 
+– Operation on TN line systems > 600 V and grounded line conductor not permissible. 
+Converter with the CU250S-2 Control Units 
+74 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+4.4.1.2 TT line system 
+In a TT line system, the transformer grounding  
+and the installation grounding are independ‐ 
+ent of one another. 
+There are TT line supplies where the neutral  
+conductor N is either transferred – or not. 
+Installing 
+4.4 Connecting the line supply and motor 
+([DPSOH  7UDQVIHU RI 1  JURXQGHG QHXWUDO  SRLQW 
+/  
+/  
+/  
+1 
+3( 
+Note 
+Operation in IEC or UL systems 
+7UDQVIRUPHU RU  JHQHUDWRU 
+7R WKH V\VWHP 
+For installations in compliance with IEC, operation on TT line systems is permissible. For  installations in compliance with UL, operation on TT line systems is not permissible. 
+Inverter connected to a TT system 
+● Inverters with integrated line filter: 
+– Operation on TT line systems with grounded neutral point permissible. 
+– Operation on TT line systems without grounded neutral point not permissible. 
+Note 
+Special feature of FSG inverters 
+FSG inverters with integrated C3 line filter can be operated in TT line systems without  a grounded neutral point if you remove the screw for functional grounding. 
+Figure 4-7 Remove screw for functional grounding (Page 73) 
+If you remove the screw for functional grounding, the EMC properties deteriorate and  the requirements of Class C3 are no longer met. 
+● Inverters with external line filter: 
+– Operation on TT line systems with grounded neutral point permissible. 
+– Operation on TT line systems without grounded neutral point not permissible. 
+● Inverter without line filter:  
+– Operation on all TT line systems permissible. 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 75
+Installing 
+4.4 Connecting the line supply and motor 
+4.4.1.3 IT system 
+In an IT line system, all of the conductors are  
+insulated with respect to the PE protective  
+conductor – or connected to the PE protective  
+conductor through an impedance. 
+There are IT systems with and without transfer  
+of the neutral conductor N. 
+Note 
+([DPSOH  
+7UDQVIRUPHU RU  JHQHUDWRU 
+7UDQVIHU RI 1  LPSHGDQFH ZLWK  UHVSHFW WR 3( SURWHFWLYH FRQGXFWRU 
+/  
+/  
+/  
+1 
+3( 
+7R WKH V\VWHP 
+Behavior of the inverter when a ground fault occurs 
+If the inverter is to remain operable even when a ground fault occurs at the inverter output,  you must install an output reactor. This prevents an overcurrent trip or damage to the drive.  
+Inverter connected to an IT system 
+● Inverters with integrated line filter:  
+– Operation on IT line systems not permissible. 
+Note 
+Special feature of FSG inverters 
+FSG inverters with integrated C3 line filter can be operated in IT line systems if you  
+remove the screw for functional grounding.  
+Figure 4-7 Remove screw for functional grounding (Page 73) 
+If you remove the screw for functional grounding, the EMC properties deteriorate and  the requirements of Class C3 are no longer met. 
+● Inverter without line filter:  
+– Operation on all IT line systems permissible. 
+Note 
+690 V inverters: Output reactors for frame sizes FSD and FSE 
+An output reactor is required for 690 V reactors in frame sizes FSD and FSE. 
+Converter with the CU250S-2 Control Units 
+76 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
+4.4.2 Protective conductor 
+Installing 
+4.4 Connecting the line supply and motor 
+
+WARNING
+	Electric shock due to interrupted protective conductor 
+The drive components conduct a high leakage current via the protective conductor. Touching  conductive parts when the protective conductor is interrupted can result in death or serious  injury. 
+● Dimension the protective conductor as stipulated in the appropriate regulations. 
+	
+
+
+
+Dimensioning the protective conductor 
+Observe the local regulations for protective conductors subject to an increased leakage current  at the site of operation. 
+/ /  
+/  
+3( 
+  
+  
+    
+① Protective conductor for line feeder cables 
+② Protective conductor for inverter line feeder cables  
+③ Protective conductor between PE and the control cabinet 
+④ Protective conductor for motor feeder cables 
+The minimum cross-section of the protective conductor ① … ④ depends on the cross-section  of the line or motor feeder cable: 
+● Line or motor feeder cable ≤ 16 mm2 
+⇒ Minimum cross-section of the protective conductor = cross-section of the line or motor  feeder cable 
+● 16 mm² < line or motor feeder cable ≤ 35 mm2 
+⇒ Minimum cross-section of the protective conductor = 16 mm2 
+● Line or motor feeder cable > 35 mm2 
+⇒ Minimum cross-section of the protective conductor = ½ cross-section of the line or motor  feeder cable 
+Converter with the CU250S-2 Control Units 
+Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG 77
+Installing 
+4.4 Connecting the line supply and motor 
+Additional requirements placed on the protective conductor ①: 
+● For permanent connection, the protective conductor must fulfill at least one of the following  conditions: 
+– The protective conductor is routed so that it is protected against damage along its  complete length. 
+Cables routed inside switch cabinets or enclosed machine housings are considered to  be adequately protected against mechanical damage. 
+– As a conductor of a multi-conductor cable, the protective conductor has a cross-section  ≥ 2.5 mm² Cu. 
+– For an individual conductor, the protective conductor has a cross-section ≥ 10 mm² Cu. 
+– The protective conductor consists of two individual conductors with the same cross section. 
+● When connecting a multi-core cable using an industrial plug connector according to EN  60309, the protective conductor must have a cross-section of ≥ 2.5 mm² Cu. 
+Converter with the CU250S-2 Control Units 
+78 Operating Instructions, 04/2018, FW V4.7 SP10, A5E31759476B AG
