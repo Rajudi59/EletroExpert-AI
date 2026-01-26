@@ -10,7 +10,7 @@
             --azul: #005792;
             --verde-rec: #2ecc71;
             --cinza-claro: #f1f3f4;
-            --vermelho: #b84a4a;
+            --vermelho-fosco: #b84a4a; /* Cor Vermelho Fosco Técnica */
         }
 
         body {
@@ -50,9 +50,16 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: none;
         }
 
-        .seguranca-box {
-            background: #fff4f4; border-left: 5px solid var(--vermelho);
-            padding: 12px; font-size: 13px; color: #852d2d; margin-bottom: 15px;
+        /* BLOCO DE SEGURANÇA E OBSERVAÇÕES EM VERMELHO FOSCO */
+        .alerta-seguranca, .obs-importante {
+            background: #fff4f4; 
+            border-left: 5px solid var(--vermelho-fosco);
+            padding: 15px; 
+            font-size: 13px; 
+            color: var(--vermelho-fosco); 
+            margin-bottom: 15px;
+            border-radius: 4px;
+            line-height: 1.5;
         }
 
         /* BARRA DE COMANDO INFERIOR */
@@ -100,10 +107,15 @@
 
 <div class="main-container">
     <div id="resultado" class="container-res">
-        <div class="seguranca-box">
-            ⚠️ <strong>NR-10:</strong> Proteja sua vida. Use EPIs e confirme a ausência de tensão antes de qualquer intervenção técnica.
+        <div class="alerta-seguranca">
+            ⚠️ <strong>NORMAS TÉCNICAS (NR-10 / NR-12):</strong> Segurança em primeiro lugar. Utilize todos os EPIs necessários e realize o bloqueio de energias antes de iniciar o serviço.
         </div>
+        
         <div id="conteudo"></div>
+
+        <div class="obs-importante" style="margin-top: 20px;">
+            ℹ️ <strong>OBSERVAÇÃO:</strong> Caso o problema persista após os procedimentos acima, consulte o suporte do fabricante.
+        </div>
     </div>
 </div>
 
@@ -168,7 +180,7 @@
         const texto = textarea.value.trim();
         if(!texto) return;
         resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Analisando manuais e normas...</em>";
+        conteudoDiv.innerHTML = "<em>Analisando acervo e normas regulamentadoras...</em>";
         try {
             const res = await fetch("/chat", {
                 method: "POST",
