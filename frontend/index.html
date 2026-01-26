@@ -10,7 +10,7 @@
             --azul: #005792;
             --verde-rec: #2ecc71;
             --cinza-claro: #f1f3f4;
-            --vermelho-fosco: #b84a4a; /* Cor Vermelho Fosco Técnica */
+            --vermelho-fosco: #b84a4a; /* Vermelho Fosco Padrão NR */
         }
 
         body {
@@ -19,7 +19,7 @@
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* RÉGUA SUPERIOR - 3 COLUNAS IGUAIS */
+        /* RÉGUA SUPERIOR */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
             background: #fff; display: flex; 
@@ -28,15 +28,11 @@
 
         .nav-item {
             flex: 1; display: flex; align-items: center; justify-content: center;
-            padding: 15px 5px; border-right: 1px solid #eee;
-            text-decoration: none; font-size: 11px; font-weight: 700;
-            color: #555; cursor: pointer; text-align: center;
-            background: #fff; border: none; outline: none;
+            padding: 15px 5px; text-decoration: none; font-size: 11px; font-weight: 700;
+            color: #555; cursor: pointer; text-align: center; background: #fff; border: none;
         }
-        .nav-item:last-child { border-right: none; }
         .nav-item:hover { background: #f9f9f9; }
-
-        .logo-item { color: var(--azul); font-size: 13px; }
+        .logo-item { color: var(--azul); font-size: 13px; border-right: 1px solid #eee; }
         .logo-item span { background: #ffcc00; color: #000; padding: 2px 4px; border-radius: 3px; margin-right: 4px; }
 
         /* ÁREA CENTRAL */
@@ -50,7 +46,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: none;
         }
 
-        /* BLOCO DE SEGURANÇA E OBSERVAÇÕES EM VERMELHO FOSCO */
+        /* PADRONIZAÇÃO DO VERMELHO FOSCO PARA SEGURANÇA E OBSERVAÇÕES */
         .alerta-seguranca, .obs-importante {
             background: #fff4f4; 
             border-left: 5px solid var(--vermelho-fosco);
@@ -60,6 +56,7 @@
             margin-bottom: 15px;
             border-radius: 4px;
             line-height: 1.5;
+            font-weight: 500;
         }
 
         /* BARRA DE COMANDO INFERIOR */
@@ -101,20 +98,20 @@
 
 <nav class="navbar">
     <div class="nav-item logo-item"><span>⚡</span>Expert</div>
-    <button class="nav-item" onclick="abrirModal()">📝 REGISTRAR SOLUÇÃO</button>
-    <a href="mailto:electroexpertdio@gmail.com?subject=Solicitação de Contrato/Parceria - ElectroExpert&body=Olá, Dionizio. Gostaria de conversar sobre o sistema ElectroExpert AI." class="nav-item">📧 CONTATO COMERCIAL</a>
+    <button class="nav-item" onclick="abrirModal()" style="border-right: 1px solid #eee;">📝 REGISTRAR SOLUÇÃO</button>
+    <a href="mailto:electroexpertdio@gmail.com?subject=Contato ElectroExpert&body=Olá Dionizio, vim pelo site." class="nav-item">📧 CONTATO COMERCIAL</a>
 </nav>
 
 <div class="main-container">
     <div id="resultado" class="container-res">
         <div class="alerta-seguranca">
-            ⚠️ <strong>NORMAS TÉCNICAS (NR-10 / NR-12):</strong> Segurança em primeiro lugar. Utilize todos os EPIs necessários e realize o bloqueio de energias antes de iniciar o serviço.
+            ⚠️ <strong>NORMAS DE SEGURANÇA (NR-10):</strong> Antes de qualquer medição ou intervenção, certifique-se do uso de EPIs e da correta desenergização do circuito.
         </div>
         
-        <div id="conteudo"></div>
+        <div id="conteudo" style="line-height: 1.6; font-size: 15px; color: #444;"></div>
 
         <div class="obs-importante" style="margin-top: 20px;">
-            ℹ️ <strong>OBSERVAÇÃO:</strong> Caso o problema persista após os procedimentos acima, consulte o suporte do fabricante.
+            ℹ️ <strong>OBSERVAÇÃO TÉCNICA:</strong> Os dados fornecidos baseiam-se no acervo disponível. Sempre confronte com a plaqueta de identificação do equipamento.
         </div>
     </div>
 </div>
@@ -134,7 +131,7 @@
         <h3 style="margin-top:0">Relatório de Campo</h3>
         <textarea id="textoFeedback" style="width:100%; height:100px; border-radius:8px; padding:10px; border:1px solid #ddd;" placeholder="Como você resolveu esse problema?"></textarea>
         <div style="display:flex; gap:10px; margin-top:15px;">
-            <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px;" onclick="enviarFeedback()">SALVAR NO ACERVO</button>
+            <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px;" onclick="enviarFeedback()">SALVAR</button>
             <button class="nav-item" style="flex:1; border-radius:8px;" onclick="fecharModal()">FECHAR</button>
         </div>
     </div>
@@ -165,22 +162,15 @@
 
     function toggleVoz() {
         if (!recognition) return alert("Navegador sem suporte a voz");
-        if (!gravando) { 
-            recognition.start(); 
-            gravando = true; 
-            btnMic.classList.add("btn-mic-active"); 
-        } else { 
-            recognition.stop(); 
-            gravando = false; 
-            btnMic.classList.remove("btn-mic-active"); 
-        }
+        if (!gravando) { recognition.start(); gravando = true; btnMic.classList.add("btn-mic-active"); }
+        else { recognition.stop(); gravando = false; btnMic.classList.remove("btn-mic-active"); }
     }
 
     async function processarEntrada() {
         const texto = textarea.value.trim();
         if(!texto) return;
         resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Analisando acervo e normas regulamentadoras...</em>";
+        conteudoDiv.innerHTML = "<em>Processando dados técnicos...</em>";
         try {
             const res = await fetch("/chat", {
                 method: "POST",
@@ -188,19 +178,20 @@
                 body: JSON.stringify({ question: texto })
             });
             const data = await res.json();
+            // Formatação básica para negritos e quebras de linha
             conteudoDiv.innerHTML = data.answer.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             textarea.value = "";
             window.scrollTo(0, 0);
-        } catch (e) { conteudoDiv.innerHTML = "Erro de conexão com o servidor."; }
+        } catch (e) { conteudoDiv.innerHTML = "Falha na comunicação com o servidor."; }
     }
 
     function abrirModal() { document.getElementById("modalFeedback").style.display = "block"; }
     function fecharModal() { document.getElementById("modalFeedback").style.display = "none"; }
     async function enviarFeedback() {
         const fb = document.getElementById("textoFeedback").value;
-        if(!fb) return alert("Por favor, descreva a solução.");
+        if(!fb) return alert("Descreva a solução.");
         await fetch("/feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ feedback: fb }) });
-        alert("Sua experiência foi salva com sucesso!"); fecharModal();
+        alert("Solução arquivada com sucesso!"); fecharModal();
     }
 </script>
 </body>
