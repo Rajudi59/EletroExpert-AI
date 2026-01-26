@@ -15,38 +15,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul: #005792;
+            --azul-link: #005792;
             --verde-rec: #2ecc71;
-            --cinza-claro: #f1f3f4;
-            --vermelho-fosco: #b84a4a; 
+            --cinza-bg: #e5e5e5;
+            --cinza-input: #f1f3f4;
+            --vermelho-fosco: #b84a4a;
+            --cinza-regua: #f8f9fa; /* Cinza bem claro para o início do degradê */
         }
 
         body {
             margin: 0; font-family: 'Inter', sans-serif;
-            background: #e5e5e5; color: #333;
+            background: var(--cinza-bg); color: #333;
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* RÉGUA SUPERIOR - 3 COLUNAS */
+        /* RÉGUA SUPERIOR - DEGRADÊ CINZA CLARO PARA BRANCO */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: #fff; display: flex; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000;
+            background: linear-gradient(to bottom, var(--cinza-regua) 0%, #ffffff 100%);
+            display: flex; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); z-index: 1000;
+            border-bottom: 1px solid #ddd;
         }
 
         .nav-item {
             flex: 1; display: flex; align-items: center; justify-content: center;
-            padding: 15px 5px; text-decoration: none; font-size: 11px; font-weight: 700;
-            color: #555; cursor: pointer; text-align: center; background: #fff; border: none;
+            padding: 18px 5px; text-decoration: none; font-size: 11px; font-weight: 700;
+            color: #444; cursor: pointer; text-align: center; 
+            background: transparent; border: none; outline: none;
+            transition: background 0.2s;
         }
-        .nav-item:hover { background: #f9f9f9; }
-        .logo-item { color: var(--azul); font-size: 13px; border-right: 1px solid #eee; }
+
+        .nav-item:not(:last-child) {
+            border-right: 1px solid #eee;
+        }
+
+        .nav-item:hover { background: rgba(0, 0, 0, 0.03); }
+
+        .logo-item { color: var(--azul-link); font-size: 13px; }
         .logo-item span { background: #ffcc00; color: #000; padding: 2px 4px; border-radius: 3px; margin-right: 4px; }
 
         /* ÁREA CENTRAL */
         .main-container { 
             flex: 1; width: 100%; max-width: 800px; 
-            margin: 80px auto 140px; padding: 0 15px; box-sizing: border-box;
+            margin: 90px auto 140px; padding: 0 15px; box-sizing: border-box;
         }
         
         .container-res {
@@ -70,14 +82,14 @@
 
         .input-container {
             max-width: 800px; margin: 0 auto; display: flex; align-items: center;
-            background: var(--cinza-claro); border-radius: 30px; padding: 5px 10px; 
+            background: var(--cinza-input); border-radius: 30px; padding: 5px 10px; 
             width: 94%; box-sizing: border-box; gap: 8px;
         }
 
         #pergunta {
             flex: 1; border: none; background: #fff; padding: 10px 15px;
             outline: none; font-size: 15px; font-family: inherit; resize: none;
-            border-radius: 20px; height: 42px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 20px; height: 42px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
         }
 
         .icon-btn { 
@@ -90,7 +102,7 @@
             box-shadow: 0 0 10px var(--verde-rec);
         }
 
-        .send-btn { background: var(--azul); color: white; padding: 10px; }
+        .send-btn { background: var(--azul-link); color: white; padding: 10px; }
 
         /* MODAL */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
@@ -101,20 +113,20 @@
 
 <nav class="navbar">
     <div class="nav-item logo-item"><span>⚡</span>Expert</div>
-    <button class="nav-item" onclick="abrirModal()" style="border-right: 1px solid #eee;">📝 REGISTRAR SOLUÇÃO</button>
+    <button class="nav-item" onclick="abrirModal()">📝 REGISTRAR SOLUÇÃO</button>
     <a href="mailto:electroexpertdio@gmail.com?subject=Contato ElectroExpert&body=Olá Dionizio, vim pelo site." class="nav-item">📧 CONTATO COMERCIAL</a>
 </nav>
 
 <div class="main-container">
     <div id="resultado" class="container-res">
         <div class="alerta-seguranca">
-            ⚠️ <strong>SEGURANÇA (NR-10):</strong> Use EPIs, bloqueie energias e verifique a ausência de tensão antes de qualquer intervenção.
+            ⚠️ <strong>SEGURANÇA (NR-10):</strong> Use EPIs, realize o bloqueio de energias e verifique a ausência de tensão antes de qualquer intervenção. A segurança do operador é prioridade absoluta.
         </div>
         
         <div id="conteudo" style="line-height: 1.6; font-size: 15px; color: #444;"></div>
 
         <div class="obs-importante" style="margin-top: 20px;">
-            ℹ️ <strong>OBSERVAÇÃO:</strong> Siga as normas técnicas brasileiras e as especificações do fabricante.
+            ℹ️ <strong>OBSERVAÇÃO TÉCNICA:</strong> Esta resposta é baseada no acervo disponível. Consulte sempre o manual oficial do fabricante para confirmação de parâmetros.
         </div>
     </div>
 </div>
@@ -132,10 +144,10 @@
 <div id="modalFeedback" class="modal">
     <div class="modal-content">
         <h3 style="margin-top:0">Relatório de Solução</h3>
-        <textarea id="textoFeedback" style="width:100%; height:100px; border-radius:8px; padding:10px; border:1px solid #ddd;" placeholder="Descreva como resolveu..."></textarea>
+        <textarea id="textoFeedback" style="width:100%; height:100px; border-radius:8px; padding:10px; border:1px solid #ddd;" placeholder="Como você resolveu esse problema?"></textarea>
         <div style="display:flex; gap:10px; margin-top:15px;">
             <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px;" onclick="enviarFeedback()">SALVAR</button>
-            <button class="nav-item" style="flex:1; border-radius:8px;" onclick="fecharModal()">FECHAR</button>
+            <button class="nav-item" style="flex:1; border-radius:8px; border: 1px solid #ddd;" onclick="fecharModal()">FECHAR</button>
         </div>
     </div>
 </div>
@@ -173,7 +185,7 @@
         const texto = textarea.value.trim();
         if(!texto) return;
         resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Buscando no acervo técnico...</em>";
+        conteudoDiv.innerHTML = "<em>Analisando manuais...</em>";
         try {
             const res = await fetch("/chat", {
                 method: "POST",
@@ -184,16 +196,16 @@
             conteudoDiv.innerHTML = data.answer.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             textarea.value = "";
             window.scrollTo(0, 0);
-        } catch (e) { conteudoDiv.innerHTML = "Erro de conexão."; }
+        } catch (e) { conteudoDiv.innerHTML = "Falha na conexão com o servidor."; }
     }
 
     function abrirModal() { document.getElementById("modalFeedback").style.display = "block"; }
     function fecharModal() { document.getElementById("modalFeedback").style.display = "none"; }
     async function enviarFeedback() {
         const fb = document.getElementById("textoFeedback").value;
-        if(!fb) return alert("Por favor, preencha a solução.");
+        if(!fb) return alert("Por favor, descreva a solução.");
         await fetch("/feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ feedback: fb }) });
-        alert("Experiência registrada!"); fecharModal();
+        alert("Experiência arquivada!"); fecharModal();
     }
 </script>
 </body>
