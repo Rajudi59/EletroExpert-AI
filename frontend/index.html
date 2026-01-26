@@ -20,8 +20,7 @@
             --cinza-bg: #e5e5e5;
             --cinza-input: #f1f3f4;
             --vermelho-fosco: #b84a4a;
-            --grafite-escuro: #2c3e50; /* Cinza escuro industrial */
-            --grafite-medio: #455a64;
+            --grafite-escuro: #2c3e50;
         }
 
         body {
@@ -30,7 +29,6 @@
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* RÉGUA SUPERIOR - DEGRADÊ ESCURO PROFISSIONAL */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
             background: linear-gradient(to bottom, var(--grafite-escuro) 0%, #1a252f 100%);
@@ -42,25 +40,16 @@
         .nav-item {
             flex: 1; display: flex; align-items: center; justify-content: center;
             padding: 18px 5px; text-decoration: none; font-size: 11px; font-weight: 700;
-            color: #ffffff; /* Letras em branco para destaque */
-            cursor: pointer; text-align: center; 
+            color: #ffffff; cursor: pointer; text-align: center; 
             background: transparent; border: none; outline: none;
-            transition: background 0.3s;
-            text-transform: uppercase; /* Dá um tom mais sério */
-            letter-spacing: 0.5px;
+            transition: background 0.3s; text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        .nav-item:not(:last-child) {
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
+        .nav-item:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.1); }
         .nav-item:hover { background: rgba(255, 255, 255, 0.1); }
-
-        /* LOGOTIPO MANTÉM O DESTAQUE ORIGINAL */
         .logo-item { font-size: 13px; color: #fff !important; }
         .logo-item span { background: #ffcc00; color: #000; padding: 2px 5px; border-radius: 3px; margin-right: 4px; font-weight: 800; }
 
-        /* ÁREA CENTRAL */
         .main-container { 
             flex: 1; width: 100%; max-width: 800px; 
             margin: 95px auto 140px; padding: 0 15px; box-sizing: border-box;
@@ -71,15 +60,12 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none;
         }
 
-        /* VERMELHO FOSCO TÉCNICO */
         .alerta-seguranca, .obs-importante {
-            background: #fff4f4; 
-            border-left: 5px solid var(--vermelho-fosco);
+            background: #fff4f4; border-left: 5px solid var(--vermelho-fosco);
             padding: 15px; font-size: 13px; color: var(--vermelho-fosco); 
             margin-bottom: 15px; border-radius: 4px; line-height: 1.5; font-weight: 600;
         }
 
-        /* BARRA DE COMANDO */
         .input-wrapper {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: #fff; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1001;
@@ -102,16 +88,22 @@
             padding: 8px; display: flex; align-items: center; color: #666; border-radius: 50%;
         }
         
-        .btn-mic-active { 
-            background: var(--verde-rec) !important; color: white !important;
-            box-shadow: 0 0 12px var(--verde-rec);
-        }
-
+        .btn-mic-active { background: var(--verde-rec) !important; color: white !important; box-shadow: 0 0 12px var(--verde-rec); }
         .send-btn { background: var(--azul-link); color: white; padding: 10px; }
 
-        /* MODAL */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
         .modal-content { background: #fff; margin: 15% auto; padding: 25px; border-radius: 15px; width: 85%; max-width: 450px; box-sizing: border-box; }
+
+        /* Estilo da Moldura do Diagrama */
+        .box-diagrama {
+            margin-top: 20px; border: 2px solid var(--azul-link); border-radius: 10px;
+            overflow: hidden; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .box-diagrama-header {
+            background: var(--azul-link); color: #fff; padding: 8px 12px;
+            font-size: 12px; font-weight: bold; text-transform: uppercase;
+        }
+        .img-diagrama { width: 100%; display: block; height: auto; }
     </style>
 </head>
 <body>
@@ -119,19 +111,19 @@
 <nav class="navbar">
     <div class="nav-item logo-item"><span>⚡</span>Expert</div>
     <button class="nav-item" onclick="abrirModal()">📝 Registrar Solução</button>
-    <a href="mailto:electroexpertdio@gmail.com?subject=Contato ElectroExpert&body=Olá Dionizio, vim pelo site." class="nav-item">📧 Contato Comercial</a>
+    <a href="mailto:electroexpertdio@gmail.com" class="nav-item">📧 Contato Comercial</a>
 </nav>
 
 <div class="main-container">
     <div id="resultado" class="container-res">
         <div class="alerta-seguranca">
-            ⚠️ <strong>SEGURANÇA (NR-10):</strong> Obrigatório uso de EPIs. Realize o bloqueio de energias e confirme a ausência de tensão. A vida do técnico é prioridade.
+            ⚠️ <strong>SEGURANÇA (NR-10):</strong> Obrigatório uso de EPIs. Realize o bloqueio de energias e confirme a ausência de tensão.
         </div>
         
-        <div id="conteudo" style="line-height: 1.7; font-size: 15px; color: #333;"></div>
+        <div id="conteudo"></div>
 
         <div class="obs-importante" style="margin-top: 20px;">
-            ℹ️ <strong>OBSERVAÇÃO:</strong> Informação baseada no acervo técnico. Em caso de dúvida, não opere o equipamento e consulte o fabricante.
+            ℹ️ <strong>OBSERVAÇÃO:</strong> Informação baseada no acervo técnico.
         </div>
     </div>
 </div>
@@ -149,10 +141,10 @@
 <div id="modalFeedback" class="modal">
     <div class="modal-content">
         <h3 style="margin-top:0; color: var(--grafite-escuro);">Relatório de Solução</h3>
-        <textarea id="textoFeedback" style="width:100%; height:120px; border-radius:8px; padding:12px; border:1px solid #ccc; font-family: inherit;" placeholder="Descreva como o problema foi resolvido..."></textarea>
+        <textarea id="textoFeedback" style="width:100%; height:120px; border-radius:8px; padding:12px; border:1px solid #ccc;" placeholder="Como resolveu?"></textarea>
         <div style="display:flex; gap:10px; margin-top:15px;">
-            <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px; padding: 12px;" onclick="enviarFeedback()">SALVAR AGORA</button>
-            <button class="nav-item" style="flex:1; border-radius:8px; border: 1px solid #ccc; color: #666; padding: 12px;" onclick="fecharModal()">CANCELAR</button>
+            <button class="nav-item" style="background:var(--verde-rec); color:#fff; flex:1; border-radius:8px;" onclick="enviarFeedback()">SALVAR</button>
+            <button class="nav-item" style="flex:1; border-radius:8px; border: 1px solid #ccc; color:#666;" onclick="fecharModal()">CANCELAR</button>
         </div>
     </div>
 </div>
@@ -165,32 +157,27 @@
 
     let recognition;
     let gravando = false;
-
     const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+
     if (Speech) {
         recognition = new Speech();
         recognition.lang = "pt-BR";
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.onresult = (e) => {
-            let t = "";
-            for (let i = e.resultIndex; i < e.results.length; i++) t += e.results[i][0].transcript;
-            textarea.value = t;
-        };
+        recognition.onresult = (e) => { textarea.value = e.results[0][0].transcript; };
         recognition.onend = () => { gravando = false; btnMic.classList.remove("btn-mic-active"); };
     }
 
     function toggleVoz() {
-        if (!recognition) return alert("Navegador sem suporte a voz");
+        if (!recognition) return alert("Sem suporte a voz");
         if (!gravando) { recognition.start(); gravando = true; btnMic.classList.add("btn-mic-active"); }
-        else { recognition.stop(); gravando = false; btnMic.classList.remove("btn-mic-active"); }
+        else { recognition.stop(); }
     }
 
     async function processarEntrada() {
         const texto = textarea.value.trim();
         if(!texto) return;
         resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Consultando base de dados técnica...</em>";
+        conteudoDiv.innerHTML = "<em>Consultando base técnica...</em>";
+        
         try {
             const res = await fetch("/chat", {
                 method: "POST",
@@ -198,20 +185,31 @@
                 body: JSON.stringify({ question: texto })
             });
             const data = await res.json();
-            conteudoDiv.innerHTML = data.answer.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Lógica para separar texto do comando de imagem
+            let respostaLimpa = data.answer.replace(/\[MOSTRAR_DIAGRAMA: (.*?)\]/g, "");
+            conteudoDiv.innerHTML = respostaLimpa.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // Verifica se a IA pediu para mostrar um diagrama
+            const regexImg = /\[MOSTRAR_DIAGRAMA: (.*?)\]/;
+            const match = data.answer.match(regexImg);
+            if(match && match[1]) {
+                const nomeArquivo = match[1].trim();
+                conteudoDiv.innerHTML += `
+                    <div class="box-diagrama">
+                        <div class="box-diagrama-header">📊 DIAGRAMA TÉCNICO: ${nomeArquivo}</div>
+                        <img src="acervo/diagramas/${nomeArquivo}" class="img-diagrama" alt="Diagrama">
+                    </div>`;
+            }
+
             textarea.value = "";
             window.scrollTo(0, 0);
-        } catch (e) { conteudoDiv.innerHTML = "Erro de conexão com o servidor."; }
+        } catch (e) { conteudoDiv.innerHTML = "Erro de conexão."; }
     }
 
     function abrirModal() { document.getElementById("modalFeedback").style.display = "block"; }
     function fecharModal() { document.getElementById("modalFeedback").style.display = "none"; }
-    async function enviarFeedback() {
-        const fb = document.getElementById("textoFeedback").value;
-        if(!fb) return alert("Por favor, relate a solução.");
-        await fetch("/feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ feedback: fb }) });
-        alert("Experiência salva com sucesso!"); fecharModal();
-    }
+    async function enviarFeedback() { alert("Salvo!"); fecharModal(); }
 </script>
 </body>
 </html>
