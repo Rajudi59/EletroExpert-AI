@@ -17,7 +17,6 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 ========================= */
 app.use(express.json());
 
-// Desativa cache para garantir que novas fotos apareçam imediatamente
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.setHeader('Pragma', 'no-cache');
@@ -25,7 +24,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Define o caminho do frontend (ajustado para a sua estrutura)
 const frontendPath = path.join(__dirname, '../frontend');
 app.use(express.static(frontendPath));
 
@@ -33,44 +31,32 @@ app.use(express.static(frontendPath));
    GERENCIAMENTO DE ACERVO
 ========================= */
 
-// 1. Busca automática de diagramas (JPG/PNG)
 function listarDiagramas() {
     try {
         const caminhoDiagramas = path.join(frontendPath, 'acervo', 'diagramas');
-        if (!fs.existsSync(caminhoDiagramas)) return "Nenhum diagrama visual disponível no momento.";
-        
+        if (!fs.existsSync(caminhoDiagramas)) return "Nenhum diagrama visual disponível.";
         const arquivos = fs.readdirSync(caminhoDiagramas);
         const imagens = arquivos.filter(f => f.match(/\.(jpg|jpeg|png|gif)$/i));
-        
         return imagens.length > 0 
             ? imagens.map(f => `- Diagrama disponível: ${f}`).join('\n')
             : "Pasta de diagramas vazia.";
-    } catch (err) {
-        return "Erro ao ler pasta de diagramas.";
-    }
+    } catch (err) { return "Erro ao ler diagramas."; }
 }
 
-// 2. Leitura dos manuais técnicos (TXT)
 function lerArquivosTecnicos() {
     try {
         const caminhoAcervo = path.join(frontendPath, 'acervo', 'inversores');
         if (!fs.existsSync(caminhoAcervo)) return "Aviso: Pasta de manuais não encontrada.";
-
         const arquivos = fs.readdirSync(caminhoAcervo);
         let conteudoTotal = "";
-
         arquivos.forEach(arquivo => {
             if (arquivo.endsWith('.txt')) {
                 const texto = fs.readFileSync(path.join(caminhoAcervo, arquivo), 'utf-8');
-                conteudoTotal += `\n[FONTE LOCAL - MANUAL: ${arquivo}]\n${texto}\n`;
+                conteudoTotal += `\n[MANUAL LOCAL - MARCA/MODELO: ${arquivo}]\n${texto}\n`;
             }
         });
-
         return conteudoTotal || "Acervo de manuais vazio.";
-    } catch (err) {
-        console.error("Erro ao ler acervo:", err);
-        return "Erro ao acessar base de dados técnica local.";
-    }
+    } catch (err) { return "Erro ao acessar base técnica local."; }
 }
 
 /* =========================
@@ -85,45 +71,38 @@ app.post('/chat', async (req, res) => {
         const listaDiagramas = listarDiagramas();
 
         const promptSistema = `
-Você é o ElectroExpert-AI, especialista sênior em sistemas elétricos e inversores.
+Você é o ElectroExpert-AI, especialista sênior em sistemas elétricos.
 
-ESTRATÉGIA DE BUSCA (Siga esta ordem de prioridade):
-1. PESQUISA LOCAL: Primeiro, use APENAS as informações abaixo para responder:
+ESTRATÉGIA DE BUSCA RIGOROSA (Priorize a Segurança):
+1. Verifique qual MARCA o usuário mencionou (ex: Siemens, Weg, ABB).
+2. Use o ACERVO LOCAL abaixo apenas se os manuais forem da MARCA EXATA pedida:
 ${acervoLocal}
 
-2. PESQUISA EXTERNA: Se a resposta NÃO estiver nos dados acima, use seu conhecimento geral, mas inicie a resposta obrigatoriamente com: "🌐 [PESQUISA EXTERNA - PROCEDER COM CAUTELA]".
+3. REGRA DE OURO: Se o usuário pedir Siemens e você só tiver manuais da Weg no acervo, IGNORE o acervo local e faça uma PESQUISA EXTERNA. Nunca dê parâmetros de uma marca usando manuais de outra.
 
-DIAGRAMAS VISUAIS DISPONÍVEIS:
+4. IDENTIFICAÇÃO NA RESPOSTA:
+   - Resposta com manual correto: "✅ [ACERVO LOCAL - MARCA CONFIRMADA]"
+   - Resposta via web (marca diferente ou não cadastrada): "🌐 [PESQUISA EXTERNA - PROCEDER COM CAUTELA]"
+
+DIAGRAMAS:
 ${listaDiagramas}
+(Se relevante, use: [MOSTRAR_DIAGRAMA: nome-do-arquivo.jpg])
 
-REGRA DE EXIBIÇÃO DE IMAGEM:
-Sempre que a resposta envolver a instalação ou conexão de um componente que possua um diagrama na lista acima, finalize a resposta incluindo o código: [MOSTRAR_DIAGRAMA: nome-do-arquivo.jpg].
+SEGURANÇA:
+Sempre cite NR-10 e EPIs. Errar um parâmetro de inversor pode causar danos graves.
 
-SEGURANÇA (OBRIGATÓRIO):
-- Sempre mencione o uso de EPIs e conformidade com a NR-10.
-- Priorize a segurança do operador/tecnicista.
-- Em caso de pesquisa externa, reforce que o usuário deve consultar o manual físico do fabricante.
-
-Pergunta do usuário: ${question}
-        `;
+Pergunta: ${question}`;
 
         const result = await model.generateContent(promptSistema);
         res.json({ answer: result.response.text() });
 
     } catch (error) {
-        console.error("ERRO IA:", error);
-        res.status(500).json({ answer: "⚠️ Erro ao conectar com o motor de inteligência." });
+        res.status(500).json({ answer: "⚠️ Erro de conexão com a IA." });
     }
 });
 
-/* =========================
-   INICIALIZAÇÃO DO SERVIDOR
-========================= */
-app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-});
+app.get('*', (req, res) => { res.sendFile(path.join(frontendPath, 'index.html')); });
 
 app.listen(port, () => {
-    console.log(`🚀 ElectroExpert AI Online em http://localhost:${port}`);
-    console.log(`📂 Pasta Frontend: ${frontendPath}`);
+    console.log(`🚀 ElectroExpert Online em http://localhost:${port}`);
 });
