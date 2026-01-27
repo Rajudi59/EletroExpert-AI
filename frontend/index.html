@@ -8,105 +8,93 @@
     <style>
         :root {
             --azul-link: #005792;
-            --verde-rec: #2ecc71;
-            --cinza-bg: #e5e5e5;
-            --cinza-input: #f1f3f4;
-            --vermelho-fosco: #b84a4a;
-            --grafite-escuro: #2c3e50;
+            --vermelho-youtube: #ff0000;
+            --grafite: #2c3e50;
+            --cinza-bg: #f4f7f6;
         }
 
         body {
             margin: 0; font-family: 'Inter', sans-serif;
-            background: var(--cinza-bg); color: #333;
-            display: flex; flex-direction: column; min-height: 100vh;
+            background: var(--cinza-bg); display: flex; flex-direction: column; min-height: 100vh;
         }
 
+        /* Navbar fixa */
         .navbar {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background: linear-gradient(to bottom, var(--grafite-escuro) 0%, #1a252f 100%);
-            display: flex; box-shadow: 0 3px 12px rgba(0,0,0,0.2); z-index: 1000;
-            border-bottom: 2px solid #111;
+            position: fixed; top: 0; width: 100%; height: 60px;
+            background: var(--grafite); display: flex; align-items: center;
+            justify-content: center; color: white; font-weight: bold; z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-
-        .nav-item {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            padding: 18px 5px; text-decoration: none; font-size: 11px; font-weight: 700;
-            color: #ffffff; cursor: pointer; text-align: center; 
-            background: transparent; border: none; text-transform: uppercase;
-        }
-
-        .logo-item { font-size: 13px; color: #fff !important; }
-        .logo-item span { background: #ffcc00; color: #000; padding: 2px 5px; border-radius: 3px; margin-right: 4px; font-weight: 800; }
 
         .main-container { 
             flex: 1; width: 100%; max-width: 800px; 
-            margin: 95px auto 140px; padding: 0 15px; box-sizing: border-box;
+            margin: 80px auto 100px; padding: 0 15px; box-sizing: border-box;
         }
         
-        .container-res {
+        #resultado {
             background: #fff; border-radius: 12px; padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: none;
+            line-height: 1.6;
         }
 
-        .alerta-seguranca {
-            background: #fff4f4; border-left: 5px solid var(--vermelho-fosco);
-            padding: 15px; font-size: 13px; color: var(--vermelho-fosco); 
-            margin-bottom: 15px; border-radius: 4px; font-weight: 600;
-        }
-
-        /* ESTILO DO BOTÃO DE VÍDEO */
+        /* Botão do YouTube dinâmico */
         .btn-youtube {
             display: flex; align-items: center; justify-content: center;
-            background: #ff0000; color: white; padding: 12px;
+            background: var(--vermelho-youtube); color: white; padding: 15px;
             text-decoration: none; border-radius: 8px; font-weight: bold;
-            margin-top: 15px; gap: 10px; transition: background 0.3s;
+            margin-top: 15px; gap: 10px; border: none; cursor: pointer;
         }
-        .btn-youtube:hover { background: #cc0000; }
 
-        /* ESTILO DO DIAGRAMA */
-        .box-diagrama {
-            margin-top: 20px; border: 2px solid var(--azul-link);
-            border-radius: 10px; overflow: hidden;
-        }
+        .box-diagrama { margin-top: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
         .box-diagrama img { width: 100%; height: auto; display: block; }
 
+        /* Rodapé com Input e Botões de Mídia */
         .input-wrapper {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: #fff; padding: 12px 0; border-top: 1px solid #ddd;
+            background: #fff; padding: 15px 0; border-top: 1px solid #ddd;
         }
 
         .input-container {
-            max-width: 800px; margin: 0 auto; display: flex;
-            background: var(--cinza-input); border-radius: 30px; padding: 5px 10px; 
-            width: 94%; gap: 8px;
+            max-width: 800px; margin: 0 auto; display: flex; align-items: center;
+            padding: 0 15px; gap: 10px;
+        }
+
+        .btn-acao {
+            background: #eee; border: none; width: 45px; height: 45px;
+            border-radius: 50%; cursor: pointer; font-size: 20px;
+            display: flex; align-items: center; justify-content: center;
         }
 
         #pergunta {
-            flex: 1; border: none; background: #fff; padding: 12px;
-            outline: none; border-radius: 20px; resize: none; height: 20px;
+            flex: 1; border: 1px solid #ddd; border-radius: 25px;
+            padding: 12px 20px; outline: none; font-size: 16px; max-height: 100px;
         }
 
-        .send-btn { background: var(--azul-link); color: white; border-radius: 50%; width: 40px; height: 40px; border: none; cursor: pointer; }
+        .btn-enviar {
+            background: var(--azul-link); color: white; width: 45px; height: 45px;
+            border-radius: 50%; border: none; cursor: pointer; font-size: 18px;
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="nav-item logo-item"><span>⚡</span>Expert</div>
-    <a href="mailto:electroexpertdio@gmail.com" class="nav-item">📧 Contato</a>
-</nav>
+<nav class="navbar">⚡ ElectroExpert AI</nav>
 
 <div class="main-container">
-    <div id="resultado" class="container-res">
-        <div class="alerta-seguranca">⚠️ SEGURANÇA (NR-10): Obrigatório uso de EPIs.</div>
+    <div id="resultado">
         <div id="conteudo"></div>
     </div>
 </div>
 
 <div class="input-wrapper">
     <div class="input-container">
-        <textarea id="pergunta" placeholder="Ex: Como instalo um inversor Siemens?"></textarea>
-        <button class="send-btn" onclick="processarEntrada()">➤</button>
+        <button class="btn-acao" title="Tirar Foto">📷</button>
+        
+        <textarea id="pergunta" placeholder="Diga ou digite sua dúvida..." rows="1"></textarea>
+        
+        <button class="btn-acao" title="Falar">🎤</button>
+        
+        <button class="btn-enviar" onclick="processarEntrada()">➤</button>
     </div>
 </div>
 
@@ -120,7 +108,7 @@
         const conteudoDiv = document.getElementById("conteudo");
 
         resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Processando...</em>";
+        conteudoDiv.innerHTML = "<em>Buscando informações técnicas...</em>";
 
         try {
             const res = await fetch("/chat", {
@@ -129,27 +117,26 @@
                 body: JSON.stringify({ question: texto })
             });
             const data = await res.json();
-            let respostaIA = data.answer;
+            let resposta = data.answer;
 
-            // 1. TRATAR VÍDEOS (Transformar comando em Botão Clicável)
-            respostaIA = respostaIA.replace(/\[BUSCAR_YOUTUBE: (.*?)\]/g, (match, termo) => {
+            // Converter código de vídeo em BOTÃO REAL
+            resposta = resposta.replace(/\[BUSCAR_YOUTUBE: (.*?)\]/g, (match, termo) => {
                 const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(termo)}`;
-                return `<a href="${url}" target="_blank" class="btn-youtube">▶️ CLIQUE AQUI PARA VER VÍDEO TUTORIAL: ${termo}</a>`;
+                return `<a href="${url}" target="_blank" class="btn-youtube">▶️ VER TUTORIAL: ${termo}</a>`;
             });
 
-            // 2. TRATAR DIAGRAMAS (Transformar em Imagem na tela)
-            respostaIA = respostaIA.replace(/\[MOSTRAR_DIAGRAMA: (.*?)\]/g, (match, foto) => {
+            // Converter código de diagrama em IMAGEM REAL
+            resposta = resposta.replace(/\[MOSTRAR_DIAGRAMA: (.*?)\]/g, (match, foto) => {
                 return `<div class="box-diagrama"><img src="acervo/diagramas/${foto.trim()}" alt="Diagrama"></div>`;
             });
 
-            // 3. FORMATAR TEXTO (Bolding e Quebras de linha)
-            conteudoDiv.innerHTML = respostaIA.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            
+            // Formatação final
+            conteudoDiv.innerHTML = resposta.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             textarea.value = "";
             window.scrollTo(0, 0);
 
         } catch (e) {
-            conteudoDiv.innerHTML = "Erro de conexão.";
+            conteudoDiv.innerHTML = "Erro de conexão com o servidor.";
         }
     }
 </script>
