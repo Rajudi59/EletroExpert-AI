@@ -55,10 +55,23 @@
         .mic-ativo { background: #ff4d4d !important; color: white !important; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; resize: none; }
-        .btn-enviar { background: var(--azul-link); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer; }
+        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; }
+        .btn-enviar { background: var(--azul-link); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer;}
         
-        .box-diagrama { margin-top:15px; border:2px solid var(--azul-link); border-radius:8px; overflow:hidden; background:#fff; }
+        /* CORREÇÃO DO TAMANHO DA IMAGEM */
+        .box-diagrama { 
+            margin-top:15px; 
+            border:2px solid var(--azul-link); 
+            border-radius:8px; 
+            overflow:hidden; 
+            background:#fff;
+            max-width: 100%; 
+        }
+        .box-diagrama img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+        }
     </style>
 </head>
 <body>
@@ -73,9 +86,7 @@
     <div class="input-container">
         <input type="file" id="input-foto" accept="image/*" capture="environment" style="display: none;">
         <button class="btn-acao" onclick="document.getElementById('input-foto').click()">📷</button>
-        
         <textarea id="pergunta" placeholder="Diga ou digite..." rows="1"></textarea>
-        
         <button class="btn-acao" id="btn-mic" onclick="toggleMicrofone()">🎤</button>
         <button class="btn-enviar" onclick="processarEntrada()">➤</button>
     </div>
@@ -104,7 +115,7 @@
         const texto = campoTexto.value.trim();
         if(!texto) return;
         document.getElementById("resultado").style.display = "block";
-        document.getElementById("conteudo").innerHTML = "<em>Buscando informações...</em>";
+        document.getElementById("conteudo").innerHTML = "<em>Buscando informações técnicas...</em>";
 
         try {
             const res = await fetch("/chat", {
@@ -115,18 +126,15 @@
             const data = await res.json();
             let resposta = data.answer;
 
-            // Converter código de vídeo em BOTÃO
             resposta = resposta.replace(/\[BUSCAR_YOUTUBE: (.*?)\]/g, (match, termo) => {
                 const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(termo)}`;
                 return `<a href="${url}" target="_blank" class="btn-youtube">▶️ VER TUTORIAL: ${termo}</a>`;
             });
 
-            // Converter código de diagrama em IMAGEM (com tratamento de erro e caminho corrigido)
             resposta = resposta.replace(/\[MOSTRAR_DIAGRAMA:\s*(.*?)\]/g, (match, foto) => {
                 const nomeArquivo = foto.trim();
                 return `<div class="box-diagrama">
                             <img src="/acervo/diagramas/${nomeArquivo}" 
-                                 style="width:100%; display:block;"
                                  onerror="this.parentElement.innerHTML='<p style=padding:10px;color:red;font-size:12px;>⚠️ Arquivo não encontrado: ${nomeArquivo}</p>'">
                         </div>`;
             });
