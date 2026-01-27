@@ -37,6 +37,7 @@ app.post('/chat', async (req, res) => {
         const sessionId = "usuario_unico";
 
         if (!sessoesDeChat[sessionId]) {
+            const listaFotos = listarDiagramas();
             sessoesDeChat[sessionId] = model.startChat({
                 history: [
                     {
@@ -44,18 +45,18 @@ app.post('/chat', async (req, res) => {
                         parts: [{ text: `Você é o ElectroExpert-AI.
                         
                         REGRAS RÍGIDAS DE SEGURANÇA E CONTEXTO:
-                        1. NÃO MISTURE ASSUNTOS: Se falamos de inversores, não mostre diagramas de lâmpadas.
-                        2. DIAGRAMAS: Só use [MOSTRAR_DIAGRAMA: nome] se o diagrama for EXATAMENTE sobre o que o usuário perguntou. Na dúvida, NÃO mostre imagem.
-                        3. EXEMPLOS: Se o usuário pedir um exemplo (sem modelo), use o Siemens V20 ou Weg CFW500 como base educativa.
-                        4. VÍDEOS: Se o usuário pedir "vídeo" ou "tutorial", use APENAS o comando [BUSCAR_YOUTUBE: termo]. Não mostre imagens do acervo se ele pediu vídeo.
-                        5. MEMÓRIA: Mantenha o fio da meada. Se ele disse "interruptor simples" após falar de "lâmpada", foque no conjunto.
-                        
-                        ACERVO: ${lerArquivosTecnicos()}
-                        IMAGENS DISPONÍVEIS: ${listarDiagramas()}` }]
+                        1. SEGURANÇA EM PRIMEIRO LUGAR: Priorize sempre a segurança do operador/eletricista. Cite NR-10 e uso de EPIs em todas as instalações.
+                        2. DIAGRAMAS (EXTREMA ATENÇÃO): Só use nomes de arquivos que existam na lista abaixo. NÃO invente nomes descritivos. Use o formato [MOSTRAR_DIAGRAMA: nome_exato_do_arquivo.jpg].
+                        3. LISTA DE FOTOS REAIS: ${listaFotos}. (Exemplo: Se pedirem lâmpada e existir 'lampada-simples.jpg', use esse nome exato).
+                        4. EXEMPLOS: Se o usuário pedir exemplo de inversor (sem modelo), use Siemens V20 ou Weg CFW500 como base educativa.
+                        5. VÍDEOS: Para tutoriais, use [BUSCAR_YOUTUBE: termo de busca].
+                        6. MEMÓRIA: Lembre-se do contexto anterior (ex: se falaram de lâmpada e depois 'interruptor', é o conjunto).
+
+                        ACERVO DE TEXTO: ${lerArquivosTecnicos()}` }]
                     },
                     {
                         role: "model",
-                        parts: [{ text: "Entendido. Serei rigoroso com os diagramas e manterei o contexto da conversa sem misturar assuntos. Prioridade total à segurança e clareza técnica." }]
+                        parts: [{ text: "Entendido. Sou o ElectroExpert-AI. Vou utilizar apenas os nomes de arquivos de imagem fornecidos na lista oficial para evitar erros de carregamento, mantendo o foco total em segurança NR-10 e no contexto da conversa." }]
                     }
                 ],
             });
@@ -65,7 +66,8 @@ app.post('/chat', async (req, res) => {
         res.json({ answer: result.response.text() });
 
     } catch (error) {
-        res.status(500).json({ answer: "⚠️ Erro de conexão." });
+        console.error("Erro no Servidor:", error);
+        res.status(500).json({ answer: "⚠️ Erro de conexão no servidor." });
     }
 });
 
