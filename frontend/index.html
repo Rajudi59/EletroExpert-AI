@@ -26,7 +26,7 @@
 
         .main-container { 
             flex: 1; width: 100%; max-width: 800px; 
-            margin: 80px auto 120px; padding: 0 15px; box-sizing: border-box;
+            margin: 80px auto 140px; padding: 0 15px; box-sizing: border-box;
         }
         
         #resultado { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: none; }
@@ -35,6 +35,24 @@
             display: flex; align-items: center; justify-content: center;
             background: var(--vermelho-youtube); color: white; padding: 15px;
             text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 15px;
+        }
+
+        /* CORREÇÃO DE ESCALA DE IMAGEM */
+        .box-diagrama { 
+            margin: 15px 0; 
+            border: 2px solid var(--azul-link); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            background: #fff;
+            width: 100%; 
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        .box-diagrama img { 
+            display: block;
+            width: 100% !important; 
+            max-width: 100%; 
+            height: auto !important; 
         }
 
         .input-wrapper {
@@ -55,23 +73,8 @@
         .mic-ativo { background: #ff4d4d !important; color: white !important; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; }
+        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; resize: none; }
         .btn-enviar { background: var(--azul-link); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer;}
-        
-        /* CORREÇÃO DO TAMANHO DA IMAGEM */
-        .box-diagrama { 
-            margin-top:15px; 
-            border:2px solid var(--azul-link); 
-            border-radius:8px; 
-            overflow:hidden; 
-            background:#fff;
-            max-width: 100%; 
-        }
-        .box-diagrama img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-        }
     </style>
 </head>
 <body>
