@@ -12,9 +12,9 @@ const port = process.env.PORT || 8080;
 ========================= */
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-/* =========================
-   MIDDLEWARES & SEGURANÇA
-========================= */
+// Objeto para manter as conversas ativas (Memória)
+let sessoesDeChat = {};
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -33,81 +33,82 @@ app.use(express.static(frontendPath));
 
 function listarDiagramas() {
     try {
-        const caminhoDiagramas = path.join(frontendPath, 'acervo', 'diagramas');
-        if (!fs.existsSync(caminhoDiagramas)) return "Nenhum diagrama visual disponível.";
-        const arquivos = fs.readdirSync(caminhoDiagramas);
-        const imagens = arquivos.filter(f => f.match(/\.(jpg|jpeg|png|gif)$/i));
-        return imagens.length > 0 
-            ? imagens.map(f => `- Diagrama disponível: ${f}`).join('\n')
-            : "Pasta de diagramas vazia.";
-    } catch (err) { return "Erro ao ler diagramas."; }
+        const caminho = path.join(frontendPath, 'acervo', 'diagramas');
+        if (!fs.existsSync(caminho)) return "Sem diagramas.";
+        const arquivos = fs.readdirSync(caminho);
+        return arquivos.filter(f => f.match(/\.(jpg|jpeg|png)$/i)).join(', ');
+    } catch (err) { return ""; }
 }
 
 function lerArquivosTecnicos() {
     try {
-        const caminhoAcervo = path.join(frontendPath, 'acervo', 'inversores');
-        if (!fs.existsSync(caminhoAcervo)) return "Aviso: Pasta de manuais não encontrada.";
-        const arquivos = fs.readdirSync(caminhoAcervo);
-        let conteudoTotal = "";
-        arquivos.forEach(arquivo => {
-            if (arquivo.endsWith('.txt')) {
-                const texto = fs.readFileSync(path.join(caminhoAcervo, arquivo), 'utf-8');
-                conteudoTotal += `\n[MANUAL LOCAL - MARCA/MODELO: ${arquivo}]\n${texto}\n`;
+        const caminho = path.join(frontendPath, 'acervo', 'inversores');
+        if (!fs.existsSync(caminho)) return "";
+        const arquivos = fs.readdirSync(caminho);
+        let textoTotal = "";
+        arquivos.forEach(arq => {
+            if (arq.endsWith('.txt')) {
+                const conteudo = fs.readFileSync(path.join(caminho, arq), 'utf-8');
+                textoTotal += `\n[MANUAL: ${arq}]\n${conteudo}\n`;
             }
         });
-        return conteudoTotal || "Acervo de manuais vazio.";
-    } catch (err) { return "Erro ao acessar base técnica local."; }
+        return textoTotal;
+    } catch (err) { return ""; }
 }
 
 /* =========================
-   ROTA PRINCIPAL (CHAT IA)
+   ROTA DO CHAT COM HISTÓRICO
 ========================= */
 app.post('/chat', async (req, res) => {
     try {
         const { question } = req.body;
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-        const acervoLocal = lerArquivosTecnicos();
-        const listaDiagramas = listarDiagramas();
+        // Identificador único de sessão (neste caso simples, um fixo)
+        const sessionId = "usuario_atual";
 
-        const promptSistema = `
-Você é o ElectroExpert-AI, especialista sênior em sistemas elétricos e inversores.
+        // Se a sessão não existe, cria o chat com o histórico mestre (System Prompt)
+        if (!sessoesDeChat[sessionId]) {
+            const acervo = lerArquivosTecnicos();
+            const diagramas = listarDiagramas();
 
-ESTRATÉGIA DE BUSCA RIGOROSA (Priorize a Segurança):
-1. Verifique qual MARCA o usuário mencionou (ex: Siemens, Weg, ABB).
-2. Use o ACERVO LOCAL abaixo APENAS se os manuais forem da MARCA EXATA pedida:
-${acervoLocal}
+            sessoesDeChat[sessionId] = model.startChat({
+                history: [
+                    {
+                        role: "user",
+                        parts: [{ text: `Você é o ElectroExpert-AI. 
+                        
+                        SUAS REGRAS DE COMPORTAMENTO:
+                        1. MEMÓRIA: Mantenha o contexto das mensagens anteriores. Se eu falar sobre uma lâmpada e depois disser "interruptor simples", entenda que é o interruptor para aquela lâmpada.
+                        2. EXEMPLOS: Se eu não souber o modelo do inversor ou pedir um exemplo, NÃO insista na pergunta. Forneça uma explicação baseada em um modelo comum (ex: Siemens V20 ou Weg CFW500) como exemplo educativo, deixando claro que é apenas uma referência.
+                        3. ACERVO LOCAL: Use estas informações: ${acervo}.
+                        4. MARCAS: Se eu pedir Siemens e você só tiver Weg no acervo, use seu conhecimento externo para Siemens, mas avise que é [PESQUISA EXTERNA].
+                        5. SEGURANÇA: Priorize sempre NR-10, uso de EPIs e bloqueio de energias.
+                        6. DIAGRAMAS DISPONÍVEIS: ${diagramas}. Use [MOSTRAR_DIAGRAMA: nome-do-arquivo.jpg] quando relevante.
+                        7. VÍDEOS: Só sugira se eu pedir. Use [BUSCAR_YOUTUBE: termo de pesquisa].` }]
+                    },
+                    {
+                        role: "model",
+                        parts: [{ text: "Entendido. Sou o ElectroExpert-AI. Estou pronto para manter o contexto das nossas conversas e fornecer exemplos técnicos mesmo quando os modelos específicos não forem informados, sempre com foco total na segurança elétrica." }]
+                    }
+                ],
+            });
+        }
 
-3. REGRA DE CONFLITO: Se o usuário pedir uma marca e você só tiver manuais de outra, IGNORE o acervo local e use PESQUISA EXTERNA para evitar parâmetros errados.
+        // Envia a pergunta para a sessão de chat que já tem o histórico
+        const result = await sessoesDeChat[sessionId].sendMessage(question);
+        const responseText = result.response.text();
 
-4. VÍDEOS E TUTORIAIS (REATIVO):
-   - NÃO ofereça vídeos por padrão.
-   - SOMENTE se o usuário pedir explicitamente ("tem vídeo?", "mostra um tutorial", "tem no youtube?"), você deve incluir o código: [BUSCAR_YOUTUBE: termo de pesquisa específico].
-   - Exemplo: [BUSCAR_YOUTUBE: parametrização passo a passo inversor siemens v20]
-
-IDENTIFICAÇÃO:
-- "✅ [ACERVO LOCAL - MARCA CONFIRMADA]" (Se usar manual local da marca correta).
-- "🌐 [PESQUISA EXTERNA - PROCEDER COM CAUTELA]" (Se buscar na web).
-
-DIAGRAMAS:
-${listaDiagramas}
-(Se relevante para a instalação, use: [MOSTRAR_DIAGRAMA: nome-do-arquivo.jpg])
-
-SEGURANÇA:
-Sempre mencione NR-10 e EPIs. A segurança do técnico é a prioridade absoluta.
-
-Pergunta do usuário: ${question}`;
-
-        const result = await model.generateContent(promptSistema);
-        res.json({ answer: result.response.text() });
+        res.json({ answer: responseText });
 
     } catch (error) {
-        res.status(500).json({ answer: "⚠️ Erro de conexão com a IA." });
+        console.error("ERRO:", error);
+        res.status(500).json({ answer: "⚠️ Erro de comunicação com a IA." });
     }
 });
 
 app.get('*', (req, res) => { res.sendFile(path.join(frontendPath, 'index.html')); });
 
 app.listen(port, () => {
-    console.log(`🚀 ElectroExpert Online em http://localhost:${port}`);
+    console.log(`🚀 ElectroExpert Online e com Memória em http://localhost:${port}`);
 });
