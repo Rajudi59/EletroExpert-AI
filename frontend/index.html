@@ -18,45 +18,32 @@
             background: var(--cinza-bg); display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* Navbar fixa */
         .navbar {
             position: fixed; top: 0; width: 100%; height: 60px;
             background: var(--grafite); display: flex; align-items: center;
             justify-content: center; color: white; font-weight: bold; z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .main-container { 
             flex: 1; width: 100%; max-width: 800px; 
-            margin: 80px auto 100px; padding: 0 15px; box-sizing: border-box;
+            margin: 80px auto 120px; padding: 0 15px; box-sizing: border-box;
         }
         
-        #resultado {
-            background: #fff; border-radius: 12px; padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: none;
-            line-height: 1.6;
-        }
+        #resultado { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: none; }
 
-        /* Botão do YouTube dinâmico */
         .btn-youtube {
             display: flex; align-items: center; justify-content: center;
             background: var(--vermelho-youtube); color: white; padding: 15px;
-            text-decoration: none; border-radius: 8px; font-weight: bold;
-            margin-top: 15px; gap: 10px; border: none; cursor: pointer;
+            text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 15px;
         }
 
-        .box-diagrama { margin-top: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
-        .box-diagrama img { width: 100%; height: auto; display: block; }
-
-        /* Rodapé com Input e Botões de Mídia */
         .input-wrapper {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: #fff; padding: 15px 0; border-top: 1px solid #ddd;
         }
 
         .input-container {
-            max-width: 800px; margin: 0 auto; display: flex; align-items: center;
-            padding: 0 15px; gap: 10px;
+            max-width: 800px; margin: 0 auto; display: flex; align-items: center; padding: 0 15px; gap: 10px;
         }
 
         .btn-acao {
@@ -65,15 +52,11 @@
             display: flex; align-items: center; justify-content: center;
         }
 
-        #pergunta {
-            flex: 1; border: 1px solid #ddd; border-radius: 25px;
-            padding: 12px 20px; outline: none; font-size: 16px; max-height: 100px;
-        }
+        .mic-ativo { background: #ff4d4d !important; color: white !important; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        .btn-enviar {
-            background: var(--azul-link); color: white; width: 45px; height: 45px;
-            border-radius: 50%; border: none; cursor: pointer; font-size: 18px;
-        }
+        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; }
+        .btn-enviar { background: var(--azul-link); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; }
     </style>
 </head>
 <body>
@@ -81,34 +64,49 @@
 <nav class="navbar">⚡ ElectroExpert AI</nav>
 
 <div class="main-container">
-    <div id="resultado">
-        <div id="conteudo"></div>
-    </div>
+    <div id="resultado"><div id="conteudo"></div></div>
 </div>
 
 <div class="input-wrapper">
     <div class="input-container">
-        <button class="btn-acao" title="Tirar Foto">📷</button>
+        <input type="file" id="input-foto" accept="image/*" capture="environment" style="display: none;">
+        <button class="btn-acao" onclick="document.getElementById('input-foto').click()">📷</button>
         
-        <textarea id="pergunta" placeholder="Diga ou digite sua dúvida..." rows="1"></textarea>
+        <textarea id="pergunta" placeholder="Diga ou digite..." rows="1"></textarea>
         
-        <button class="btn-acao" title="Falar">🎤</button>
-        
+        <button class="btn-acao" id="btn-mic" onclick="toggleMicrofone()">🎤</button>
         <button class="btn-enviar" onclick="processarEntrada()">➤</button>
     </div>
 </div>
 
 <script>
+    // LÓGICA DA CÂMERA
+    document.getElementById('input-foto').addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            alert("Foto selecionada: " + this.files[0].name + "\n(Em breve poderei analisar imagens diretamente!)");
+        }
+    });
+
+    // LÓGICA DO MICROFONE
+    const btnMic = document.getElementById('btn-mic');
+    const campoTexto = document.getElementById('pergunta');
+    let gravando = false;
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (Recognition) {
+        const recognition = new Recognition();
+        recognition.lang = 'pt-BR';
+        recognition.onstart = () => { gravando = true; btnMic.classList.add('mic-ativo'); };
+        recognition.onend = () => { gravando = false; btnMic.classList.remove('mic-ativo'); };
+        recognition.onresult = (e) => { campoTexto.value = e.results[0][0].transcript; };
+        function toggleMicrofone() { if (gravando) recognition.stop(); else recognition.start(); }
+    }
+
     async function processarEntrada() {
-        const textarea = document.getElementById("pergunta");
-        const texto = textarea.value.trim();
+        const texto = campoTexto.value.trim();
         if(!texto) return;
-
-        const resultadoDiv = document.getElementById("resultado");
-        const conteudoDiv = document.getElementById("conteudo");
-
-        resultadoDiv.style.display = "block";
-        conteudoDiv.innerHTML = "<em>Buscando informações técnicas...</em>";
+        document.getElementById("resultado").style.display = "block";
+        document.getElementById("conteudo").innerHTML = "<em>Buscando informações...</em>";
 
         try {
             const res = await fetch("/chat", {
@@ -119,25 +117,18 @@
             const data = await res.json();
             let resposta = data.answer;
 
-            // Converter código de vídeo em BOTÃO REAL
             resposta = resposta.replace(/\[BUSCAR_YOUTUBE: (.*?)\]/g, (match, termo) => {
                 const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(termo)}`;
                 return `<a href="${url}" target="_blank" class="btn-youtube">▶️ VER TUTORIAL: ${termo}</a>`;
             });
 
-            // Converter código de diagrama em IMAGEM REAL
             resposta = resposta.replace(/\[MOSTRAR_DIAGRAMA: (.*?)\]/g, (match, foto) => {
-                return `<div class="box-diagrama"><img src="acervo/diagramas/${foto.trim()}" alt="Diagrama"></div>`;
+                return `<div style="margin-top:15px; border:1px solid #ddd; border-radius:8px; overflow:hidden;"><img src="acervo/diagramas/${foto.trim()}" style="width:100%;"></div>`;
             });
 
-            // Formatação final
-            conteudoDiv.innerHTML = resposta.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            textarea.value = "";
-            window.scrollTo(0, 0);
-
-        } catch (e) {
-            conteudoDiv.innerHTML = "Erro de conexão com o servidor.";
-        }
+            document.getElementById("conteudo").innerHTML = resposta.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            campoTexto.value = "";
+        } catch (e) { document.getElementById("conteudo").innerHTML = "Erro de conexão."; }
     }
 </script>
 </body>
