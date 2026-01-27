@@ -55,8 +55,10 @@
         .mic-ativo { background: #ff4d4d !important; color: white !important; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; }
-        .btn-enviar { background: var(--azul-link); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; }
+        #pergunta { flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 12px 20px; outline: none; resize: none; }
+        .btn-enviar { background: var(--azul-link); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer; }
+        
+        .box-diagrama { margin-top:15px; border:2px solid var(--azul-link); border-radius:8px; overflow:hidden; background:#fff; }
     </style>
 </head>
 <body>
@@ -80,14 +82,10 @@
 </div>
 
 <script>
-    // LÓGICA DA CÂMERA
     document.getElementById('input-foto').addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            alert("Foto selecionada: " + this.files[0].name + "\n(Em breve poderei analisar imagens diretamente!)");
-        }
+        if (this.files && this.files[0]) alert("Foto selecionada: " + this.files[0].name);
     });
 
-    // LÓGICA DO MICROFONE
     const btnMic = document.getElementById('btn-mic');
     const campoTexto = document.getElementById('pergunta');
     let gravando = false;
@@ -117,17 +115,25 @@
             const data = await res.json();
             let resposta = data.answer;
 
+            // Converter código de vídeo em BOTÃO
             resposta = resposta.replace(/\[BUSCAR_YOUTUBE: (.*?)\]/g, (match, termo) => {
                 const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(termo)}`;
                 return `<a href="${url}" target="_blank" class="btn-youtube">▶️ VER TUTORIAL: ${termo}</a>`;
             });
 
-            resposta = resposta.replace(/\[MOSTRAR_DIAGRAMA: (.*?)\]/g, (match, foto) => {
-                return `<div style="margin-top:15px; border:1px solid #ddd; border-radius:8px; overflow:hidden;"><img src="acervo/diagramas/${foto.trim()}" style="width:100%;"></div>`;
+            // Converter código de diagrama em IMAGEM (com tratamento de erro e caminho corrigido)
+            resposta = resposta.replace(/\[MOSTRAR_DIAGRAMA:\s*(.*?)\]/g, (match, foto) => {
+                const nomeArquivo = foto.trim();
+                return `<div class="box-diagrama">
+                            <img src="/acervo/diagramas/${nomeArquivo}" 
+                                 style="width:100%; display:block;"
+                                 onerror="this.parentElement.innerHTML='<p style=padding:10px;color:red;font-size:12px;>⚠️ Arquivo não encontrado: ${nomeArquivo}</p>'">
+                        </div>`;
             });
 
             document.getElementById("conteudo").innerHTML = resposta.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             campoTexto.value = "";
+            window.scrollTo(0, 0);
         } catch (e) { document.getElementById("conteudo").innerHTML = "Erro de conexão."; }
     }
 </script>
